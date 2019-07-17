@@ -1,0 +1,11 @@
+{% extends "dashboard/base.html" %} {% block content %} {% for mem in members %}
+{{ mem.employee_number }}
+{% endfor %}
+
+<form action="{% url 'home' %}" method="POST">
+  {% csrf_token %}
+  <div class="form-group">
+    {{ form }}
+  </div>
+</form>
+{% endblock content %}
