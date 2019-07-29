@@ -1,5 +1,12 @@
-{% extends "dashboard/base.html" %} {% block content %} {% for mem in members %}
-{{ mem.employee_number }}
+{% extends "dashboard/base.html" %} 
+{% block content %} 
+{% for mem in members %}
+
+<div> </div> College of {{mem.college}} | {% if user.course == 'VPAA' %} Dean is  
+{{mem.last_name}}
+{% elif user.course == 'Dean' %}
+  Department of  {{ mem.program }} | Department Chairperson {{mem.last_name}}
+{% endif %}
 {% endfor %}
 
 <form action="{% url 'home' %}" method="POST">

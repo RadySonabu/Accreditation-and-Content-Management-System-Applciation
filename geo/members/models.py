@@ -8,7 +8,7 @@ import datetime
 
 
 class MyUserManager(BaseUserManager):
-    def create_user(self, employee_number, first_name, middle_initial, last_name, email, contact, course, password=None):
+    def create_user(self, employee_number, first_name, middle_initial, last_name, college, program, email, contact, course, password=None):
         """
         Creates and saves a User with the given email, favorite color
          and password.
@@ -24,6 +24,8 @@ class MyUserManager(BaseUserManager):
             email=self.normalize_email(email),
             contact=contact,
             course=course,
+            college=college,
+            program=program,
 
 
         )
@@ -32,7 +34,7 @@ class MyUserManager(BaseUserManager):
         user.save(using=self._db)
         return user
 
-    def create_superuser(self, employee_number, first_name, middle_initial, last_name, course, contact, email, password):
+    def create_superuser(self, employee_number, first_name, middle_initial, college, program, last_name, course, contact, email, password):
         """
         Creates and saves a superuser with the given email, date of
         birth and password.
@@ -46,6 +48,8 @@ class MyUserManager(BaseUserManager):
             contact=contact,
             email=email,
             password=password,
+            college=college,
+            program=program,
 
 
         )
@@ -60,8 +64,24 @@ class MyUser(AbstractBaseUser):
         ('Dean', 'Dean of College'),
         ('DC', 'Department Chairperson'),
         ('AD ', 'Administration')
-
     )
+    COLLEGE_CHOICES = (
+        ('CITE', 'College of Information Technology Education'),
+        ('CEA', 'College of Engineering and Architecture'),
+        ('CBE', 'College of Business Eduction'),
+        ('COA', 'College of Arts'),
+        ('N/A', 'Not Applicable')
+    )
+    PROGRAM_CHOICES = (
+        ('BSCS', 'Bachelor of Science in Computer Science'),
+        ('BSIT', 'Bachelor of Science in Information Technology'),
+        ('BSIS', 'Bachelor of Science in Information Systems'),
+        ('BSEMC', 'Bachelor of Science in Entertainment Multimedia Education'),
+        ('BSCE', 'Bachelor of Science in Civil Engineering'),
+        ('BSIE', 'Bachelor of Science in Industrial Engineering'),
+        ('N/A', 'Not Applicable'),
+    )
+
     employee_number = models.CharField(primary_key=True, max_length=7, validators=[
         RegexValidator(r'^\d{1,10}$')])
 
@@ -72,6 +92,8 @@ class MyUser(AbstractBaseUser):
     contact = models.CharField(validators=[
         RegexValidator(r'^(09|\+639)\d{9}$')], blank=True, max_length=13)
     course = models.CharField(choices=ROLE_CHOICES, max_length=50)
+    college = models.CharField(choices=COLLEGE_CHOICES, max_length=50, null=True)
+    program = models.CharField(choices=PROGRAM_CHOICES, max_length=50, null=True)
     date_added = models.DateTimeField(null=True, auto_now=True)
     is_active = models.BooleanField(default=True)
     is_admin = models.BooleanField(default=False)
@@ -80,13 +102,13 @@ class MyUser(AbstractBaseUser):
 
     USERNAME_FIELD = 'employee_number'
     REQUIRED_FIELDS = ['first_name', 'middle_initial',
-                       'last_name', 'course', 'contact', 'email']
+                       'last_name', 'course', 'college', 'program', 'contact', 'email']
 
     class Meta:
         ordering = ['-date_added']
 
     def __str__(self):
-        return f'{self.employee_number} - {self.first_name} {self.last_name}'
+        return f'{self.employee_number} - {self.first_name} {self.last_name} {self.course}'
 
     def has_perm(self, perm, obj=None):
         "Does the user have a specific permission?"
