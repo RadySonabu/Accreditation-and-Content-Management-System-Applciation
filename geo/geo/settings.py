@@ -40,7 +40,7 @@ INSTALLED_APPS = [
     'members',
     'dashboard',
     'import_export',
-    'crispy_forms',
+    #'crispy_forms',
 
     'request',
     'forms',

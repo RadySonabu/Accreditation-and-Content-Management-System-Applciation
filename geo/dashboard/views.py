@@ -22,9 +22,12 @@ def home(request):
                 'members': MyUser.objects.filter(course='DC')
             }
     elif user.is_authenticated and user.course == 'DC':
-        context = {
-            
-        }
+        if user.program == 'BSIT':
+
+            context = {
+                'members': MyUser.objects.filter(program='BSIT')
+                
+            }
     else: 
         return render(request, 'dashboard/home.html')
         

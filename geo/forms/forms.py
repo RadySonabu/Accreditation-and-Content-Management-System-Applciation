@@ -1,6 +1,7 @@
 from django import forms
-from .models import CoE_IT_FORM
-class CoE_IT_FORM_FORMs(forms.ModelForm):
+from .models import CreateForm
+
+class CreateForm_FORMs(forms.ModelForm):
     class Meta:
-        model=CoE_IT_FORM
+        model=CreateForm
         fields = '__all__'

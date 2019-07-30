@@ -27,7 +27,6 @@ class MyUserManager(BaseUserManager):
             college=college,
             program=program,
 
-
         )
 
         user.set_password(password)
@@ -90,7 +89,7 @@ class MyUser(AbstractBaseUser):
     last_name = models.CharField(max_length=50)
     email = models.EmailField(blank=True, max_length=254)
     contact = models.CharField(validators=[
-        RegexValidator(r'^(09|\+639)\d{9}$')], blank=True, max_length=13)
+    RegexValidator(r'^(09|\+639)\d{9}$')], blank=True, max_length=13)
     course = models.CharField(choices=ROLE_CHOICES, max_length=50)
     college = models.CharField(choices=COLLEGE_CHOICES, max_length=50, null=True)
     program = models.CharField(choices=PROGRAM_CHOICES, max_length=50, null=True)

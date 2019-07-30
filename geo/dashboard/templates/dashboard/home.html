@@ -2,10 +2,28 @@
 {% block content %} 
 {% for mem in members %}
 
-<div> </div> College of {{mem.college}} | {% if user.course == 'VPAA' %} Dean is  
-{{mem.last_name}}
+{% if user.course == 'VPAA' %}
+  <div>
+    {% if mem.college == 'CITE' %}
+      College of ITE <img style="height: 150px; width: 150px;" src="https://cdn1.iconfinder.com/data/icons/charts-2/304/Untitled-42-512.png">
+    {% elif mem.college == 'CEA' %}
+    
+      College of Engineering and Architecture<img style="height: 150px; width: 1  50px;" src="https://cdn2.iconfinder.com/data/icons/infographic-vol-3/512/18-512.png">
+    {% endif %}
+  </div>
+
+
+
 {% elif user.course == 'Dean' %}
-  Department of  {{ mem.program }} | Department Chairperson {{mem.last_name}}
+  {% if mem.college == 'CITE' %}
+    Department of {{mem.program}} <img src="https://cdn1.iconfinder.com/data/icons/charts-2/304/Untitled-42-512.png">
+
+  {% endif %}
+{% elif user.course == 'DC' %}
+  {% if mem.program == 'BSIT' %}
+  Department of {{mem.program}} <img src="https://cdn1.iconfinder.com/data/icons/charts-2/304/Untitled-42-512.png">
+
+  {% endif %}
 {% endif %}
 {% endfor %}
 

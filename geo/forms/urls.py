@@ -1,10 +1,9 @@
 from django.urls import path, include
-from .views import CoE_IT_FORM_FORMs
+from .views import CreateForm_FORMs, EditFormView
 from . import views
 
 urlpatterns = [
     # path('admin/', admin.site.urls),
-    path('forms/', views.EditFormView, name='forms'),
+    path('create_form/', views.EditFormView, name='create_form'),
     
-
-]
+    ]
