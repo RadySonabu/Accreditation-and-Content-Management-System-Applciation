@@ -69,6 +69,7 @@ class MyUser(AbstractBaseUser):
         ('CEA', 'College of Engineering and Architecture'),
         ('CBE', 'College of Business Eduction'),
         ('COA', 'College of Arts'),
+        ('CME', 'College of Maritime Education'),
         ('N/A', 'Not Applicable')
     )
     PROGRAM_CHOICES = (
@@ -78,6 +79,26 @@ class MyUser(AbstractBaseUser):
         ('BSEMC', 'Bachelor of Science in Entertainment Multimedia Education'),
         ('BSCE', 'Bachelor of Science in Civil Engineering'),
         ('BSIE', 'Bachelor of Science in Industrial Engineering'),
+        ('BSChe', 'Bachelor of Science in Chemical Engineering'),
+        ('BSCpe', 'Bachelor of Science in Computer Engineering'),
+        ('BSEE', 'Bachelor of Science in Electrical Engineering'),
+        ('BSECE', 'Bachelor of Science in Electronics and Communications Engineering'),
+        ('BSEnSE', 'Bachelor of Science in Environmental and Sanitary Engineering'),
+        ('BSME', 'Bachelor of Science in Mechanical Engineering'),
+        ('BSIE', 'Bachelor of Science in Industrial Engineering'),
+        ('BSArch', 'Bachelor of Science in Architecture'),
+        ('BSMArE', 'Bachelor of Science in Marine Engineering'),
+        ('BSMT', 'Bachelor of Science in Marine Transportation'),
+        ('BSA', 'Bachelor of Science in Accounting'),
+        ('BSA-LSCM', 'Bachelor of Science in Accounting Major in Logistics and Supply Chain Management'),
+        ('BSA-FMA', 'Bachelor of Science in Accounting Major in financial and Management Accounting'),
+        ('BSA-HRDM', 'Bachelor of Science in Accounting Major in Human Resources Development Management'),
+        ('BSA-MM', 'Bachelor of Science in Accounting Major in Marketing Management'),
+        ('BSA-SMBPO', 'Bachelor of Science in Accounting Major in Service Management for Business Process Outsourcing'),
+        ('BSA-Entrep', 'Bachelor of Science in Accounting in Entrepreneurship'),
+        ('BSA-Act', 'Bachelor of Science in Accounting in Accounting Technology'),
+        ('AB-Engl', 'Bachelor of Arts in English Language'),
+        ('AB-Polsci', 'Bachelor of Arts in Political Science'),
         ('N/A', 'Not Applicable'),
     )
 
