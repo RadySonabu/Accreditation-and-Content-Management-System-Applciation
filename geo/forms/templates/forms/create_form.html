@@ -1,0 +1,101 @@
+    
+{% load static %}
+<!DOCTYPE html>
+<html>
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+
+    <!-- Bootstrap CSS -->
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+      integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+      crossorigin="anonymous"
+    />
+
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{% static 'dashboard/main.css' %}"
+    />
+
+    {% if title %}
+    <title>Django Blog - {{ title }}</title>
+    {% else %}
+    <title>Django Blog</title>
+    {% endif %}
+  </head>
+  <body>
+      <header class="site-header">
+          <nav class="navbar navbar-expand-md navbar-dark  bg-dark fixed-top">
+            <div class="container">
+              <a class="navbar-brand mr-4" href="{% url 'register' %}">Forms - ACMSA</a>
+              <button
+                class="navbar-toggler"
+                type="button"
+                data-toggle="collapse"
+                data-target="#navbarToggle"
+                aria-controls="navbarToggle"
+                aria-expanded="false"
+                aria-label="Toggle navigation"
+              >
+                <span class="navbar-toggler-icon"></span>
+              </button>
+    
+              <div class="collapse navbar-collapse" id="navbarToggle">
+                <div class="navbar-nav mr-auto">
+                  
+                </div>
+                <!-- Navbar Right Side -->
+                <div class="navbar-nav">
+                  <!-- <a class="nav-item nav-link" href="#">Login</a> -->
+    
+                  
+                  <a class="nav-item nav-link" href="#">{% now "M d, Y : P"%}</a>
+                </div>
+              </div>
+            </div>
+          </nav>
+        </header>
+    {% load crispy_forms_tags %}
+    {% if messages %} {% for message in messages %}
+      <div class="alert alert-{{ message.tags }}">
+        {{ message }}
+      </div>
+      {% endfor %} {% endif %}
+    <div class="row justify-content-center">
+      <div class="col-md-auto ">
+        <div class="content-section">
+          <form method="POST">
+            {% csrf_token %}
+            <fieldset class="form-group">
+              <legend class="border-bottom mb-4">Accreditation Form for Tracking</legend>
+              <div class="form-row">
+                {{form}}
+              </div>
+              
+              
+              
+            </fieldset>
+            <div class="form-group">
+              <button class="btn btn-outline-info" type="submit">
+                Sign Up
+              </button>
+            </div>
+          </form>
+          <!-- <div class="border-top pt-3">
+            <small class="text-muted">
+              Already Have An Account? <a class="ml-2" href="{% url 'login' %}">Sign In</a>
+            </small>
+          </div> -->
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
+</body>
