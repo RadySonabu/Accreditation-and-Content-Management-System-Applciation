@@ -58,6 +58,13 @@ class MyUserManager(BaseUserManager):
 
 
 class MyUser(AbstractBaseUser):
+
+    # ROLE_CHOICES = (
+    #     ('VPAA', 'Vice President for Academic Affairs'),
+    #     ('Dean', 'Dean of College'),
+    #     ('DC', 'Department Chairperson'),
+    #     ('AD ', 'Administration')
+    # )
     ROLE_CHOICES = (
         ('VPAA', 'Vice President for Academic Affairs'),
         ('Dean', 'Dean of College'),
@@ -110,10 +117,12 @@ class MyUser(AbstractBaseUser):
     last_name = models.CharField(max_length=50)
     email = models.EmailField(blank=True, max_length=254)
     contact = models.CharField(validators=[
-    RegexValidator(r'^(09|\+639)\d{9}$')], blank=True, max_length=13)
+        RegexValidator(r'^(09|\+639)\d{9}$')], blank=True, max_length=13)
     course = models.CharField(choices=ROLE_CHOICES, max_length=50)
-    college = models.CharField(choices=COLLEGE_CHOICES, max_length=50, null=True)
-    program = models.CharField(choices=PROGRAM_CHOICES, max_length=50, null=True)
+    college = models.CharField(
+        choices=COLLEGE_CHOICES, max_length=50, null=True)
+    program = models.CharField(
+        choices=PROGRAM_CHOICES, max_length=50, null=True)
     date_added = models.DateTimeField(null=True, auto_now=True)
     is_active = models.BooleanField(default=True)
     is_admin = models.BooleanField(default=False)

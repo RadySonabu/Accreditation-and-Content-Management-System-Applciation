@@ -1,7 +1,10 @@
 from django import forms
-from .models import CreateForm
 
-class CreateForm_FORMs(forms.ModelForm):
+from .models import Forms
+
+
+class FormForm(forms.ModelForm):
+
     class Meta:
-        model=CreateForm
-        fields = '__all__'
+        model = Forms
+        fields = "__all__"

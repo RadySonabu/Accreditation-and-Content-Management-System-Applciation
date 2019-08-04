@@ -1,15 +1,15 @@
 from django.shortcuts import render, redirect
-from .forms import CreateForm_FORMs
+from .forms import FormForm
 from django.contrib import messages
 from django.http import HttpResponse
+from .models import Forms, SubdivisionDetail
 
-def EditFormView(request):
-    if request.method == 'POST':
-        form = CreateForm_FORMs(request.POST)
-        if form.is_valid():
-            form.save()
-            
-            return redirect('create_form')
-    else:
-        form = CreateForm_FORMs()
-    return render(request, 'forms/create_form.html', {'form': form})
+
+def trial(request):
+    d = Forms.objects.all()
+    context = {
+
+        'display': d
+
+    }
+    return render(request, 'forms/trial.html', context)
