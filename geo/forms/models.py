@@ -1,4 +1,5 @@
 from django.db import models
+from django.urls import reverse
 
 
 class AccreditationType(models.Model):
@@ -52,34 +53,8 @@ class BasicInfo(models.Model):
         return f'{self.accreditation_type } infos'
 
 
-class Division(models.Model):
-    accreditation_type = models.ForeignKey(
-        AccreditationType, on_delete=models.CASCADE)
-    basic_info = models.ForeignKey(BasicInfo, on_delete=models.CASCADE)
-    criteria = models.CharField(max_length=150)
-
-    def __str__(self):
-        return self.criteria
-
-
-class Subdivision(models.Model):
-    accreditation_type = models.ForeignKey(
-        AccreditationType, on_delete=models.CASCADE)
-    basic_info = models.ForeignKey(BasicInfo, on_delete=models.CASCADE)
-    division = models.ForeignKey(Division, on_delete=models.CASCADE)
-    criteria = models.CharField(max_length=150)
-    points = models.FloatField()
-
-    def __str__(self):
-        return f'{ self.criteria} with {self.points} points'
-
-
 class SubdivisionDetail(models.Model):
-    # accreditation_type = models.ForeignKey(
-    #     'AccreditationType', on_delete=models.CASCADE)
-    # basic_info = models.ForeignKey(BasicInfo, on_delete=models.CASCADE)
-    # division = models.ForeignKey(Division, on_delete=models.CASCADE)
-    # subdivision = models.ForeignKey(Subdivision, on_delete=models.CASCADE)
+
     criteria = models.CharField(max_length=150)
     points = models.FloatField()
     subpoints = models.FloatField()
@@ -91,17 +66,61 @@ class SubdivisionDetail(models.Model):
         return self.criteria
 
 
-class Forms(models.Model):
-    title = models.CharField(max_length=50)
-    accreditation_type = models.ForeignKey(
-        'AccreditationType', on_delete=models.CASCADE)
-    basic_info = models.ForeignKey(BasicInfo, on_delete=models.CASCADE)
-    division = models.ForeignKey(Division, on_delete=models.CASCADE)
-    subdivision = models.ForeignKey(Subdivision, on_delete=models.CASCADE)
-    subdivision_detail = models.ManyToManyField(
-        SubdivisionDetail)
-
-    
+class Subdivision(models.Model):
+    subdivision_detail = models.ForeignKey(
+        SubdivisionDetail, on_delete=models.CASCADE)
+    criteria = models.CharField(max_length=150)
+    points = models.FloatField()
 
     def __str__(self):
-        return self.title
+        return f'{ self.criteria} with {self.points} points'
+
+
+class Division(models.Model):
+    subdivision_detail = models.ForeignKey(
+        SubdivisionDetail, on_delete=models.CASCADE)
+    subdivision = models.ForeignKey(Subdivision, on_delete=models.CASCADE)
+    criteria = models.CharField(max_length=150)
+
+    def __str__(self):
+        return self.criteria
+
+
+class Forms(models.Model):
+    ACCREDITATION_TYPE_CHOICES = (
+        ('ABET', 'American Based Education and Technology'),
+        ('SA', 'Seoul Accord'),
+        ('COE', 'Center of Excellence'),
+        ('COD', 'Center of Development'),
+        ('FP', 'FAAP-PACUCOA'),
+        ('PA', 'PTC-ACBET'),
+        ('PP', 'PCS-PCAB')
+    )
+    COLLEGE_CHOICES = (
+        ('CITE', 'College of Information Technology Education'),
+        ('CEA', 'College of Engineering and Architecture'),
+        ('CBE', 'College of Business Education'),
+        ('COA', 'College of Arts'),
+        ('CME', 'College of Maritime Education'),
+        ('N/A', 'Not Applicable')
+    )
+    BRANCH_CHOICES = (
+        ('MNL', 'Manila Branch'),
+        ('QC', 'Quezon City Branch'),
+    )
+    title = models.CharField(max_length=50)
+
+    form_type = models.CharField(
+        choices=ACCREDITATION_TYPE_CHOICES, max_length=100)  # primary key is passed here!
+    branch = models.CharField(choices=BRANCH_CHOICES, max_length=100)
+    year = models.CharField(max_length=4)
+    college = models.CharField(choices=COLLEGE_CHOICES, max_length=100)
+    address = models.CharField(max_length=100)
+    first_name = models.CharField(max_length=50)
+    middle_initial = models.CharField(max_length=2)
+    last_name = models.CharField(max_length=50)
+
+    division = models.ForeignKey(Division, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return f'{self.division}'

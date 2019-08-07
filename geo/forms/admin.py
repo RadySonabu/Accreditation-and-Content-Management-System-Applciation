@@ -5,7 +5,6 @@ from .models import BasicInfo, Division, Subdivision, SubdivisionDetail, Accredi
 class FormsAdmin(admin.ModelAdmin):
     list_display = ('title', )
     search_fields = ['title']
-    filter_horizontal = ('subdivision_detail',)
 
 
 admin.site.register(BasicInfo)

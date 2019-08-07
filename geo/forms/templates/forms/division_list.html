@@ -1,0 +1,14 @@
+<form method="POST">
+        {% csrf_token %}
+        {% load crispy_forms_tags %}
+    {% for form in forms %}
+    <h2><a class="article-title" href="{% url 'division-detail' form.id %}">{{ form.id }}</a></h2>
+            
+            
+                
+              
+       
+    {% endfor %}
+    
+    </form>
+    
