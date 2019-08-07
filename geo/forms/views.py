@@ -34,6 +34,7 @@ class FormCreateView(CreateView):
 class FormUpdateView(UpdateView):
     model = Forms
     fields = "__all__"
+    success_url = '/form/'
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -96,6 +97,7 @@ class SubdivisionCreateView(CreateView):
 class SubdivisionUpdateView(UpdateView):
     model = Subdivision
     fields = "__all__"
+    success_url = '/subdivision/'
 
 
 class SubdivisionDeleteView(DeleteView):
@@ -109,21 +111,22 @@ class SubdivisionDetailListView(ListView):
     context_object_name = 'forms'
 
 
-class SubdivisionDetailView(DetailView):
+class SubdivisionDetailDetailView(DetailView):
     model = SubdivisionDetail
 
 
 class SubdivisionDetailCreateView(CreateView):
     model = SubdivisionDetail
     fields = "__all__"
-    success_url = '/subdivision-list/'
+    success_url = '/subdivisiondetail/'
 
 
 class SubdivisionDetailUpdateView(UpdateView):
     model = SubdivisionDetail
     fields = "__all__"
+    success_url = '/subdivisiondetail/'
 
 
 class SubdivisionDetailDeleteView(DeleteView):
     model = SubdivisionDetail
-    success_url = '/subdivision-detail/'
+    success_url = '/subdivisiondetail/'

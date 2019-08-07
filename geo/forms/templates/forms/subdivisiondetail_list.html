@@ -1,8 +1,9 @@
 <form method="POST">
         {% csrf_token %}
         {% load crispy_forms_tags %}
+        <h1>Edit Criteria</h1>
     {% for form in forms %}
-    <h2><a class="article-title" href="{% url 'subdivision-detail-detail' form.id %}">{{ form.id }}</a></h2>
+    <h2><a class="article-title" href="{% url 'subdivisiondetail-detail' form.id %}">{{ form.criteria }}   |   {{form.points}}</a></h2>
             
             
                 

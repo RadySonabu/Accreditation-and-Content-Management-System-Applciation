@@ -1,2 +1,32 @@
-{% csrf_token %}
-{{object}}
+
+
+
+{% extends "dashboard/base.html" %} 
+
+{% block content %}
+{% load crispy_forms_tags %}
+<div class="row justify-content-center">
+        <div class="col-md-10 ">
+        <div class="content-section">
+            <form method="POST">
+            {% csrf_token %}
+            <fieldset class="form-group">
+                <legend class="border-bottom mb-4">Join Today</legend>
+                <div class="form-row">
+                <div class="form-group col-md-6 mb-0">
+                        {{object.criteria}} {{object.points}}
+                        <button class="btn btn-outline-danger" type="submit">
+                            
+                                <a href="{% url 'subdivisiondetail-update' object.id %}">Update</a>
+                                </button>
+                </div>
+</div>
+</fieldset>
+<button class="btn btn-outline-danger" type="submit">
+    Save
+    </button>
+</form>
+</div>
+</div>
+</div>
+{% endblock %}
