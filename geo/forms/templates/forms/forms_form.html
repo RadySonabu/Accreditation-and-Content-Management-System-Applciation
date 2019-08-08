@@ -1,7 +1,7 @@
 {% extends "dashboard/base.html" %} 
 {% load crispy_forms_tags %}
 {% block content %}
-<div class="row justify-content-center">
+    <div class="row justify-content-center">
       <div class="col-md-auto ">
         <div class="content-section">
           <form method="POST">
@@ -9,19 +9,19 @@
             <fieldset class="form-group">
               <legend class="border-bottom mb-4">Join Today</legend>
               <div class="form-row">
-                <div class="form-group col-md-6 mb-0">
+                <div class="form-group col-md-12 mb-0">
                   {{ form| crispy  }}
                   
                   
                     
-                  
-                      
                 </div>
-</div>
-</fieldset>
-
-</form>
-</div>
-</div>
-</div>
+              </div>
+              <button class="btn btn-outline-danger" type="submit">
+                  Add
+             </button>
+            </fieldset>
+            </form>
+          </div>
+        </div>
+      </div>
 {% endblock%}

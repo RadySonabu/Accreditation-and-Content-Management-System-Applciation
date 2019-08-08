@@ -10,20 +10,21 @@
             <form method="POST">
             {% csrf_token %}
             <fieldset class="form-group">
-                <legend class="border-bottom mb-4">Update Subdivision</legend>
+                <legend class="border-bottom mb-4">List of Forms</legend>
                 <div class="form-row">
                 <div class="form-group col-md-6 mb-0">
                         {% for form in forms %}
-    <h2><a class="article-title" href="{% url 'form-detail' form.id %}">{{ form.id }}</a></h2>
+    <h2><a class="article-title" href="{% url 'form-detail' form.id %}">{{ form.title }}</a></h2>
             
             
-                {{form.division.criteria}}
-                {{form.division.subdivision}}
-                {{form.division.subdivision_detail}}
+                
               
        
     {% endfor %}
-                        <
+    <button class="btn btn-outline-primary" >
+               <a href="{% url 'form-create' %}"> Add form</a>
+                </button>
+                        
                 </div>
 </div>
 </fieldset>

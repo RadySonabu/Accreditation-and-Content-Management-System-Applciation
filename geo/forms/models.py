@@ -1,5 +1,6 @@
 from django.db import models
 from django.urls import reverse
+from multiselectfield import MultiSelectField
 
 
 class AccreditationType(models.Model):
@@ -53,22 +54,16 @@ class BasicInfo(models.Model):
         return f'{self.accreditation_type } infos'
 
 
-class SubdivisionDetail(models.Model):
-
-    criteria = models.CharField(max_length=150)
-    points = models.FloatField()
-    subpoints = models.FloatField()
-    remarks = models.CharField(max_length=150)
-    subtotal = models.FloatField()
-    total = models.FloatField()
+class Division(models.Model):
+    criteria = models.CharField(unique=True, max_length=150)
 
     def __str__(self):
         return self.criteria
 
 
 class Subdivision(models.Model):
-    subdivision_detail = models.ForeignKey(
-        SubdivisionDetail, on_delete=models.CASCADE)
+    division = models.ForeignKey(
+        Division, on_delete=models.CASCADE)
     criteria = models.CharField(max_length=150)
     points = models.FloatField()
 
@@ -76,11 +71,14 @@ class Subdivision(models.Model):
         return f'{ self.criteria} with {self.points} points'
 
 
-class Division(models.Model):
-    subdivision_detail = models.ForeignKey(
-        SubdivisionDetail, on_delete=models.CASCADE)
+class SubdivisionDetail(models.Model):
     subdivision = models.ForeignKey(Subdivision, on_delete=models.CASCADE)
     criteria = models.CharField(max_length=150)
+    points = models.FloatField()
+    subpoints = models.FloatField()
+    remarks = models.CharField(max_length=150)
+    subtotal = models.FloatField()
+    total = models.FloatField()
 
     def __str__(self):
         return self.criteria
@@ -120,7 +118,7 @@ class Forms(models.Model):
     middle_initial = models.CharField(max_length=2)
     last_name = models.CharField(max_length=50)
 
-    division = models.ForeignKey(Division, on_delete=models.CASCADE)
+    division = models.ManyToManyField(Division,  blank=True)
 
     def __str__(self):
         return f'{self.division}'

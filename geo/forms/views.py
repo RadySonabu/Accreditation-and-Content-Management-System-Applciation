@@ -5,6 +5,8 @@ from django.http import HttpResponse
 from .models import Forms, SubdivisionDetail, Subdivision, Division
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 
+from .forms import SubdivisionForm
+
 
 class FormListView(ListView):
     model = Forms
@@ -30,6 +32,13 @@ class FormCreateView(CreateView):
     fields = "__all__"
     success_url = '/form/'
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['d'] = Division.objects.all()
+        context['sd'] = Subdivision.objects.all()
+        context['sdd'] = SubdivisionDetail.objects.all()
+        return context
+
 
 class FormUpdateView(UpdateView):
     model = Forms
@@ -41,6 +50,7 @@ class FormUpdateView(UpdateView):
         context['d'] = Division.objects.all()
         context['sd'] = Subdivision.objects.all()
         context['sdd'] = SubdivisionDetail.objects.all()
+
         return context
 
 
@@ -58,18 +68,36 @@ class DivisionListView(ListView):
 class DivisionDetailView(DetailView):
     model = Division
     fields = "__all__"
+    context_object_name = 'forms'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+
+        context['d'] = Division.objects.all()
+        context['sd'] = Subdivision.objects.all()
+        context['sdd'] = SubdivisionDetail.objects.all()
+
+        return context
 
 
 class DivisionCreateView(CreateView):
     model = Division
     fields = "__all__"
-    success_url = '/division/'
+    success_url = '/form-detail/'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['d'] = Division.objects.all()
+        context['sd'] = Subdivision.objects.all()
+        context['sdd'] = SubdivisionDetail.objects.all()
+
+        return context
 
 
 class DivisionUpdateView(UpdateView):
     model = Division
     fields = "__all__"
-    success_url = '/division/'
+    success_url = '/form/'
 
 
 class DivisionDeleteView(DeleteView):
@@ -86,12 +114,13 @@ class SubdivisionListView(ListView):
 class SubdivisionDetailView(DetailView):
     model = Subdivision
     fields = "__all__"
+    success_url = '/subdivision/'
 
 
 class SubdivisionCreateView(CreateView):
     model = Subdivision
     fields = "__all__"
-    success_url = '/subdivision/'
+    success_url = '/subdivision/new/'
 
 
 class SubdivisionUpdateView(UpdateView):
@@ -114,11 +143,19 @@ class SubdivisionDetailListView(ListView):
 class SubdivisionDetailDetailView(DetailView):
     model = SubdivisionDetail
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['d'] = Division.objects.all()
+        context['sd'] = Subdivision.objects.all()
+        context['sdd'] = SubdivisionDetail.objects.all()
+
+        return context
+
 
 class SubdivisionDetailCreateView(CreateView):
     model = SubdivisionDetail
     fields = "__all__"
-    success_url = '/subdivisiondetail/'
+    success_url = '/subdivisiondetail/new'
 
 
 class SubdivisionDetailUpdateView(UpdateView):
