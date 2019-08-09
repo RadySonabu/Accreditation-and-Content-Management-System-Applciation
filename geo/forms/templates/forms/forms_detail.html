@@ -32,14 +32,16 @@
                 
                 
                 
-                {% for d in object.division.all %}
+                {% for d in d%}
                       
                       <div class="form-row">
-                          <div class="form-group col-md-2 mb-0"><strong><a href="{% url 'division-detail' d.id %}">{{d.criteria}}</a> </strong>   
-                          </div>
+                        <div class="form-group col-md-2 mb-0"><strong><a href="{% url 'division-detail' d.id %}">{{d.criteria}}</a> </strong>   
                         </div>
+                      </div>
+                      
+                      
                     {% for s in sd %}
-                        
+                    {% if s.division.id == d.id %}
                         <div class="form-row">
                             <div class="form-group col-md-4 mb-0">{{s.criteria}}    
                             </div>
@@ -47,7 +49,7 @@
                             </div>
                           </div>
                         
-                        
+                        {%endif%}
                         
                         
                        

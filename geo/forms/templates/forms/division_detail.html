@@ -8,7 +8,7 @@
             <form method="POST">
             {% csrf_token %}
             <fieldset class="form-group">
-                <legend class="border-bottom mb-4">Join Today</legend>
+                <legend class="border-bottom mb-4">Division</legend>
                 <div class="form-row border-bottom border-top mt-4 mb-4">
                         <div class="form-group col-md-4 pt-3 "><strong>Criteria</strong>
                         </div>
@@ -32,20 +32,24 @@
                               
                             
                       <div class="form-row">
-                          <div class="form-group col-md-2 mb-0"><strong><a href="{% url 'division-detail' d.id %}">{{d.criteria}}</a> </strong>   
+                          <div class="form-group col-md-2 mb-0"><strong>{{d.criteria}} </strong>   
                           </div>
                         </div>
                     {% for s in sd %}
+                        {% if s.division.id == d.id %}
                         <div class="form-row">
-                          <div class="form-group col-md-4 mb-0">{{s.criteria}}    
+                          <div class="form-group col-md-4 mb-0"><a href="{% url 'subdivision-detail' s.id %}">{{s.criteria}} </a>   
                           </div>
                           <div class="form-group col-md-2 mb-0">{{s.points}}    
                           </div>
                         </div>
+                        {% endif %}
+                        
                       
                       
                       {% for x in sdd %}
                         
+                          {% if x.id == d.id %}
                           <div class="form-row">
                             <div class="form-group col-md-4 mb-0"> {{x.criteria}}    
                             </div>
@@ -60,6 +64,7 @@
                                     <div class="form-group col-md-2 mb-0"> {{x.total}}    
                                       </div>
                           </div>
+                          {% endif %}
                       
                       {% endfor %}
                         

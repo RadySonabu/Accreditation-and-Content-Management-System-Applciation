@@ -9,15 +9,38 @@
             {% csrf_token %}
             <fieldset class="form-group">
                 <legend class="border-bottom mb-4">Update Subdivision</legend>
-                <div class="form-row">
-                <div class="form-group col-md-6 mb-0">
+                <div class="form-row border-bottom mb-4">
+                        <div class="form-group col-md-4 mb-0">
+                                Criteria
+                                
+                                
+                        </div>
+                        <div class="form-group col-md-2 mb-0">
+                                Weigh
+                                
+                                
+                        </div>
+                </div>
+                <div class="form-row mb-4">
+                <div class="form-group col-md-4 mb-0">
                         {{object.criteria}}
-                        <button class="btn btn-outline-danger" type="submit">
-                            
-                                <a href="{% url 'subdivision-update' object.id %}">Update..</a>
-                                </button>
+                        
+                        
+                </div>
+                <div class="form-group col-md-2 mb-0">
+                        {{object.points}}
+                        
+                        
                 </div>
 </div>
+<button class="btn btn-outline-danger" type="submit">
+                            
+        <a href="{% url 'subdivision-update' object.id %}">Update..</a>
+        </button>
+        <button class="btn btn-outline-danger" type="submit">
+                            
+                <a href="{% url 'subdivisiondetail-create'  %}">Add Detail</a>
+                </button>
 </fieldset>
 
 </form>

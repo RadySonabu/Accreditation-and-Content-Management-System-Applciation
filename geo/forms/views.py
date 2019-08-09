@@ -43,7 +43,6 @@ class FormCreateView(CreateView):
 class FormUpdateView(UpdateView):
     model = Forms
     fields = "__all__"
-    success_url = '/form/'
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -83,7 +82,6 @@ class DivisionDetailView(DetailView):
 class DivisionCreateView(CreateView):
     model = Division
     fields = "__all__"
-    success_url = '/form-detail/'
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -97,12 +95,11 @@ class DivisionCreateView(CreateView):
 class DivisionUpdateView(UpdateView):
     model = Division
     fields = "__all__"
-    success_url = '/form/'
 
 
 class DivisionDeleteView(DeleteView):
     model = Division
-    success_url = '/division/'
+
 # ----------------------------------------------------------------------------------
 
 
@@ -114,24 +111,20 @@ class SubdivisionListView(ListView):
 class SubdivisionDetailView(DetailView):
     model = Subdivision
     fields = "__all__"
-    success_url = '/subdivision/'
 
 
 class SubdivisionCreateView(CreateView):
     model = Subdivision
     fields = "__all__"
-    success_url = '/subdivision/new/'
 
 
 class SubdivisionUpdateView(UpdateView):
     model = Subdivision
     fields = "__all__"
-    success_url = '/subdivision/'
 
 
 class SubdivisionDeleteView(DeleteView):
     model = Subdivision
-    success_url = '/subdivision/'
 
 
 # -----------------------------------------
@@ -155,15 +148,14 @@ class SubdivisionDetailDetailView(DetailView):
 class SubdivisionDetailCreateView(CreateView):
     model = SubdivisionDetail
     fields = "__all__"
-    success_url = '/subdivisiondetail/new'
 
 
 class SubdivisionDetailUpdateView(UpdateView):
     model = SubdivisionDetail
     fields = "__all__"
-    success_url = '/subdivisiondetail/'
+
+    def subdivision_value(self):
 
 
 class SubdivisionDetailDeleteView(DeleteView):
     model = SubdivisionDetail
-    success_url = '/subdivisiondetail/'
