@@ -20,6 +20,7 @@ class FormDetailView(DetailView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
+        context['f'] = Forms.objects.all()
         context['d'] = Division.objects.all()
         context['sd'] = Subdivision.objects.all()
         context['sdd'] = SubdivisionDetail.objects.all()
@@ -55,7 +56,7 @@ class FormUpdateView(UpdateView):
 
 class FormDeleteView(DeleteView):
     model = Forms
-    success_url = '/form/'
+
 # ----------------------------------------------------------------------------------
 
 
@@ -85,6 +86,7 @@ class DivisionCreateView(CreateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
+        context['f'] = Forms.objects.all()
         context['d'] = Division.objects.all()
         context['sd'] = Subdivision.objects.all()
         context['sdd'] = SubdivisionDetail.objects.all()
@@ -112,15 +114,39 @@ class SubdivisionDetailView(DetailView):
     model = Subdivision
     fields = "__all__"
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['d'] = Division.objects.all()
+        context['sd'] = Subdivision.objects.all()
+        context['sdd'] = SubdivisionDetail.objects.all()
+
+        return context
+
 
 class SubdivisionCreateView(CreateView):
     model = Subdivision
     fields = "__all__"
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['d'] = Division.objects.all()
+        context['sd'] = Subdivision.objects.all()
+        context['sdd'] = SubdivisionDetail.objects.all()
+
+        return context
+
 
 class SubdivisionUpdateView(UpdateView):
     model = Subdivision
     fields = "__all__"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['d'] = Division.objects.all()
+        context['sd'] = Subdivision.objects.all()
+        context['sdd'] = SubdivisionDetail.objects.all()
+
+        return context
 
 
 class SubdivisionDeleteView(DeleteView):
@@ -154,8 +180,13 @@ class SubdivisionDetailUpdateView(UpdateView):
     model = SubdivisionDetail
     fields = "__all__"
 
-    def subdivision_value(self):
-        pass
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['d'] = Division.objects.all()
+        context['sd'] = Subdivision.objects.all()
+        context['sdd'] = SubdivisionDetail.objects.all()
+
+        return context
 
 
 class SubdivisionDetailDeleteView(DeleteView):

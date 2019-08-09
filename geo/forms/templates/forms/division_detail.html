@@ -26,7 +26,10 @@
                 <div class="form-row">
                     
                 <div class="form-group col-md-12 mb-0">
+
+                  
                         {% for d in d %}
+                        
                         
                             {% if d.id == forms.id  %}
                               
@@ -49,7 +52,7 @@
                       
                       {% for x in sdd %}
                         
-                          {% if x.id == d.id %}
+                      {% if x.subdivision.id == s.id and s.division.id == d.id %}
                           <div class="form-row">
                             <div class="form-group col-md-4 mb-0"> {{x.criteria}}    
                             </div>
@@ -71,18 +74,18 @@
                     {% endfor %}
                     {% endif %}
                 {% endfor %}
-                        <button class="btn btn-outline-danger" type="submit">
+                        <button class="btn btn-outline-primary" type="submit">
                             
                                 <a href="{% url 'division-update' object.id %}">Update Division</a>
                                 </button>
-                                <button class="btn btn-outline-danger" type="submit">
+                                <button class="btn btn-outline-primary" type="submit">
                             
                                         <a href="{% url 'subdivision-create' %}">Add Subdivision</a>
                                         </button>
-                                        <button class="btn btn-outline-danger" type="submit">
-                            
-                                                <a href="{% url 'subdivisiondetail-create' %}">Add Detail</a>
-                                                </button>
+                                        
+                                                <button class="btn btn-outline-danger" >
+                                                    <a href="{% url 'division-delete' object.id %}"> Delete Division</a>
+                                                     </button>
                 </div>
 </div>
 </fieldset>

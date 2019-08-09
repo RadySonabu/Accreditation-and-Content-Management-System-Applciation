@@ -33,11 +33,16 @@
                 
                 
                 {% for d in d%}
-                      
+                  
+                  {% if d.title.id == forms.id %}
+                    
+                  
                       <div class="form-row">
-                        <div class="form-group col-md-2 mb-0"><strong><a href="{% url 'division-detail' d.id %}">{{d.criteria}}</a> </strong>   
+                          <div class="form-group col-md-2 mb-0"><strong><a href="{% url 'division-detail' d.id %}">{{d.criteria}}</a> </strong>   
+                          </div>
                         </div>
-                      </div>
+                      
+                      
                       
                       
                     {% for s in sd %}
@@ -56,6 +61,9 @@
                         
                       
                       {% for x in sdd %}
+                      
+                        {% if x.subdivision.id == s.id and s.division.id == d.id %}
+                          
                         
                           <div class="form-row">
                             <div class="form-group col-md-4 mb-0"> {{x.criteria}}    
@@ -71,11 +79,12 @@
                                     <div class="form-group col-md-2 mb-0"> {{x.total}}    
                                       </div>
                           </div>
-                      
+                          {% endif %}
                       {% endfor %}
                         
                     {% endfor %}
-                      
+                    
+                    {% endif %}
                 {% endfor %}
                   
                   

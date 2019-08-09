@@ -1,24 +1,73 @@
-
-
-
 {% extends "dashboard/base.html" %} 
 
 {% block content %}
 {% load crispy_forms_tags %}
 <div class="row justify-content-center">
-        <div class="col-md-10 ">
+        <div class="col-md-12 ">
         <div class="content-section">
             <form method="POST">
             {% csrf_token %}
             <fieldset class="form-group">
-                <legend class="border-bottom mb-4">Join Today</legend>
+                <legend class="border-bottom mb-4">Subdivision</legend>
+                <div class="form-row border-bottom border-top mt-4 mb-4">
+                        <div class="form-group col-md-4 pt-3 "><strong>Criteria</strong>
+                        </div>
+                        <div class="form-group col-md-1 pt-3 "><strong>Weigh</strong>
+                          </div>
+                        <div class="form-group col-md-1 pt-3 "><strong>Breakdown</strong>  
+                            </div>
+                            <div class="form-group col-md-2 pt-3 "><strong>Remarks</strong>
+                            </div>
+                            <div class="form-group col-md-2 pt-3 "><strong>Subpoints</strong>
+                            </div>
+                            <div class="form-group col-md-2 pt-3 "><strong>Points</strong>
+                            </div>
+                      </div>
                 <div class="form-row">
-                <div class="form-group col-md-6 mb-0">
-                        {{object.criteria}} {{object.points}}
-                        <button class="btn btn-outline-danger" type="submit">
+                    
+                <div class="form-group col-md-12 mb-0">
+
+                        
+                        {% for x in sd %}
+
+                        {% if x.id == object.id %}
+                        
+                
+                        {% endif %}
+
+                             
+                             {% for s in sdd  %}
+                                {% if x.id == object.id and x.id == s.id %}
+                                <div class="form-row">
+                                                <div class="form-group col-md-4 mb-0"> <a href="{% url 'subdivisiondetail-detail' object.id%}">{{s.criteria}}  </a>  
+                                                </div>
+                                                <div class="form-group col-md-1 mb-0 "> {{s.points}}    
+                                                  </div>
+                                                  <div class="form-group col-md-1 mb-0"> {{s.subpoints}}    
+                                                    </div>
+                                                    <div class="form-group col-md-2 mb-0"> {{s.remarks}}    
+                                                      </div>
+                                                      <div class="form-group col-md-2 mb-0"> {{s.subtotal}}    
+                                                        </div>
+                                                        <div class="form-group col-md-2 mb-0"> {{s.total}}    
+                                                          </div>
+                                              </div>
+                                {% endif %}
+                             {% endfor %}
+                                     
+                        {% endfor %}
+                                
+                  
+                        
+                        <button class="btn btn-outline-primary" type="submit">
                             
-                                <a href="{% url 'subdivisiondetail-update' object.id %}">Update</a>
-                                </button>
+                                        <a href="{% url 'subdivisiondetail-update' object.id %}">Update Detail</a>
+                                        </button>
+                                        
+                                               
+                                                        <button class="btn btn-outline-danger" >
+                                                            <a href="{% url 'subdivisiondetail-delete' object.id %}"> Delete Detail</a>
+                                                             </button>
                 </div>
 </div>
 </fieldset>

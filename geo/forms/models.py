@@ -132,4 +132,4 @@ class SubdivisionDetail(models.Model):
         return self.criteria
 
     def get_absolute_url(self):
-        return reverse("division-detail", kwargs={"pk": self.pk})
+        return reverse("subdivisiondetail-detail", kwargs={"pk": self.pk})
