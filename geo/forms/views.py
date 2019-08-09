@@ -155,6 +155,7 @@ class SubdivisionDetailUpdateView(UpdateView):
     fields = "__all__"
 
     def subdivision_value(self):
+        pass
 
 
 class SubdivisionDetailDeleteView(DeleteView):
