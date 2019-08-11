@@ -88,6 +88,12 @@ class DivisionCreateView(CreateView):
     model = Division
     fields = "__all__"
 
+    def form_valid(self, form):
+        field_evaluation_obj = form.save(commit=True)
+        files = self.request.FILES.getlist('attachments')
+
+        return super(DivisionCreateView, self).form_valid(form)
+
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['f'] = Forms.objects.all()
