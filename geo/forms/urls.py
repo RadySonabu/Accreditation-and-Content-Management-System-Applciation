@@ -32,7 +32,7 @@ urlpatterns = [
          DivisionUpdateView.as_view(), name='division-update'),
     path('division/<int:pk>/delete',
          DivisionDeleteView.as_view(), name='division-delete'),
-    path('division/new/',
+    path('division/new/<int:pk>',
          DivisionCreateView.as_view(), name='division-create'),
     # ----------------------------------------------------------------------------------
     path('subdivision/', SubdivisionListView.as_view(), name='subdivision-list'),
@@ -42,7 +42,7 @@ urlpatterns = [
          SubdivisionUpdateView.as_view(), name='subdivision-update'),
     path('subdivision/<int:pk>/delete',
          SubdivisionDeleteView.as_view(), name='subdivision-delete'),
-    path('subdivision/new/', SubdivisionCreateView.as_view(),
+    path('subdivision/new/<int:pk>', SubdivisionCreateView.as_view(),
          name='subdivision-create'),
     # ----------------------------------------------------------------------------------
     path('subdivisiondetail/', SubdivisionDetailListView.as_view(),
@@ -53,7 +53,7 @@ urlpatterns = [
          SubdivisionDetailUpdateView.as_view(), name='subdivisiondetail-update'),
     path('subdivisiondetail/<int:pk>/delete',
          SubdivisionDetailDeleteView.as_view(), name='subdivisiondetail-delete'),
-    path('subdivisiondetail/new/', SubdivisionDetailCreateView.as_view(),
+    path('subdivisiondetail/new/<int:pk>', SubdivisionDetailCreateView.as_view(),
          name='subdivisiondetail-create'),
 
 ]

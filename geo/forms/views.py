@@ -88,9 +88,11 @@ class DivisionCreateView(CreateView):
     model = Division
     fields = "__all__"
 
-    def form_valid(self, form, ):
-        title = form.save(commit=True)
-        title
+    def form_valid(self, form):
+
+        form.instance.title_id = self.kwargs.get('pk')
+
+        print(self)
 
         return super(DivisionCreateView, self).form_valid(form)
 
@@ -153,6 +155,14 @@ class SubdivisionCreateView(CreateView):
 
     form_class = SubdivisionForm
 
+    def form_valid(self, form):
+
+        form.instance.division_id = self.kwargs.get('pk')
+
+        print(self)
+
+        return super(SubdivisionCreateView, self).form_valid(form)
+
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['d'] = Division.objects.all()
@@ -206,6 +216,14 @@ class SubdivisionDetailDetailView(DetailView):
 class SubdivisionDetailCreateView(CreateView):
     model = SubdivisionDetail
     fields = "__all__"
+
+    def form_valid(self, form):
+
+        form.instance.subdivision_id = self.kwargs.get('pk')
+
+        print(self)
+
+        return super(SubdivisionDetailCreateView, self).form_valid(form)
 
 
 class SubdivisionDetailUpdateView(UpdateView):

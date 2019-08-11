@@ -40,7 +40,7 @@
                     {% if d.title.id == object.division.title.id  %}
                        
                         <div class="form-row">
-                            <div class="form-group col-md-4 mb-0"><strong>{{d.criteria}}</strong>   
+                            <div class="form-group col-md-4 mb-0"><strong>{{d.criteria}}</strong>   <a href="{% url 'subdivision-create' d.id %}">Add Subivision</a>
                             </div>
                             <div class="form-group col-md-1 pt-3 "><strong></strong>
                             </div>
@@ -65,7 +65,7 @@
                         
                         
                         <div class="form-row">
-                            <div class="form-group col-md-4 mb-0">{{s.criteria}}    
+                            <div class="form-group col-md-4 mb-0">{{s.criteria}}    <a href="{% url 'subdivisiondetail-create' s.id%}">Add Detail</a>
                             </div>
                             <div class="form-group col-md-1 mb-0">{{s.points}}    
                             </div>
@@ -124,14 +124,9 @@
                 
             </fieldset>
             <button class="btn btn-outline-primary" type="submit">
-              <a href="{% url 'division-create'%}">Add Division</a>
+              <a href="{% url 'division-create' object.division.title.id%}">Add Division</a>
              </button>
-             <button class="btn btn-outline-primary" type="submit">
-               <a href="{% url 'subdivision-create'  %}">Add Subivision</a>
-              </button>
-              <button class="btn btn-outline-primary" type="submit">
-               <a href="{% url 'subdivisiondetail-create'%}">Add Detail</a>
-              </button>
+            
              <button class="btn btn-outline-primary" type="submit">
                  <a href="{% url 'form-update' object.id %}">Update Form</a>
                 </button>
