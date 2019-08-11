@@ -88,9 +88,9 @@ class DivisionCreateView(CreateView):
     model = Division
     fields = "__all__"
 
-    def form_valid(self, form):
-        field_evaluation_obj = form.save(commit=True)
-        files = self.request.FILES.getlist('attachments')
+    def form_valid(self, form, ):
+        title = form.save(commit=True)
+        title
 
         return super(DivisionCreateView, self).form_valid(form)
 
