@@ -1,11 +1,15 @@
+from django import forms
+
 from django.shortcuts import render, redirect, get_object_or_404
 
 from django.contrib import messages
 from django.http import HttpResponse
 from .models import Forms, SubdivisionDetail, Subdivision, Division
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
+from django.urls import reverse, reverse_lazy
+from .forms import SubdivisionForm, SubdivisionDetailForm
 
-from .forms import SubdivisionForm
+from django.forms.models import modelform_factory
 
 
 class FormListView(ListView):
@@ -56,7 +60,7 @@ class FormUpdateView(UpdateView):
 
 class FormDeleteView(DeleteView):
     model = Forms
-
+    success_url = '/form/'
 # ----------------------------------------------------------------------------------
 
 
@@ -96,11 +100,26 @@ class DivisionCreateView(CreateView):
 
 class DivisionUpdateView(UpdateView):
     model = Division
-    fields = "__all__"
+    fields = ['criteria', ]
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['f'] = Forms.objects.all()
+        context['d'] = Division.objects.all()
+        context['sd'] = Subdivision.objects.all()
+        context['sdd'] = SubdivisionDetail.objects.all()
+
+        return context
 
 
 class DivisionDeleteView(DeleteView):
     model = Division
+
+    def get_success_url(self, **kwargs):
+        self.object = self.get_object()
+        id1 = self.kwargs['pk']
+        return reverse_lazy('form-detail', kwargs={'pk': self.object.title.id})
+
 
 # ----------------------------------------------------------------------------------
 
@@ -125,7 +144,8 @@ class SubdivisionDetailView(DetailView):
 
 class SubdivisionCreateView(CreateView):
     model = Subdivision
-    fields = "__all__"
+
+    form_class = SubdivisionForm
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -138,7 +158,8 @@ class SubdivisionCreateView(CreateView):
 
 class SubdivisionUpdateView(UpdateView):
     model = Subdivision
-    fields = "__all__"
+
+    form_class = SubdivisionForm
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -152,8 +173,13 @@ class SubdivisionUpdateView(UpdateView):
 class SubdivisionDeleteView(DeleteView):
     model = Subdivision
 
-
+    def get_success_url(self, **kwargs):
+        self.object = self.get_object()
+        id1 = self.kwargs['pk']
+        return reverse_lazy('form-detail', kwargs={'pk': self.object.division.title.id})
 # -----------------------------------------
+
+
 class SubdivisionDetailListView(ListView):
     model = SubdivisionDetail
     context_object_name = 'forms'
@@ -178,7 +204,7 @@ class SubdivisionDetailCreateView(CreateView):
 
 class SubdivisionDetailUpdateView(UpdateView):
     model = SubdivisionDetail
-    fields = "__all__"
+    form_class = SubdivisionDetailForm
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -191,3 +217,8 @@ class SubdivisionDetailUpdateView(UpdateView):
 
 class SubdivisionDetailDeleteView(DeleteView):
     model = SubdivisionDetail
+
+    def get_success_url(self, **kwargs):
+        self.object = self.get_object()
+        id1 = self.kwargs['pk']
+        return reverse_lazy('form-detail', kwargs={'pk': self.object.subdivision.division.title.id})

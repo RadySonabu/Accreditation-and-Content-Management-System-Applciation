@@ -109,11 +109,11 @@ class Division(models.Model):
 class Subdivision(models.Model):
     division = models.ForeignKey(
         Division, on_delete=models.CASCADE)
-    criteria = models.CharField(max_length=150)
+    criteria = models.CharField(max_length=150,)
     points = models.FloatField()
 
     def __str__(self):
-        return f'{ self.criteria} with {self.points} points'
+        return self.criteria
 
     def get_absolute_url(self):
         return reverse("subdivision-detail", kwargs={"pk": self.pk})

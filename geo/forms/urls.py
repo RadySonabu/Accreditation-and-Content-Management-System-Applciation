@@ -2,12 +2,19 @@ from django.urls import path, include
 from . import views
 from .views import (FormListView, FormDetailView,
                     FormCreateView, FormUpdateView,
-                    FormDeleteView, DivisionCreateView,
+                    FormDeleteView,
+
+
+                    DivisionCreateView,
                     DivisionListView, DivisionDetailView,
                     DivisionUpdateView, DivisionDeleteView,
+
+
                     SubdivisionListView, SubdivisionDetailView,
-                    SubdivisionUpdateView, SubdivisionDeleteView,
-                    SubdivisionCreateView, SubdivisionDetailListView,
+                    SubdivisionUpdateView,  SubdivisionDeleteView,
+                    SubdivisionCreateView,
+
+                    SubdivisionDetailListView,
                     SubdivisionDetailDetailView,
                     SubdivisionDetailUpdateView, SubdivisionDetailDeleteView,
                     SubdivisionDetailCreateView
@@ -25,7 +32,8 @@ urlpatterns = [
          DivisionUpdateView.as_view(), name='division-update'),
     path('division/<int:pk>/delete',
          DivisionDeleteView.as_view(), name='division-delete'),
-    path('division/new/', DivisionCreateView.as_view(), name='division-create'),
+    path('division/new/',
+         DivisionCreateView.as_view(), name='division-create'),
     # ----------------------------------------------------------------------------------
     path('subdivision/', SubdivisionListView.as_view(), name='subdivision-list'),
     path('subdivision/<int:pk>/',
