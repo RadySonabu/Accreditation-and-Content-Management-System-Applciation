@@ -10,14 +10,15 @@ from django.urls import reverse, reverse_lazy
 from .forms import SubdivisionForm, SubdivisionDetailForm
 
 from django.forms.models import modelform_factory
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 
-class FormListView(ListView):
+class FormListView(LoginRequiredMixin, ListView):
     model = Forms
     context_object_name = 'forms'
 
 
-class FormDetailView(DetailView):
+class FormDetailView(LoginRequiredMixin, DetailView):
 
     model = Forms
     fields = "__all__"
@@ -31,7 +32,7 @@ class FormDetailView(DetailView):
         return context
 
 
-class FormCreateView(CreateView):
+class FormCreateView(LoginRequiredMixin, CreateView):
     model = Forms
 
     fields = "__all__"
@@ -45,7 +46,7 @@ class FormCreateView(CreateView):
         return context
 
 
-class FormUpdateView(UpdateView):
+class FormUpdateView(LoginRequiredMixin, UpdateView):
     model = Forms
     fields = "__all__"
 
@@ -58,18 +59,18 @@ class FormUpdateView(UpdateView):
         return context
 
 
-class FormDeleteView(DeleteView):
+class FormDeleteView(LoginRequiredMixin, DeleteView):
     model = Forms
     success_url = '/form/'
 # ----------------------------------------------------------------------------------
 
 
-class DivisionListView(ListView):
+class DivisionListView(LoginRequiredMixin, ListView):
     model = Division
     context_object_name = 'forms'
 
 
-class DivisionDetailView(DetailView):
+class DivisionDetailView(LoginRequiredMixin, DetailView):
     model = Division
     fields = "__all__"
     context_object_name = 'forms'
@@ -84,7 +85,7 @@ class DivisionDetailView(DetailView):
         return context
 
 
-class DivisionCreateView(CreateView):
+class DivisionCreateView(LoginRequiredMixin, CreateView):
     model = Division
     fields = "__all__"
 
@@ -106,7 +107,7 @@ class DivisionCreateView(CreateView):
         return context
 
 
-class DivisionUpdateView(UpdateView):
+class DivisionUpdateView(LoginRequiredMixin, UpdateView):
     model = Division
     fields = ['criteria', ]
 
@@ -120,7 +121,7 @@ class DivisionUpdateView(UpdateView):
         return context
 
 
-class DivisionDeleteView(DeleteView):
+class DivisionDeleteView(LoginRequiredMixin, DeleteView):
     model = Division
 
     def get_success_url(self, **kwargs):
@@ -132,12 +133,12 @@ class DivisionDeleteView(DeleteView):
 # ----------------------------------------------------------------------------------
 
 
-class SubdivisionListView(ListView):
+class SubdivisionListView(LoginRequiredMixin, ListView):
     model = Subdivision
     context_object_name = 'forms'
 
 
-class SubdivisionDetailView(DetailView):
+class SubdivisionDetailView(LoginRequiredMixin, DetailView):
     model = Subdivision
     fields = "__all__"
 
@@ -150,7 +151,7 @@ class SubdivisionDetailView(DetailView):
         return context
 
 
-class SubdivisionCreateView(CreateView):
+class SubdivisionCreateView(LoginRequiredMixin, CreateView):
     model = Subdivision
 
     form_class = SubdivisionForm
@@ -172,7 +173,7 @@ class SubdivisionCreateView(CreateView):
         return context
 
 
-class SubdivisionUpdateView(UpdateView):
+class SubdivisionUpdateView(LoginRequiredMixin, UpdateView):
     model = Subdivision
 
     form_class = SubdivisionForm
@@ -186,7 +187,7 @@ class SubdivisionUpdateView(UpdateView):
         return context
 
 
-class SubdivisionDeleteView(DeleteView):
+class SubdivisionDeleteView(LoginRequiredMixin, DeleteView):
     model = Subdivision
 
     def get_success_url(self, **kwargs):
@@ -196,12 +197,12 @@ class SubdivisionDeleteView(DeleteView):
 # -----------------------------------------
 
 
-class SubdivisionDetailListView(ListView):
+class SubdivisionDetailListView(LoginRequiredMixin, ListView):
     model = SubdivisionDetail
     context_object_name = 'forms'
 
 
-class SubdivisionDetailDetailView(DetailView):
+class SubdivisionDetailDetailView(LoginRequiredMixin, DetailView):
     model = SubdivisionDetail
 
     def get_context_data(self, **kwargs):
@@ -213,7 +214,7 @@ class SubdivisionDetailDetailView(DetailView):
         return context
 
 
-class SubdivisionDetailCreateView(CreateView):
+class SubdivisionDetailCreateView(LoginRequiredMixin, CreateView):
     model = SubdivisionDetail
     fields = "__all__"
 
@@ -226,7 +227,7 @@ class SubdivisionDetailCreateView(CreateView):
         return super(SubdivisionDetailCreateView, self).form_valid(form)
 
 
-class SubdivisionDetailUpdateView(UpdateView):
+class SubdivisionDetailUpdateView(LoginRequiredMixin, UpdateView):
     model = SubdivisionDetail
     form_class = SubdivisionDetailForm
 
@@ -239,7 +240,7 @@ class SubdivisionDetailUpdateView(UpdateView):
         return context
 
 
-class SubdivisionDetailDeleteView(DeleteView):
+class SubdivisionDetailDeleteView(LoginRequiredMixin, DeleteView):
     model = SubdivisionDetail
 
     def get_success_url(self, **kwargs):
