@@ -70,7 +70,7 @@
     <div class="row justify-content-center">
       <div class="col-md-auto ">
         <div class="content-section">
-          <form method="POST">
+          <form method="POST" id="personForm" data-college-url="{% url 'ajax_load_college' %}" data-program-url="{% url 'ajax_load_program' %}" novalidate>
             {% csrf_token %}
             <fieldset class="form-group">
               <legend class="border-bottom mb-4">Join Today</legend>
@@ -79,7 +79,7 @@
                   {{ form.employee_number | as_crispy_field }}
                 </div>
                 <div class="form-group col-md-6 mb-0">
-                  {{ form.course | as_crispy_field }}
+                  {{ form.role | as_crispy_field }}
                 </div>
               </div>
               <div class="form-row">
@@ -88,7 +88,7 @@
                 </div>
                 <div class="form-group col-md-6 mb-0">
                   {{ form.program | as_crispy_field }}
-                </div> 
+                </div>
               </div>
               <div class="form-row">
                 <div class="form-group col-md-5 mb-0">
@@ -127,14 +127,43 @@
               </button>
             </div>
           </form>
-          <!-- <div class="border-top pt-3">
-            <small class="text-muted">
-              Already Have An Account? <a class="ml-2" href="{% url 'login' %}">Sign In</a>
-            </small>
-          </div> -->
+          
         </div>
       </div>
     </div>
   </body>
+  <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+          <script>
+            $("#id_role").change(function () {
+              var url = $("#personForm").attr("data-college-url");  // get the url of the `load_cities` view
+              var roleId = $(this).val();  // get the selected country ID from the HTML input
+        
+              $.ajax({                       // initialize an AJAX request
+                url: url,                    // set the url of the request (= localhost:8000/hr/ajax/load-cities/)
+                data: {
+                  'role': roleId       // add the country id to the GET parameters
+                },
+                success: function (data) {   // `data` is the return of the `load_cities` view function
+                  $("#id_college").html(data);  // replace the contents of the city input with the data that came from the server
+                }
+              });
+        
+            });
+            $("#id_college").change(function () {
+              var url = $("#personForm").attr("data-program-url");  // get the url of the `load_cities` view
+              var collegeId = $(this).val();  // get the selected country ID from the HTML input
+        
+              $.ajax({                       // initialize an AJAX request
+                url: url,                    // set the url of the request (= localhost:8000/hr/ajax/load-cities/)
+                data: {
+                  'college': collegeId       // add the country id to the GET parameters
+                },
+                success: function (data) {   // `data` is the return of the `load_cities` view function
+                  $("#id_program").html(data);  // replace the contents of the city input with the data that came from the server
+                }
+              });
+        
+            });
+          </script>
 </html>
 </body>

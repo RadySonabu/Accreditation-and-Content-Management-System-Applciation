@@ -6,31 +6,29 @@ from members.models import MyUser
 
 def home(request):
     user = request.user
-    if user.is_authenticated and user.course == 'VPAA':
+    if user.is_authenticated and user.role == 'VPAA':
         context = {
-            'members': MyUser.objects.filter(course='Dean')
+            'members': MyUser.objects.filter(role='Dean')
         }
-    elif user.is_authenticated and user.course == 'Dean':
-        if user.college =='CITE':
+    elif user.is_authenticated and user.role == 'Dean':
+        if user.college == 'CITE':
 
             context = {
-                'members': MyUser.objects.filter(course='DC', college='CITE')
+                'members': MyUser.objects.filter(role='DEPTCHAIR', college='CITE')
             }
         else:
 
             context = {
-                'members': MyUser.objects.filter(course='DC')
+                'members': MyUser.objects.filter(role='DEPTCHAIR')
             }
-    elif user.is_authenticated and user.course == 'DC':
+    elif user.is_authenticated and user.role == 'DEPTCHAIR':
         if user.program == 'BSIT':
 
             context = {
                 'members': MyUser.objects.filter(program='BSIT')
-                
+
             }
-    else: 
+    else:
         return render(request, 'dashboard/home.html')
-        
-        
 
     return render(request, 'dashboard/home.html', context)

@@ -96,7 +96,7 @@ class Forms(models.Model):
 
 
 class Division(models.Model):
-    title = models.ForeignKey(Forms, on_delete=models.CASCADE)
+    title = models.ForeignKey(Forms, default=1, on_delete=models.CASCADE)
     criteria = models.CharField(unique=True, max_length=150)
 
     def __str__(self):
@@ -108,7 +108,7 @@ class Division(models.Model):
 
 class Subdivision(models.Model):
     division = models.ForeignKey(
-        Division, on_delete=models.CASCADE)
+        Division, default=1, on_delete=models.CASCADE)
     criteria = models.CharField(max_length=150,)
     points = models.FloatField()
 
@@ -120,7 +120,8 @@ class Subdivision(models.Model):
 
 
 class SubdivisionDetail(models.Model):
-    subdivision = models.ForeignKey(Subdivision, on_delete=models.CASCADE)
+    subdivision = models.ForeignKey(
+        Subdivision, default=1, on_delete=models.CASCADE)
     criteria = models.CharField(max_length=150)
     points = models.FloatField()
     subpoints = models.FloatField()

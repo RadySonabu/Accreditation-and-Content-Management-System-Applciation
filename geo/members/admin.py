@@ -5,7 +5,7 @@ from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
 
 from django.contrib.auth.forms import ReadOnlyPasswordHashField
 
-from members.models import MyUser
+from members.models import MyUser, Role, College, Program
 from import_export.admin import ImportExportModelAdmin
 
 
@@ -19,7 +19,7 @@ class UserCreationForm(forms.ModelForm):
     class Meta:
         model = MyUser
         fields = ('employee_number', 'first_name', 'middle_initial',
-                  'last_name', 'contact', 'email', 'course', 'college', 'program', 'password1', 'password2')
+                  'last_name', 'contact', 'email', 'role',  'college', 'program', 'password1', 'password2')
 
     def clean_password2(self):
         # Check that the two password entries match
@@ -28,6 +28,31 @@ class UserCreationForm(forms.ModelForm):
         if password1 and password2 and password1 != password2:
             raise forms.ValidationError("Passwords don't match")
         return password2
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['college'].queryset = MyUser.objects.none()
+        self.fields['program'].queryset = MyUser.objects.none()
+
+        if 'role' in self.data:
+            try:
+                role_id = int(self.data.get('role'))
+                self.fields['college'].queryset = College.objects.filter(
+                    role_id=role_id)
+            except (ValueError, TypeError):
+                pass  # invalid input from the client; ignore and fallback to empty City queryset
+        elif self.instance.pk:
+            self.fields['college'].queryset = self.instance.role.college_set
+
+        if 'college' in self.data:
+            try:
+                college_id = int(self.data.get('college'))
+                self.fields['program'].queryset = Program.objects.filter(
+                    college_id=college_id)
+            except (ValueError, TypeError):
+                pass  # invalid input from the client; ignore and fallback to empty City queryset
+        elif self.instance.pk:
+            self.fields['program'].queryset = self.instance.role.program_set
 
     def save(self, commit=True):
         # Save the provided password in hashed format
@@ -48,7 +73,7 @@ class UserChangeForm(forms.ModelForm):
     class Meta:
         model = MyUser
         fields = ('employee_number', 'first_name', 'middle_initial',
-                  'last_name', 'contact', 'email', 'course', 'college', 'program', 'is_active', 'is_admin')
+                  'last_name', 'contact', 'email', 'role',  'college', 'program',  'is_active', 'is_admin')
 
     def clean_password(self):
         # Regardless of what the user provides, return the initial value.
@@ -65,12 +90,12 @@ class UserAdmin(BaseUserAdmin):
     # The fields to be used in displaying the User model.
     # These override the definitions on the base UserAdmin
     # that reference specific fields on auth.User.
-    list_display = ('employee_number', 'course', 'is_admin')
+    list_display = ('employee_number',  'is_admin')
     list_filter = ('is_admin',)
     fieldsets = (
         (None, {'fields': ('employee_number', 'password')}),
         ('Personal info', {'fields': (
-            'first_name', 'middle_initial', 'last_name', 'contact', 'email', 'course', 'college', 'program')}),
+            'first_name', 'middle_initial', 'last_name', 'contact', 'email', 'role',  'college', 'program')}),
         ('Permissions', {'fields': ('is_admin', 'is_active')}),
     )
     # add_fieldsets is not a standard ModelAdmin attribute. UserAdmin
@@ -79,7 +104,7 @@ class UserAdmin(BaseUserAdmin):
     add_fieldsets = (
         (None, {
             'classes': ('wide',),
-            'fields': ('employee_number', 'first_name', 'middle_initial', 'last_name', 'contact', 'email', 'course', 'college', 'program', 'password1', 'password2')}
+            'fields': ('employee_number', 'first_name', 'middle_initial', 'last_name', 'contact', 'email',  'password1', 'password2' 'role',  'college', 'program')}
          ),
     )
     search_fields = ('last_name',)
@@ -95,6 +120,10 @@ class UserAdmin(BaseUserAdmin):
 class ViewAdmin(ImportExportModelAdmin):
     pass
 
+
     # ... and, since we're not using Django's built-in permissions,
     # unregister the Group model from admin.
 admin.site.unregister(Group)
+admin.site.register(Role)
+admin.site.register(College)
+admin.site.register(Program)

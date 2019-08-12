@@ -3,7 +3,7 @@
 <h1 class="mb-5">Progress...</h1>
 {% for mem in members %}
 
-{% if user.course == 'VPAA' %}
+{% if user.role == 'VPAA' %}
   <div class="row">
       {% if mem.college == 'CITE' %}
       <div class="col-md-auto">
@@ -31,7 +31,7 @@
 
 
 
-{% elif user.course == 'Dean' %}
+{% elif user.role == 'Dean' %}
 
   {% if mem.college == 'CITE' %}
   
@@ -69,7 +69,7 @@
    
     
   {% endif %}
-{% elif user.course == 'DC' %}
+{% elif user.role == 'DC' %}
 {% if mem.program == 'BSIT' %}
 <div class="col-md-auto">
   <div class="card">

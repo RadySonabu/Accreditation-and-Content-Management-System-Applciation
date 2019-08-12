@@ -7,8 +7,38 @@ from django.core.validators import MaxValueValidator, MinValueValidator, RegexVa
 import datetime
 
 
+class Role(models.Model):
+    role = models.CharField(max_length=50,  null=True, blank=True)
+
+    def __str__(self):
+        return self.role
+
+
+class College(models.Model):
+    role = models.ForeignKey(Role, on_delete=models.CASCADE)
+    college = models.CharField(
+        max_length=50,    null=True, blank=True)
+
+    def __str__(self):
+        return f'{self.college} {self.role}'
+
+
+class Program(models.Model):
+
+    college = models.ForeignKey(College, on_delete=models.CASCADE)
+    program = models.CharField(max_length=50,  null=True, blank=True)
+
+    def __str__(self):
+        return self.program
+
+
 class MyUserManager(BaseUserManager):
-    def create_user(self, employee_number, first_name, middle_initial, last_name, college, program, email, contact, course, password=None):
+    def create_user(self, employee_number, first_name, middle_initial, last_name,
+                    college,
+                    email, contact,
+                    role,
+                    program,
+                    password=None):
         """
         Creates and saves a User with the given email, favorite color
          and password.
@@ -23,7 +53,7 @@ class MyUserManager(BaseUserManager):
             last_name=last_name,
             email=self.normalize_email(email),
             contact=contact,
-            course=course,
+            role=role,
             college=college,
             program=program,
 
@@ -33,7 +63,12 @@ class MyUserManager(BaseUserManager):
         user.save(using=self._db)
         return user
 
-    def create_superuser(self, employee_number, first_name, middle_initial, college, program, last_name, course, contact, email, password):
+    def create_superuser(self, employee_number, first_name, middle_initial,
+                         college,
+                         last_name,
+                         role,
+                         program,
+                         contact, email, password):
         """
         Creates and saves a superuser with the given email, date of
         birth and password.
@@ -43,12 +78,13 @@ class MyUserManager(BaseUserManager):
             first_name=first_name,
             middle_initial=middle_initial,
             last_name=last_name,
-            course=course,
+            role=role,
             contact=contact,
             email=email,
             password=password,
             college=college,
             program=program,
+
 
 
         )
@@ -59,56 +95,6 @@ class MyUserManager(BaseUserManager):
 
 class MyUser(AbstractBaseUser):
 
-    # ROLE_CHOICES = (
-    #     ('VPAA', 'Vice President for Academic Affairs'),
-    #     ('Dean', 'Dean of College'),
-    #     ('DC', 'Department Chairperson'),
-    #     ('AD ', 'Administration')
-    # )
-    ROLE_CHOICES = (
-        ('VPAA', 'Vice President for Academic Affairs'),
-        ('Dean', 'Dean of College'),
-        ('DC', 'Department Chairperson'),
-        ('AD ', 'Administration')
-    )
-    COLLEGE_CHOICES = (
-        ('CITE', 'College of Information Technology Education'),
-        ('CEA', 'College of Engineering and Architecture'),
-        ('CBE', 'College of Business Eduction'),
-        ('COA', 'College of Arts'),
-        ('CME', 'College of Maritime Education'),
-        ('N/A', 'Not Applicable')
-    )
-    PROGRAM_CHOICES = (
-        ('BSCS', 'Bachelor of Science in Computer Science'),
-        ('BSIT', 'Bachelor of Science in Information Technology'),
-        ('BSIS', 'Bachelor of Science in Information Systems'),
-        ('BSEMC', 'Bachelor of Science in Entertainment Multimedia Education'),
-        ('BSCE', 'Bachelor of Science in Civil Engineering'),
-        ('BSIE', 'Bachelor of Science in Industrial Engineering'),
-        ('BSChe', 'Bachelor of Science in Chemical Engineering'),
-        ('BSCpe', 'Bachelor of Science in Computer Engineering'),
-        ('BSEE', 'Bachelor of Science in Electrical Engineering'),
-        ('BSECE', 'Bachelor of Science in Electronics and Communications Engineering'),
-        ('BSEnSE', 'Bachelor of Science in Environmental and Sanitary Engineering'),
-        ('BSME', 'Bachelor of Science in Mechanical Engineering'),
-        ('BSIE', 'Bachelor of Science in Industrial Engineering'),
-        ('BSArch', 'Bachelor of Science in Architecture'),
-        ('BSMArE', 'Bachelor of Science in Marine Engineering'),
-        ('BSMT', 'Bachelor of Science in Marine Transportation'),
-        ('BSA', 'Bachelor of Science in Accounting'),
-        ('BSA-LSCM', 'Bachelor of Science in Accounting Major in Logistics and Supply Chain Management'),
-        ('BSA-FMA', 'Bachelor of Science in Accounting Major in financial and Management Accounting'),
-        ('BSA-HRDM', 'Bachelor of Science in Accounting Major in Human Resources Development Management'),
-        ('BSA-MM', 'Bachelor of Science in Accounting Major in Marketing Management'),
-        ('BSA-SMBPO', 'Bachelor of Science in Accounting Major in Service Management for Business Process Outsourcing'),
-        ('BSA-Entrep', 'Bachelor of Science in Accounting in Entrepreneurship'),
-        ('BSA-Act', 'Bachelor of Science in Accounting in Accounting Technology'),
-        ('AB-Engl', 'Bachelor of Arts in English Language'),
-        ('AB-Polsci', 'Bachelor of Arts in Political Science'),
-        ('N/A', 'Not Applicable'),
-    )
-
     employee_number = models.CharField(primary_key=True, max_length=7, validators=[
         RegexValidator(r'^\d{1,10}$')])
 
@@ -118,11 +104,12 @@ class MyUser(AbstractBaseUser):
     email = models.EmailField(blank=True, max_length=254)
     contact = models.CharField(validators=[
         RegexValidator(r'^(09|\+639)\d{9}$')], blank=True, max_length=13)
-    course = models.CharField(choices=ROLE_CHOICES, max_length=50)
-    college = models.CharField(
-        choices=COLLEGE_CHOICES, max_length=50, null=True)
-    program = models.CharField(
-        choices=PROGRAM_CHOICES, max_length=50, null=True)
+    role = models.ForeignKey(
+        Role, on_delete=models.SET_NULL, null=True, blank=True)
+    college = models.ForeignKey(
+        College, on_delete=models.SET_NULL, null=True, blank=True)
+    program = models.ForeignKey(
+        Program, on_delete=models.SET_NULL, null=True, blank=True)
     date_added = models.DateTimeField(null=True, auto_now=True)
     is_active = models.BooleanField(default=True)
     is_admin = models.BooleanField(default=False)
@@ -131,13 +118,13 @@ class MyUser(AbstractBaseUser):
 
     USERNAME_FIELD = 'employee_number'
     REQUIRED_FIELDS = ['first_name', 'middle_initial',
-                       'last_name', 'course', 'college', 'program', 'contact', 'email']
+                       'last_name', 'role', 'college', 'program',  'contact', 'email']
 
     class Meta:
         ordering = ['-date_added']
 
     def __str__(self):
-        return f'{self.employee_number} - {self.first_name} {self.last_name} {self.course}'
+        return f'{self.employee_number} - {self.first_name} {self.last_name} {self.role}'
 
     def has_perm(self, perm, obj=None):
         "Does the user have a specific permission?"
