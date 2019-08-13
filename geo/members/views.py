@@ -6,8 +6,7 @@ from .admin import UserCreationForm
 from django.http import HttpResponse
 from .resources import Members
 from .models import MyUser, College, Program
-from django.views.generic import ListView, CreateView, UpdateView
-
+from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 
 # @login_required
 # def register(request):
@@ -50,7 +49,7 @@ def load_program(request):
 
 class UserListView(ListView):
     model = MyUser
-    template_name = 'dashboard/home.html'
+    success_url = reverse_lazy('home')
 
 
 class UserCreateView(CreateView):

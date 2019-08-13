@@ -15,7 +15,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 
 class FormListView(LoginRequiredMixin, ListView):
     model = Forms
-    context_object_name = 'forms'
+   
 
 
 class FormDetailView(LoginRequiredMixin, DetailView):

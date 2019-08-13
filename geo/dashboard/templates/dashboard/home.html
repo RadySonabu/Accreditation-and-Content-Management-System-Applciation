@@ -1,11 +1,13 @@
 {% extends "dashboard/base.html" %} 
 {% block content %} 
 <h1 class="mb-5">Progress...</h1>
+
 {% for mem in members %}
 
-{% if user.role == 'VPAA' %}
+{% if user.role.role == 'VPAA' %}
+
   <div class="row">
-      {% if mem.college == 'CITE' %}
+      {% if mem.college.college == 'CITE' %}
       <div class="col-md-auto">
         <div class="card">
           <div class="card-body">
@@ -14,7 +16,7 @@
           </div>
         </div>
       </div>
-      {% elif mem.college == 'CEA' %}
+      {% elif mem.college.college == 'CEA' %}
       <div class="col-md-auto">
         <div class="card">
           <div class="card-body" style="justify-content: center">
@@ -31,16 +33,16 @@
 
 
 
-{% elif user.role == 'Dean' %}
-
-  {% if mem.college == 'CITE' %}
+{% elif user.role.role == 'DEAN' %}
+  
+  {% if mem.college.college == 'CITE' %}
   
 
 
 
 
   <div class="row">
-      {% if mem.program == 'BSIT' %}
+      {% if mem.program.program == 'BSIT' %}
       <div class="col-md-auto">
         <div class="card">
           <div class="card-body">
@@ -49,7 +51,7 @@
           </div>
         </div>
       </div>
-      {% elif mem.program == 'BSCS' %}
+      {% elif mem.program.program == 'BSCS' %}
       <div class="col-md-auto">
         <div class="card">
           <div class="card-body" style="justify-content: center">
@@ -69,12 +71,15 @@
    
     
   {% endif %}
-{% elif user.role == 'DC' %}
-{% if mem.program == 'BSIT' %}
-<div class="col-md-auto">
+{% elif user.role.role == 'DEPTCHAIR' %}
+{% if mem.program.program == 'BSIT' %}
+
+
+    
+<div class="col-md-3">
   <div class="card">
-    <div class="card-body">
-      <h5 class="card-title">Department of Info.Technology</h5>
+    <div class="card-body" style="justify-content: center">
+      <h5 class="card-title"><a href="{% url 'form-detail' pk=1%}">Department of Info.Technology</a></h5>
       <img class="mx-auto d-block "   style="height: 200px; width: 200px; padding: 2%; justify-content: center" src="https://cdn1.iconfinder.com/data/icons/charts-2/304/Untitled-41-512.png">
     </div>
   </div>
@@ -83,10 +88,5 @@
 {% endif %}
 {% endfor %}
 
-<form action="{% url 'home' %}" method="POST">
-  {% csrf_token %}
-  <div class="form-group">
-    {{ form }}
-  </div>
-</form>
+
 {% endblock content %}
