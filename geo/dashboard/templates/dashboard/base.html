@@ -50,6 +50,7 @@
           <div class="collapse navbar-collapse" id="navbarToggle">
             <div class="navbar-nav mr-auto">
               <a class="nav-item nav-link" href="#">Home</a>
+              
             </div>
             <!-- Navbar Right Side -->
             <div class="navbar-nav">
@@ -96,7 +97,7 @@
                   data-toggle="dropdown"
                 >
                   <!-- <img class ="rounded-circle" width="30" height="30" src="{{user.profile.image.url}}"> -->
-                  DEAN of {{user.college}}
+                  DEAN of {{user.college.college}}
                 </button>
               </div>
 
@@ -127,8 +128,9 @@
                   id="menu1"
                   data-toggle="dropdown"
                 >
+                
                   <!-- <img class ="rounded-circle" width="30" height="30" src="{{user.profile.image.url}}"> -->
-                  DEPTCHAIR
+                  DEPTCHAIR of {{user.program.program}}
                 </button>
               </div>
 

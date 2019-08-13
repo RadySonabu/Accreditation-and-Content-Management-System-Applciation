@@ -7,7 +7,7 @@ from django.http import HttpResponse
 from .models import Forms, SubdivisionDetail, Subdivision, Division
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from django.urls import reverse, reverse_lazy
-from .forms import SubdivisionForm, SubdivisionDetailForm
+from .forms import SubdivisionForm, SubdivisionDetailForm, FormForm
 
 from django.forms.models import modelform_factory
 from django.contrib.auth.mixins import LoginRequiredMixin
@@ -15,13 +15,12 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 
 class FormListView(LoginRequiredMixin, ListView):
     model = Forms
-   
+    context_object_name = 'forms'
 
 
 class FormDetailView(LoginRequiredMixin, DetailView):
 
     model = Forms
-    fields = "__all__"
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -34,9 +33,15 @@ class FormDetailView(LoginRequiredMixin, DetailView):
 
 class FormCreateView(LoginRequiredMixin, CreateView):
     model = Forms
+    form_class = FormForm
 
-    fields = "__all__"
     success_url = '/form/'
+
+    def form_valid(self, form):
+
+        form.instance.created_by = self.request.user
+
+        return super(FormCreateView, self).form_valid(form)
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)

@@ -1,6 +1,8 @@
 {% extends "dashboard/base.html" %} 
 {% load crispy_forms_tags %}
 {% block content %}
+    
+    {% if user.role.role == 'DEAN' %}
     <div class="row justify-content-center">
       <div class="col-md-auto ">
         <div class="content-section">
@@ -24,4 +26,8 @@
           </div>
         </div>
       </div>
+    {% else %}
+      Oops.. PAGE NOT FOUND
+    {% endif %}
+      
 {% endblock%}

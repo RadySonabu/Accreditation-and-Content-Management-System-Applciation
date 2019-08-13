@@ -1,5 +1,13 @@
 from django import forms
-from .models import Division, Subdivision, SubdivisionDetail
+from .models import Forms,  Division, Subdivision, SubdivisionDetail
+
+
+class FormForm(forms.ModelForm):
+
+    class Meta:
+        model =  Forms
+        fields = ('title', 'form_type', 'branch', 'year', 'college', 'address',
+                  'first_name', 'middle_initial', 'last_name', 'created_for')
 
 
 class SubdivisionForm(forms.ModelForm):

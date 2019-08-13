@@ -1,6 +1,7 @@
 from django.db import models
 from django.urls import reverse
 from multiselectfield import MultiSelectField
+from members.models import MyUser, Program
 
 
 class AccreditationType(models.Model):
@@ -87,6 +88,10 @@ class Forms(models.Model):
     first_name = models.CharField(max_length=50)
     middle_initial = models.CharField(max_length=2)
     last_name = models.CharField(max_length=50)
+    created_by = models.ForeignKey(
+        MyUser, on_delete=models.SET_NULL, null=True, default="")
+    created_for = models.ForeignKey(
+        Program, on_delete=models.SET_NULL, null=True)
 
     def __str__(self):
         return f'{self.title}'
