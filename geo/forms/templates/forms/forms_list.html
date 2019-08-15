@@ -4,30 +4,35 @@
 
 {% block content %}
 {% load crispy_forms_tags %}
+{% if user.role.role == 'DEAN'  and form.created_by == user.instance %}
 <div class="row justify-content-center">
-        <div class="col-md-10 ">
-        <div class="content-section">
-            <form method="POST">
-            {% csrf_token %}
-            <fieldset class="form-group">
-                <legend class="border-bottom mb-4">List of Forms</legend>
-                <div class="form-row">
-                   
-                <div class="form-group col-md-6 mb-0">
-                        {% for form in forms %}
-    <h2><a class="article-title" href="{% url 'form-detail' form.id %}">{{ form.title}}</a></h2>
-            
-            
+    <div class="col-md-10 ">
+    <div class="content-section">
+        <form method="POST">
+        {% csrf_token %}
+        <fieldset class="form-group">
+            <legend class="border-bottom mb-4">List of Forms</legend>
+            <div class="form-row">
+               
+            <div class="form-group col-md-6 mb-0">
                 
-              
-       
-    {% endfor %}
-    <button class="btn btn-outline-primary" >
-               <a href="{% url 'form-create' %}"> Add form</a>
-                </button>
-                
+                    {% for form in forms %}
                         
-                </div>
+                        {% if form.created_by == user  %}
+                        <h2><a class="article-title" href="{% url 'form-detail' form.id %}">{{ form.title}}</a></h2>
+                        {% endif %}
+        
+        
+            
+          
+   
+                    {% endfor %}
+<button class="btn btn-outline-primary" >
+           <a href="{% url 'form-create' %}"> Add form</a>
+            </button>
+            
+                    
+            </div>
 </div>
 </fieldset>
 
@@ -35,4 +40,7 @@
 </div>
 </div>
 </div>
+{%else%}
+Oops page not found!
+{% endif %}
 {% endblock %}

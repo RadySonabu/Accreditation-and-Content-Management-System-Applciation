@@ -76,14 +76,24 @@
 
 
     
-<div class="col-md-3">
-  <div class="card">
-    <div class="card-body" style="justify-content: center">
-      <h5 class="card-title"><a href="{% url 'form-detail' pk=1%}">Department of Info.Technology</a></h5>
-      <img class="mx-auto d-block "   style="height: 200px; width: 200px; padding: 2%; justify-content: center" src="https://cdn1.iconfinder.com/data/icons/charts-2/304/Untitled-41-512.png">
+    
+    {% for f in form %}
+     
+     {% if f.created_for.program == mem.program.program %}
+     <div class="col-md-3">
+      <div class="card">
+        <div class="card-body" style="justify-content: center">
+          <h5 class="card-title"><a href="{% url 'form-detail' pk=f.id%}">Department of Info.Technology</a></h5>
+          <img class="mx-auto d-block "   style="height: 200px; width: 200px; padding: 2%; justify-content: center" src="https://cdn1.iconfinder.com/data/icons/charts-2/304/Untitled-41-512.png">
+        </div>
+      </div>
     </div>
-  </div>
-</div>
+     {% endif %}
+       
+    
+    {% endfor %}
+      
+
   {% endif %}
 {% endif %}
 {% endfor %}

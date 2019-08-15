@@ -67,6 +67,15 @@ class FormUpdateView(LoginRequiredMixin, UpdateView):
 class FormDeleteView(LoginRequiredMixin, DeleteView):
     model = Forms
     success_url = '/form/'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['f'] = Forms.objects.all()
+        context['d'] = Division.objects.all()
+        context['sd'] = Subdivision.objects.all()
+        context['sdd'] = SubdivisionDetail.objects.all()
+
+        return context
 # ----------------------------------------------------------------------------------
 
 
@@ -92,7 +101,7 @@ class DivisionDetailView(LoginRequiredMixin, DetailView):
 
 class DivisionCreateView(LoginRequiredMixin, CreateView):
     model = Division
-    fields = "__all__"
+    fields = ('criteria',)
 
     def form_valid(self, form):
 
@@ -134,6 +143,14 @@ class DivisionDeleteView(LoginRequiredMixin, DeleteView):
         id1 = self.kwargs['pk']
         return reverse_lazy('form-detail', kwargs={'pk': self.object.title.id})
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['f'] = Forms.objects.all()
+        context['d'] = Division.objects.all()
+        context['sd'] = Subdivision.objects.all()
+        context['sdd'] = SubdivisionDetail.objects.all()
+
+        return context
 
 # ----------------------------------------------------------------------------------
 
@@ -165,7 +182,7 @@ class SubdivisionCreateView(LoginRequiredMixin, CreateView):
 
         form.instance.division_id = self.kwargs.get('pk')
 
-        print(self)
+        
 
         return super(SubdivisionCreateView, self).form_valid(form)
 
