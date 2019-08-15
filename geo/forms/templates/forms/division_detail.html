@@ -124,13 +124,15 @@
          </button>
          
           
+         {% if f.created_by == user %}
          <button class="btn btn-outline-primary" type="submit">
-             <a href="{% url 'form-update' object.id %}">Update Form</a>
-            </button>
-            <button class="btn btn-outline-danger" type="submit">
-             <a href="{% url 'form-delete' object.id %}">Delete Form</a>
-            </button>
-    
+            <a href="{% url 'form-update' object.id %}">Update Form</a>
+           </button>
+           <button class="btn btn-outline-danger" type="submit">
+            <a href="{% url 'form-delete' object.id %}">Delete Form</a>
+           </button>
+   
+         {% endif %}
 
     </form>
 </div>
