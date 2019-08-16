@@ -40,7 +40,10 @@
                 {% if d.title.id == object.title.id  %}
                   
                     <div class="form-row">
-                        <div class="form-group col-md-4 mb-0"><strong>{{d.criteria}}</strong> <a href="{% url 'subdivision-create' d.id  %}">Add Subivision</a>  
+                        <div class="form-group col-md-4 mb-0"><strong>{{d.criteria}}</strong> 
+                          {% if user == f.created_by  %}
+                              <a href="{% url 'subdivision-create' d.id%}">Add Subdivision</a>
+                              {% endif %}  
                         </div>
                         <div class="form-group col-md-1 pt-3 "><strong></strong>
                         </div>
@@ -53,7 +56,10 @@
                         </div>
                         <div class="form-group col-md-2 pt-3 "><strong></strong>
                         </div>
-                        <div class="form-group col-md-1 pt-3 "><a href="{% url 'division-update' d.id%}">Update</a><a href="{% url 'division-delete' d.id%}">Delete</a>
+                        <div class="form-group col-md-1 pt-3 "><a href="{% url 'division-update' d.id%}">Update</a>
+                          {% if user == f.created_by %}
+                              <a href="{% url 'division-delete' d.id%}">Delete</a>
+                              {% endif %}
                         </div>
                     </div> 
                   
@@ -62,7 +68,10 @@
                 {% for s in sd %}
                 {% if s.division.id == d.id %}
                     <div class="form-row">
-                        <div class="form-group col-md-4 mb-0">{{s.criteria}} <a href="{% url 'subdivisiondetail-create' s.id%}">Add Detail</a>   
+                        <div class="form-group col-md-4 mb-0">{{s.criteria}} 
+                            {% if user == f.created_by %}
+                            <a href="{% url 'subdivisiondetail-create' s.id %}">Add Detail</a>
+                            {% endif %}    
                         </div>
                         <div class="form-group col-md-1 mb-0">{{s.points}}    
                         </div>
@@ -75,7 +84,10 @@
                         </div>
                         <div class="form-group col-md-2 pt-3 "><strong></strong>
                         </div>
-                        <div class="form-group col-md-1 pt-3 "><a href="{% url 'subdivision-update' s.id%}">Update</a><a href="{% url 'subdivision-delete' s.id%}">Delete</a>
+                        <div class="form-group col-md-1 pt-3 "><a href="{% url 'subdivision-update' s.id%}">Update</a>
+                          {% if user == f.created_by %}
+                            <a href="{% url 'subdivision-delete' s.id%}">Delete</a>
+                            {% endif %}
                         </div>
                       </div>
                     
@@ -103,7 +115,10 @@
                                 </div>
                                 <div class="form-group col-md-2 mb-0"> {{x.total}}    
                                   </div>
-                                  <div class="form-group col-md-1 mb-0"> <a href="{% url 'subdivisiondetail-update' x.id%}">Update</a><a href="{% url 'subdivisiondetail-delete' x.id%}">Delete</a>    
+                                  <div class="form-group col-md-1 mb-0"> <a href="{% url 'subdivisiondetail-update' x.id%}">Update</a>
+                                    {% if user == f.created_by %}
+                                          <a href="{% url 'subdivisiondetail-delete' x.id%}">Delete</a>
+                                          {% endif %}      
                                   </div>
                       </div>
                       {% endif %}
@@ -118,13 +133,13 @@
               
             
         </fieldset>
-    
+        {% if f.created_by == user %}
         <button class="btn btn-outline-primary" type="submit">
           <a href="{% url 'division-create' object.title.id%}">Add Division</a>
          </button>
          
           
-         {% if f.created_by == user %}
+         
          <button class="btn btn-outline-primary" type="submit">
             <a href="{% url 'form-update' object.id %}">Update Form</a>
            </button>

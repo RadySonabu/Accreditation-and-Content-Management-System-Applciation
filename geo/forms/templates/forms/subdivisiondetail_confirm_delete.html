@@ -2,26 +2,33 @@
 
 {% block content %}
 {% load crispy_forms_tags %}
-<div class="row justify-content-center">
-        <div class="col-md-10 ">
-        <div class="content-section">
-            <form method="POST">
-            {% csrf_token %}
-            <fieldset class="form-group">
-                <legend class="border-bottom mb-4">Join Today</legend>
-                <div class="form-row">
-                <div class="form-group col-md-6 mb-0">
-                        Do you want to delete this? {{object.criteria}}
-                        <button class="btn btn-outline-danger" type="submit">
-                            
-                                <a href="{% url 'subdivisiondetail-update' object.id %}">Yes, Delete</a>
-                                </button>
-                </div>
-</div>
-</fieldset>
 
-</form>
-</div>
-</div>
-</div>
+{% for f in f %}
+        {% if user == f.created_by%}
+        <div class="row justify-content-center">
+                <div class="col-md-10 ">
+                <div class="content-section">
+                    <form method="POST">
+                    {% csrf_token %}
+                    <fieldset class="form-group">
+                        <legend class="border-bottom mb-4">Join Today</legend>
+                        <div class="form-row">
+                        <div class="form-group col-md-6 mb-0">
+                                Do you want to delete this? 
+                                <div><h2>{{object.criteria}}</h2></div>
+                                <button class="btn btn-outline-danger" type="submit">
+                                
+                                                Delete
+                                                 </button>
+                        </div>
+        </div>
+        </fieldset>
+        
+        </form>
+        </div>
+        </div>
+        </div>
+        {% endif %}
+{% endfor %}
+        
 {% endblock %}

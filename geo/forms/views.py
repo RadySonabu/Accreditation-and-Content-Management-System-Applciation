@@ -166,6 +166,7 @@ class SubdivisionDetailView(LoginRequiredMixin, DetailView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
+        context['f'] = Forms.objects.all()
         context['d'] = Division.objects.all()
         context['sd'] = Subdivision.objects.all()
         context['sdd'] = SubdivisionDetail.objects.all()
@@ -188,6 +189,7 @@ class SubdivisionCreateView(LoginRequiredMixin, CreateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
+        context['f'] = Forms.objects.all()
         context['d'] = Division.objects.all()
         context['sd'] = Subdivision.objects.all()
         context['sdd'] = SubdivisionDetail.objects.all()
@@ -202,6 +204,7 @@ class SubdivisionUpdateView(LoginRequiredMixin, UpdateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
+        context['f'] = Forms.objects.all()
         context['d'] = Division.objects.all()
         context['sd'] = Subdivision.objects.all()
         context['sdd'] = SubdivisionDetail.objects.all()
@@ -216,6 +219,15 @@ class SubdivisionDeleteView(LoginRequiredMixin, DeleteView):
         self.object = self.get_object()
         id1 = self.kwargs['pk']
         return reverse_lazy('form-detail', kwargs={'pk': self.object.division.title.id})
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['f'] = Forms.objects.all()
+        context['d'] = Division.objects.all()
+        context['sd'] = Subdivision.objects.all()
+        context['sdd'] = SubdivisionDetail.objects.all()
+
+        return context
 # -----------------------------------------
 
 
@@ -229,6 +241,7 @@ class SubdivisionDetailDetailView(LoginRequiredMixin, DetailView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
+        context['f'] = Forms.objects.all()
         context['d'] = Division.objects.all()
         context['sd'] = Subdivision.objects.all()
         context['sdd'] = SubdivisionDetail.objects.all()
@@ -248,6 +261,14 @@ class SubdivisionDetailCreateView(LoginRequiredMixin, CreateView):
 
         return super(SubdivisionDetailCreateView, self).form_valid(form)
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['f'] = Forms.objects.all()
+        context['d'] = Division.objects.all()
+        context['sd'] = Subdivision.objects.all()
+        context['sdd'] = SubdivisionDetail.objects.all()
+
+        return context
 
 class SubdivisionDetailUpdateView(LoginRequiredMixin, UpdateView):
     model = SubdivisionDetail
@@ -255,6 +276,7 @@ class SubdivisionDetailUpdateView(LoginRequiredMixin, UpdateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
+        context['f'] = Forms.objects.all()
         context['d'] = Division.objects.all()
         context['sd'] = Subdivision.objects.all()
         context['sdd'] = SubdivisionDetail.objects.all()
@@ -269,3 +291,12 @@ class SubdivisionDetailDeleteView(LoginRequiredMixin, DeleteView):
         self.object = self.get_object()
         id1 = self.kwargs['pk']
         return reverse_lazy('form-detail', kwargs={'pk': self.object.subdivision.division.title.id})
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['f'] = Forms.objects.all()
+        context['d'] = Division.objects.all()
+        context['sd'] = Subdivision.objects.all()
+        context['sdd'] = SubdivisionDetail.objects.all()
+
+        return context

@@ -1,166 +1,172 @@
 {% extends "dashboard/base.html" %} 
 {% load crispy_forms_tags %}
 {% block content %}
+
+{% for f in f %}
+{% if user == f.created_by or user.program.program == f.created_for.program %}
 <div class="row justify-content-center">
-      <div class="col-md-12 ">
-        <div class="content-section">
-          <form method="POST">
-                {% csrf_token %}
-                
-            {% if object %}
-            <fieldset class="form-group">
-              <legend class="border-bottom mb-4">{{ object.division.title }}</legend>
-              
-            <div class="form-row">
-                    <div class="form-group col-md-6 mb-0">Accreditation Type: {{ object.division.title.form_type }}    
-                    </div>
-                  </div>
-           
-            <div class="form-row border-bottom border-top mt-4 mb-4">
-                  <div class="form-group col-md-4 pt-3 "><strong>Criteria</strong>
-                  </div>
-                  <div class="form-group col-md-1 pt-3 "><strong>Weigh</strong>
-                    </div>
-                  <div class="form-group col-md-1 pt-3 "><strong>Breakdown</strong>  
-                      </div>
-                      <div class="form-group col-md-2 pt-3 "><strong>Remarks</strong>
-                      </div>
-                      <div class="form-group col-md-2 pt-3 "><strong>Subpoints</strong>
-                      </div>
-                      <div class="form-group col-md-1 pt-3 "><strong>Points</strong>
-                      </div>
-                      <div class="form-group col-md-1 pt-3 "><strong>Action</strong>
-                      </div>
-                </div>
-                
-                
-                
-                {% for d in d %}
-                  
-                    {% if d.title.id == object.division.title.id  %}
-                       
-                        <div class="form-row">
-                            <div class="form-group col-md-4 mb-0"><strong>{{d.criteria}}</strong>   
-                            </div>
-                            <div class="form-group col-md-1 pt-3 "><strong></strong>
-                            </div>
-                            <div class="form-group col-md-1 pt-3 "><strong></strong>
-                            </div>
-
-                            <div class="form-group col-md-2 pt-3 "><strong></strong>
-                            </div>
-                            <div class="form-group col-md-2 pt-3 "><strong></strong>
-                            </div>
-                            <div class="form-group col-md-1 pt-3 "><strong></strong>
-                            </div>
-                            <div class="form-group col-md-1 pt-3 "><a href="{% url 'division-update' d.id%}">Update</a>
-                            </div>
-                        </div> 
-                      
-                        
-                      
-                    {% for s in sd %}
-                    {% if s.division.id == d.id %}
-                        
-                        {% if object.id == s.id %}
-                        <div class="form-row">
-                            <div class="form-group col-md-4 mb-0">{{form.criteria}}    
-                            </div>
-                            <div class="form-group col-md-1 mb-0">{{form.points}}    
-                            </div>
-                            <div class="form-group col-md-1 pt-3 "><strong></strong>
-                            </div>
-
-                            <div class="form-group col-md-2 pt-3 "><strong></strong>
-                            </div>
-                            <div class="form-group col-md-2 pt-3 "><strong></strong>
-                            </div>
-                            <div class="form-group col-md-1 pt-3 "><strong></strong>
-                            </div>
-                            <div class="form-group col-md-1 pt-3 "><button class="btn btn-outline-primary" type="submit">Save</button>
-                            </div>
-                          </div>
-                        {% else %}
-                        <div class="form-row">
-                            <div class="form-group col-md-4 mb-0">{{s.criteria}}    
-                            </div>
-                            <div class="form-group col-md-1 mb-0">{{s.points}}    
-                            </div>
-                            <div class="form-group col-md-1 pt-3 "><strong></strong>
-                            </div>
-
-                            <div class="form-group col-md-2 pt-3 "><strong></strong>
-                            </div>
-                            <div class="form-group col-md-2 pt-3 "><strong></strong>
-                            </div>
-                            <div class="form-group col-md-1 pt-3 "><strong></strong>
-                            </div>
-                            <div class="form-group col-md-1 pt-3 "><a href="{% url 'subdivision-update' s.id%}">Update</a>
-                            </div>
-                          </div>
-                        {% endif %}
-                            
-                        
-                        {%endif%}
-                        
-                        
-                       
-                        
-                      
-                      {% for x in sdd %}
-                      
-                        {% if x.subdivision.id == s.id and s.division.id == d.id %}
-                          
-                        
-                          <div class="form-row">
-                            <div class="form-group col-md-4 mb-0"> {{x.criteria}}    
-                            </div>
-                            <div class="form-group col-md-1 mb-0 "> {{x.points}}    
-                              </div>
-                              <div class="form-group col-md-1 mb-0"> {{x.subpoints}}    
-                                </div>
-                                <div class="form-group col-md-2 mb-0"> {{x.remarks}}    
-                                  </div>
-                                  <div class="form-group col-md-2 mb-0"> {{x.subtotal}}    
-                                    </div>
-                                    <div class="form-group col-md-1 mb-0"> {{x.total}}    
-                                      </div>
-                                      <div class="form-group col-md-1 pt-3 "><a href="{% url 'subdivisiondetail-update' x.id%}">Update</a>
-                                      </div>
-                          </div>
-                          {% endif %}
-                      {% endfor %}
-                        
-                    {% endfor %}
-                    
-                    {% endif %}
-                {% endfor %}
-                  
-                  
-                  
-                
-            </fieldset>
-            {% else %}
-            <fieldset class="form-group">
-              <legend class="border-bottom mb-4">Join Today</legend>
-              <div class="form-row">
-                <div class="form-group col-md-auto mb-0">
-                  {{ form| crispy  }}
-                  
-                  
-                    
+  <div class="col-md-12 ">
+    <div class="content-section">
+      <form method="POST">
+            {% csrf_token %}
+            
+        {% if object %}
+        <fieldset class="form-group">
+          <legend class="border-bottom mb-4">{{ object.division.title }}</legend>
+          
+        <div class="form-row">
+                <div class="form-group col-md-6 mb-0">Accreditation Type: {{ object.division.title.form_type }}    
                 </div>
               </div>
-              <button class="btn btn-outline-danger" type="submit">
-                  Add
-             </button>
-            </fieldset>
-            {% endif %}
-        
-        
+       
+        <div class="form-row border-bottom border-top mt-4 mb-4">
+              <div class="form-group col-md-4 pt-3 "><strong>Criteria</strong>
+              </div>
+              <div class="form-group col-md-1 pt-3 "><strong>Weigh</strong>
+                </div>
+              <div class="form-group col-md-1 pt-3 "><strong>Breakdown</strong>  
+                  </div>
+                  <div class="form-group col-md-2 pt-3 "><strong>Remarks</strong>
+                  </div>
+                  <div class="form-group col-md-2 pt-3 "><strong>Subpoints</strong>
+                  </div>
+                  <div class="form-group col-md-1 pt-3 "><strong>Points</strong>
+                  </div>
+                  <div class="form-group col-md-1 pt-3 "><strong>Action</strong>
+                  </div>
+            </div>
+            
+            
+            
+            {% for d in d %}
+              
+                {% if d.title.id == object.division.title.id  %}
+                   
+                    <div class="form-row">
+                        <div class="form-group col-md-4 mb-0"><strong>{{d.criteria}}</strong>   
+                        </div>
+                        <div class="form-group col-md-1 pt-3 "><strong></strong>
+                        </div>
+                        <div class="form-group col-md-1 pt-3 "><strong></strong>
+                        </div>
+
+                        <div class="form-group col-md-2 pt-3 "><strong></strong>
+                        </div>
+                        <div class="form-group col-md-2 pt-3 "><strong></strong>
+                        </div>
+                        <div class="form-group col-md-1 pt-3 "><strong></strong>
+                        </div>
+                        <div class="form-group col-md-1 pt-3 "><a href="{% url 'division-update' d.id%}">Update</a>
+                        </div>
+                    </div> 
+                  
+                    
+                  
+                {% for s in sd %}
+                {% if s.division.id == d.id %}
+                    
+                    {% if object.id == s.id %}
+                    <div class="form-row">
+                        <div class="form-group col-md-4 mb-0">{{form.criteria}}    
+                        </div>
+                        <div class="form-group col-md-1 mb-0">{{form.points}}    
+                        </div>
+                        <div class="form-group col-md-1 pt-3 "><strong></strong>
+                        </div>
+
+                        <div class="form-group col-md-2 pt-3 "><strong></strong>
+                        </div>
+                        <div class="form-group col-md-2 pt-3 "><strong></strong>
+                        </div>
+                        <div class="form-group col-md-1 pt-3 "><strong></strong>
+                        </div>
+                        <div class="form-group col-md-1 pt-3 "><button class="btn btn-outline-primary" type="submit">Save</button>
+                        </div>
+                      </div>
+                    {% else %}
+                    <div class="form-row">
+                        <div class="form-group col-md-4 mb-0">{{s.criteria}}    
+                        </div>
+                        <div class="form-group col-md-1 mb-0">{{s.points}}    
+                        </div>
+                        <div class="form-group col-md-1 pt-3 "><strong></strong>
+                        </div>
+
+                        <div class="form-group col-md-2 pt-3 "><strong></strong>
+                        </div>
+                        <div class="form-group col-md-2 pt-3 "><strong></strong>
+                        </div>
+                        <div class="form-group col-md-1 pt-3 "><strong></strong>
+                        </div>
+                        <div class="form-group col-md-1 pt-3 "><a href="{% url 'subdivision-update' s.id%}">Update</a>
+                        </div>
+                      </div>
+                    {% endif %}
+                        
+                    
+                    {%endif%}
+                    
+                    
+                   
+                    
+                  
+                  {% for x in sdd %}
+                  
+                    {% if x.subdivision.id == s.id and s.division.id == d.id %}
+                      
+                    
+                      <div class="form-row">
+                        <div class="form-group col-md-4 mb-0"> {{x.criteria}}    
+                        </div>
+                        <div class="form-group col-md-1 mb-0 "> {{x.points}}    
+                          </div>
+                          <div class="form-group col-md-1 mb-0"> {{x.subpoints}}    
+                            </div>
+                            <div class="form-group col-md-2 mb-0"> {{x.remarks}}    
+                              </div>
+                              <div class="form-group col-md-2 mb-0"> {{x.subtotal}}    
+                                </div>
+                                <div class="form-group col-md-1 mb-0"> {{x.total}}    
+                                  </div>
+                                  <div class="form-group col-md-1 pt-3 "><a href="{% url 'subdivisiondetail-update' x.id%}">Update</a>
+                                  </div>
+                      </div>
+                      {% endif %}
+                  {% endfor %}
+                    
+                {% endfor %}
+                
+                {% endif %}
+            {% endfor %}
+              
+              
+              
+            
+        </fieldset>
+        {% else %}
+        <fieldset class="form-group">
+          <legend class="border-bottom mb-4">Join Today</legend>
+          <div class="form-row">
+            <div class="form-group col-md-auto mb-0">
+              {{ form| crispy  }}
+              
+              
+                
+            </div>
+          </div>
+          <button class="btn btn-outline-danger" type="submit">
+              Add
+         </button>
+        </fieldset>
+        {% endif %}
     
-        </form>
-    </div>
+    
+
+    </form>
 </div>
 </div>
+</div>
+{% endif %}
+{% endfor %}
+  
 {% endblock%}
