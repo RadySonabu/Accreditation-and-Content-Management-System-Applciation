@@ -41,11 +41,11 @@ INSTALLED_APPS = [
     'dashboard',
     'import_export',
     'crispy_forms',
-
+    'phonenumber_field',
+    
     'request',
     'forms',
-    'django_select2',
-    'multiselectfield',
+    
 
 
 ]
