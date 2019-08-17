@@ -4,7 +4,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 
 from django.contrib import messages
 from django.http import HttpResponse
-from .models import Forms, SubdivisionDetail, Subdivision, Division
+from forms.models import Forms, SubdivisionDetail, Subdivision, Division
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from django.urls import reverse, reverse_lazy
 from .forms import SubdivisionForm, SubdivisionDetailForm, FormForm
@@ -257,7 +257,15 @@ class SubdivisionDetailCreateView(LoginRequiredMixin, CreateView):
 
         form.instance.subdivision_id = self.kwargs.get('pk')
 
-        print(self)
+        s = Subdivision.objects.all()
+        for s in s:
+            sd = SubdivisionDetail.objects.all()
+            sd_filter = sd.filter(subdivision_id=s.id)
+            sum = sd_filter.aggregate(Sum('subtotal'))
+            # sum = Subdivision.objects.annotate(Sum('subdivisiondetail__subtotal'))
+            for x, y in sum.items():
+                x = float(y)
+                Subdivision.objects.filter(id=s.id).update(total=x)
 
         return super(SubdivisionDetailCreateView, self).form_valid(form)
 
@@ -274,19 +282,21 @@ class SubdivisionDetailUpdateView(LoginRequiredMixin, UpdateView):
     model = SubdivisionDetail
     form_class = SubdivisionDetailForm
 
-    # def form_valid(self, form):
+    def form_valid(self, form):
 
-    #     s = Subdivision.objects.all()
-    #     for s in s:
-    #         sd = SubdivisionDetail.objects.all()
-    #         sd_filter = sd.filter(subdivision_id=s)
-    #         sum = sd_filter.aggregate(Sum('subtotal'))
-    #         for y in sum:
-    #             Subdivision.objects.filter(id=8).update(total=y[1])
+        s = Subdivision.objects.all()
+        for s in s:
+            sd = SubdivisionDetail.objects.all()
+            sd_filter = sd.filter(subdivision_id=s.id)
+            sum = sd_filter.aggregate(Sum('subtotal'))
+            # sum = Subdivision.objects.annotate(Sum('subdivisiondetail__subtotal'))
+            for x, y in sum.items():
+                x = float(y)
+                Subdivision.objects.filter(id=s.id).update(total=x)
         
-    #     print(self)
+        
 
-    #     return super(SubdivisionDetailUpdateView, self).form_valid(form)
+        return super(SubdivisionDetailUpdateView, self).form_valid(form)
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
