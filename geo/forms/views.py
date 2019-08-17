@@ -11,7 +11,7 @@ from .forms import SubdivisionForm, SubdivisionDetailForm, FormForm
 
 from django.forms.models import modelform_factory
 from django.contrib.auth.mixins import LoginRequiredMixin
-
+from django.db.models import Max, Sum, Avg
 
 class FormListView(LoginRequiredMixin, ListView):
     model = Forms
@@ -273,6 +273,20 @@ class SubdivisionDetailCreateView(LoginRequiredMixin, CreateView):
 class SubdivisionDetailUpdateView(LoginRequiredMixin, UpdateView):
     model = SubdivisionDetail
     form_class = SubdivisionDetailForm
+
+    # def form_valid(self, form):
+
+    #     s = Subdivision.objects.all()
+    #     for s in s:
+    #         sd = SubdivisionDetail.objects.all()
+    #         sd_filter = sd.filter(subdivision_id=s)
+    #         sum = sd_filter.aggregate(Sum('subtotal'))
+    #         for y in sum:
+    #             Subdivision.objects.filter(id=8).update(total=y[1])
+        
+    #     print(self)
+
+    #     return super(SubdivisionDetailUpdateView, self).form_valid(form)
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)

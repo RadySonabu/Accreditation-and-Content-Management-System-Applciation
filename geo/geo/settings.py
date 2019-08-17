@@ -39,12 +39,13 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'members',
     'dashboard',
+    'forms',
+
+
     'import_export',
     'crispy_forms',
     'phonenumber_field',
-    
     'request',
-    'forms',
     
 
 
