@@ -277,10 +277,14 @@ class SubdivisionDetailUpdateView(LoginRequiredMixin, UpdateView):
         sd_filter = sd.filter(subdivision_id=self.object.subdivision.id)
         sum = sd_filter.aggregate(Sum('subtotal'))['subtotal__sum']
         # sum = Subdivision.objects.annotate(Sum('subdivisiondetail__subtotal'))
-        
-        
-        form.instance.remarks =sum
-        form.save()
+
+
+        s = Subdivision.objects.get(id=self.object.subdivision.id)
+        s.total = sum
+        s.save()
+        # Subdivision.objects.filter(id = self.object.subdivision.id).update(total=sum)
+        # form.instance.remarks =sum
+        # form.save()
         return super(SubdivisionDetailUpdateView, self).form_valid(form)
     
     # def profile(request, self):
