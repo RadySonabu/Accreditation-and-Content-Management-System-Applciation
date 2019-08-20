@@ -270,40 +270,40 @@ class SubdivisionDetailUpdateView(LoginRequiredMixin, UpdateView):
     model = SubdivisionDetail
     form_class = SubdivisionDetailForm
 
-    # def form_valid( self, form = SubdivisionForm):
-    #     #get the pk of the foreign key
+    def form_valid( self, form = SubdivisionForm):
+        #get the pk of the foreign key
         
-    #     sd = SubdivisionDetail.objects.all()
-    #     sd_filter = sd.filter(subdivision_id=self.object.subdivision.id)
-    #     sum = sd_filter.aggregate(Sum('subtotal'))['subtotal__sum']
-    #     # sum = Subdivision.objects.annotate(Sum('subdivisiondetail__subtotal'))
+        sd = SubdivisionDetail.objects.all()
+        sd_filter = sd.filter(subdivision_id=self.object.subdivision.id)
+        sum = sd_filter.aggregate(Sum('subtotal'))['subtotal__sum']
+        # sum = Subdivision.objects.annotate(Sum('subdivisiondetail__subtotal'))
         
         
-    #     form.instance.remarks =sum
-    #     form.save()
-    #     return super(SubdivisionDetailUpdateView, self).form_valid(form)
+        form.instance.remarks =sum
+        form.save()
+        return super(SubdivisionDetailUpdateView, self).form_valid(form)
     
-    def profile(request, self):
-        if request.method == 'POST':
-            form = SubdivisionForm(request.POST)
+    # def profile(request, self):
+    #     if request.method == 'POST':
+    #         form = SubdivisionForm(request.POST)
            
-            if form.is_valid():
+    #         if form.is_valid():
             
-                sd = SubdivisionDetail.objects.all()
-                sd_filter = sd.filter(subdivision_id=7)
-                sum = sd_filter.aggregate(Sum('subtotal'))['subtotal__sum']
-                # sum = Subdivision.objects.annotate(Sum('subdivisiondetail__subtotal'))
+    #             sd = SubdivisionDetail.objects.all()
+    #             sd_filter = sd.filter(subdivision_id=7)
+    #             sum = sd_filter.aggregate(Sum('subtotal'))['subtotal__sum']
+    #             # sum = Subdivision.objects.annotate(Sum('subdivisiondetail__subtotal'))
                 
-                form.instance.remarks =sum
-                form.save()
-                return redirect('form-list')
+    #             form.instance.remarks =sum
+    #             form.save()
+    #             return redirect('form-list')
 
-        else:
-          form = SubdivisionForm(request.POST, )
+        # else:
+        #   form = SubdivisionForm(request.POST, )
 
         
 
-        return render(request, 'members/register.html')
+        # return render(request, 'members/register.html')
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
