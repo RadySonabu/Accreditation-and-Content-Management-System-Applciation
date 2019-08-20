@@ -4,14 +4,16 @@ from django.shortcuts import render, redirect, get_object_or_404
 
 from django.contrib import messages
 from django.http import HttpResponse
-from forms.models import Forms, SubdivisionDetail, Subdivision, Division
+
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from django.urls import reverse, reverse_lazy
 from .forms import SubdivisionForm, SubdivisionDetailForm, FormForm
 
 from django.forms.models import modelform_factory
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.db.models import Max, Sum, Avg
+from django.db.models import Max, Sum, Avg, F
+from forms.models import Forms, SubdivisionDetail, Subdivision, Division
+from django.db.models.expressions import RawSQL
 
 class FormListView(LoginRequiredMixin, ListView):
     model = Forms
@@ -253,21 +255,7 @@ class SubdivisionDetailCreateView(LoginRequiredMixin, CreateView):
     model = SubdivisionDetail
     fields = "__all__"
 
-    def form_valid(self, form):
-
-        form.instance.subdivision_id = self.kwargs.get('pk')
-
-        s = Subdivision.objects.all()
-        for s in s:
-            sd = SubdivisionDetail.objects.all()
-            sd_filter = sd.filter(subdivision_id=s.id)
-            sum = sd_filter.aggregate(Sum('subtotal'))
-            # sum = Subdivision.objects.annotate(Sum('subdivisiondetail__subtotal'))
-            for x, y in sum.items():
-                x = float(y)
-                Subdivision.objects.filter(id=s.id).update(total=x)
-
-        return super(SubdivisionDetailCreateView, self).form_valid(form)
+    # 
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -282,21 +270,40 @@ class SubdivisionDetailUpdateView(LoginRequiredMixin, UpdateView):
     model = SubdivisionDetail
     form_class = SubdivisionDetailForm
 
-    def form_valid(self, form):
-
-        s = Subdivision.objects.all()
-        for s in s:
-            sd = SubdivisionDetail.objects.all()
-            sd_filter = sd.filter(subdivision_id=s.id)
-            sum = sd_filter.aggregate(Sum('subtotal'))
-            # sum = Subdivision.objects.annotate(Sum('subdivisiondetail__subtotal'))
-            for x, y in sum.items():
-                x = float(y)
-                Subdivision.objects.filter(id=s.id).update(total=x)
+    # def form_valid( self, form = SubdivisionForm):
+    #     #get the pk of the foreign key
+        
+    #     sd = SubdivisionDetail.objects.all()
+    #     sd_filter = sd.filter(subdivision_id=self.object.subdivision.id)
+    #     sum = sd_filter.aggregate(Sum('subtotal'))['subtotal__sum']
+    #     # sum = Subdivision.objects.annotate(Sum('subdivisiondetail__subtotal'))
         
         
+    #     form.instance.remarks =sum
+    #     form.save()
+    #     return super(SubdivisionDetailUpdateView, self).form_valid(form)
+    
+    def profile(request, self):
+        if request.method == 'POST':
+            form = SubdivisionForm(request.POST)
+           
+            if form.is_valid():
+            
+                sd = SubdivisionDetail.objects.all()
+                sd_filter = sd.filter(subdivision_id=7)
+                sum = sd_filter.aggregate(Sum('subtotal'))['subtotal__sum']
+                # sum = Subdivision.objects.annotate(Sum('subdivisiondetail__subtotal'))
+                
+                form.instance.remarks =sum
+                form.save()
+                return redirect('form-list')
 
-        return super(SubdivisionDetailUpdateView, self).form_valid(form)
+        else:
+          form = SubdivisionForm(request.POST, )
+
+        
+
+        return render(request, 'members/register.html')
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)

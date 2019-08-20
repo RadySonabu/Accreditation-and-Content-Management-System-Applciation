@@ -2,6 +2,7 @@ from django.db import models
 from django.urls import reverse
 from multiselectfield import MultiSelectField
 from members.models import MyUser, Program
+from django.db.models import Sum
 
 
 class AccreditationType(models.Model):
@@ -117,6 +118,7 @@ class Subdivision(models.Model):
     criteria = models.CharField(max_length=150,)
     points = models.FloatField()
     total = models.FloatField(default=0)
+
     def __str__(self):
         return self.criteria
 
@@ -128,11 +130,10 @@ class SubdivisionDetail(models.Model):
     subdivision = models.ForeignKey(
         Subdivision, default=1, on_delete=models.CASCADE)
     criteria = models.CharField(max_length=150)
-    
+
     subpoints = models.FloatField()
     remarks = models.CharField(max_length=150)
     subtotal = models.FloatField()
-   
 
     def __str__(self):
         return self.criteria
