@@ -1,8 +1,10 @@
 {% extends "dashboard/base.html" %} 
 {% load crispy_forms_tags %}
 {% block content %}
-{{object.subdivision.id}} ||||| {{object.id}}
+
 {% for f in f %}
+
+  {% if object.subdivision.division.title.id == f.id %}
   {% if user == f.created_by or user.program.program == f.created_for.program %}
   <div class="row justify-content-center">
     <div class="col-md-12 ">
@@ -14,7 +16,7 @@
             <legend class="border-bottom mb-4">{{ object.subdivision.division.title }}</legend>
             
           <div class="form-row">
-                  <div class="form-group col-md-6 mb-0">Accreditation Type: {{ object.subdivision.division.title.form_type }}    
+                  <div class="form-group col-md-6 mb-0">Accreditation Type: {{ object.subdivision.division.title.type_of_accreditation }}    
                   </div>
                   <div class="form-group col-md-6 mb-0">Total: {{ object.subdivision.division.title.total }}    
                   </div>
@@ -23,7 +25,7 @@
           <div class="form-row border-bottom border-top mt-4 mb-4">
                 <div class="form-group col-md-4 pt-3 "><strong>Criteria</strong>
                 </div>
-                <div class="form-group col-md-1 pt-3 "><strong>Weigh</strong>
+                <div class="form-group col-md-1 pt-3 "><strong>Weight</strong>
                   </div>
                 <div class="form-group col-md-1 pt-3 "><strong>Breakdown</strong>  
                     </div>
@@ -46,7 +48,7 @@
                       <div class="form-row">
                           <div class="form-group col-md-4 mb-0"><strong>{{d.criteria}}</strong> 
                             {% if user == f.created_by  %}
-                            <a href="{% url 'subdivision-create' d.id%}">Add Subdivision</a>
+                            <a href="{% url 'subdivision-create' d.id%}">Add Minor Criteria</a>
                             {% endif %}   
                           </div>
                           <div class="form-group col-md-1 pt-3 "><strong></strong>
@@ -76,7 +78,7 @@
                       <div class="form-row">
                           <div class="form-group col-md-4 mb-0">{{s.criteria}}
                               {% if user == f.created_by %}
-                              <a href="{% url 'subdivisiondetail-create' s.id %}">Add Detail</a>
+                              <a href="{% url 'subdivisiondetail-create' s.id %}">Add Subcriteria</a>
                               {% endif %}  
                             </div>
                           <div class="form-group col-md-1 mb-0">{{s.points}}    
@@ -148,7 +150,7 @@
           </fieldset>
           {% if f.created_by == user %}
               <button class="btn btn-outline-primary" type="submit">
-                <a href="{% url 'division-create' object.subdivision.division.title.id %}">Add Division</a>
+                <a href="{% url 'division-create' object.subdivision.division.title.id %}">Add Major Criteria</a>
                </button>
                
                 
@@ -167,6 +169,7 @@
   </div>
 </div>
 </div>
+  {% endif %}
   {% endif %}
 {% endfor %}
   

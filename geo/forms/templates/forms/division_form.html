@@ -2,7 +2,10 @@
 {% load crispy_forms_tags %}
 {% block content %}
 
-{% if  user.role.role == 'DEPTCHAIR'  or  user.role.role == 'DEAN' %}
+
+{% for f in f %}
+
+{% if  user.program.program == f.created_for  or  user == f.created_by %}
 <div class="row justify-content-center">
   <div class="col-md-12 ">
     <div class="content-section">
@@ -14,14 +17,14 @@
             <legend class="border-bottom mb-4">{{ object.title }}</legend>
             
           <div class="form-row">
-                  <div class="form-group col-md-6 mb-0">Accreditation Type: {{ object.title.form_type }}    
+                  <div class="form-group col-md-12 mb-0">Accreditation Type: {{ object.title.type_of_accreditation }}    
                   </div>
                 </div>
         
           <div class="form-row border-bottom border-top mt-4 mb-4">
                 <div class="form-group col-md-4 pt-3 "><strong>Criteria</strong>
                 </div>
-                <div class="form-group col-md-1 pt-3 "><strong>Weigh</strong>
+                <div class="form-group col-md-1 pt-3 "><strong>Weight</strong>
                   </div>
                 <div class="form-group col-md-1 pt-3 "><strong>Breakdown</strong>  
                     </div>
@@ -143,22 +146,36 @@
               
           </fieldset>
         {% else %}
-        
-          <fieldset class="form-group">
-            <legend class="border-bottom mb-4">Join Today</legend>
-            <div class="form-row">
-              <div class="form-group col-md-auto mb-0">
-                
-                {{ form.criteria | as_crispy_field}}
-                
-                
-                  
-              </div>
-            </div>
-            <button class="btn btn-outline-danger" type="submit">
-                Add
-          </button>
-          </fieldset>
+          
+          
+          
+          {% for d in d %}
+            {% if f.id == d.title.id %}
+            <fieldset class="form-group">
+                <legend class="border-bottom mb-4">Add Major Criteria</legend>
+                <div class="form-row">
+                  <div class="form-group col-md-auto mb-0">
+                    
+                    {{ form.criteria | as_crispy_field}}
+                    
+                    
+                      
+                  </div>
+                </div>
+               {% if object %}
+                  <button class="btn btn-outline-danger" type="submit">
+                  Update
+                  </button>
+                {%else%}
+                  <button class="btn btn-outline-danger" type="submit">
+                    Add
+                  </button>
+               {% endif %}
+              </fieldset>
+            {% endif %}
+          {% endfor %}
+            
+          
         {% endif %}
 
 
@@ -172,5 +189,7 @@
 {% else %}
   Oops... PAGE NOT FOUND
 {% endif %}
+{% endfor %}
+  
   
 {% endblock%}

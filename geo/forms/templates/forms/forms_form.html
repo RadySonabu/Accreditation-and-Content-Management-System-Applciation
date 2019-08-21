@@ -2,14 +2,15 @@
 {% load crispy_forms_tags %}
 {% block content %}
     
-    {% if user.role.role == 'DEAN' %}
+   <div class="container ">
+      {% if user.role.role == 'COLLEGE DEAN' %}
     <div class="row justify-content-center">
       <div class="col-md-auto ">
         <div class="content-section">
           <form method="POST">
                 {% csrf_token %}
             <fieldset class="form-group">
-              <legend class="border-bottom mb-4">Join Today</legend>
+              <legend class="border-bottom mb-4">Add Accreditation</legend>
               <div class="form-row">
                 <div class="form-group col-md-12 mb-0">
                   {{ form| crispy  }}
@@ -17,10 +18,12 @@
                   
                     
                 </div>
+                
               </div>
-              <button class="btn btn-outline-danger" type="submit">
+              <button class="btn btn-outline-primary" type="submit" style="margin-bottom: 4rem">
                   Add
              </button>
+             
             </fieldset>
             </form>
           </div>
@@ -30,4 +33,5 @@
       Oops.. PAGE NOT FOUND
     {% endif %}
       
+   </div>
 {% endblock%}

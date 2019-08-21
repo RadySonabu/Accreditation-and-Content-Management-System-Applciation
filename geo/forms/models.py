@@ -1,96 +1,30 @@
 from django.db import models
 from django.urls import reverse
 from multiselectfield import MultiSelectField
-from members.models import MyUser, Program
+from members.models import MyUser, Program, College
 from django.db.models import Sum
 
 
 class AccreditationType(models.Model):
-    ACCREDITATION_TYPE_CHOICES = (
-        ('ABET', 'American Based Education and Technology'),
-        ('SA', 'Seoul Accord'),
-        ('COE', 'Center of Excellence'),
-        ('COD', 'Center of Development'),
-        ('FP', 'FAAP-PACUCOA'),
-        ('PA', 'PTC-ACBET'),
-        ('PP', 'PCS-PCAB')
-    )
-    form_type = models.CharField(
-        choices=ACCREDITATION_TYPE_CHOICES, max_length=100)
+
+    type_of_accreditations = models.CharField(max_length=150)
 
     def __str__(self):
-        return self.form_type
-
-
-class BasicInfo(models.Model):
-
-    # PACUCOA_LEVEL_CHOICES = (
-    #     ('I', 'Level I'),
-    #     ('II', 'Level II'),
-    #     ('III', 'Level III'),
-    #     ('IV', 'Level IV'),
-    # )
-    COLLEGE_CHOICES = (
-        ('CITE', 'College of Information Technology Education'),
-        ('CEA', 'College of Engineering and Architecture'),
-        ('CBE', 'College of Business Education'),
-        ('COA', 'College of Arts'),
-        ('CME', 'College of Maritime Education'),
-        ('N/A', 'Not Applicable')
-    )
-    BRANCH_CHOICES = (
-        ('MNL', 'Manila Branch'),
-        ('QC', 'Quezon City Branch'),
-    )
-    accreditation_type = models.ForeignKey(
-        AccreditationType, on_delete=models.CASCADE)  # primary key is passed here!
-    branch = models.CharField(choices=BRANCH_CHOICES, max_length=100)
-    year = models.CharField(max_length=4)
-    college = models.CharField(choices=COLLEGE_CHOICES, max_length=100)
-    address = models.CharField(max_length=100)
-    first_name = models.CharField(max_length=50)
-    middle_initial = models.CharField(max_length=2)
-    last_name = models.CharField(max_length=50)
-
-    def __str__(self):
-        return f'{self.accreditation_type } infos'
+        return self.type_of_accreditations
 
 
 class Forms(models.Model):
-    ACCREDITATION_TYPE_CHOICES = (
-        ('ABET', 'American Based Education and Technology'),
-        ('SA', 'Seoul Accord'),
-        ('COE', 'Center of Excellence'),
-        ('COD', 'Center of Development'),
-        ('FP', 'FAAP-PACUCOA'),
-        ('PA', 'PTC-ACBET'),
-        ('PP', 'PCS-PCAB')
-    )
-    COLLEGE_CHOICES = (
-        ('CITE', 'College of Information Technology Education'),
-        ('CEA', 'College of Engineering and Architecture'),
-        ('CBE', 'College of Business Education'),
-        ('COA', 'College of Arts'),
-        ('CME', 'College of Maritime Education'),
-        ('N/A', 'Not Applicable')
-    )
-    BRANCH_CHOICES = (
-        ('MNL', 'Manila Branch'),
-        ('QC', 'Quezon City Branch'),
-    )
-    title = models.CharField(max_length=50)
 
-    form_type = models.CharField(
-        choices=ACCREDITATION_TYPE_CHOICES, max_length=100)  # primary key is passed here!
-    branch = models.CharField(choices=BRANCH_CHOICES, max_length=100)
+    title = models.CharField(max_length=200, blank=True, null=True)
+    type_of_accreditation = models.ForeignKey(
+        AccreditationType, on_delete=models.CASCADE)
+
     year = models.CharField(max_length=4)
-    college = models.CharField(choices=COLLEGE_CHOICES, max_length=100)
-    address = models.CharField(max_length=100)
-    first_name = models.CharField(max_length=50)
-    middle_initial = models.CharField(max_length=2)
-    last_name = models.CharField(max_length=50)
+    college = models.ForeignKey(
+        College, on_delete=models.CASCADE, blank=True, null=True)
+
     created_by = models.ForeignKey(
-        MyUser, on_delete=models.SET_NULL, null=True, default="")
+        MyUser, on_delete=models.CASCADE, null=True, default="")
     created_for = models.ForeignKey(
         Program, on_delete=models.SET_NULL, null=True)
     total = models.FloatField(default=0)

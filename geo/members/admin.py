@@ -18,8 +18,10 @@ class UserCreationForm(forms.ModelForm):
 
     class Meta:
         model = MyUser
-        fields = ('employee_number', 'first_name', 'middle_initial',
-                  'last_name', 'contact', 'email', 'role',  'college', 'program', 'password1', 'password2')
+        fields = (
+            # 'employee_number',
+            'first_name', 'middle_initial',
+            'last_name', 'contact', 'email', 'role',  'college', 'program', 'password1', 'password2')
 
     def clean_password2(self):
         # Check that the two password entries match
@@ -28,6 +30,13 @@ class UserCreationForm(forms.ModelForm):
         if password1 and password2 and password1 != password2:
             raise forms.ValidationError("Passwords don't match")
         return password2
+
+    def clean_email(self):
+        email = self.cleaned_data.get('email')
+        if not email.endswith('tip.edu.ph'):
+            raise forms.ValidationError(
+                "This is not a valid email! Try to use @tip.edu.ph ")
+        return email
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -72,8 +81,10 @@ class UserChangeForm(forms.ModelForm):
 
     class Meta:
         model = MyUser
-        fields = ('employee_number', 'first_name', 'middle_initial',
-                  'last_name', 'contact', 'email', 'role',  'college', 'program',  'is_active', 'is_admin')
+        fields = (
+            # 'employee_number',
+            'first_name', 'middle_initial',
+            'last_name', 'contact', 'email', 'role',  'college', 'program',  'is_active', 'is_admin')
 
     def clean_password(self):
         # Regardless of what the user provides, return the initial value.
@@ -90,10 +101,10 @@ class UserAdmin(BaseUserAdmin):
     # The fields to be used in displaying the User model.
     # These override the definitions on the base UserAdmin
     # that reference specific fields on auth.User.
-    list_display = ('employee_number',  'is_admin')
+    list_display = ('email',  'is_admin')
     list_filter = ('is_admin',)
     fieldsets = (
-        (None, {'fields': ('employee_number', 'password')}),
+        (None, {'fields': ('email', 'password')}),
         ('Personal info', {'fields': (
             'first_name', 'middle_initial', 'last_name', 'contact', 'email', 'role',  'college', 'program')}),
         ('Permissions', {'fields': ('is_admin', 'is_active')}),
@@ -104,7 +115,7 @@ class UserAdmin(BaseUserAdmin):
     add_fieldsets = (
         (None, {
             'classes': ('wide',),
-            'fields': ('employee_number', 'first_name', 'middle_initial', 'last_name', 'contact', 'email',  'password1', 'password2' 'role',  'college', 'program')}
+            'fields': ('first_name', 'middle_initial', 'last_name', 'contact', 'email',  'password1', 'password2' 'role',  'college', 'program')}
          ),
     )
     search_fields = ('last_name',)
@@ -119,7 +130,6 @@ class UserAdmin(BaseUserAdmin):
 @admin.register(MyUser)
 class ViewAdmin(ImportExportModelAdmin):
     pass
-
 
     # ... and, since we're not using Django's built-in permissions,
     # unregister the Group model from admin.

@@ -1,8 +1,9 @@
 {% extends "dashboard/base.html" %} 
 {% load crispy_forms_tags %}
 {% block content %}
-{{form.total}}
+
 {% for f in f %}
+
 {% if user == f.created_by or user.program.program == f.created_for.program %}
 <div class="row justify-content-center">
   <div class="col-md-12 ">
@@ -11,11 +12,12 @@
             {% csrf_token %}
             
         {% if object %}
+        {% if object.division.title.id == f.id %}
         <fieldset class="form-group">
           <legend class="border-bottom mb-4">{{ object.division.title }}</legend>
           
         <div class="form-row">
-                <div class="form-group col-md-6 mb-0">Accreditation Type: {{ object.division.title.form_type }}    
+                <div class="form-group col-md-12 mb-0">Accreditation Type: {{ object.division.title.form_type }}    
                 </div>
               </div>
        
@@ -143,9 +145,10 @@
               
             
         </fieldset>
+        {% endif %}
         {% else %}
         <fieldset class="form-group">
-          <legend class="border-bottom mb-4">Join Today</legend>
+          <legend class="border-bottom mb-4">Add Minor Criteria</legend>
           <div class="form-row">
             <div class="form-group col-md-auto mb-0">
               {{ form| crispy  }}
@@ -166,7 +169,9 @@
 </div>
 </div>
 </div>
+
 {% endif %}
+
 {% endfor %}
   
 {% endblock%}

@@ -28,9 +28,9 @@
         <div class="col-md-6 image-form-container">
             <div id="overlay"></div>
         </div>
-        <div class="col-md-6 col-xs-12 form-container">
-            <div class="login-card">
-                <img src="{% static 'img/logologintemp.png' %}" alt="ACMSA LOGO" width="350" class="brand">
+        <div class="col-md-6 col-xs-12 form-container " >
+            <div class="login-card" style="margin-top: 0px">
+                <img src="{% static 'img/logologintemp.png' %}" alt="ACMSA LOGO" style="width: 100%" class="brand">
                 <!-- <form action="#">
                     <input type="text" name="username" id="username" placeholder="Enter username" class="form-control">
                     <input type="text" name="password" id="password" placeholder="Enter password" class="form-control">
@@ -41,9 +41,8 @@
                     {% csrf_token %}
                     <fieldset class="form-group">
                         <legend class="border-bottom mb-4">Log In</legend>
-                        <!-- {{ form|crispy }} -->
-                        <input type="text" name="username" id="username" placeholder="Enter username" class="form-control">
-                        <input type="password" name="password" id="password" placeholder="Enter password" class="form-control">
+                        {{ form|crispy }}
+                        
                     </fieldset>
                     <div class="form-group">
                         <button type="submit" class="btn btn-block btn-login">Login</button>

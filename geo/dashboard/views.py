@@ -5,22 +5,24 @@ from members.models import MyUser
 from forms.models import Forms
 
 
+@login_required
 def home(request):
     user = request.user
     if user.is_authenticated and user.role.role == 'VPAA':
         context = {
-            'members': MyUser.objects.filter(role__role='DEAN')
+            'members': MyUser.objects.filter(role__role='COLLEGE DEAN')
         }
-    elif user.is_authenticated and user.role.role == 'DEAN':
-        if user.college.college == 'CITE':
+    elif user.is_authenticated and user.role.role == 'COLLEGE DEAN':
+        if user.college.college == 'College of Information Technology Education':
 
             context = {
-                'members': MyUser.objects.filter(role__role='DEPTCHAIR', college__college='CITE')
+
+                'members': MyUser.objects.filter(role__role='DEPARTMENT CHAIRPERSON', college__college='College of Information Technology Education')
             }
         else:
 
             context = {
-                'members': MyUser.objects.filter(role__role='DEPTCHAIR')
+                'members': MyUser.objects.filter(role__role='DEPARTMENT CHAIRPERSON')
             }
     elif user.is_authenticated and user.role.role == 'DEPTCHAIR':
         if user.program.program == 'BSIT':

@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import BasicInfo, Division, Subdivision, SubdivisionDetail, AccreditationType, Forms
+from .models import Division, Subdivision, SubdivisionDetail, AccreditationType, Forms
 
 
 class FormsAdmin(admin.ModelAdmin):
@@ -7,7 +7,6 @@ class FormsAdmin(admin.ModelAdmin):
     search_fields = ['title']
 
 
-admin.site.register(BasicInfo)
 admin.site.register(Division)
 admin.site.register(Subdivision)
 admin.site.register(SubdivisionDetail)

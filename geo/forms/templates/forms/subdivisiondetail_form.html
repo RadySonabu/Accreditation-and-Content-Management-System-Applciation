@@ -1,7 +1,7 @@
 {% extends "dashboard/base.html" %} 
 {% load crispy_forms_tags %}
 {% block content %}
-{{form}}qwe
+
 {% for f in f %}
   {% if user.program.program == f.created_for.program or user == f.created_by  %}
   <div class="row justify-content-center">
@@ -15,14 +15,14 @@
               <legend class="border-bottom mb-4">{{ object.subdivision.division.title }}</legend>
               qwe
             <div class="form-row">
-                    <div class="form-group col-md-6 mb-0">Accreditation Type: {{ object.subdivision.division.title.form_type }}    
+                    <div class="form-group col-md-12 mb-0">Accreditation Type: {{ object.subdivision.division.title.type_of_accreditation }}    
                     </div>
                   </div>
           
             <div class="form-row border-bottom border-top mt-4 mb-4">
                   <div class="form-group col-md-4 pt-3 "><strong>Criteria</strong>
                   </div>
-                  <div class="form-group col-md-1 pt-3 "><strong>Weigh</strong>
+                  <div class="form-group col-md-1 pt-3 "><strong>Weight</strong>
                     </div>
                   <div class="form-group col-md-1 pt-3 "><strong>Breakdown</strong>  
                       </div>

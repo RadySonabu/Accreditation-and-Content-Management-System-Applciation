@@ -33,9 +33,12 @@ class Program(models.Model):
 
 
 class MyUserManager(BaseUserManager):
-    def create_user(self, employee_number, first_name, middle_initial, last_name,
+    def create_user(self,
+
+                    first_name, middle_initial, last_name,
                     college,
-                    email, contact,
+                    email,
+                    contact,
                     role,
                     program,
                     password=None):
@@ -43,11 +46,11 @@ class MyUserManager(BaseUserManager):
         Creates and saves a User with the given email, favorite color
          and password.
         """
-        if not employee_number:
-            raise ValueError('Users must have a employee number')
+        if not email:
+            raise ValueError('Users must have a institutional email address')
 
         user = self.model(
-            employee_number=employee_number,
+
             first_name=first_name,
             middle_initial=middle_initial,
             last_name=last_name,
@@ -63,24 +66,26 @@ class MyUserManager(BaseUserManager):
         user.save(using=self._db)
         return user
 
-    def create_superuser(self, employee_number, first_name, middle_initial,
+    def create_superuser(self, first_name, middle_initial,
                          college,
                          last_name,
                          role,
                          program,
-                         contact, email, password):
+                         contact,
+                         email,
+                         password):
         """
         Creates and saves a superuser with the given email, date of
         birth and password.
         """
         user = self.create_user(
-            employee_number,
+            email=email,
             first_name=first_name,
             middle_initial=middle_initial,
             last_name=last_name,
             role=role,
             contact=contact,
-            email=email,
+
             password=password,
             college=college,
             program=program,
@@ -95,13 +100,11 @@ class MyUserManager(BaseUserManager):
 
 class MyUser(AbstractBaseUser):
 
-    employee_number = models.CharField(primary_key=True, max_length=7, validators=[
-        RegexValidator(r'^\d{1,10}$')])
-
+    email = models.EmailField(primary_key=True,  max_length=254)
     first_name = models.CharField(max_length=50)
     middle_initial = models.CharField(max_length=1)
     last_name = models.CharField(max_length=50)
-    email = models.EmailField(blank=True, max_length=254)
+
     contact = models.CharField(validators=[
         RegexValidator(r'^(09|\+639)\d{9}$')], blank=True, max_length=13)
     role = models.ForeignKey(
@@ -116,15 +119,17 @@ class MyUser(AbstractBaseUser):
 
     objects = MyUserManager()
 
-    USERNAME_FIELD = 'employee_number'
+    USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = ['first_name', 'middle_initial',
-                       'last_name', 'role', 'college', 'program',  'contact', 'email']
+                       'last_name', 'role', 'college', 'program',  'contact',
+
+                       ]
 
     class Meta:
         ordering = ['-date_added']
 
     def __str__(self):
-        return f'{self.employee_number} - {self.first_name} {self.last_name} {self.role}'
+        return f'{self.email} - {self.first_name} {self.last_name} {self.role}'
 
     def has_perm(self, perm, obj=None):
         "Does the user have a specific permission?"

@@ -42,7 +42,8 @@ class FormCreateView(LoginRequiredMixin, CreateView):
     def form_valid(self, form):
 
         form.instance.created_by = self.request.user
-
+        form.instance.title = f'{form.instance.type_of_accreditation} {form.instance.created_for} {form.instance.year}'
+        form.instance.college = self.request.user.college
         return super(FormCreateView, self).form_valid(form)
 
     def get_context_data(self, **kwargs):
@@ -109,7 +110,7 @@ class DivisionCreateView(LoginRequiredMixin, CreateView):
 
         form.instance.title_id = self.kwargs.get('pk')
 
-        print(self)
+        
 
         return super(DivisionCreateView, self).form_valid(form)
 
@@ -253,7 +254,7 @@ class SubdivisionDetailDetailView(LoginRequiredMixin, DetailView):
 
 class SubdivisionDetailCreateView(LoginRequiredMixin, CreateView):
     model = SubdivisionDetail
-    fields = "__all__"
+    form_class = SubdivisionDetailForm
 
     # 
 

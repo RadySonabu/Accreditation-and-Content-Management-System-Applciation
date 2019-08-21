@@ -1,237 +1,147 @@
-{% load static %}
 
-<!DOCTYPE html>
+{% load static%}<!DOCTYPE html>
 <html>
-  <head>
-    <!-- Required meta tags -->
-    <meta charset="utf-8" />
-    <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1, shrink-to-fit=no"
-    />
 
-    <!-- Bootstrap CSS -->
-    <link
-      rel="stylesheet"
-      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
-      integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
-      crossorigin="anonymous"
-    />
+<head>
 
-    <link
-      rel="stylesheet"
-      type="text/css"
-      href="{% static 'dashboard/main.css' %}"
-    />
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
-    {% if title %}
-    <title>Django Blog - {{ title }}</title>
-    {% else %}
-    <title>Django Blog</title>
-    {% endif %}
-  </head>
-  <body>
-    <header class="site-header">
-      <nav class="navbar navbar-expand-md navbar-dark  bg-dark fixed-top">
-        <div class="container">
-          <a class="navbar-brand mr-4" href="/">ACMSAs</a>
-          <button
-            class="navbar-toggler"
-            type="button"
-            data-toggle="collapse"
-            data-target="#navbarToggle"
-            aria-controls="navbarToggle"
-            aria-expanded="false"
-            aria-label="Toggle navigation"
-          >
-            <span class="navbar-toggler-icon"></span>
-          </button>
+    <title>ACMSA-TIP | Home</title>
 
-          <div class="collapse navbar-collapse" id="navbarToggle">
-            <div class="navbar-nav mr-auto">
-              <a class="nav-item nav-link" href="#">Home</a>
-              
+    <!-- <link href="css/theme.ba/bootstrap.min.css" rel="stylesheet">
+    <link href="css/theme.ba/animate.css" rel="stylesheet">
+    <link href="css/theme.ba/style.css" rel="stylesheet">
+    <link href="css/acmsa/acmsastyle.css" rel="stylesheet">
+    <link href="font-awesome/css/font-awesome.css" rel="stylesheet"> -->
+    <link rel="stylesheet" href="{% static 'css/theme.ba/bootstrap.min.css' %}">
+    <!-- <link href="font-awesome/css/font-awesome.css" rel="stylesheet"> -->
+    <link rel="stylesheet" href="{% static 'font-awesome/css/font-awesome.css' %}">
+
+
+
+    <!-- <link href="css/theme.ba/animate.css" rel="stylesheet"> -->
+    <link rel="stylesheet" href="{% static 'css/theme.ba/animate.css' %}">
+    <!-- <link href="css/theme.ba/style.css" rel="stylesheet"> -->
+    <link rel="stylesheet" href="{% static 'css/theme.ba/style.css' %}">
+    <!-- <link href="css/acmsa/acmsastyle.css" rel="stylesheet"> -->
+    <link rel="stylesheet" href="{% static 'css/acmsa/acmsastyle.css' %}">
+
+
+</head>
+
+<body>
+    <div id="wrapper">
+        <nav class="navbar-default navbar-static-side " role="navigation">
+            <div class="sidebar-collapse">
+                <ul class="nav metismenu" id="side-menu">
+                    <li class="nav-header">
+                        <div class="dropdown profile-element"> 
+                            <a data-toggle="dropdown" class="dropdown-toggle" href="#">
+                            <span class="clear"> <span class="block m-t-xs"> <strong class="font-bold">{{user.first_name}} {{user.last_name}}</strong>
+                             </span> <span class="text-muted text-xs block">{{user.role}}</span>  </a>
+                        </div>
+                        <div class="logo-element">
+                            <img alt="image" class="img-circle" style="width: 100%;" src="{%static 'img/logotest.png'%}" />
+                        </div>
+                    </li>
+                    <li>
+                        <a href="{% url 'home'%}"><i class="fa fa-th-large"></i> <span class="nav-label">Dashboard</span> </a>
+                    </li>
+                    {% if user.role.role == 'ADMINISTRATOR' %}
+                        <li>
+                            <a href="{% url 'register'%}"><i class="fa fa-child"></i> <span class="nav-label">Manage users</span></a>
+                        </li>
+                    {% else %}
+                      
+                    {% endif %}
+                    
+                    
+                    {% if user.role.role == 'COLLEGE DEAN'  or user.role.role == 'DEPARTMENT CHAIRPERSON' %}
+                        <li>
+                            <a href="{% url 'form-list' %}"> <i class="fa fa-table"></i> <span class="nav-label">Manage Accreditation</span></a>
+                        </li>
+                    {% endif %}
+                    
+                </ul>
+
             </div>
-            <!-- Navbar Right Side -->
-            <div class="navbar-nav">
-              <!-- <a class="nav-item nav-link" href="#">Login</a> -->
-              
-              {% if user.is_authenticated and user.role.role == 'VPAA' %}
-              <div class="dropdown">
-                <button
-                  class="btn btn-default "
-                  type="button"
-                  id="menu1"
-                  data-toggle="dropdown"
-                >
-                  <!-- <img class ="rounded-circle" width="30" height="30" src="{{user.profile.image.url}}"> -->
-                  VPAA
-                </button>
-              </div>
+        </nav>
 
-              <div class="dropdown">
-                <button
-                  class="btn btn-default ml-2"
-                  type="button"
-                  id="menu1"
-                  data-toggle="dropdown"
-                >
-                  <!-- <img class ="rounded-circle" width="30" height="30" src="{{user.profile.image.url}}"> -->
-                  Options
-                </button>
-                <ul
-                  class="dropdown-menu mt-2"
-                  role="menu"
-                  aria-labelledby="menu1"
-                >
-                  <a class="dropdown-item" href="{% url 'logout' %}">Logout</a>
-                </ul>
-              </div>
+        <div id="page-wrapper" class="gray-bg dashbard-1">
+        <div class="row border-bottom">
+        <nav class="navbar navbar-static-top" role="navigation" style="margin-bottom: 0">
+        <div class="navbar-header">
+        
+            <a class="navbar-minimalize minimalize-styl-2 btn btn-primary " href="#"><i class="fa fa-bars"></i> </a>
 
-              {% elif user.is_authenticated and user.role.role == 'DEAN' %}
-              <div class="dropdown">
-                <button
-                  class="btn btn-default "
-                  type="button"
-                  id="menu1"
-                  data-toggle="dropdown"
-                >
-                  <!-- <img class ="rounded-circle" width="30" height="30" src="{{user.profile.image.url}}"> -->
-                  DEAN of {{user.college.college}}
-                </button>
-              </div>
-
-              <div class="dropdown">
-                <button
-                  class="btn btn-default ml-2"
-                  type="button"
-                  id="menu1"
-                  data-toggle="dropdown"
-                >
-                  <!-- <img class ="rounded-circle" width="30" height="30" src="{{user.profile.image.url}}"> -->
-                  Options
-                </button>
-                <ul
-                  class="dropdown-menu mt-2"
-                  role="menu"
-                  aria-labelledby="menu1"
-                >
-                <a class="dropdown-item" href="{% url 'form-list' %}">Forms</a>
-                  <a class="dropdown-item" href="{% url 'logout' %}">Logout</a>
-                </ul>
-              </div>
-              {% elif user.is_authenticated and user.role.role == 'DEPTCHAIR' %}
-              <div class="dropdown">
-                <button
-                  class="btn btn-default "
-                  type="button"
-                  id="menu1"
-                  data-toggle="dropdown"
-                >
-
-                  <!-- <img class ="rounded-circle" width="30" height="30" src="{{user.profile.image.url}}"> -->
-                  DEPTCHAIR of {{user.program.program}}
-                </button>
-              </div>
-
-              <div class="dropdown">
-                <button
-                  class="btn btn-default ml-2"
-                  type="button"
-                  id="menu1"
-                  data-toggle="dropdown"
-                >
-                  <!-- <img class ="rounded-circle" width="30" height="30" src="{{user.profile.image.url}}"> -->
-                  Options
-                </button>
-                <ul
-                  class="dropdown-menu mt-2"
-                  role="menu"
-                  aria-labelledby="menu1"
-                >
-                  
-                  <a class="dropdown-item" href="{% url 'logout' %}">Logout</a>
-                  <a class="dropdown-item" href="{% url 'form-list' %}">Form</a>
-                  
-                </ul>
-              </div>
-              {% elif user.is_authenticated and user.role.role == 'AD' %}
-              <div class="dropdown">
-                <button
-                  class="btn btn-default "
-                  type="button"
-                  id="menu1"
-                  data-toggle="dropdown"
-                >
-                  <!-- <img class ="rounded-circle" width="30" height="30" src="{{user.profile.image.url}}"> -->
-                  Admin
-                </button>
-              </div>
-
-              <div class="dropdown">
-                <button
-                  class="btn btn-default ml-2"
-                  type="button"
-                  id="menu1"
-                  data-toggle="dropdown"
-                >
-                  <!-- <img class ="rounded-circle" width="30" height="30" src="{{user.profile.image.url}}"> -->
-                  
-                  Option
-                </button>
-                <ul
-                  class="dropdown-menu mt-2"
-                  role="menu"
-                  aria-labelledby="menu1"
-                >
-                  <a
-                    class="dropdown-item"
-                    target="_blank"
-                    href="{% url 'register' %}"
-                    >Register</a
-                  >
-                  <a class="dropdown-item" href="{% url 'logout' %}">Logout</a>
-                  <a class="dropdown-item" href="{% url 'download-excel' %}"
-                    >Download List
-                  </a>
-                </ul>
-              </div>
-              {% else %}
-              <a class="nav-item nav-link" href="{% url 'login' %}">Login</a>
-              {% endif %}
-
-              <a class="nav-item nav-link" href="#">{% now "M d, Y : P"%}</a>
-            </div>
-          </div>
+            
         </div>
-      </nav>
-    </header>
-    <main role="main" class="container col-md-auto" >
-      {% if messages %} {% for message in messages %}
-      <div class="alert alert-{{ message.tags }}">
-        {{ message }}
-      </div>
-      {% endfor %} {% endif %} {% block content %}{% endblock %}
+            <ul class="nav navbar-top-links navbar-right">
+                    
+                <li class="dropdown">
+                   
+                    
+                        <li class="divider"></li>
+                        
+                        <li class="divider"></li>
+                        
+                        <li class="divider"></li>
+                      
+                
+                       
+                        
 
-      <!-- <div class="col-md-4">
-          <div class="content-section">
-            <h3>Our Sidebar</h3>
-            <p class='text-muted'>You can put any information here you'd like.
-              <ul class="list-group">
-                <li class="list-group-item list-group-item-light">Latest Posts</li>
-                <li class="list-group-item list-group-item-light">Announcements</li>
-                <li class="list-group-item list-group-item-light">Calendars</li>
-                <li class="list-group-item list-group-item-light">etc</li>
-              </ul>
-            </p>
-          </div>
-        </div> -->
-    </main>
 
-    <!-- Optional JavaScript -->
-    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-  </body>
+                <li>
+                    <a href="{% url 'logout' %}">
+                        <i class="fa fa-sign-out"></i> Log out
+                    </a>
+                </li>
+                
+
+        </nav>
+        </div>
+        <main role="main" class="container col-md-auto " style="margin-top: 2rem" >
+                
+                {% block content %}{% endblock %}
+                <!-- <div class="col-md-4">
+                    <div class="content-section">
+                      <h3>Our Sidebar</h3>
+                      <p class='text-muted'>You can put any information here you'd like.
+                        <ul class="list-group">
+                          <li class="list-group-item list-group-item-light">Latest Posts</li>
+                          <li class="list-group-item list-group-item-light">Announcements</li>
+                          <li class="list-group-item list-group-item-light">Calendars</li>
+                          <li class="list-group-item list-group-item-light">etc</li>
+                        </ul>
+                      </p>
+                    </div>
+                  </div> -->
+              </main>
+                <div class="footer">
+                    <div class="pull-right">
+                        Made by TIPians  <strong>for the</strong> Institute.
+                    </div>
+                    <div>
+                        <strong>Established</strong> 2019 
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        
+
+        <!-- Mainly scripts -->
+        <script src="{% static 'js/jquery-2.1.1.js'%}"></script>
+        <script src="{% static 'js/bootstrap.min.js'%}"></script>
+        <script src="{% static 'js/plugins/metisMenu/jquery.metisMenu.js'%}"></script>
+        <script src="{% static 'js/plugins/slimscroll/jquery.slimscroll.min.js'%}"></script>
+    
+        <!-- Custom and plugin javascript -->
+        <script src="{% static 'js/inspinia.js'%}"></script>
+        <script src="{% static 'js/plugins/pace/pace.min.js'%}"></script> 
+    
+</body>
 </html>

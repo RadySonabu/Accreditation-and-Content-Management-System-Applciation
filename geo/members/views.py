@@ -7,7 +7,8 @@ from django.http import HttpResponse
 from .resources import Members
 from .models import MyUser, College, Program
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
-
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.messages.views import SuccessMessageMixin
 # @login_required
 # def register(request):
 #     if request.method == 'POST':
@@ -47,19 +48,27 @@ def load_program(request):
     return render(request, 'members/program_dropdown_option.html', {'program': program, })
 
 
-class UserListView(ListView):
+class UserListView(LoginRequiredMixin, ListView):
     model = MyUser
     success_url = reverse_lazy('home')
 
 
-class UserCreateView(CreateView):
+class UserCreateView(LoginRequiredMixin, SuccessMessageMixin, CreateView):
     model = MyUser
 
     form_class = UserCreationForm
-    success_url = reverse_lazy('user_changelist')
+    success_url = reverse_lazy('register')
+
+    success_message = "%(account)s was created successfully"
+
+    def get_success_message(self, cleaned_data):
+        return self.success_message % dict(
+            cleaned_data,
+            account=f'{self.object.first_name} {self.object.last_name}',
+        )
 
 
-class UserUpdateView(UpdateView):
+class UserUpdateView(LoginRequiredMixin, UpdateView):
     model = MyUser
     form_class = UserCreationForm
     success_url = reverse_lazy('user_changelist')
