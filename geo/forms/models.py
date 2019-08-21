@@ -93,6 +93,7 @@ class Forms(models.Model):
         MyUser, on_delete=models.SET_NULL, null=True, default="")
     created_for = models.ForeignKey(
         Program, on_delete=models.SET_NULL, null=True)
+    total = models.FloatField(default=0)
 
     def __str__(self):
         return f'{self.title}'
