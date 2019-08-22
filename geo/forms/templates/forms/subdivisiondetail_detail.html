@@ -155,10 +155,10 @@
                
                 
                <button class="btn btn-outline-primary" type="submit">
-                   <a href="{% url 'form-update' object.id %}">Update Form</a>
+                   <a href="{% url 'form-update' object.subdivision.division.title.id %}">Update Form</a>
                   </button>
                   <button class="btn btn-outline-danger" type="submit">
-                   <a href="{% url 'form-delete' object.id %}">Delete Form</a>
+                   <a href="{% url 'form-delete' object.subdivision.division.title.id %}">Delete Form</a>
                   </button>
                 
                   {% endif %}

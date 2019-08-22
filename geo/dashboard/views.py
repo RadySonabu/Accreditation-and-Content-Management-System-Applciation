@@ -24,11 +24,11 @@ def home(request):
             context = {
                 'members': MyUser.objects.filter(role__role='DEPARTMENT CHAIRPERSON')
             }
-    elif user.is_authenticated and user.role.role == 'DEPTCHAIR':
-        if user.program.program == 'BSIT':
+    elif user.is_authenticated and user.role.role == 'DEPARTMENT CHAIRPERSON':
+        if user.program.program == 'BS Information Technology':
 
             context = {
-                'members': MyUser.objects.filter(program__program='BSIT'),
+                'members': MyUser.objects.filter(program__program='BS Information Technology'),
                 'form': Forms.objects.all()
             }
     else:

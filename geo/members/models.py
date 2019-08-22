@@ -129,7 +129,7 @@ class MyUser(AbstractBaseUser):
         ordering = ['-date_added']
 
     def __str__(self):
-        return f'{self.email} - {self.first_name} {self.last_name} {self.role}'
+        return f'{self.first_name} {self.last_name} {self.role}'
 
     def has_perm(self, perm, obj=None):
         "Does the user have a specific permission?"

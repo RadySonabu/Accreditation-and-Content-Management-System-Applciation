@@ -256,7 +256,14 @@ class SubdivisionDetailCreateView(LoginRequiredMixin, CreateView):
     model = SubdivisionDetail
     form_class = SubdivisionDetailForm
 
-    # 
+    def form_valid(self, form):
+
+        form.instance.subdivision_id = self.kwargs.get('pk')
+
+        
+
+        return super(SubdivisionCreateView, self).form_valid(form)
+    
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)

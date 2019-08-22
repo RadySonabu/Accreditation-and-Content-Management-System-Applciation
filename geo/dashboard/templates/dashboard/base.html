@@ -49,7 +49,7 @@
                     <li>
                         <a href="{% url 'home'%}"><i class="fa fa-th-large"></i> <span class="nav-label">Dashboard</span> </a>
                     </li>
-                    {% if user.role.role == 'ADMINISTRATOR' %}
+                    {% if user.role.role == 'REGISTRAR' or user.role.role == 'ADMINISTRATOR' %}
                         <li>
                             <a href="{% url 'register'%}"><i class="fa fa-child"></i> <span class="nav-label">Manage users</span></a>
                         </li>
