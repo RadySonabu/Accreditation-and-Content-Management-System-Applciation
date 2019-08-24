@@ -262,7 +262,7 @@ class SubdivisionDetailCreateView(LoginRequiredMixin, CreateView):
 
         
 
-        return super(SubdivisionCreateView, self).form_valid(form)
+        return super(SubdivisionDetailCreateView, self).form_valid(form)
     
 
     def get_context_data(self, **kwargs):

@@ -3,9 +3,7 @@
 {% block content %}
 
 
-{% for f in f %}
 
-{% if  user.program.program == f.created_for  or  user == f.created_by %}
 <div class="row justify-content-center">
   <div class="col-md-12 ">
     <div class="content-section">
@@ -13,6 +11,12 @@
             {% csrf_token %}
             
         {% if object %}
+          {% for f in f %}
+
+          
+          {% if object.title.id == f.id %}
+            
+          {% if  user.program.program == f.created_for  or  user == f.created_by %} 
           <fieldset class="form-group">
             <legend class="border-bottom mb-4">{{ object.title }}</legend>
             
@@ -133,18 +137,25 @@
                                     </div>
 
                         </div>
+                      </fieldset>
                         {% endif %}
                     {% endfor %}
                       
+                    
                   {% endfor %}
                   
                   {% endif %}
               {% endfor %}
                 
                 
+            
                 
-              
-          </fieldset>
+              {% else %}
+              Oops... PAGE NOT FOUND
+            {% endif %}
+            {% endif%}  
+            {% endfor %}
+          
         {% else %}
           
           
@@ -186,10 +197,7 @@
 </div>
 </div>
 </div>
-{% else %}
-  Oops... PAGE NOT FOUND
-{% endif %}
-{% endfor %}
+
   
   
 {% endblock%}

@@ -133,6 +133,7 @@
                                       </div>
                                       
                           </div>
+                        </fieldset>
                           {% endif %}
                       {% endfor %}
                         
@@ -144,7 +145,7 @@
                   
                   
                 
-            </fieldset>
+            
             {% if f.created_by == user %}
         <button class="btn btn-outline-primary" type="submit">
         <a href="{% url 'division-create' object.id%}">Add Major Criteria</a>

@@ -7,6 +7,7 @@
 {% for f in f %}
 
 {% if user == f.created_by  %}
+{% if object.id == f.id %}
 <div class="row justify-content-center">
                 <div class="col-md-10 ">
                 <div class="content-section">
@@ -30,6 +31,7 @@
         </div>
         </div>
         </div>
+{% endif %}
 {%else%}
 Oops.. Page not found!
 {% endif %}
