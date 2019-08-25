@@ -23,10 +23,7 @@ class UserCreationForm(forms.ModelForm):
             'first_name', 'middle_initial',
             'last_name', 'contact', 'email', 'role',  'college', 'program', 'password1', 'password2')
 
-        widgets = {
-            'email': forms.TextInput(attrs={placeholder="email"}),
-
-        }
+        
 
     def clean_password2(self):
         # Check that the two password entries match
