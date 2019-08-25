@@ -8,7 +8,7 @@
         <div class="content-section">
             <div class="media">
                 <img class="rounded-circle account-img" src="{{ user.profile.image.url }}">
-                <h2 class="account-heading">Hello {{ user.first_name }} !</h2>
+                <h2 class="account-heading">Hello {{ user.first_name }}!</h2>
             </div>
         </div>
     </div>
@@ -21,9 +21,7 @@
                 <h4>Account Details</h4>
             </div>
             <div class="form-row">
-                <div class="form-group col-md-6 mb-0">
-                    Employee Number : {{ user.employee_number}}
-                </div>
+               
                 <div class="form-group col-md-6 mb-0">
                     Name : {{ user.first_name}} {{ user.middle_initial}} {{ user.last_name}}
                 </div>
@@ -41,7 +39,7 @@
                     Role : {{ user.role}}
                 </div>
                 <div class="form-group col-md-6 mb-0">
-                    College : {{ user.college}}
+                    College : {{ user.college.college}}
                 </div>
             </div>
             {% if user.role.role == DEPTCHAIR %}

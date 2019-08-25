@@ -2,7 +2,6 @@
 {% load crispy_forms_tags %}
 {% block content %}
 
-
 {% for f in f %}
 
 {% if object.title.id == f.id %}
@@ -39,6 +38,7 @@
             </div>
             
             
+            
             {% for d in d %}
              
                 {% if d.title.id == object.title.id  %}
@@ -67,7 +67,8 @@
                         </div>
                     </div> 
                   
-                    
+                   
+        
                   
                 {% for s in sd %}
                 {% if s.division.id == d.id %}

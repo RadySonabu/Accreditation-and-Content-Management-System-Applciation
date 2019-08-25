@@ -13,8 +13,9 @@
 
               <fieldset class="form-group">
                 <legend class="border-bottom mb-4">{{ object.subdivision.division.title }} {% if f.created_by == user %}
-                  <a href="{% url 'form-update' object.subdivision.division.id %}"><i class="fas fa-edit"></i> </a><a href="{% url 'form-delete'  object.subdivision.division.id %}"><i class="fas fa-trash"></i></a></legend>
+                  <a href="{% url 'form-update' object.subdivision.division.id %}"><i class="fas fa-edit"></i> </a><a href="{% url 'form-delete'  object.subdivision.division.id %}"><i class="fas fa-trash"></i></a>
                 {% endif %}
+              </legend>
               <div class="form-row">
                       <div class="form-group col-md-6 mb-0">Accreditation Type: {{ object.subdivision.division.title.type_of_accreditation }}    
                       </div>

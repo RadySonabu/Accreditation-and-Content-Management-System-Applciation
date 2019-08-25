@@ -1,21 +1,21 @@
 {% extends "dashboard/base.html" %} 
 {% load crispy_forms_tags %}
 {% block content %}
-
+<div class="row ">
+    <div class="col-md-auto ">
+      <div class="content-section" style="margin-bottom: 4rem">
+        <form method="POST">
 {% for f in f %}
  {% if object.division.title.id == f.id %}
  {% if user.program.program == f.created_for.program or user == f.created_by %}
- <div class="row justify-content-center" style="margin-bottom: 4rem">
-   <div class="col-md-12 ">
-     <div class="content-section" style="margin-bottom: 4rem">
-       <form method="POST">
+ 
              {% csrf_token %}
              
          <fieldset class="form-group">
            <legend class="border-bottom mb-4">{{ object.division.title }} 
               {% if f.created_by == user %}
-              <a href="{% url 'form-update' object.division.title.id %}"><i class="fas fa-edit"></i> </a><a href="{% url 'form-delete' object.division.title.id %}"><i class="fas fa-trash"></i></a></legend>
-              {% endif%}
+              <a href="{% url 'form-update' object.division.title.id %}"><i class="fas fa-edit"></i> </a><a href="{% url 'form-delete' object.division.title.id %}"><i class="fas fa-trash"></i></a>
+              {% endif%}</legend>
          <div class="form-row">
                  <div class="form-group col-md-12 mb-0">Accreditation Type: {{ object.division.title.type_of_accreditation }}    
                  </div>
@@ -62,9 +62,9 @@
                          </div>
                          <div class="form-group col-md-2 pt-3 "><strong></strong>
                          </div>
-                         <div class="form-group col-md-1 pt-3 "><a href="{% url 'division-update' d.id%}">Update</a>
+                         <div class="form-group col-md-1 pt-3 "><a href="{% url 'division-update' d.id%}"><i class="fas fa-edit"></i></a>
                            {% if user == f.created_by %}
-                           <a href="{% url 'division-delete' d.id%}">Delete</a>
+                           <a href="{% url 'division-delete' d.id%}"><i class="fas fa-trash"></i></a>
                            {% endif %}
                          </div>
                      </div> 
@@ -93,9 +93,9 @@
                          </div>
                          <div class="form-group col-md-1 pt-3 "><strong>{{s.total}}</strong>
                          </div>
-                         <div class="form-group col-md-1 pt-3 "><a href="{% url 'subdivision-update' s.id%}">Update</a>
+                         <div class="form-group col-md-1 pt-3 "><a href="{% url 'subdivision-update' s.id%}"><i class="fas fa-edit"></i></a>
                            {% if user == f.created_by %}
-                           <a href="{% url 'subdivision-delete' s.id%}">Delete</a>
+                           <a href="{% url 'subdivision-delete' s.id%}"><i class="fas fa-trash"></i></a>
                            {% endif %}
                          </div>
                        </div>
@@ -126,9 +126,9 @@
                                  </div>
                                  <div class="form-group col-md-2 mb-0"> {{x.total}}    
                                    </div>
-                                   <div class="form-group col-md-1 mb-0"> <a href="{% url 'subdivisiondetail-update' x.id%}">Update</a>
+                                   <div class="form-group col-md-1 mb-0"> <a href="{% url 'subdivisiondetail-update' x.id%}"><i class="fas fa-edit"></i></a>
                                      {% if user == f.created_by %}
-                                     <a href="{% url 'subdivisiondetail-delete' x.id%}">Delete</a>
+                                     <a href="{% url 'subdivisiondetail-delete' x.id%}"><i class="fas fa-trash"></i></a>
                                      {% endif %}    
                                    </div>
                        </div>

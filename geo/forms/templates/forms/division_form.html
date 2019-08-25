@@ -4,7 +4,7 @@
 
 
 
-<div class="row justify-content-center">
+<div class="row justify-content-center" style="margin-bottom: 4rem">
   <div class="col-md-12 ">
     <div class="content-section">
       <form action="" method="POST">
@@ -16,7 +16,7 @@
           
           {% if object.title.id == f.id %}
             
-          {% if  user.program.program == f.created_for  or  user == f.created_by %} 
+          {% if  user.program.program == f.created_for.program  or  user == f.created_by %} 
           <fieldset class="form-group">
             <legend class="border-bottom mb-4">{{ object.title }}</legend>
             

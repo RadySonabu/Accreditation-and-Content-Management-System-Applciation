@@ -1,4 +1,4 @@
-{% load static%}
+{% load static %}
 <!DOCTYPE html>
 <html>
 
@@ -8,7 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
-    <title>ACMSA-TIP | Home</title>
+    <title>ACMSA-TIP</title>
 
     <!-- <link href="css/theme.ba/bootstrap.min.css" rel="stylesheet">
     <link href="css/theme.ba/animate.css" rel="stylesheet">
@@ -19,7 +19,7 @@
     <!-- <link href="font-awesome/css/font-awesome.css" rel="stylesheet"> -->
     <link rel="stylesheet" href="{% static 'font-awesome/css/font-awesome.css' %}">
 
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> -->
 
     <!-- <link href="css/theme.ba/animate.css" rel="stylesheet"> -->
     <link rel="stylesheet" href="{% static 'css/theme.ba/animate.css' %}">
@@ -27,7 +27,7 @@
     <link rel="stylesheet" href="{% static 'css/theme.ba/style.css' %}">
     <!-- <link href="css/acmsa/acmsastyle.css" rel="stylesheet"> -->
     <link rel="stylesheet" href="{% static 'css/acmsa/acmsastyle.css' %}">
-
+    
 
 </head>
 
@@ -39,13 +39,17 @@
                     <li class="nav-header">
                         <div class="dropdown profile-element">
                             <a data-toggle="dropdown" class="dropdown-toggle" href="#">
-                                <span class="clear"> <span class="block m-t-xs"> <strong
+                                <span class="clear"> 
+                                    <div style="justify-content: center"><span class="block m-t-xs"><img alt="image" class="img-circle" col-md-12 "
+                                        src="{{user.profile.image.url}}" /> </div>
+                                    <strong
                                             class="font-bold">{{user.first_name}} {{user.last_name}}</strong>
+                                            
                                     </span> <span class="text-muted text-xs block">{{user.role}}</span> </a>
                         </div>
                         <div class="logo-element">
                             <img alt="image" class="img-circle" style="width: 100%;"
-                                src="{%static 'img/logotest.png'%}" />
+                                src="{{user.profile.image.url}}" />
                         </div>
                     </li>
                     <li>
@@ -100,7 +104,6 @@
                         <li class="divider"></li>
 
 
-<<<<<<< HEAD
                 <li>
                     <a href="{% url 'logout' %}">
                          Log out
@@ -112,23 +115,6 @@
         </div>
         <main role="main" class="container col-md-auto " style="margin: 2rem" >
                 
-=======
-
-
-
-
-                        <li>
-                            <a href="{% url 'logout' %}">
-                                <i class="fa fa-sign-out"></i> Log out
-                            </a>
-                        </li>
-
-
-                </nav>
-            </div>
-            <main role="main" class="container col-md-auto " style="margin-top: 2rem">
-
->>>>>>> 14718563d3b1c85eba65b7499e5c53dfec5a9148
                 {% block content %}{% endblock %}
                 <!-- <div class="col-md-4">
                     <div class="content-section">
@@ -157,17 +143,8 @@
 
 
 
-    <!-- Mainly scripts -->
-    <script src="{% static 'js/jquery-2.1.1.js'%}"></script>
-    <script src="{% static 'js/bootstrap.min.js'%}"></script>
-    <script src="{% static 'js/plugins/metisMenu/jquery.metisMenu.js'%}"></script>
-    <script src="{% static 'js/plugins/slimscroll/jquery.slimscroll.min.js'%}"></script>
+   
 
-    <!-- Custom and plugin javascript -->
-    <script src="{% static 'js/inspinia.js'%}"></script>
-    <script src="{% static 'js/plugins/pace/pace.min.js'%}"></script>
-
-<<<<<<< HEAD
         
 
         <!-- Mainly scripts -->
@@ -180,8 +157,6 @@
         <script src="{% static 'js/inspinia.js'%}"></script>
         <script src="{% static 'js/plugins/pace/pace.min.js'%}"></script> 
         <script src='https://kit.fontawesome.com/a076d05399.js'></script>
-=======
->>>>>>> 14718563d3b1c85eba65b7499e5c53dfec5a9148
 </body>
 
 </html>
