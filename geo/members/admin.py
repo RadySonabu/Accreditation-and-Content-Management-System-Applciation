@@ -5,7 +5,7 @@ from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
 
 from django.contrib.auth.forms import ReadOnlyPasswordHashField
 
-from members.models import MyUser, Role, College, Program
+from members.models import MyUser, Role, College, Program, Profile
 from import_export.admin import ImportExportModelAdmin
 
 
@@ -137,3 +137,4 @@ admin.site.unregister(Group)
 admin.site.register(Role)
 admin.site.register(College)
 admin.site.register(Program)
+admin.site.register(Profile)

@@ -1,100 +1,105 @@
-{% extends "dashboard/base.html" %} 
-{% block content %} 
+{% extends "dashboard/base.html" %}
+{% block content %}
 <!-- <h1 class="mb-5">Progress...</h1> -->
 <div style="margin-bottom: 4rem"></div>
 {% for mem in members %}
 
 {% if user.role.role == 'VPAA' %}
 
-  <div class="row">
-      {% if mem.college.college == 'CITE' %}
-      <div class="col-md-auto">
-        <div class="card">
-          <div class="card-body">
-            <h5 class="card-title">College of Info. Technology Education</h5>
-            <img class="mx-auto d-block "   style="height: 200px; width: 200px; padding: 2%; justify-content: center" src="https://cdn1.iconfinder.com/data/icons/charts-2/304/Untitled-41-512.png">
-          </div>
-        </div>
+<div class="row">
+  {% if mem.college.college == 'CITE' %}
+  <div class="col-md-auto">
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title">College of Info. Technology Education</h5>
+        <img class="mx-auto d-block " style="height: 200px; width: 200px; padding: 2%; justify-content: center"
+          src="https://cdn1.iconfinder.com/data/icons/charts-2/304/Untitled-41-512.png">
       </div>
-      {% elif mem.college.college == 'CEA' %}
-      <div class="col-md-auto">
-        <div class="card">
-          <div class="card-body" style="justify-content: center">
-            <h5 class="card-title">College of Engineering and Architecture</h5>
-            <img class="mx-auto d-block " style="height: 200px; width: 200px; padding: 2%; justify-content: center" src="https://cdn1.iconfinder.com/data/icons/charts-2/304/Untitled-35-512.png">
-          </div>
-        </div>
-      </div>
+    </div>
   </div>
+  {% elif mem.college.college == 'CEA' %}
+  <div class="col-md-auto">
+    <div class="card">
+      <div class="card-body" style="justify-content: center">
+        <h5 class="card-title">College of Engineering and Architecture</h5>
+        <img class="mx-auto d-block " style="height: 200px; width: 200px; padding: 2%; justify-content: center"
+          src="https://cdn1.iconfinder.com/data/icons/charts-2/304/Untitled-35-512.png">
+      </div>
+    </div>
+  </div>
+</div>
 
 
 
-      {% endif %}
+{% endif %}
 
 
 
 {% elif user.role.role == 'COLLEGE DEAN' %}
-  {{ARDY}}
-  {% if mem.college.college == 'College of Information Technology Education' %}
-  
+{{ARDY}}
+{% if mem.college.college == 'College of Information Technology Education' %}
 
 
 
 
-  <div class="row">
-      {% if mem.program.program == 'BS Information Technology' %}
-      <div class="col-md-3">
-        <div class="card">
-          <div class="card-body">
-            <h5 class="card-title">Department of Info.Technology</h5>
-            <img class="mx-auto d-block "   style="height: 200px; width: 200px; padding: 2%; justify-content: center" src="https://cdn1.iconfinder.com/data/icons/charts-2/304/Untitled-41-512.png">
-          </div>
-        </div>
+
+<div class="row">
+  {% if mem.program.program == 'BS Information Technology' %}
+  <div class="col-md-3">
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title">Department of Info.Technology</h5>
+        <img class="mx-auto d-block " style="height: 200px; width: 200px; padding: 2%; justify-content: center"
+          src="https://cdn1.iconfinder.com/data/icons/charts-2/304/Untitled-41-512.png">
       </div>
-      {% elif mem.program.program == 'BS Computer Science' %}
-      <div class="col-md-3">
-        <div class="card">
-          <div class="card-body" style="justify-content: center">
-            <h5 class="card-title">Department of Computer Science</h5>
-            <img class="mx-auto d-block " style="height: 200px; width: 200px; padding: 2%; justify-content: center" src="https://cdn1.iconfinder.com/data/icons/charts-2/304/Untitled-42-512.png">
-          </div>
-        </div>
-      </div>
+    </div>
   </div>
+  {% elif mem.program.program == 'BS Computer Science' %}
+  <div class="col-md-3">
+    <div class="card">
+      <div class="card-body" style="justify-content: center">
+        <h5 class="card-title">Department of Computer Science</h5>
+        <img class="mx-auto d-block " style="height: 200px; width: 200px; padding: 2%; justify-content: center"
+          src="https://cdn1.iconfinder.com/data/icons/charts-2/304/Untitled-42-512.png">
+      </div>
+    </div>
+  </div>
+</div>
 
 
-   
-      
-    
-    {% endif %}
-  
-   
-    
-  {% endif %}
+
+
+
+{% endif %}
+
+
+
+{% endif %}
 {% elif user.role.role == 'DEPARTMENT CHAIRPERSON' %}
 {% if mem.program.program == 'BS Information Technology' %}
 
 
-    
-    
-    {% for f in form %}
-     
-     {% if f.created_for.program == mem.program.program %}
-     <div class="col-md-3">
-      <div class="card">
-        <div class="card-body" style="justify-content: center">
-          <h5 class="card-title"><a href="{% url 'form-detail' pk=f.id%}">Department of Info.Technology</a></h5>
-          <img class="mx-auto d-block "   style="height: 200px; width: 200px; padding: 2%; justify-content: center" src="https://cdn1.iconfinder.com/data/icons/charts-2/304/Untitled-41-512.png">
-        </div>
-      </div>
-    </div>
-     {% endif %}
-       
-    
-    {% endfor %}
-      
 
-  {% endif %}
+
+{% for f in form %}
+
+{% if f.created_for.program == mem.program.program %}
+<div class="col-md-3">
+  <div class="card">
+    <div class="card-body" style="justify-content: center">
+      <h5 class="card-title"><a href="{% url 'form-detail' pk=f.id%}">Department of Info.Technology</a></h5>
+      <img class="mx-auto d-block " style="height: 200px; width: 200px; padding: 2%; justify-content: center"
+        src="https://cdn1.iconfinder.com/data/icons/charts-2/304/Untitled-41-512.png">
+    </div>
+  </div>
+</div>
+{% endif %}
+
+
+{% endfor %}
+
+
+{% endif %}
 {% endif %}
 {% endfor %}
 
