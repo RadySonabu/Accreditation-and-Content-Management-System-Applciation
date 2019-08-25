@@ -5,22 +5,24 @@
 {% for f in f %}
  {% if object.division.title.id == f.id %}
  {% if user.program.program == f.created_for.program or user == f.created_by %}
- <div class="row justify-content-center">
+ <div class="row justify-content-center" style="margin-bottom: 4rem">
    <div class="col-md-12 ">
      <div class="content-section" style="margin-bottom: 4rem">
        <form method="POST">
              {% csrf_token %}
              
          <fieldset class="form-group">
-           <legend class="border-bottom mb-4">{{ object.division.title }}</legend>
-           
+           <legend class="border-bottom mb-4">{{ object.division.title }} 
+              {% if f.created_by == user %}
+              <a href="{% url 'form-update' object.division.title.id %}"><i class="fas fa-edit"></i> </a><a href="{% url 'form-delete' object.division.title.id %}"><i class="fas fa-trash"></i></a></legend>
+              {% endif%}
          <div class="form-row">
                  <div class="form-group col-md-12 mb-0">Accreditation Type: {{ object.division.title.type_of_accreditation }}    
                  </div>
                </div>
         
          <div class="form-row border-bottom border-top mt-4 mb-4">
-               <div class="form-group col-md-4 pt-3 "><strong>Criteria</strong>
+               <div class="form-group col-md-4 pt-3 "><strong>Criteria <a href="{% url 'subdivision-create' object.division.title.id%}"><i class="fas fa-plus"></i></a></strong>
                </div>
                <div class="form-group col-md-1 pt-3 "><strong>Weight</strong>
                  </div>
@@ -144,16 +146,7 @@
              
          
          {% if f.created_by == user %}
-         <button class="btn btn-outline-primary" type="submit">
-           <a href="{% url 'division-create' object.division.title.id%}">Add Major Criteria</a>
-          </button>
          
-          <button class="btn btn-outline-primary" type="submit">
-              <a href="{% url 'form-update' object.division.title.id %}">Update Form</a>
-             </button>
-             <button class="btn btn-outline-danger" type="submit">
-              <a href="{% url 'form-delete' object.division.title.id %}">Delete Form</a>
-             </button>
          {% endif%}
      
  

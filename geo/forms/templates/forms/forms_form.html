@@ -9,7 +9,25 @@
         <div class="content-section">
           <form method="POST">
                 {% csrf_token %}
+            {% if object %}
             <fieldset class="form-group">
+                <legend class="border-bottom mb-4">Update Accreditation</legend>
+                <div class="form-row">
+                  <div class="form-group col-md-12 mb-0">
+                    {{ form| crispy  }}
+                    
+                    
+                      
+                  </div>
+                  
+                </div>
+                <button class="btn btn-outline-primary" type="submit" style="margin-bottom: 4rem">
+                    Update
+               </button>
+               
+              </fieldset>
+            {% else %}
+              <fieldset class="form-group">
               <legend class="border-bottom mb-4">Add Accreditation</legend>
               <div class="form-row">
                 <div class="form-group col-md-12 mb-0">
@@ -25,6 +43,8 @@
              </button>
              
             </fieldset>
+            {% endif %}
+            
             </form>
           </div>
         </div>

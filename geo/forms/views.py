@@ -259,7 +259,7 @@ class SubdivisionDetailCreateView(LoginRequiredMixin, CreateView):
     def form_valid(self, form):
 
         form.instance.subdivision_id = self.kwargs.get('pk')
-
+        
         
 
         return super(SubdivisionDetailCreateView, self).form_valid(form)

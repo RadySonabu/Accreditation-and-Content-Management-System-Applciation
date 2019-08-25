@@ -13,16 +13,16 @@
       <form action="" method="POST">
             {% csrf_token %}
             
-        <fieldset class="form-group">
-          <legend class="border-bottom mb-4">{{ object.title }}</legend>
+        <fieldset class="form-group ">
+          <legend class="border-bottom mb-4">{{ object.title }} <a href="{% url 'form-update' object.id %}"><i class="fas fa-edit"></i> </a><a href="{% url 'form-delete' object.id %}"><i class="fas fa-trash"></i></a></legend> 
           
         <div class="form-row">
-                <div class="form-group col-md-12 mb-0">Accreditation Type: {{ object.title.type_of_accreditation }}    
+                <div class="form-group col-md-12 mb-0">Accreditation Type: {{ object.title.type_of_accreditation }}   
                 </div>
               </div>
        
         <div class="form-row border-bottom border-top mt-4 mb-4">
-              <div class="form-group col-md-4 pt-3 "><strong>Criteria</strong>
+              <div class="form-group col-md-4 pt-3 "><strong>Criteria <a href="{% url 'division-create' object.title.id%}"><i class="fas fa-plus"></i></a></strong>
               </div>
               <div class="form-group col-md-1 pt-3 "><strong>Weight</strong>
                 </div>
@@ -60,9 +60,9 @@
                         </div>
                         <div class="form-group col-md-2 pt-3 "><strong></strong>
                         </div>
-                        <div class="form-group col-md-1 pt-3 "><a href="{% url 'division-update' d.id%}">Update</a>
+                        <div class="form-group col-md-1 pt-3 "><a href="{% url 'division-update' d.id%}"><i class="fas fa-edit"></i></a>
                           {% if user == f.created_by %}
-                              <a href="{% url 'division-delete' d.id%}">Delete</a>
+                              <a href="{% url 'division-delete' d.id%}"><i class='fas fa-trash-alt'></i></a>
                               {% endif %}
                         </div>
                     </div> 
@@ -88,9 +88,9 @@
                         </div>
                         <div class="form-group col-md-1 pt-3 ">{{s.total}}
                         </div>
-                        <div class="form-group col-md-1 pt-3 "><a href="{% url 'subdivision-update' s.id%}">Update</a>
+                        <div class="form-group col-md-1 pt-3 "><a href="{% url 'subdivision-update' s.id%}"><i class="fas fa-edit"></i></a>
                           {% if user == f.created_by %}
-                            <a href="{% url 'subdivision-delete' s.id%}">Delete</a>
+                            <a href="{% url 'subdivision-delete' s.id%}"><i class='fas fa-trash-alt'></i></a>
                             {% endif %}
                         </div>
                       </div>
@@ -119,9 +119,9 @@
                                 </div>
                                 <div class="form-group col-md-2 mb-0"> {{x.total}}    
                                   </div>
-                                  <div class="form-group col-md-1 mb-0"> <a href="{% url 'subdivisiondetail-update' x.id%}">Update</a>
+                                  <div class="form-group col-md-1 mb-0"> <a href="{% url 'subdivisiondetail-update' x.id%}"><i class="fas fa-edit"></i>  </a>
                                     {% if user == f.created_by %}
-                                          <a href="{% url 'subdivisiondetail-delete' x.id%}">Delete</a>
+                                          <a href="{% url 'subdivisiondetail-delete' x.id%}"><i class='fas fa-trash-alt'></i></a>
                                           {% endif %}      
                                   </div>
                       </div>
@@ -139,18 +139,14 @@
             
         
         {% if f.created_by == user %}
-        <button class="btn btn-outline-primary" type="submit">
-          <a href="{% url 'division-create' object.title.id%}">Add Major Criteria</a>
-         </button>
+        
          
           
          
-         <button class="btn btn-outline-primary" type="submit">
-            <a href="{% url 'form-update' object.id %}">Update Form</a>
-           </button>
-           <button class="btn btn-outline-danger" type="submit">
-            <a href="{% url 'form-delete' object.id %}">Delete Form</a>
-           </button>
+         
+            
+           
+           
    
          {% endif %}
 

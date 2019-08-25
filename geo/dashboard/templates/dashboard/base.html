@@ -19,7 +19,7 @@
     <!-- <link href="font-awesome/css/font-awesome.css" rel="stylesheet"> -->
     <link rel="stylesheet" href="{% static 'font-awesome/css/font-awesome.css' %}">
 
-
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
     <!-- <link href="css/theme.ba/animate.css" rel="stylesheet"> -->
     <link rel="stylesheet" href="{% static 'css/theme.ba/animate.css' %}">
@@ -96,14 +96,14 @@
 
                 <li>
                     <a href="{% url 'logout' %}">
-                        <i class="fa fa-sign-out"></i> Log out
+                         Log out
                     </a>
                 </li>
                 
 
         </nav>
         </div>
-        <main role="main" class="container col-md-auto " style="margin-top: 2rem" >
+        <main role="main" class="container col-md-auto " style="margin: 2rem" >
                 
                 {% block content %}{% endblock %}
                 <!-- <div class="col-md-4">
@@ -142,6 +142,6 @@
         <!-- Custom and plugin javascript -->
         <script src="{% static 'js/inspinia.js'%}"></script>
         <script src="{% static 'js/plugins/pace/pace.min.js'%}"></script> 
-    
+        <script src='https://kit.fontawesome.com/a076d05399.js'></script>
 </body>
 </html>

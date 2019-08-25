@@ -15,7 +15,7 @@
             {% if user == f.created_by or user.program.program == f.created_for.program %}
             {% if object.subdivision.division.title.id == f.id %}
             <fieldset class="form-group">
-              <legend class="border-bottom mb-4">{{ object.division.title }}</legend>
+              <legend class="border-bottom mb-4">{{ object.division.title }} </legend>
               
             <div class="form-row">
                     <div class="form-group col-md-12 mb-0">Accreditation Type: {{ object.division.title.form_type }}    
@@ -59,7 +59,7 @@
                             </div>
                             <div class="form-group col-md-1 pt-3 "><strong></strong>
                             </div>
-                            <div class="form-group col-md-1 pt-3 "><a href="{% url 'division-update' d.id%}">Update</a>
+                            <div class="form-group col-md-1 pt-3 "><a href="{% url 'division-update' d.id%}"><i class="btn btn-secondary fas fa-edit"></i></a>
                             </div>
                         </div> 
                       
@@ -83,7 +83,7 @@
                             </div>
                             <div class="form-group col-md-1 pt-3 "><strong></strong>
                             </div>
-                            <div class="form-group col-md-1 pt-3 "><button class="btn btn-outline-primary" type="submit">Save</button>
+                            <div class="form-group col-md-1 pt-3 "><button class="btn btn-primary fas fa-check" type="submit"></button>
                             </div>
                           </div>
                         {% else %}
@@ -101,7 +101,7 @@
                             </div>
                             <div class="form-group col-md-1 pt-3 "><strong></strong>
                             </div>
-                            <div class="form-group col-md-1 pt-3 "><a href="{% url 'subdivision-update' s.id%}">Update</a>
+                            <div class="form-group col-md-1 pt-3 "><a href="{% url 'subdivision-update' s.id%}"><i class="btn btn-secondary fas fa-edit"></i></a>
                             </div>
                           </div>
                         {% endif %}
@@ -131,7 +131,7 @@
                                     </div>
                                     <div class="form-group col-md-1 mb-0"> {{form.total}}    
                                       </div>
-                                      <div class="form-group col-md-1 pt-3 "><button class="btn btn-outline-primary" type="submit">Save</button>
+                                      <div class="form-group col-md-1 pt-3 "><button class="btn btn-primary fas fa-check" type="submit"></button>
                                       </div>
                           </div>
                         {%else%}
@@ -148,7 +148,7 @@
                                     </div>
                                     <div class="form-group col-md-1 mb-0"> {{x.total}}    
                                       </div>
-                                      <div class="form-group col-md-1 pt-3 "><a href="{% url 'subdivisiondetail-update' x.id%}">Update</a>
+                                      <div class="form-group col-md-1 pt-3 "><a href="{% url 'subdivisiondetail-update' x.id%}"><i class="btn btn-secondary fas fa-edit"></i></a>
                                       </div>
                           </div>
                         {% endif %}
