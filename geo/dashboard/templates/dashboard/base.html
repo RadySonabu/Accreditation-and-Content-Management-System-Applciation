@@ -1,5 +1,5 @@
-
-{% load static%}<!DOCTYPE html>
+{% load static%}
+<!DOCTYPE html>
 <html>
 
 <head>
@@ -37,63 +37,70 @@
             <div class="sidebar-collapse">
                 <ul class="nav metismenu" id="side-menu">
                     <li class="nav-header">
-                        <div class="dropdown profile-element"> 
+                        <div class="dropdown profile-element">
                             <a data-toggle="dropdown" class="dropdown-toggle" href="#">
-                            <span class="clear"> <span class="block m-t-xs"> <strong class="font-bold">{{user.first_name}} {{user.last_name}}</strong>
-                             </span> <span class="text-muted text-xs block">{{user.role}}</span>  </a>
+                                <span class="clear"> <span class="block m-t-xs"> <strong
+                                            class="font-bold">{{user.first_name}} {{user.last_name}}</strong>
+                                    </span> <span class="text-muted text-xs block">{{user.role}}</span> </a>
                         </div>
                         <div class="logo-element">
-                            <img alt="image" class="img-circle" style="width: 100%;" src="{%static 'img/logotest.png'%}" />
+                            <img alt="image" class="img-circle" style="width: 100%;"
+                                src="{%static 'img/logotest.png'%}" />
                         </div>
                     </li>
                     <li>
-                        <a href="{% url 'home'%}"><i class="fa fa-th-large"></i> <span class="nav-label">Dashboard</span> </a>
+                        <a href="{% url 'home'%}"><i class="fa fa-th-large"></i> <span
+                                class="nav-label">Dashboard</span> </a>
                     </li>
                     {% if user.role.role == 'REGISTRAR' or user.role.role == 'ADMINISTRATOR' %}
-                        <li>
-                            <a href="{% url 'register'%}"><i class="fa fa-child"></i> <span class="nav-label">Manage users</span></a>
-                        </li>
+                    <li>
+                        <a href="{% url 'register'%}"><i class="fa fa-child"></i> <span class="nav-label">Manage
+                                users</span></a>
+                    </li>
                     {% else %}
-                      
+
                     {% endif %}
-                    
-                    
+
+
                     {% if user.role.role == 'COLLEGE DEAN'  or user.role.role == 'DEPARTMENT CHAIRPERSON' %}
-                        <li>
-                            <a href="{% url 'form-list' %}"> <i class="fa fa-table"></i> <span class="nav-label">Manage Accreditation</span></a>
-                        </li>
+                    <li>
+                        <a href="{% url 'form-list' %}"> <i class="fa fa-table"></i> <span class="nav-label">Manage
+                                Accreditation</span></a>
+                    </li>
+                    <li>
+                        <a href="{% url 'profile' %}"> <i class="fa fa-user"></i> <span
+                                class="nav-label">Profile</span></a>
+                    </li>
                     {% endif %}
-                    
+
                 </ul>
 
             </div>
         </nav>
 
         <div id="page-wrapper" class="gray-bg dashbard-1">
-        <div class="row border-bottom">
-        <nav class="navbar navbar-static-top" role="navigation" style="margin-bottom: 0">
-        <div class="navbar-header">
-        
-            <a class="navbar-minimalize minimalize-styl-2 btn btn-primary " href="#"><i class="fa fa-bars"></i> </a>
+            <div class="row border-bottom">
+                <nav class="navbar navbar-static-top" role="navigation" style="margin-bottom: 0">
+                    <div class="navbar-header">
 
-            
-        </div>
-            <ul class="nav navbar-top-links navbar-right">
-                    
-                <li class="dropdown">
-                   
-                    
-                        <li class="divider"></li>
-                        
-                        <li class="divider"></li>
-                        
-                        <li class="divider"></li>
-                      
-                
-                       
-                        
+                        <a class="navbar-minimalize minimalize-styl-2 btn btn-primary " href="#"><i
+                                class="fa fa-bars"></i> </a>
 
 
+                    </div>
+                    <ul class="nav navbar-top-links navbar-right">
+
+                        <li class="dropdown">
+
+
+                        <li class="divider"></li>
+
+                        <li class="divider"></li>
+
+                        <li class="divider"></li>
+
+
+<<<<<<< HEAD
                 <li>
                     <a href="{% url 'logout' %}">
                          Log out
@@ -105,6 +112,23 @@
         </div>
         <main role="main" class="container col-md-auto " style="margin: 2rem" >
                 
+=======
+
+
+
+
+                        <li>
+                            <a href="{% url 'logout' %}">
+                                <i class="fa fa-sign-out"></i> Log out
+                            </a>
+                        </li>
+
+
+                </nav>
+            </div>
+            <main role="main" class="container col-md-auto " style="margin-top: 2rem">
+
+>>>>>>> 14718563d3b1c85eba65b7499e5c53dfec5a9148
                 {% block content %}{% endblock %}
                 <!-- <div class="col-md-4">
                     <div class="content-section">
@@ -119,18 +143,31 @@
                       </p>
                     </div>
                   </div> -->
-              </main>
-                <div class="footer">
-                    <div class="pull-right">
-                        Made by TIPians  <strong>for the</strong> Institute.
-                    </div>
-                    <div>
-                        <strong>Established</strong> 2019 
-                    </div>
+            </main>
+            <div class="footer">
+                <div class="pull-right">
+                    Made by TIPians <strong>for the</strong> Institute.
+                </div>
+                <div>
+                    <strong>Established</strong> 2019
                 </div>
             </div>
         </div>
+    </div>
 
+
+
+    <!-- Mainly scripts -->
+    <script src="{% static 'js/jquery-2.1.1.js'%}"></script>
+    <script src="{% static 'js/bootstrap.min.js'%}"></script>
+    <script src="{% static 'js/plugins/metisMenu/jquery.metisMenu.js'%}"></script>
+    <script src="{% static 'js/plugins/slimscroll/jquery.slimscroll.min.js'%}"></script>
+
+    <!-- Custom and plugin javascript -->
+    <script src="{% static 'js/inspinia.js'%}"></script>
+    <script src="{% static 'js/plugins/pace/pace.min.js'%}"></script>
+
+<<<<<<< HEAD
         
 
         <!-- Mainly scripts -->
@@ -143,5 +180,8 @@
         <script src="{% static 'js/inspinia.js'%}"></script>
         <script src="{% static 'js/plugins/pace/pace.min.js'%}"></script> 
         <script src='https://kit.fontawesome.com/a076d05399.js'></script>
+=======
+>>>>>>> 14718563d3b1c85eba65b7499e5c53dfec5a9148
 </body>
+
 </html>

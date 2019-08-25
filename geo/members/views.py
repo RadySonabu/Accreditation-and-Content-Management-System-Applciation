@@ -34,6 +34,10 @@ def export(request):
     return response
 
 
+def profile(request):
+    return render(request, 'members/profile.html')
+
+
 def load_college(request):
     role_id = request.GET.get('role')
 
