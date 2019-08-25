@@ -23,6 +23,11 @@ class UserCreationForm(forms.ModelForm):
             'first_name', 'middle_initial',
             'last_name', 'contact', 'email', 'role',  'college', 'program', 'password1', 'password2')
 
+        widgets = {
+            'email': forms.TextInput(attrs={placeholder="email"}),
+
+        }
+
     def clean_password2(self):
         # Check that the two password entries match
         password1 = self.cleaned_data.get("password1")
@@ -130,6 +135,7 @@ class UserAdmin(BaseUserAdmin):
 @admin.register(MyUser)
 class ViewAdmin(ImportExportModelAdmin):
     pass
+
 
     # ... and, since we're not using Django's built-in permissions,
     # unregister the Group model from admin.
