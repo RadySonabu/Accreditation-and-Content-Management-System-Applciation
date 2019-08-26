@@ -24,7 +24,7 @@
         /* Sidebar */
         #sidebar-wrapper {
         z-index: 1;
-        position: absolute;
+        position: fixed;
         width: 250px;
         height: 100%;
         overflow-y: hidden;
@@ -33,7 +33,7 @@
         margin-bottom: -9999px;
         padding-top: 9999px;
         padding-bottom: 9999px;
-
+        
     
 
     
@@ -45,6 +45,8 @@
     position: absolute;
     padding: 15px;
     padding-left: 250px;
+    
+    
     
 }
 
@@ -145,16 +147,18 @@
         <!-- Page content -->
 
         <div id="page-content-wrapper">
-            <div class="container-fluid">
-                <div class="navbar navbar-dark">
-                  <div class="row">
-                    <div class="col-md-12">
-                        <a href="#"  id="menu-toggle"><i class="fa fa-bars" style="font-size: 200%"></i></a>
-                        
-                    </div>
-                    
-                </div>
-                </div>
+            <div class="container-fluid" >
+                
+                  <div>
+                      <div class="row">
+                          <div class="col-md-12" >
+                              <a href="#"  id="menu-toggle"><i class="fa fa-bars" style="font-size: 200%; "></i></a>
+                              
+                          </div>
+                          
+                      </div>
+                  </div>
+              
                 <main role="main" class="container col-md-12     "  >
                 
                     <div >
