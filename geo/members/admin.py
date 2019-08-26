@@ -15,7 +15,7 @@ class UserCreationForm(forms.ModelForm):
     password1 = forms.CharField(label='Password', widget=forms.PasswordInput)
     password2 = forms.CharField(
         label='Password confirmation', widget=forms.PasswordInput)
-
+    
     class Meta:
         model = MyUser
         fields = (
@@ -23,7 +23,7 @@ class UserCreationForm(forms.ModelForm):
             'first_name', 'middle_initial',
             'last_name', 'contact', 'email', 'role',  'college', 'program', 'password1', 'password2')
 
-        
+  
 
     def clean_password2(self):
         # Check that the two password entries match
@@ -132,7 +132,6 @@ class UserAdmin(BaseUserAdmin):
 @admin.register(MyUser)
 class ViewAdmin(ImportExportModelAdmin):
     pass
-
 
     # ... and, since we're not using Django's built-in permissions,
     # unregister the Group model from admin.

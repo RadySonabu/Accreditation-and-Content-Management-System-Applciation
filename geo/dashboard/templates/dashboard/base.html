@@ -1,162 +1,219 @@
-{% load static %}
 <!DOCTYPE html>
-<html>
-
+<html lang="en">
 <head>
 
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
 
-    <title>ACMSA-TIP</title>
+    <title>ACMSA</title>
 
-    <!-- <link href="css/theme.ba/bootstrap.min.css" rel="stylesheet">
-    <link href="css/theme.ba/animate.css" rel="stylesheet">
-    <link href="css/theme.ba/style.css" rel="stylesheet">
-    <link href="css/acmsa/acmsastyle.css" rel="stylesheet">
-    <link href="font-awesome/css/font-awesome.css" rel="stylesheet"> -->
-    <link rel="stylesheet" href="{% static 'css/theme.ba/bootstrap.min.css' %}">
-    <!-- <link href="font-awesome/css/font-awesome.css" rel="stylesheet"> -->
-    <link rel="stylesheet" href="{% static 'font-awesome/css/font-awesome.css' %}">
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 
-    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> -->
-
-    <!-- <link href="css/theme.ba/animate.css" rel="stylesheet"> -->
-    <link rel="stylesheet" href="{% static 'css/theme.ba/animate.css' %}">
-    <!-- <link href="css/theme.ba/style.css" rel="stylesheet"> -->
-    <link rel="stylesheet" href="{% static 'css/theme.ba/style.css' %}">
-    <!-- <link href="css/acmsa/acmsastyle.css" rel="stylesheet"> -->
-    <link rel="stylesheet" href="{% static 'css/acmsa/acmsastyle.css' %}">
+    
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+    
+    <style type="text/css">
     
 
+        /* Sidebar */
+        #sidebar-wrapper {
+        z-index: 1;
+        position: absolute;
+        width: 250px;
+        height: 100%;
+        overflow-y: hidden;
+        background: #1a1a1a;
+        margin-top: -9999px;
+        margin-bottom: -9999px;
+        padding-top: 9999px;
+        padding-bottom: 9999px;
+
+    
+
+    
+      }
+
+/* Always take up entire screen */
+#page-content-wrapper {
+    width: 100%;
+    position: absolute;
+    padding: 15px;
+    padding-left: 250px;
+    
+}
+
+
+/* Change with of sidebar from 0 to 250px */
+#wrapper.menuDisplayed #sidebar-wrapper {
+    width: 0px;
+}
+
+/* Since we added left padding, we need to shrink the width by 250px */
+#wrapper.menuDisplayed #page-content-wrapper {
+    padding-left: 0px;
+}
+
+
+@media screen  and  (max-width: 499px){
+  #sidebar-wrapper {
+        z-index: 1;
+        position: absolute;
+        width: 0px;
+        height: 100%;
+        overflow-y: hidden;
+        background: #1a1a1a;
+        margin-top: -9999px;
+        margin-bottom: -9999px;
+        padding-top: 9999px;
+        padding-bottom: 9999px;
+
+    
+
+    
+      }
+
+/* Always take up entire screen */
+#page-content-wrapper {
+    width: 100%;
+    position: absolute;
+    padding: 15px;
+    padding-left: 0px;
+    
+}
+
+
+/* Change with of sidebar from 0 to 250px */
+#wrapper.menuDisplayed #sidebar-wrapper {
+    width: 200px;
+}
+
+/* Since we added left padding, we need to shrink the width by 250px */
+#wrapper.menuDisplayed #page-content-wrapper {
+    padding-left: 200px;
+}
+  
+}
+
+
+/* Sidebar styling - the entire ul list */
+.sidebar-nav {
+    padding: 0;
+    list-style: none;
+}
+
+.sidebar-nav li {
+    text-indent: 20px;
+    line-height: 40px;
+}
+
+.sidebar-nav li a {
+    display: block;
+    text-decoration: none;
+    color: #ddd;
+}
+
+.sidebar-nav li a:hover {
+    background: rgb(160, 128, 22);
+}
+    </style>
 </head>
 
-<body>
-    <div id="wrapper">
-        <nav class="navbar-default navbar-static-side " role="navigation">
-            <div class="sidebar-collapse">
-                <ul class="nav metismenu" id="side-menu">
-                    <li class="nav-header">
-                        <div class="dropdown profile-element">
-                            <a data-toggle="dropdown" class="dropdown-toggle" href="#">
-                                <span class="clear"> 
-                                    <div style="justify-content: center"><span class="block m-t-xs"><img alt="image" class="img-circle" col-md-12 "
-                                        src="{{user.profile.image.url}}" /> </div>
-                                    <strong
-                                            class="font-bold">{{user.first_name}} {{user.last_name}}</strong>
-                                            
-                                    </span> <span class="text-muted text-xs block">{{user.role}}</span> </a>
-                        </div>
-                        <div class="logo-element">
-                            <img alt="image" class="img-circle" style="width: 100%;"
-                                src="{{user.profile.image.url}}" />
-                        </div>
-                    </li>
-                    <li>
-                        <a href="{% url 'home'%}"><i class="fa fa-th-large"></i> <span
-                                class="nav-label">Dashboard</span> </a>
-                    </li>
-                    {% if user.role.role == 'REGISTRAR' or user.role.role == 'ADMINISTRATOR' %}
-                    <li>
-                        <a href="{% url 'register'%}"><i class="fa fa-child"></i> <span class="nav-label">Manage
-                                users</span></a>
-                    </li>
-                    {% else %}
+<body>  
 
-                    {% endif %}
+<div id="wrapper" >
 
-
-                    {% if user.role.role == 'COLLEGE DEAN'  or user.role.role == 'DEPARTMENT CHAIRPERSON' %}
-                    <li>
-                        <a href="{% url 'form-list' %}"> <i class="fa fa-table"></i> <span class="nav-label">Manage
-                                Accreditation</span></a>
-                    </li>
-                    <li>
-                        <a href="{% url 'profile' %}"> <i class="fa fa-user"></i> <span
-                                class="nav-label">Profile</span></a>
-                    </li>
-                    {% endif %}
-
-                </ul>
-
-            </div>
-        </nav>
-
-        <div id="page-wrapper" class="gray-bg dashbard-1">
-            <div class="row border-bottom">
-                <nav class="navbar navbar-static-top" role="navigation" style="margin-bottom: 0">
-                    <div class="navbar-header">
-
-                        <a class="navbar-minimalize minimalize-styl-2 btn btn-primary " href="#"><i
-                                class="fa fa-bars"></i> </a>
-
-
-                    </div>
-                    <ul class="nav navbar-top-links navbar-right">
-
-                        <li class="dropdown">
-
-
-                        <li class="divider"></li>
-
-                        <li class="divider"></li>
-
-                        <li class="divider"></li>
-
-
-                <li>
-                    <a href="{% url 'logout' %}">
-                         Log out
-                    </a>
-                </li>
-                
-
-        </nav>
+        <!-- Sidebar -->
+        
+          <div id="sidebar-wrapper">
+            <ul class="sidebar-nav">
+              
+              <img  class="card-img rounded-circle p-3 img-thumnail" src="{{user.profile.image.url}}">
+                <li><a href="{%url 'profile'%}">Account</a></li>
+                <li><a href="{%url 'form-list'%}">Forms</a></li>
+                <li><a href="#">Settings</a></li>
+                <li><a href="{%url 'logout'%}">Logout</a></li>
+            </ul>
         </div>
-        <main role="main" class="container col-md-auto " style="margin: 2rem" >
-                
-                {% block content %}{% endblock %}
-                <!-- <div class="col-md-4">
-                    <div class="content-section">
-                      <h3>Our Sidebar</h3>
-                      <p class='text-muted'>You can put any information here you'd like.
-                        <ul class="list-group">
-                          <li class="list-group-item list-group-item-light">Latest Posts</li>
-                          <li class="list-group-item list-group-item-light">Announcements</li>
-                          <li class="list-group-item list-group-item-light">Calendars</li>
-                          <li class="list-group-item list-group-item-light">etc</li>
-                        </ul>
-                      </p>
+        
+
+        <!-- Page content -->
+
+        <div id="page-content-wrapper">
+            <div class="container-fluid">
+                <div class="navbar navbar-dark">
+                  <div class="row">
+                    <div class="col-md-12">
+                        <a href="#"  id="menu-toggle"><i class="fa fa-bars" style="font-size: 200%"></i></a>
+                        
                     </div>
-                  </div> -->
-            </main>
-            <div class="footer">
-                <div class="pull-right">
-                    Made by TIPians <strong>for the</strong> Institute.
+                    
                 </div>
-                <div>
-                    <strong>Established</strong> 2019
                 </div>
+                <main role="main" class="container col-md-12     "  >
+                
+                    <div >
+                        {% if messages %} {% for message in messages %}
+                        <div class="alert alert-{{ message.tags }}">
+                          {{ message }}
+                        </div>
+                        {% endfor %} {% endif %}
+                      {% block content %}{% endblock %}
+                    </div>
+                    <!-- <div class="col-md-4">
+                        <div class="content-section">
+                          <h3>Our Sidebar</h3>
+                          <p class='text-muted'>You can put any information here you'd like.
+                            <ul class="list-group">
+                              <li class="list-group-item list-group-item-light">Latest Posts</li>
+                              <li class="list-group-item list-group-item-light">Announcements</li>
+                              <li class="list-group-item list-group-item-light">Calendars</li>
+                              <li class="list-group-item list-group-item-light">etc</li>
+                            </ul>
+                          </p>
+                        </div>
+                      </div> -->
+                </main>
             </div>
         </div>
+        
+                
+            
     </div>
 
 
+  <!-- Menu toggle script -->
+  <script >
+    $("#menu-toggle").click( function(e){
+      e.preventDefault();
+      $("#wrapper").toggleClass("menuDisplayed");
+    });
+  </script>
+  
 
-   
 
-        
 
-        <!-- Mainly scripts -->
-        <script src="{% static 'js/jquery-2.1.1.js'%}"></script>
-        <script src="{% static 'js/bootstrap.min.js'%}"></script>
-        <script src="{% static 'js/plugins/metisMenu/jquery.metisMenu.js'%}"></script>
-        <script src="{% static 'js/plugins/slimscroll/jquery.slimscroll.min.js'%}"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous">
     
-        <!-- Custom and plugin javascript -->
-        <script src="{% static 'js/inspinia.js'%}"></script>
-        <script src="{% static 'js/plugins/pace/pace.min.js'%}"></script> 
-        <script src='https://kit.fontawesome.com/a076d05399.js'></script>
+  </script>
 </body>
-
 </html>

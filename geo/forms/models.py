@@ -15,7 +15,8 @@ class AccreditationType(models.Model):
 
 class Forms(models.Model):
 
-    title = models.CharField(max_length=200, blank=True, null=True)
+    title = models.CharField(
+        unique=True, max_length=200, blank=True, null=True)
     type_of_accreditation = models.ForeignKey(
         AccreditationType, on_delete=models.CASCADE)
 

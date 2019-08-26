@@ -14,6 +14,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.db.models import Max, Sum, Avg, F
 from forms.models import Forms, SubdivisionDetail, Subdivision, Division
 from django.db.models.expressions import RawSQL
+from django.db import IntegrityError
 
 class FormListView(LoginRequiredMixin, ListView):
     model = Forms
@@ -39,12 +40,29 @@ class FormCreateView(LoginRequiredMixin, CreateView):
 
     success_url = '/form/'
 
+    error_message = "%(account)s is already created!"
+
+    
+    
+
     def form_valid(self, form):
 
         form.instance.created_by = self.request.user
+        
         form.instance.title = f'{form.instance.type_of_accreditation} {form.instance.created_for} {form.instance.year}'
-        form.instance.college = self.request.user.college
+        title = Forms.objects.filter(title=f'{form.instance.type_of_accreditation} {form.instance.created_for} {form.instance.year}')
+        if not title:
+            form.instance.college = self.request.user.college
+        else:
+            
+            return redirect('form-list')
         return super(FormCreateView, self).form_valid(form)
+
+    def get_error_message(self, cleaned_data):
+        return self.error_message % dict(
+            cleaned_data,
+            account=f'{self.object.title} Title!',
+        )
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -261,7 +279,7 @@ class SubdivisionDetailCreateView(LoginRequiredMixin, CreateView):
         form.instance.subdivision_id = self.kwargs.get('pk')
         
         
-
+    
         return super(SubdivisionDetailCreateView, self).form_valid(form)
     
 

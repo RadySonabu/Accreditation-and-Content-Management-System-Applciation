@@ -3,18 +3,19 @@
 
 
 {% csrf_token %}
-<div class="container-fluid justify-content-center bg-dark">
-    <div class="col-md-auto ">
+<div class="container-fluid justify-content-center ">
+    <div class="col-md-12 ">
         <div class="content-section">
             <div class="media">
                 <img class="rounded-circle account-img" src="{{ user.profile.image.url }}">
-                <h2 class="account-heading">Hello {{ user.first_name }}!</h2>
+                
             </div>
+            <div><h2 class="account-heading">Hello {{ user.first_name }}!</h2></div>
         </div>
     </div>
 </div>
 
-<div class="container-fluid justify-content-center  bg-dark">
+<div class="container-fluid justify-content-center  ">
     <div class="col-md-auto ">
         <div class="content-section">
             <div class="media">
