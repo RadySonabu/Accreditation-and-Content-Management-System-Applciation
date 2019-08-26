@@ -70,7 +70,7 @@
                           {% for s in sd %}
                           {% if s.division.id == d.id %}
                           <tr >
-                              <td style="word-wrap: break-word;min-width: 400px;max-width: 400px;"">{{s.criteria}}
+                              <td style="word-wrap: break-word;min-width: 400px;max-width: 400px;"">&nbsp;&nbsp;&nbsp;{{s.criteria}}
                                 {% if user == f.created_by %}
                                 <a href="{% url 'subdivisiondetail-create' s.id %}">Add Subcriteria</a>
                                 {% endif %}  
@@ -97,7 +97,7 @@
                             {% for x in sdd %}                     
                             {% if x.subdivision.id == s.id and s.division.id == d.id %}
                             <tr >
-                                <td style="word-wrap: break-word;min-width: 400px;max-width: 400px;"> {{x.criteria}}    
+                                <td style="word-wrap: break-word;min-width: 400px;max-width: 400px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {{x.criteria}}    
                                 </td>
                                 <td class="form-group col-md-1 mb-0 "> {{x.points}}    
                                   </td>
