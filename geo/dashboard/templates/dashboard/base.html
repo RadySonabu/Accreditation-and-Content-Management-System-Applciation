@@ -33,17 +33,20 @@
         margin-bottom: -9999px;
         padding-top: 9999px;
         padding-bottom: 9999px;
+        background: url('https://images.pexels.com/photos/1446948/pexels-photo-1446948.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500');
+        opacity: 0.9;
         
     
 
     
       }
+      
 
 /* Always take up entire screen */
 #page-content-wrapper {
     width: 100%;
     position: absolute;
-    padding: 15px;
+    
     padding-left: 250px;
     
     
@@ -123,6 +126,7 @@
 .sidebar-nav li a:hover {
     background: rgb(160, 128, 22);
 }
+
     </style>
 </head>
 
@@ -137,7 +141,7 @@
               
               <img  class="card-img rounded-circle p-3 img-thumnail" src="{{user.profile.image.url}}">
                 <li style="color: #ddd; ">{{user.first_name}} {{user.last_name}}</li>
-                <li style="color: #ddd; font-size: 90%">{{user.role.role}} </li>
+                <li style="font-size:1vw;color: #ddd;">{{user.role.role}}</li>
                 <li><a href="{% url 'home'%}">Dashboard</a></li>
                 <li><a href="{%url 'profile'%}">Account</a></li>
                 {% if user.role.role == 'COLLEGE DEAN' %}
@@ -154,9 +158,10 @@
         <!-- Page content -->
 
         <div id="page-content-wrapper">
-            <div class="container-fluid" >
+            <div class="container-fluid p-0" >
                 
-                  <div>
+                  <nav  class="navbar navbar-expand-lg bg-warning">
+                    <div>
                       <div class="row">
                           <div class="col-md-12" >
                               <a href="#"  id="menu-toggle"><i class="fa fa-bars" style="font-size: 200%; "></i></a>
@@ -165,6 +170,8 @@
                           
                       </div>
                   </div>
+                  </div>
+                </nav>
               
                 <main role="main" class="container col-md-12     "  >
                 
