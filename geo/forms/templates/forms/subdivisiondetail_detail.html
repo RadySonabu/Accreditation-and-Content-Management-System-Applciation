@@ -19,7 +19,7 @@
               <div class="form-row">
                       <div class="form-group col-md-6 mb-0">Accreditation Type: {{ object.subdivision.division.title.type_of_accreditation }}    
                       </div>
-                      <div class="form-group col-md-6 mb-0">Total: {{ object.subdivision.division.title.total }}    
+                      <div class="form-group col-md-6 mb-0">Total: {{ object.subdivision.division.title.total }}   
                       </div>
                     </div>
             
@@ -56,7 +56,7 @@
                                 </td>
                                 <td class="form-group col-md-1 pt-3 "><strong></strong>
                                 </td>
-                                <td class="form-group col-md-2 pt-3 "><strong></strong>
+                                <td class="form-group col-md-2 pt-3 "><strong>{{d.total}}</strong>
                                 </td>
                                 <td class="form-group col-md-1 pt-3 "><a href="{% url 'division-update' d.id%}"><i class="fa fa-edit"></i></a>
                                   {% if user == f.created_by %}
@@ -105,7 +105,7 @@
                                         </td>
                                         <td class=""> {{x.subtotal}}    
                                           </td>
-                                  <td class="form-group col-md-1 mb-0"> {{x.total}}    
+                                  <td class="form-group col-md-1 mb-0"> {{x.totals}}  1  
                                     </td>
                                     <td class="form-group col-md-1 mb-0"> <a href="{% url 'subdivisiondetail-update' x.id%}"><i class="fa fa-edit"></i></a>
                                       {% if user == f.created_by %}

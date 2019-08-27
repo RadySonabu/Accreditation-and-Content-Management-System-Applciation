@@ -36,10 +36,23 @@ class Forms(models.Model):
     def get_absolute_url(self):
         return reverse("form-detail", kwargs={"pk": self.pk})
 
+    @property
+    def total(self):
+        return SubdivisionDetail.objects.filter(subdivision__division__title=self).aggregate(total=Sum("subtotal"))["total"]
+    # @property
+    # def total(self):
+    #     division = self.subdivision_set.only(
+    #         'total')
+    #     total=0
+    #     for division in division:
+    #         total += division.total
+    #     return total
+
 
 class Division(models.Model):
     title = models.ForeignKey(Forms, default=1, on_delete=models.CASCADE)
     criteria = models.CharField(unique=True, max_length=150)
+    _total = models.FloatField(default=0, db_column='total')
 
     def __str__(self):
         return self.criteria
@@ -47,13 +60,32 @@ class Division(models.Model):
     def get_absolute_url(self):
         return reverse("division-detail", kwargs={"pk": self.pk})
 
+    @property
+    def total(self):
+        return SubdivisionDetail.objects.filter(subdivision__division=self).aggregate(total=Sum("subtotal"))["total"]
+    # @property
+    # def total(self):
+    #     subdivision_detail = self.subdivision_set.only(
+    #         '_total')
+    #     total = 0
+    #     for subdivision_detail in subdivision_detail:
+    #         total += subdivision_detail._total
+    #         self._total = total
+
+    #     return self._total
+
+    # @total.setter
+    # def total(self, value):
+    #     print(value + ' ardy')
+    #     self._total = value
+
 
 class Subdivision(models.Model):
     division = models.ForeignKey(
         Division, default=1, on_delete=models.CASCADE)
     criteria = models.CharField(max_length=150,)
     points = models.FloatField()
-    total = models.FloatField(default=0)
+    _total = models.FloatField(default=0, db_column='total')
 
     def __str__(self):
         return self.criteria
@@ -63,12 +95,21 @@ class Subdivision(models.Model):
 
     @property
     def total(self):
-        subdivision_detail = self.subdivisiondetail_set.only(
-            'subtotal')
-        total = 0
-        for subdivision_detail in subdivision_detail:
-            total += subdivision_detail.subtotal
-        return total
+        return self.subdivisiondetail_set.aggregate(total=Sum("subtotal"))["total"]
+
+    # @property
+    # def total(self):
+    #     subdivision_detail = self.subdivisiondetail_set.only(
+    #         'subtotal')
+    #     total = 0
+    #     for subdivision_detail in subdivision_detail:
+    #         total += subdivision_detail.subtotal
+    #         self._total = total
+    #     return self._total
+
+    # @total.setter
+    # def total(self, value):
+    #     self._total = value
 
 
 class SubdivisionDetail(models.Model):
