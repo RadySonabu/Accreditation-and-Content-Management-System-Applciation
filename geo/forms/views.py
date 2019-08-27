@@ -296,22 +296,23 @@ class SubdivisionDetailUpdateView(LoginRequiredMixin, UpdateView):
     model = SubdivisionDetail
     form_class = SubdivisionDetailForm
 
-    def form_valid( self, form = SubdivisionForm):
-        #get the pk of the foreign key
+    # def form_valid( self, form ):
+    #     #get the pk of the foreign key
         
-        sd = SubdivisionDetail.objects.all()
-        sd_filter = sd.filter(subdivision_id=self.object.subdivision.id)
-        sum = sd_filter.aggregate(Sum('subtotal'))['subtotal__sum']
-        # sum = Subdivision.objects.annotate(Sum('subdivisiondetail__subtotal'))
+    #     sd = SubdivisionDetail.objects.all()
+    #     sd_filter = sd.filter(subdivision_id=self.object.subdivision.id)
+    #     sum = sd_filter.aggregate(Sum('subtotal'))['subtotal__sum']
+    #     # sum = Subdivision.objects.annotate(Sum('subdivisiondetail__subtotal'))
 
 
-        s = Subdivision.objects.get(id=self.object.subdivision.id)
-        s.total = sum
-        s.save()
-        # Subdivision.objects.filter(id = self.object.subdivision.id).update(total=sum)
-        # form.instance.remarks =sum
-        # form.save()
-        return super(SubdivisionDetailUpdateView, self).form_valid(form)
+    #     s = Subdivision.objects.get(id=self.object.subdivision.id)
+    #     s.total = sum
+        
+    #     s.save()
+    #     # Subdivision.objects.filter(id = self.object.subdivision.id).update(total=sum)
+    #     # form.instance.remarks =sum
+    #     # form.save()
+    #     return super(SubdivisionDetailUpdateView, self).form_valid(form)
     
     # def profile(request, self):
     #     if request.method == 'POST':

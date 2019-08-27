@@ -61,6 +61,15 @@ class Subdivision(models.Model):
     def get_absolute_url(self):
         return reverse("subdivision-detail", kwargs={"pk": self.pk})
 
+    @property
+    def total(self):
+        subdivision_detail = self.subdivisiondetail_set.only(
+            'subtotal')
+        total = 0
+        for subdivision_detail in subdivision_detail:
+            total += subdivision_detail.subtotal
+        return total
+
 
 class SubdivisionDetail(models.Model):
     subdivision = models.ForeignKey(
