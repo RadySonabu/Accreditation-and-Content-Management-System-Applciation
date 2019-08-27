@@ -136,8 +136,15 @@
             <ul class="sidebar-nav">
               
               <img  class="card-img rounded-circle p-3 img-thumnail" src="{{user.profile.image.url}}">
+                <li style="color: #ddd; ">{{user.first_name}} {{user.last_name}}</li>
+                <li style="color: #ddd; font-size: 90%">{{user.role.role}} </li>
+                <li><a href="{% url 'home'%}">Dashboard</a></li>
                 <li><a href="{%url 'profile'%}">Account</a></li>
+                {% if user.role.role == 'COLLEGE DEAN' %}
                 <li><a href="{%url 'form-list'%}">Forms</a></li>
+
+                {% endif %}
+                
                 <li><a href="#">Settings</a></li>
                 <li><a href="{%url 'logout'%}">Logout</a></li>
             </ul>
