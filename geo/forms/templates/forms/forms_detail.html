@@ -22,7 +22,9 @@
               </legend>
               
             <div class="row">
-                    <div class=" col-md-12 mb-0">Accreditation Type: {{ object.type_of_accreditation }}    
+                    <div class=" col-md-6 mb-0">Accreditation Type: {{ object.type_of_accreditation }}    
+                    </div>
+                    <div class="form-group col-md-6 mb-0">Total: {{f.total}}  
                     </div>
                   </div>
                   <table class="table table-sm table-responsive table-striped table-bordered w-auto" ">
@@ -58,7 +60,7 @@
                               </td>
                               <td class="form-group col-md-1 pt-3 "><strong></strong>
                               </td>
-                              <td class="form-group col-md-2 pt-3 "><strong></strong>
+                              <td class="form-group col-md-2 pt-3 "><strong>{{d.total}}</strong>
                               </td>
                               <td class="form-group col-md-1 pt-3 "><a href="{% url 'division-update' d.id%}"><i class="fa fa-edit"></i></a>
                                 {% if user == f.created_by %}

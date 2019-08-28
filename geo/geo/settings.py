@@ -40,13 +40,14 @@ INSTALLED_APPS = [
     'members',
     'dashboard',
     'forms',
+    'choices',
 
 
     'import_export',
     'crispy_forms',
     'phonenumber_field',
     'request',
-    
+
 
 
 ]

@@ -6,31 +6,7 @@ from phonenumber_field.modelfields import PhoneNumberField
 from django.core.validators import MaxValueValidator, MinValueValidator, RegexValidator
 import datetime
 from PIL import Image
-
-
-class Role(models.Model):
-    role = models.CharField(max_length=50,  null=True, blank=True)
-
-    def __str__(self):
-        return self.role
-
-
-class College(models.Model):
-    role = models.ForeignKey(Role, on_delete=models.CASCADE)
-    college = models.CharField(
-        max_length=50,    null=True, blank=True)
-
-    def __str__(self):
-        return f'{self.college} {self.role}'
-
-
-class Program(models.Model):
-
-    college = models.ForeignKey(College, on_delete=models.CASCADE)
-    program = models.CharField(max_length=50,  null=True, blank=True)
-
-    def __str__(self):
-        return self.program
+from choices.models import Role, College, Program
 
 
 class MyUserManager(BaseUserManager):
@@ -147,6 +123,7 @@ class MyUser(AbstractBaseUser):
         "Is the user a member of staff?"
         # Simplest possible answer: All admins are staff
         return self.is_admin
+
 
 class Profile(models.Model):
     user = models.OneToOneField(MyUser, on_delete=models.CASCADE)

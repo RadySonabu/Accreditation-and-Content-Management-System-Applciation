@@ -1,8 +1,9 @@
 from django.db import models
 from django.urls import reverse
 from multiselectfield import MultiSelectField
-from members.models import MyUser, Program, College
+from members.models import MyUser
 from django.db.models import Sum
+from choices.models import Role, College, Program
 
 
 class AccreditationType(models.Model):

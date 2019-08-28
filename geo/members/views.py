@@ -5,10 +5,11 @@ from django.urls import reverse_lazy
 from .admin import UserCreationForm
 from django.http import HttpResponse
 from .resources import Members
-from .models import MyUser, College, Program
+from .models import MyUser
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.messages.views import SuccessMessageMixin
+from choices.models import Role, College, Program
 # @login_required
 # def register(request):
 #     if request.method == 'POST':
@@ -40,8 +41,10 @@ def profile(request):
 
 def load_college(request):
     role_id = request.GET.get('role')
-
+    # print(role_id)
+    # print(request.POST)
     college = College.objects.filter(role_id=role_id)
+
     return render(request, 'members/college_dropdown_option.html', {'college': college, })
 
 

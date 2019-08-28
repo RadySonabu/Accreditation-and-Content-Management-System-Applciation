@@ -5,8 +5,9 @@ from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
 
 from django.contrib.auth.forms import ReadOnlyPasswordHashField
 
-from members.models import MyUser, Role, College, Program, Profile
+from members.models import MyUser, Profile
 from import_export.admin import ImportExportModelAdmin
+from choices.models import Role, College, Program
 
 
 class UserCreationForm(forms.ModelForm):
@@ -15,15 +16,16 @@ class UserCreationForm(forms.ModelForm):
     password1 = forms.CharField(label='Password', widget=forms.PasswordInput)
     password2 = forms.CharField(
         label='Password confirmation', widget=forms.PasswordInput)
-    
+
     class Meta:
         model = MyUser
         fields = (
-            # 'employee_number',
+
             'first_name', 'middle_initial',
             'last_name', 'contact', 'email', 'role',  'college', 'program', 'password1', 'password2')
-
-  
+        labels = {
+            'role': 'Designation'
+        }
 
     def clean_password2(self):
         # Check that the two password entries match
@@ -35,7 +37,7 @@ class UserCreationForm(forms.ModelForm):
 
     def clean_email(self):
         email = self.cleaned_data.get('email')
-        if not email.endswith('tip.edu.ph'):
+        if not email.endswith('@tip.edu.ph'):
             raise forms.ValidationError(
                 "This is not a valid email! Try to use @tip.edu.ph ")
         return email
@@ -43,7 +45,7 @@ class UserCreationForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.fields['college'].queryset = MyUser.objects.none()
-        self.fields['program'].queryset = MyUser.objects.none()
+        # self.fields['program'].queryset = MyUser.objects.none()
 
         if 'role' in self.data:
             try:
@@ -132,6 +134,7 @@ class UserAdmin(BaseUserAdmin):
 @admin.register(MyUser)
 class ViewAdmin(ImportExportModelAdmin):
     pass
+
 
     # ... and, since we're not using Django's built-in permissions,
     # unregister the Group model from admin.
