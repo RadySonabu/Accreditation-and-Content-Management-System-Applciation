@@ -1,5 +1,5 @@
 from django import forms
-from .models import Forms,  Division, Subdivision, SubdivisionDetail
+from .models import Forms,  Division, Subdivision, SubdivisionDetail, Files
 
 
 class FormForm(forms.ModelForm):
@@ -39,3 +39,9 @@ class SubdivisionDetailForm(forms.ModelForm):
             'subtotal': forms.NumberInput(attrs={'style': 'width:6ch'}),
 
         }
+
+
+class FileForm(forms.ModelForm):
+    class Meta:
+        model = Files
+        fields = ('title', 'author', 'pdf')

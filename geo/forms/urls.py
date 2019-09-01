@@ -17,7 +17,8 @@ from .views import (FormListView, FormDetailView,
                     SubdivisionDetailListView,
                     SubdivisionDetailDetailView,
                     SubdivisionDetailUpdateView, SubdivisionDetailDeleteView,
-                    SubdivisionDetailCreateView
+                    SubdivisionDetailCreateView,
+
                     )
 urlpatterns = [
     path('form/', FormListView.as_view(), name='form-list'),
@@ -56,4 +57,15 @@ urlpatterns = [
     path('subdivisiondetail/new/<int:pk>', SubdivisionDetailCreateView.as_view(),
          name='subdivisiondetail-create'),
 
+
+    # ---------------------------------------------------------------------------------
+    path('upload/', views.upload, name='upload'),
+
+    path('files/', views.file_list, name='file_list'),
+    path('files/upload/', views.upload_file, name='upload_file'),
+    path('files/<int:pk>/', views.delete_file, name='delete_file'),
+
+    path('class/files/', views.FileListView.as_view(), name='class_file_list'),
+    path('class/files/upload/', views.UploadFileView.as_view(),
+         name='class_upload_file'),
 ]
