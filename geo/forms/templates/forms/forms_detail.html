@@ -2,7 +2,7 @@
 {% load crispy_forms_tags %}
 {% block content %}
 
-{% if user.role.role == 'DEPTCHAIR'  or  user.created_by == user.instance %}
+{% if user.role.role == 'DEPARTMENT CHAIRPERSON'  or  user.created_by == user.instance %}
   {% for f in f %}
   
   {% if object.id == f.id %}
@@ -170,12 +170,29 @@
     </div>
     </div>
     </div>
-{% else %}
-Oops.. Page not found!
+    <a data-toggle="modal" href="#myModal">
+      Launch demo modal
+    </a>
+    <!-- Modal -->
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+         <div class="embed-responsive embed-responsive-16by9">
+          <iframe src="{% url 'form-list' %}" scrolling="no" class="embed-responsive-item" allowfullscreen style="margin: 10px"></iframe>
+         </div>
+            
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+
 {% endif %}
   {% endif %}
   {% endfor %}
 {% else %}
 Oops.. Page not found!
 {% endif %}
+
 {% endblock%}

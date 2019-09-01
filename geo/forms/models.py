@@ -29,7 +29,8 @@ class Forms(models.Model):
         MyUser, on_delete=models.CASCADE, null=True, default="")
     created_for = models.ForeignKey(
         Program, on_delete=models.SET_NULL, null=True)
-    total = models.FloatField(default=0)
+    _total = models.FloatField(default=0, db_column='total')
+    _percent = models.FloatField(default=0, db_column='percent')
 
     def __str__(self):
         return f'{self.title}'
@@ -43,8 +44,17 @@ class Forms(models.Model):
 
     @property
     def percent(self):
-        return (SubdivisionDetail.objects.filter(subdivision__division__title=self).aggregate(total=Sum("subtotal"))["total"]/SubdivisionDetail.objects.filter(subdivision__division__title=self).aggregate(total=Sum("subpoints"))["total"])*100
 
+        points = SubdivisionDetail.objects.filter(
+            subdivision__division__title=self).aggregate(total=Sum("subtotal")).get('total') or 0
+        over = SubdivisionDetail.objects.filter(
+            subdivision__division__title=self).aggregate(total=Sum("subpoints")).get('total') or 0
+        if over == 0:
+            return 0
+        else:
+            percentage = (points/over)*100
+
+        return percentage
     # @property
     # def total(self):
     #     division = self.subdivision_set.only(
@@ -123,9 +133,9 @@ class SubdivisionDetail(models.Model):
         Subdivision, default=1, on_delete=models.CASCADE)
     criteria = models.CharField(max_length=150)
 
-    subpoints = models.FloatField()
+    subpoints = models.FloatField(default=0)
     remarks = models.CharField(max_length=150)
-    subtotal = models.FloatField()
+    subtotal = models.FloatField(default=0)
 
     def __str__(self):
         return self.criteria

@@ -1,6 +1,6 @@
 {% extends "dashboard/base.html" %} 
 {% load crispy_forms_tags %}
-{% block content %}
+{% block content   %}
     
    <div class="container ">
       {% if user.role.role == 'COLLEGE DEAN' %}
@@ -10,6 +10,7 @@
           <form method="POST" id="formForm" data-college-url="{% url 'ajax_load_college' %}" data-program-url="{% url 'ajax_load_program' %}" novalidate>
                 {% csrf_token %}
             {% if object %}
+            
             <fieldset class="form-group">
                 <legend class="border-bottom mb-4">Update Accreditation</legend>
                 <div class="form-row">
