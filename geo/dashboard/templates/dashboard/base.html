@@ -1,76 +1,77 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
 
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
-    <meta name="author" content="">
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="">
+  <meta name="author" content="">
 
-    <title>ACMSA</title>
+  <title>ACMSA</title>
 
-    <!-- Latest compiled and minified CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  <!-- Latest compiled and minified CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <link rel="stylesheet" type="text/css"
+    href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 
-    
-    <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script> -->
-    <!-- <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script> -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+
+  <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script> -->
+  <!-- <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script> -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-    
-    <style type="text/css">
-    
 
-        /* Sidebar */
-        #sidebar-wrapper {
-        z-index: 1;
-        position: fixed;
-        width: 250px;
-        height: 100%;
-        overflow-y: hidden;
-        background: #1a1a1a;
-        margin-top: -9999px;
-        margin-bottom: -9999px;
-        padding-top: 9999px;
-        padding-bottom: 9999px;
-        background: url('https://images.pexels.com/photos/1446948/pexels-photo-1446948.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500');
-        opacity: 0.9;
-        
-    
-
-    
-      }
-      
-
-/* Always take up entire screen */
-#page-content-wrapper {
-    width: 100%;
-    position: absolute;
-    
-    padding-left: 250px;
-    
-    
-    
-}
+  <style type="text/css">
+    /* Sidebar */
+    #sidebar-wrapper {
+      z-index: 1;
+      position: fixed;
+      width: 250px;
+      height: 100%;
+      overflow-y: hidden;
+      background: #1a1a1a;
+      margin-top: -9999px;
+      margin-bottom: -9999px;
+      padding-top: 9999px;
+      padding-bottom: 9999px;
+      background: url('https://images.pexels.com/photos/1446948/pexels-photo-1446948.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500');
+      opacity: 0.9;
 
 
-/* Change with of sidebar from 0 to 250px */
-#wrapper.menuDisplayed #sidebar-wrapper {
-    width: 0px;
-}
-
-/* Since we added left padding, we need to shrink the width by 250px */
-#wrapper.menuDisplayed #page-content-wrapper {
-    padding-left: 0px;
-}
 
 
-@media screen  and  (max-width: 499px){
-  #sidebar-wrapper {
+    }
+
+
+    /* Always take up entire screen */
+    #page-content-wrapper {
+      width: 100%;
+      position: absolute;
+
+      padding-left: 250px;
+
+
+
+    }
+
+
+    /* Change with of sidebar from 0 to 250px */
+    #wrapper.menuDisplayed #sidebar-wrapper {
+      width: 0px;
+    }
+
+    /* Since we added left padding, we need to shrink the width by 250px */
+    #wrapper.menuDisplayed #page-content-wrapper {
+      padding-left: 0px;
+    }
+
+
+    @media screen and (max-width: 499px) {
+      #sidebar-wrapper {
         z-index: 1;
         position: absolute;
         width: 0px;
@@ -82,115 +83,115 @@
         padding-top: 9999px;
         padding-bottom: 9999px;
 
-    
 
-    
+
+
       }
 
-/* Always take up entire screen */
-#page-content-wrapper {
-    width: 100%;
-    position: absolute;
-    padding: 15px;
-    padding-left: 0px;
-    
-}
+      /* Always take up entire screen */
+      #page-content-wrapper {
+        width: 100%;
+        position: absolute;
+        padding: 15px;
+        padding-left: 0px;
+
+      }
 
 
-/* Change with of sidebar from 0 to 250px */
-#wrapper.menuDisplayed #sidebar-wrapper {
-    width: 200px;
-}
+      /* Change with of sidebar from 0 to 250px */
+      #wrapper.menuDisplayed #sidebar-wrapper {
+        width: 200px;
+      }
 
-/* Since we added left padding, we need to shrink the width by 250px */
-#wrapper.menuDisplayed #page-content-wrapper {
-    padding-left: 200px;
-}
-  
-}
+      /* Since we added left padding, we need to shrink the width by 250px */
+      #wrapper.menuDisplayed #page-content-wrapper {
+        padding-left: 200px;
+      }
+
+    }
 
 
-/* Sidebar styling - the entire ul list */
-.sidebar-nav {
-    padding: 0;
-    list-style: none;
-}
+    /* Sidebar styling - the entire ul list */
+    .sidebar-nav {
+      padding: 0;
+      list-style: none;
+    }
 
-.sidebar-nav li {
-    text-indent: 20px;
-    line-height: 40px;
-}
+    .sidebar-nav li {
+      text-indent: 20px;
+      line-height: 40px;
+    }
 
-.sidebar-nav li a {
-    display: block;
-    text-decoration: none;
-    color: #ddd;
-}
+    .sidebar-nav li a {
+      display: block;
+      text-decoration: none;
+      color: #ddd;
+    }
 
-.sidebar-nav li a:hover {
-    background: rgb(160, 128, 22);
-}
-
-    </style>
+    .sidebar-nav li a:hover {
+      background: rgb(160, 128, 22);
+    }
+  </style>
 </head>
 
-<body>  
+<body>
 
-<div id="wrapper" >
+  <div id="wrapper">
 
-        <!-- Sidebar -->
-        
-          <div id="sidebar-wrapper">
-            <ul class="sidebar-nav">
-              
-              <img  class="card-img rounded-circle p-3 img-thumnail" src="{{user.profile.image.url}}">
-                <li style="color: #ddd; ">{{user.first_name}} {{user.last_name}}</li>
-                <li style="font-size:1vw;color: #ddd;">{{user.role.role}}</li>
-                <li><a href="{% url 'home'%}">Dashboard</a></li>
-                <li><a href="{%url 'profile'%}">Account</a></li>
-                {% if user.role.role == 'COLLEGE DEAN' %}
-                <li><a href="{%url 'form-list'%}">Forms</a></li>
+    <!-- Sidebar -->
 
-                {% endif %}
-                {% if user.role.role == 'ADMINISTRATOR' %}
-                <li><a href="{%url 'register'%}">Manage User</a></li>
-                {% endif %}
-                
-                <li><a href="#">Settings</a></li>
-                <li><a href="{%url 'logout'%}">Logout</a></li>
-            </ul>
+    <div id="sidebar-wrapper">
+      <ul class="sidebar-nav">
+
+        <img class="card-img rounded-circle p-3 img-thumnail" src="{{user.profile.image.url}}">
+        <li style="color: #ddd; ">{{user.first_name}} {{user.last_name}}</li>
+        <li style="font-size:1vw;color: #ddd;">{{user.role.role}}</li>
+        <li><a href="{% url 'home'%}">Dashboard</a></li>
+        <li><a href="{%url 'profile'%}">Account</a></li>
+        {% if user.role.role == 'COLLEGE DEAN' %}
+        <li><a href="{%url 'form-list'%}">Forms</a></li>
+        <li><a href="{%url 'class_file_list'%}">Upload List</a></li>
+        {% endif %}
+        {% if user.role.role == 'ADMINISTRATOR' %}
+        <li><a href="{%url 'register'%}">Manage User</a></li>
+        <li><a href="{%url 'register'%}">Add User</a></li>
+        {% endif %}
+
+        <li><a href="#">Settings</a></li>
+        <li><a href="{%url 'logout'%}">Logout</a></li>
+      </ul>
+    </div>
+
+
+    <!-- Page content -->
+
+    <div id="page-content-wrapper">
+      <div class="container-fluid p-0">
+
+        <nav class="navbar navbar-expand-lg bg-warning">
+          <div>
+            <div class="row">
+              <div class="col-md-12">
+                <a href="#" id="menu-toggle"><i class="fa fa-bars" style="font-size: 200%; "></i></a>
+
+              </div>
+
+            </div>
+          </div>
+      </div>
+      </nav>
+
+      <main role="main" class="container col-md-12   p-3  ">
+
+        <div>
+          {% if messages %} {% for message in messages %}
+          <div class="alert alert-{{ message.tags }}">
+            {{ message }}
+          </div>
+          {% endfor %} {% endif %}
+          {% block content %}{% endblock %}
         </div>
-        
-
-        <!-- Page content -->
-
-        <div id="page-content-wrapper">
-            <div class="container-fluid p-0" >
-                
-                  <nav  class="navbar navbar-expand-lg bg-warning">
-                    <div>
-                      <div class="row">
-                          <div class="col-md-12" >
-                              <a href="#"  id="menu-toggle"><i class="fa fa-bars" style="font-size: 200%; "></i></a>
-                              
-                          </div>
-                          
-                      </div>
-                  </div>
-                  </div>
-                </nav>
-              
-                <main role="main" class="container col-md-12   p-3  "  >
-                
-                    <div >
-                        {% if messages %} {% for message in messages %}
-                        <div class="alert alert-{{ message.tags }}">
-                          {{ message }}
-                        </div>
-                        {% endfor %} {% endif %}
-                      {% block content %}{% endblock %}
-                    </div>
-                    <!-- <div class="col-md-4">
+        <!-- <div class="col-md-4">
                         <div class="content-section">
                           <h3>Our Sidebar</h3>
                           <p class='text-muted'>You can put any information here you'd like.
@@ -203,23 +204,23 @@
                           </p>
                         </div>
                       </div> -->
-                </main>
-            </div>
-        </div>
-        
-                
-            
+      </main>
     </div>
+  </div>
+
+
+
+  </div>
 
 
   <!-- Menu toggle script -->
-  <script >
-    $("#menu-toggle").click( function(e){
+  <script>
+    $("#menu-toggle").click(function (e) {
       e.preventDefault();
       $("#wrapper").toggleClass("menuDisplayed");
     });
   </script>
-  
+
 
 
 
@@ -236,9 +237,13 @@
 
 
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous">
-    
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+    integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous">
+  </script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+    integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous">
+
   </script>
 </body>
+
 </html>
