@@ -78,7 +78,7 @@ class Division(models.Model):
 
     @property
     def total(self):
-        return SubdivisionDetail.objects.filter(subdivision__division=self).aggregate(total=Sum("subtotal"))["total"]
+        return SubdivisionDetail.objects.filter(subdivision__division=self).aggregate(total=Sum("subtotal")).get('total') or 0
     # @property
     # def total(self):
     #     subdivision_detail = self.subdivision_set.only(
@@ -111,7 +111,7 @@ class Subdivision(models.Model):
 
     @property
     def total(self):
-        return self.subdivisiondetail_set.aggregate(total=Sum("subtotal"))["total"]
+        return self.subdivisiondetail_set.aggregate(total=Sum("subtotal")).get('total') or 0
 
     # @property
     # def total(self):
