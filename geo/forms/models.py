@@ -40,7 +40,7 @@ class Forms(models.Model):
 
     @property
     def total(self):
-        return SubdivisionDetail.objects.filter(subdivision__division__title=self).aggregate(total=Sum("subtotal"))["total"]
+        return SubdivisionDetail.objects.filter(subdivision__division__title=self).aggregate(total=Sum("subtotal")).get('total') or 0
 
     @property
     def percent(self):

@@ -152,3 +152,5 @@ MEDIA_URL = '/media/'
 
 AUTH_USER_MODEL = 'members.MyUser'
 LOGIN_REDIRECT_URL = 'home'
+
+THUMBNAIL_PRESERVE_FORMAT = True

@@ -17,6 +17,10 @@
     <link href="{% static 'css/acmsa/acmsastyle.css'%}" rel="stylesheet">
     <link href="{% static 'font-awesome/css/font-awesome.css'%}" rel="stylesheet">
 
+    <link href="{% static 'css/theme.ba/plugins/iCheck/custom.css'%}" rel="stylesheet">
+
+    <link href="{% static 'css/theme.ba/plugins/fullcalendar/fullcalendar.css'%}" rel="stylesheet">
+    <link href="{% static 'css/theme.ba/plugins/fullcalendar/fullcalendar.print.css'%}" rel='stylesheet' media='print'>
 </head>
 
 <body>
@@ -25,8 +29,8 @@
             <div class="sidebar-collapse">
                 <ul class="nav metismenu" id="side-menu">
                     <li class="nav-header">
-                        <div class="dropdown profile-element"> <span>
-                                <img alt="image" class="img-circle" src="{% static 'img/logo.png'%}" />
+                        <div class="dropdown profile-element img-fluid"> <span>
+                                <img alt="image" class="img-circle" src="{{user.profile.image.url}}" style="width: 50%" />
                                  </span>
                             <a data-toggle="dropdown" class="dropdown-toggle" href="#">
                             <span class="clear"> <span class="block m-t-xs"> <strong class="font-bold">{{user.first_name}} {{user.middle_initial}}. {{user.last_name}}</strong>
@@ -34,23 +38,28 @@
                             
                         </div>   
 
-                        <div class="logo-element">
-                            <img alt="image" class="img-circle" src="{% static 'img/logo.png'%}" />
-                        </div>
+                        <!-- <div class="logo-content">
+                            <img alt="image" class="img-circle" src="{{user.profile.image.url}}"/>
+                        </div> -->
                     </li>
                     <li>
-                        <a href="accreditation_tracker.acmsa.html"><i class="fa fa-pie-chart"></i> <span class="nav-label">Accreditation tracker</span></a>
+                        <a href="{% url 'home' %}"><i class="fa fa-pie-chart"></i> <span class="nav-label">Accreditation tracker</span></a>
                     </li>
-                       
+                    {% if user.role.role == 'COLLEGE DEAN' %}
                     <li>
-                        <a href="accreditation_forms.acmsa.html"> <i class="fa fa-table"></i> <span class="nav-label">Accreditation forms</span></a>
+                        <a href="{% url 'form-list' %}"> <i class="fa fa-table"></i> <span class="nav-label">Accreditation forms</span></a>
+                    </li>
+                    {% endif %} 
+                    <li>
+                            <a href="{% url 'profile' %}"><i class="fa fa-male"></i> <span class="nav-label">Profile</span></a>
                     </li>
                     <li>
-                            <a href="profile.acmsa.html"><i class="fa fa-male"></i> <span class="nav-label">Profile</span></a>
+                            <a href="{% url 'calendar' %}"><i class="fa fa-calendar"></i> <span class="nav-label">Calendar</span></a>
                     </li>
-                    <li>
-                            <a href="academic_calendar.acmsa.html"><i class="fa fa-calendar"></i> <span class="nav-label">Academic Accreditation Calendar</span></a>
-                    </li>
+                    {% if user.role.role == 'ADMINISTRATOR' %}
+                        <!-- <li><a href="{%url 'user_changelist'%}"> <i class="fa fa-user"></i>Manage User</a></li> -->
+                        <li><a href="{%url 'register'%}"> <i class="fa fa-plus"></i>Add User</a></li>
+                    {% endif %}
                     
                     
                 </ul>
@@ -94,22 +103,22 @@
 
         </nav>
         </div>
-        <div class="row wrapper border-bottom white-bg page-heading">
+        <!-- <div class="row wrapper border-bottom white-bg page-heading">
                 <div class="col-sm-4">
                     <h3>Accreditation Tracker</h2>
                     <ol class="breadcrumb">
                         <li>
-                            <a href="accreditation_tracker.acmsa.html">Home</a>
+                            <a href="{% url 'home' %}">Home</a>
                         </li>
                         <li class="active">
                             <strong>Accreditation Tracker</strong>
                         </li>
                     </ol>
                 </div>
-         </div>       
-        <div class="row  border-bottom white-bg dashboard-header">
-
-            <div class="col-sm-4">
+         </div>        -->
+        <div class="row  border-bottom white-bg dashboard-header" style="padding-bottom: 4rem">
+            {% block content%}{% endblock%}
+            <!-- <div class="col-sm-4">
                 <h2>Welcome {{user.first_name}} {{user.middle_initial}}. {{user.last_name}}</h2>
                 <small>Here is the current state of the accreditation for SY 19-20</small><ul class="list-group clear-list m-t">
                         <li class="list-group-item fist-item"></li>
@@ -147,7 +156,7 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </div> -->
          </div>          
         
 
@@ -176,7 +185,7 @@
     <script src="{% static 'js/plugins/pace/pace.min.js'%}"></script>
 
     <!-- ChartJS-->
-    <script src="js/plugins/chartJs/Chart.min.js"></script>
+    <script src="{% static 'js/plugins/chartJs/Chart.min.js' %}"></script>
      
   
    
@@ -211,7 +220,7 @@
                     label: "Faculty"
                 },
                 {
-                    value: 100,
+                    value: 1000,
                     color: "#A4CEE8",
                     highlight: "#1ab394",
                     label: "Seminars and Teachings"

@@ -35,3 +35,8 @@ def home(request):
         return render(request, 'dashboard/home.html')
 
     return render(request, 'dashboard/home.html', context)
+
+
+@login_required
+def calendar(request):
+    return render(request, 'dashboard/calendar.html', {'title': 'Calendar'})

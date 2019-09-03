@@ -1,64 +1,149 @@
 {% extends "dashboard/base.html" %}
 {% block content %}
 
+<style>
+    .avatar {
+        vertical-align: middle;
+        width: 350px;
+        height: 200px;
+        border-radius: 20%;
+    }
+</style>
 
-{% csrf_token %}
-<div class="container-fluid justify-content-center ">
-    <div class="col-md-12 ">
-        <div class="content-section">
-            <div class="media">
-                <img class="rounded-circle account-img" src="{{ user.profile.image.url }}">
+{% load crispy_forms_tags %}
+<div class="content">
+
+    <div class="row">
+        <div class="col-md-9">
+
+
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="title">Profile</h5>
+                </div>
+
+                <div class="card-body">
+                    <form>
+                        <div class="row">
+                            <div class="col-md-5 pr-md-1">
+                                <div class="form-group">
+                                    <label>Company (disabled)</label>
+                                    <input type="text" class="form-control" disabled="" placeholder="Company"
+                                        value="Technological Institute of the Philippines">
+                                </div>
+                            </div>
+                            
+                            <div class="col-md-4 pl-md-1">
+                                <div class="form-group">
+                                    <label for="exampleInputEmail1">Email address</label>
+                                    <input type="email" class="form-control" disabled="" placeholder="{{ user.email}}">
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label>Contact</label>
+                                        <input type="text" class="form-control" disabled="" placeholder="{{ user.contact}}">
+                                    </div>
+                                </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-4 pr-md-1">
+                                <div class="form-group">
+                                    <label>First Name</label>
+                                    <input type="text" class="form-control" disabled=""
+                                        placeholder="{{ user.first_name}}">
+                                </div>
+                            </div>
+                            <div class="col-md-4 pl-md-1">
+                                <div class="form-group">
+                                    <label>Middle Initial</label>
+                                    <input type="text" class="form-control" disabled=""
+                                        placeholder="{{ user.middle_initial}}">
+                                </div>
+                            </div>
+                            <div class="col-md-4 pl-md-1">
+                                <div class="form-group">
+                                    <label>Last Name</label>
+                                    <input type="text" class="form-control" disabled=""
+                                        placeholder="{{ user.last_name}}">
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="row">
+                            <div class="col-md-4 pr-md-1">
+                                <div class="form-group">
+                                    <label>Designation</label>
+                                    <input type="text" class="form-control" disabled="" placeholder="{{ user.role}}">
+                                </div>
+                            </div>
+                            <div class="col-md-4 px-md-1">
+                                <div class="form-group">
+                                    <label>College</label>
+                                    <input type="text" class="form-control" disabled=""
+                                        placeholder="{{ user.college.college}}">
+                                </div>
+                            </div>
+                            {% if user.role.role == DEPTCHAIR %}
+                            <div class="col-md-4 pl-md-1">
+                                <div class="form-group">
+                                    <label>Program</label>
+                                    <input type="number" class="form-control" disabled=""
+                                        placeholder="{{ user.program}}">
+                                </div>
+                            </div>
+                            {% endif %}
+                            <div class="col-md-4 pl-md-1">
+                                <div class="form-group">
+                                    <label>Program</label>
+                                    <input type="number" class="form-control" disabled="" placeholder="   ">
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                
                 
             </div>
-            <div><h2 class="account-heading">Hello {{ user.first_name }}!</h2></div>
+
+        </div>
+
+        <div class="col-md-3">
+            <div class="card card-user">
+                <div class="card-body">
+                    <p class="card-text">
+                        <div class="author">
+                            <div class="block block-one"></div>
+                            <div class="block block-two"></div>
+                            <div class="block block-three"></div>
+                            <div class="block block-four"></div>
+                            <a href="javascript:void(0)">
+                                <img class="avatar" src="{{user.profile.image.url}}" alt="..." style="width: 75%">
+                                <form method="POST" enctype="multipart/form-data">
+                                    <fieldset class="form-group">
+                                        {% csrf_token %}
+                                        {{p_form|crispy}}
+                                        <div class="form-group">
+                                            <button class="btn btn-fill btn-primary" type="submit">Update</button>
+                                        </div>
+                                    </fieldset>
+
+                                </form>
+                                <h5 class="title">{{ user.first_name}} {{ user.middle_initial}} {{ user.last_name}}
+                                    -
+                                    {{ user.role}}</h5>
+                            </a>
+                        </div>
+                    </p>
+                    <div class="card-description">
+                        "Lifelong Learners, Problem Solvers, and Innovators.
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </div>
 
-<div class="container-fluid justify-content-center  ">
-    <div class="col-md-auto ">
-        <div class="content-section">
-            <div class="media">
-                <h4>Account Details</h4>
-            </div>
-            <div class="form-row">
-               
-                <div class="form-group col-md-6 mb-0">
-                    Name : {{ user.first_name}} {{ user.middle_initial}} {{ user.last_name}}
-                </div>
-            </div>
-            <div class="form-row">
-                <div class="form-group col-md-6 mb-0">
-                    Email : {{ user.email}}
-                </div>
-                <div class="form-group col-md-6 mb-0">
-                    Contact No. : {{ user.contact}}
-                </div>
-            </div>
-            <div class="form-row">
-                <div class="form-group col-md-6 mb-0">
-                    Role : {{ user.role}}
-                </div>
-                <div class="form-group col-md-6 mb-0">
-                    College : {{ user.college.college}}
-                </div>
-            </div>
-            {% if user.role.role == DEPTCHAIR %}
-            <div class="form-row">
-                <div class="form-group col-md-6 mb-0">
-                    Program : {{ user.program}}
-                </div>
-            </div>
-            {% endif %}
-            <div class="form-row">
-                <div class="form-group col-md-6 mb-0">
-
-                </div>
-            </div>
-        </div>
-
-    </div>
-</div>
 
 
 {% endblock content %}

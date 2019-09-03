@@ -5,6 +5,7 @@ urlpatterns = [
     # path('admin/', admin.site.urls),
 
     path('home/', views.home, name='home'),
+    path('calendar/', views.calendar, name='calendar'),
     path('', auth_views.LoginView.as_view(
         template_name='dashboard/login.html'), name='login'),
 ]

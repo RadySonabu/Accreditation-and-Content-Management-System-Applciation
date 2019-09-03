@@ -379,7 +379,7 @@ def upload_file(request):
         form = FileForm(request.POST, request.FILES)
         if form.is_valid():
             form.save()
-            return redirect('file_list')
+            return redirect('class_file_list')
     else:
         form = FileForm()
     return render(request, 'forms/upload_file.html', {

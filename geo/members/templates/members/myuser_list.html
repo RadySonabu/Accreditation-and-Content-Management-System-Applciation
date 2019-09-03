@@ -1,1 +1,110 @@
-Userlist
+{% extends "dashboard/base.html"%}
+{% block content %}
+{% load crispy_forms_tags %}
+
+
+<div class="row justify-content-center p-1 ">
+    <div class="row ">
+        <div class="col-md-12">
+            <div class="card ">
+                <div class="card-header">
+                    <h4 class="card-title"> Manage Users</h4>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table tablesorter " id="">
+                            <thead class=" text-primary">
+                                <tr>
+                                    <th>
+                                        Name
+                                    </th>
+                                    <th>
+                                        Designation
+                                    </th>
+                                    <th>
+                                        College
+                                    </th>
+                                    <th class="text-center">
+                                        Actions
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for user in users %}
+                                <tr>
+                                    <td>
+                                        {{user.first_name}} {{user.middle_initial}} {{user.last_name}}
+                                    </td>
+                                    <td>
+                                        {{user.role}}
+                                    </td>
+                                    <td>
+                                        {{user.college}}
+                                    </td>
+                                    <td class="text-center">
+                                        <a href="#"><i class="fa fa-edit"></i></a>
+                                        <a href="#"><i class="fa fa-trash"></i></a>
+                                    </td>
+                                </tr>
+
+
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+</div>
+</body>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script>
+    $("#id_role").change(function (e) {
+
+        var url = $("#personForm").attr("data-college-url"); // get the url of the `load_cities` view
+        var roleId = $(this).val(); // get the selected country ID from the HTML input
+        console.log(roleId)
+        $.ajax({ // initialize an AJAX request
+            url: url, // set the url of the request (= localhost:8000/hr/ajax/load-cities/)
+            data: {
+                'role': roleId // add the country id to the GET parameters
+            },
+            success: function (data) { // `data` is the return of the `load_cities` view function
+                $("#id_college").html(
+                    data
+                ); // replace the contents of the city input with the data that came from the server
+            }
+        });
+
+    });
+    $("#id_college").change(function (e) {
+        var url = $("#personForm").attr("data-program-url"); // get the url of the `load_cities` view
+        var collegeId = $(this).val(); // get the selected country ID from the HTML input
+
+        $.ajax({ // initialize an AJAX request
+            url: url, // set the url of the request (= localhost:8000/hr/ajax/load-cities/)
+            data: {
+                'college': collegeId // add the country id to the GET parameters
+            },
+            success: function (data) { // `data` is the return of the `load_cities` view function
+                $("#id_program").html(
+                    data
+                ); // replace the contents of the city input with the data that came from the server
+            }
+        });
+
+    });
+</script>
+
+
+
+
+
+
+
+
+
+{% endblock content %}
