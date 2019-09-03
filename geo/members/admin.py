@@ -38,7 +38,7 @@ class UserCreationForm(forms.ModelForm):
 
     def clean_email(self):
         email = self.cleaned_data.get('email')
-        if not email.endswith('gmail.com'):
+        if not email.endswith('@tip.edu.ph'):
             raise forms.ValidationError(
                 "This is not a valid email! Try to use @tip.edu.ph ")
         return email

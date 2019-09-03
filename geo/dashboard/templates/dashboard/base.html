@@ -117,7 +117,11 @@
                 </div>
          </div>        -->
         <div class="row  border-bottom white-bg dashboard-header" style="padding-bottom: 4rem">
-            {% block content%}{% endblock%}
+                {% if messages %} {% for message in messages %}
+                <div class="alert alert-{{ message.tags }}">
+                  {{ message }}
+                </div>
+                {% endfor %} {% endif %}{% block content%}{% endblock%}
             <!-- <div class="col-sm-4">
                 <h2>Welcome {{user.first_name}} {{user.middle_initial}}. {{user.last_name}}</h2>
                 <small>Here is the current state of the accreditation for SY 19-20</small><ul class="list-group clear-list m-t">
