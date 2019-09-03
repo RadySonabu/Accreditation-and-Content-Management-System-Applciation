@@ -396,7 +396,7 @@ def delete_file(request, pk):
 
 class FileListView(ListView):
     model = Files
-    template_name = 'class_file_list.html'
+    template_name = 'forms/class_file_list.html'
     context_object_name = 'files'
 
 
@@ -404,4 +404,4 @@ class UploadFileView(CreateView):
     model = Files
     form_class = FileForm
     success_url = reverse_lazy('class_file_list')
-    template_name = 'upload.html'
+    template_name = 'forms/upload.html'

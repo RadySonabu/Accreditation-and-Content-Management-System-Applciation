@@ -1,274 +1,243 @@
+{%load static%}
 <!DOCTYPE html>
-<html lang="en">
+<html>
 
 <head>
 
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="">
-  <meta name="author" content="">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
-  <title>ACMSA</title>
+    <title>TACOS-TIP | Accreditation Tracker
+    </title>
 
-  <!-- Latest compiled and minified CSS -->
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-  <link rel="stylesheet" type="text/css"
-    href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="{% static 'css/theme.ba/bootstrap.min.css'%}" rel="stylesheet">
+    <link href="{% static 'css/theme.ba/animate.css'%}" rel="stylesheet">
+    <link href="{% static 'css/theme.ba/style.css'%}" rel="stylesheet">
+    <link href="{% static 'css/acmsa/acmsastyle.css'%}" rel="stylesheet">
+    <link href="{% static 'font-awesome/css/font-awesome.css'%}" rel="stylesheet">
 
-
-  <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script> -->
-  <!-- <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script> -->
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-  
-    
-    
-    
-
-  <style type="text/css">
-    /* Sidebar */
-    #sidebar-wrapper {
-      z-index: 1;
-      position: fixed;
-      width: 250px;
-      height: 100%;
-      overflow-y: hidden;
-      background: #1a1a1a;
-      margin-top: -9999px;
-      margin-bottom: -9999px;
-      padding-top: 9999px;
-      padding-bottom: 9999px;
-      background: url('https://images.pexels.com/photos/1446948/pexels-photo-1446948.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500');
-      opacity: 0.9;
-
-
-
-
-    }
-
-
-    /* Always take up entire screen */
-    #page-content-wrapper {
-      width: 100%;
-      position: absolute;
-
-      padding-left: 250px;
-
-
-
-    }
-
-
-    /* Change with of sidebar from 0 to 250px */
-    #wrapper.menuDisplayed #sidebar-wrapper {
-      width: 0px;
-    }
-
-    /* Since we added left padding, we need to shrink the width by 250px */
-    #wrapper.menuDisplayed #page-content-wrapper {
-      padding-left: 0px;
-    }
-
-
-    @media screen and (max-width: 499px) {
-      #sidebar-wrapper {
-        z-index: 1;
-        position: absolute;
-        width: 0px;
-        height: 100%;
-        overflow-y: hidden;
-        background: #1a1a1a;
-        margin-top: -9999px;
-        margin-bottom: -9999px;
-        padding-top: 9999px;
-        padding-bottom: 9999px;
-
-
-
-
-      }
-
-      /* Always take up entire screen */
-      #page-content-wrapper {
-        width: 100%;
-        position: absolute;
-        padding: 15px;
-        padding-left: 0px;
-
-      }
-
-
-      /* Change with of sidebar from 0 to 250px */
-      #wrapper.menuDisplayed #sidebar-wrapper {
-        width: 200px;
-      }
-
-      /* Since we added left padding, we need to shrink the width by 250px */
-      #wrapper.menuDisplayed #page-content-wrapper {
-        padding-left: 200px;
-      }
-
-    }
-
-
-    /* Sidebar styling - the entire ul list */
-    .sidebar-nav {
-      padding: 0;
-      list-style: none;
-    }
-
-    .sidebar-nav li {
-      text-indent: 20px;
-      line-height: 40px;
-    }
-
-    .sidebar-nav li a {
-      display: block;
-      text-decoration: none;
-      color: #ddd;
-    }
-
-    .sidebar-nav li a:hover {
-      background: rgb(160, 128, 22);
-    }
-  </style>
 </head>
 
 <body>
+    <div id="wrapper">
+        <nav class="navbar-default navbar-static-side" role="navigation">
+            <div class="sidebar-collapse">
+                <ul class="nav metismenu" id="side-menu">
+                    <li class="nav-header">
+                        <div class="dropdown profile-element"> <span>
+                                <img alt="image" class="img-circle" src="{% static 'img/logo.png'%}" />
+                                 </span>
+                            <a data-toggle="dropdown" class="dropdown-toggle" href="#">
+                            <span class="clear"> <span class="block m-t-xs"> <strong class="font-bold">{{user.first_name}} {{user.middle_initial}}. {{user.last_name}}</strong>
+                             </span> <span class="text-muted text-xs block">{{user.role.role}}</span> </span> </a>
+                            
+                        </div>   
 
-  <div id="wrapper">
-
-    <!-- Sidebar -->
-
-    <div id="sidebar-wrapper">
-      <ul class="sidebar-nav">
-
-        <img class="card-img rounded-circle p-3 img-thumnail" src="{{user.profile.image.url}}">
-        <li style="color: #ddd; ">{{user.first_name}} {{user.last_name}}</li>
-        <li style="font-size:1vw;color: #ddd;">{{user.role.role}}</li>
-        <li><a href="{% url 'home'%}">Dashboard</a></li>
-        <li><a href="{%url 'profile'%}">Account</a></li>
-        {% if user.role.role == 'COLLEGE DEAN' %}
-        <li><a href="{%url 'form-list'%}">Forms</a></li>
-        <li><a href="{%url 'class_file_list'%}">Upload List</a></li>
-        {% endif %}
-        {% if user.role.role == 'ADMINISTRATOR' %}
-        <li><a href="{%url 'register'%}">Manage User</a></li>
-        <li><a href="{%url 'register'%}">Add User</a></li>
-        {% endif %}
-
-        <li><a href="#">Settings</a></li>
-        <li><a href="{%url 'logout'%}">Logout</a></li>
-      </ul>
-    </div>
-
-
-    <!-- Page content -->
-
-    <div id="page-content-wrapper">
-      <div class="container-fluid p-0">
-
-        <nav class="navbar navbar-expand-lg bg-warning">
-          <div>
-            <div class="row">
-              <div class="col-md-12">
-                <a href="#" id="menu-toggle"><i class="fa fa-bars" style="font-size: 200%; "></i></a>
-
-              </div>
+                        <div class="logo-element">
+                            <img alt="image" class="img-circle" src="{% static 'img/logo.png'%}" />
+                        </div>
+                    </li>
+                    <li>
+                        <a href="accreditation_tracker.acmsa.html"><i class="fa fa-pie-chart"></i> <span class="nav-label">Accreditation tracker</span></a>
+                    </li>
+                       
+                    <li>
+                        <a href="accreditation_forms.acmsa.html"> <i class="fa fa-table"></i> <span class="nav-label">Accreditation forms</span></a>
+                    </li>
+                    <li>
+                            <a href="profile.acmsa.html"><i class="fa fa-male"></i> <span class="nav-label">Profile</span></a>
+                    </li>
+                    <li>
+                            <a href="academic_calendar.acmsa.html"><i class="fa fa-calendar"></i> <span class="nav-label">Academic Accreditation Calendar</span></a>
+                    </li>
+                    
+                    
+                </ul>
 
             </div>
-          </div>
-      </div>
-      </nav>
+        </nav>
 
-      <main role="main" class="container col-md-12   p-3  ">
+        <div id="page-wrapper" class="gray-bg dashbard-1">
+        <div class="row border-bottom">
+        <nav class="navbar navbar-static-top" role="navigation" style="margin-bottom: 0">
+        <div class="navbar-header">
 
-        <div>
-          {% if messages %} {% for message in messages %}
-          <div class="alert alert-{{ message.tags }}">
-            {{ message }}
-          </div>
-          {% endfor %} {% endif %}
-          {% block content %}{% endblock %}
+                            <a class="navbar-minimalize minimalize-styl-2 btn btn-primary " href="#"><i class="fa fa-bars"></i> </a>
+
+            
         </div>
-        <!-- <div class="col-md-4">
-                        <div class="content-section">
-                          <h3>Our Sidebar</h3>
-                          <p class='text-muted'>You can put any information here you'd like.
-                            <ul class="list-group">
-                              <li class="list-group-item list-group-item-light">Latest Posts</li>
-                              <li class="list-group-item list-group-item-light">Announcements</li>
-                              <li class="list-group-item list-group-item-light">Calendars</li>
-                              <li class="list-group-item list-group-item-light">etc</li>
-                            </ul>
-                          </p>
+            <ul class="nav navbar-top-links navbar-right">
+                <li>
+                    <span class="m-r-sm text-muted welcome-message">Welcome to TACOS-TIP</span>
+                </li>
+                <li class="dropdown">
+                   
+                    
+                        <li class="divider"></li>
+                        
+                        <li class="divider"></li>
+                        
+                        <li class="divider"></li>
+                      
+                
+                       
+                        
+
+
+                <li>
+                    <a href="{% url 'logout'%}">
+                        <i class="fa fa-sign-out"></i> Log out
+                    </a>
+                </li>
+                
+
+        </nav>
+        </div>
+        <div class="row wrapper border-bottom white-bg page-heading">
+                <div class="col-sm-4">
+                    <h3>Accreditation Tracker</h2>
+                    <ol class="breadcrumb">
+                        <li>
+                            <a href="accreditation_tracker.acmsa.html">Home</a>
+                        </li>
+                        <li class="active">
+                            <strong>Accreditation Tracker</strong>
+                        </li>
+                    </ol>
+                </div>
+         </div>       
+        <div class="row  border-bottom white-bg dashboard-header">
+
+            <div class="col-sm-4">
+                <h2>Welcome {{user.first_name}} {{user.middle_initial}}. {{user.last_name}}</h2>
+                <small>Here is the current state of the accreditation for SY 19-20</small><ul class="list-group clear-list m-t">
+                        <li class="list-group-item fist-item"></li>
+                            <span class="label label-success">1</span> <a href="#">PACUCOA</a>
+                        </li>
+                        <li class="list-group-item">
+                            <span class="label label-info">2</span> <a href="#">ABET</a>
+                        </li>
+                        <li class="list-group-item">
+                            <span class="label label-primary">3</span> <a href="#">CENTER OF EXCELLENCE</a>
+                        </li>
+                        <li class="list-group-item">
+                            <span class="label label-default">4</span> <a href="#">ISO</a>
+                        </li>
+                        
+                    </ul>
+            </div>
+
+
+                
+            
+            <div class="col-sm-2">
+                </div>
+                
+                        <div class="col-sm-3">
+                            <div class="ibox float-e-margins">
+                                
+                                    <h1>        </h1>
+                                    <h3>PACUCOA </h5>
+        
+                               
+                                <div class="ibox-content">
+                                    <div>
+                                        <canvas id="doughnutChart" height="300"></canvas>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                      </div> -->
-      </main>
-    </div>
-  </div>
+         </div>          
+        
+
+        
+
+        <div class="footer">
+                <div class="pull-right">
+                    Made by <strong> TEAM JFTW </strong>for the <strong>Institute. </strong>
+                </div>
+                <div>
+                    <strong>Established</strong> 2019 
+                </div>
+            </div>
+        </div>
+        
+
+               
+    <!-- Mainly scripts -->
+    <script src="{% static 'js/jquery-2.1.1.js'%}"></script>
+    <script src="{% static 'js/bootstrap.min.js'%}"></script>
+    <script src="{% static 'js/plugins/metisMenu/jquery.metisMenu.js'%}"></script>
+    <script src="{% static 'js/plugins/slimscroll/jquery.slimscroll.min.js'%}"></script>
+
+    <!-- Custom and plugin javascript -->
+    <script src="{% static 'js/inspinia.js'%}"></script>
+    <script src="{% static 'js/plugins/pace/pace.min.js'%}"></script>
+
+    <!-- ChartJS-->
+    <script src="js/plugins/chartJs/Chart.min.js"></script>
+     
+  
+   
 
 
+    <script>
+        $(document).ready(function() {
+            setTimeout(function() {
+                toastr.options = {
+                    closeButton: true,
+                    progressBar: true,
+                    showMethod: 'slideDown',
+                    timeOut: 4000
+                };
+                
 
-  </div>
-
-
-  <!-- Menu toggle script -->
-  <script>
-    $("#menu-toggle").click(function (e) {
-      e.preventDefault();
-      $("#wrapper").toggleClass("menuDisplayed");
-    });
-  </script>
-
-
-
+            }, 1300);
 
 
+            
+            var doughnutData = [
+                {
+                    value: 300,
+                    color: "#a3e1d4",
+                    highlight: "#1ab394",
+                    label: "Student"
+                },
+                {
+                    value: 50,
+                    color: "#dedede",
+                    highlight: "#1ab394",
+                    label: "Faculty"
+                },
+                {
+                    value: 100,
+                    color: "#A4CEE8",
+                    highlight: "#1ab394",
+                    label: "Seminars and Teachings"
+                }
+            ];
+
+            var doughnutOptions = {
+                segmentShowStroke: true,
+                segmentStrokeColor: "#fff",
+                segmentStrokeWidth: 2,
+                percentageInnerCutout: 45, // This is 0 for Pie charts
+                animationSteps: 100,
+                animationEasing: "easeOutBounce",
+                animateRotate: true,
+                animateScale: false
+            };
+
+            var ctx = document.getElementById("doughnutChart").getContext("2d");
+            var DoughnutChart = new Chart(ctx).Doughnut(doughnutData, doughnutOptions);
+
+           
+        });
+    </script>
 
 
-
-
-
-
-
-
-
-
-
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
-    integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous">
-  </script>
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
-    integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous">
-
-  </script>
-    <script type="application/javascript">
-
-      function resizeIFrameToFitContent( iFrame ) {
-      
-          iFrame.width  = iFrame.contentWindow.document.body.scrollWidth;
-          iFrame.height = iFrame.contentWindow.document.body.scrollHeight;
-      }
-      
-      window.addEventListener('DOMContentLoaded', function(e) {
-      
-          var iFrame = document.getElementById( 'iFrame1' );
-          resizeIFrameToFitContent( iFrame );
-      
-          // or, to resize all iframes:
-          var iframes = document.querySelectorAll("iframe");
-          for( var i = 0; i < iframes.length; i++) {
-              resizeIFrameToFitContent( iframes[i] );
-          }
-      } );
-      
-      </script>
+    
 </body>
-
 </html>
+    

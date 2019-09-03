@@ -45,7 +45,7 @@ class UserCreationForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.fields['college'].queryset = MyUser.objects.none()
-        # self.fields['program'].queryset = MyUser.objects.none()
+        self.fields['program'].queryset = MyUser.objects.none()
 
         if 'role' in self.data:
             try:
