@@ -20,14 +20,6 @@
 
   <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script> -->
   <!-- <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script> -->
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-  
-    
-    
-    
 
   <style type="text/css">
     /* Sidebar */
@@ -155,9 +147,10 @@
         {% if user.role.role == 'COLLEGE DEAN' %}
         <li><a href="{%url 'form-list'%}">Forms</a></li>
         <li><a href="{%url 'class_file_list'%}">Upload List</a></li>
+
         {% endif %}
         {% if user.role.role == 'ADMINISTRATOR' %}
-        <li><a href="{%url 'register'%}">Manage User</a></li>
+        <li><a href="{%url 'user_changelist'%}">Manage User</a></li>
         <li><a href="{%url 'register'%}">Add User</a></li>
         {% endif %}
 
@@ -248,27 +241,6 @@
     integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous">
 
   </script>
-    <script type="application/javascript">
-
-      function resizeIFrameToFitContent( iFrame ) {
-      
-          iFrame.width  = iFrame.contentWindow.document.body.scrollWidth;
-          iFrame.height = iFrame.contentWindow.document.body.scrollHeight;
-      }
-      
-      window.addEventListener('DOMContentLoaded', function(e) {
-      
-          var iFrame = document.getElementById( 'iFrame1' );
-          resizeIFrameToFitContent( iFrame );
-      
-          // or, to resize all iframes:
-          var iframes = document.querySelectorAll("iframe");
-          for( var i = 0; i < iframes.length; i++) {
-              resizeIFrameToFitContent( iframes[i] );
-          }
-      } );
-      
-      </script>
 </body>
 
 </html>

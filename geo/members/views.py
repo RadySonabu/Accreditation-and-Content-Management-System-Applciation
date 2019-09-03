@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.urls import reverse_lazy
-from .admin import UserCreationForm
+from .admin import UserCreationForm, ProfileUpdateForm, UserChangeForm
 from django.http import HttpResponse
 from .resources import Members
 from .models import MyUser
@@ -35,8 +35,28 @@ def export(request):
     return response
 
 
+@login_required
 def profile(request):
-    return render(request, 'members/profile.html')
+    if request.method == 'POST':
+        u_form = UserChangeForm(request.POST, instance=request.user)
+        p_form = ProfileUpdateForm(request.POST,
+                                   request.FILES,
+                                   instance=request.user.profile)
+        if p_form.is_valid():
+
+            p_form.save()
+            messages.success(request, f'Your account has been updated!')
+            return redirect('profile')
+
+    else:
+        u_form = UserChangeForm(instance=request.user)
+        p_form = ProfileUpdateForm(instance=request.user.profile)
+
+    context = {
+        'u_form': u_form,
+        'p_form': p_form,
+    }
+    return render(request, 'members/profile.html', context)
 
 
 def load_college(request):
@@ -58,6 +78,8 @@ def load_program(request):
 class UserListView(LoginRequiredMixin, ListView):
     model = MyUser
     success_url = reverse_lazy('home')
+
+    context_object_name = 'users'
 
 
 class UserCreateView(LoginRequiredMixin, SuccessMessageMixin, CreateView):

@@ -16,6 +16,7 @@ class UserCreationForm(forms.ModelForm):
     password1 = forms.CharField(label='Password', widget=forms.PasswordInput)
     password2 = forms.CharField(
         label='Password confirmation', widget=forms.PasswordInput)
+    email = forms.EmailField()
 
     class Meta:
         model = MyUser
@@ -37,7 +38,7 @@ class UserCreationForm(forms.ModelForm):
 
     def clean_email(self):
         email = self.cleaned_data.get('email')
-        if not email.endswith('@tip.edu.ph'):
+        if not email.endswith('gmail.com'):
             raise forms.ValidationError(
                 "This is not a valid email! Try to use @tip.edu.ph ")
         return email
@@ -45,7 +46,7 @@ class UserCreationForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.fields['college'].queryset = MyUser.objects.none()
-        # self.fields['program'].queryset = MyUser.objects.none()
+        self.fields['program'].queryset = MyUser.objects.none()
 
         if 'role' in self.data:
             try:
@@ -81,7 +82,8 @@ class UserChangeForm(forms.ModelForm):
     the user, but replaces the password field with admin's
     password hash display field.
     """
-    password = ReadOnlyPasswordHashField()
+    # password = ReadOnlyPasswordHashField()
+    email = forms.EmailField()
 
     class Meta:
         model = MyUser
@@ -90,11 +92,17 @@ class UserChangeForm(forms.ModelForm):
             'first_name', 'middle_initial',
             'last_name', 'contact', 'email', 'role',  'college', 'program',  'is_active', 'is_admin')
 
-    def clean_password(self):
-        # Regardless of what the user provides, return the initial value.
-        # This is done here, rather than on the field, because the
-        # field does not have access to the initial value
-        return self.initial["password"]
+    # def clean_password(self):
+    #     # Regardless of what the user provides, return the initial value.
+    #     # This is done here, rather than on the field, because the
+    #     # field does not have access to the initial value
+    #     return self.initial["password"]
+
+
+class ProfileUpdateForm(forms.ModelForm):
+    class Meta:
+        model = Profile
+        fields = ['image']
 
 
 class UserAdmin(BaseUserAdmin):
