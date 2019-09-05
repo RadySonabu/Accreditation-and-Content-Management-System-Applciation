@@ -25,7 +25,7 @@ urlpatterns = [
     path('form/detail/<int:pk>', FormDetailView.as_view(), name='form-detail'),
     path('form/<int:pk>/update', FormUpdateView.as_view(), name='form-update'),
     path('form/<int:pk>/delete', FormDeleteView.as_view(), name='form-delete'),
-    path('form/new/', FormCreateView.as_view(), name='form-create'),
+    path('form/new/<int:pk>', FormCreateView.as_view(), name='form-create'),
     # ----------------------------------------------------------------------------------
     path('division/', DivisionListView.as_view(), name='division-list'),
     path('division/<int:pk>/', DivisionDetailView.as_view(), name='division-detail'),

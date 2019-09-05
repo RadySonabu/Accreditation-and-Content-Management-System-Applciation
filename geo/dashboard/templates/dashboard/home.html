@@ -36,7 +36,7 @@
 
 
 {% elif user.role.role == 'COLLEGE DEAN' %}
-{{ARDY}}
+
 {% if mem.college.college == 'College of Information Technology Education' %}
 
   
@@ -44,11 +44,11 @@
    
   
     
-  <div class="row  border-bottom white-bg dashboard-header">
+  <div class="row container">
 
     <div class="col-sm-4">
         
-        <small>Here is the current state of the accreditation for SY 19-20</small>
+        
         <ul class="list-group clear-list m-t">
           
             {% for a in accr_type %}
@@ -84,7 +84,7 @@
                        
                         <div class="ibox-content">
                             <div>
-                                <canvas id="doughnutChart" height="100"></canvas>
+                                <canvas id="doughnutChart" height="200"></canvas>
                             </div>
                         </div>
                     </div>
@@ -141,7 +141,7 @@
   <div class="card">
     <div class="card-body" style="justify-content: center">
       <h5 class="card-title"><a href="{% url 'form-detail' pk=f.id%}">Department of Info.Technology</a></h5>
-      <a href="{% url 'form-detail' pk=f.id%}"><img class="mx-auto d-block " style="height: 200px; width: 200px; padding: 2%; justify-content: center"
+      <a href="{% url 'form-detail' %}"><img class="mx-auto d-block " style="height: 200px; width: 200px; padding: 2%; justify-content: center"
         src="https://cdn1.iconfinder.com/data/icons/charts-2/304/Untitled-41-512.png"></a>
     </div>
   </div>

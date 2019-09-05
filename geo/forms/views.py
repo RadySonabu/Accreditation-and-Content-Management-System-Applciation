@@ -55,13 +55,14 @@ class FormCreateView(LoginRequiredMixin, CreateView):
     model = Forms
     form_class = FormForm
 
-    success_url = '/form/'
+    
 
     error_message = "%(account)s is already created!"
 
     def form_valid(self, form):
 
         form.instance.created_by = self.request.user
+        self.kwargs.get('pk')
 
         form.instance.title = f'{form.instance.type_of_accreditation} {form.instance.created_for} {form.instance.year}'
         title = Forms.objects.filter(
@@ -70,7 +71,7 @@ class FormCreateView(LoginRequiredMixin, CreateView):
             form.instance.college = self.request.user.college
         else:
 
-            return redirect('form-list')
+            return redirect('form-detail')
         return super(FormCreateView, self).form_valid(form)
 
     def get_error_message(self, cleaned_data):
@@ -81,6 +82,7 @@ class FormCreateView(LoginRequiredMixin, CreateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
+        context['a']= self.kwargs.get('pk')
         context['d'] = Division.objects.all()
         context['sd'] = Subdivision.objects.all()
         context['sdd'] = SubdivisionDetail.objects.all()
