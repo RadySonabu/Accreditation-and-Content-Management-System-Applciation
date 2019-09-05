@@ -21,8 +21,8 @@ from .views import (FormListView, FormDetailView,
 
                     )
 urlpatterns = [
-    path('form/', FormListView.as_view(), name='form-list'),
-    path('form/<int:pk>/', FormDetailView.as_view(), name='form-detail'),
+    path('form/<int:pk>/', FormListView.as_view(), name='form-list'),
+    path('form/detail/<int:pk>', FormDetailView.as_view(), name='form-detail'),
     path('form/<int:pk>/update', FormUpdateView.as_view(), name='form-update'),
     path('form/<int:pk>/delete', FormDeleteView.as_view(), name='form-delete'),
     path('form/new/', FormCreateView.as_view(), name='form-create'),

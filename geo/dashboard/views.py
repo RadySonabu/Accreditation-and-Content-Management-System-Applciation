@@ -2,7 +2,7 @@ from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
 
 from members.models import MyUser
-from forms.models import Forms
+from forms.models import Forms, AccreditationType
 
 
 @login_required
@@ -13,17 +13,20 @@ def home(request):
             'members': MyUser.objects.filter(role__role='COLLEGE DEAN')
         }
     elif user.is_authenticated and user.role.role == 'COLLEGE DEAN':
-        if user.college.college == 'College of Information Technology Education':
+        # if user.college.college == 'College of Information Technology Education':
 
-            context = {
+        context = {
 
-                'members': MyUser.objects.filter(role__role='DEPARTMENT CHAIRPERSON', college__college='College of Information Technology Education')
-            }
-        else:
+            'members': MyUser.objects.filter(role__role='DEPARTMENT CHAIRPERSON', college__college='College of Information Technology Education'),
+            'accr_type': AccreditationType.objects.all(),
+            'title': 'Home',
+            'f': Forms.objects.all(),
+        }
+        # else:
 
-            context = {
-                'members': MyUser.objects.filter(role__role='DEPARTMENT CHAIRPERSON')
-            }
+        #     context = {
+        #         'members': MyUser.objects.filter(role__role='DEPARTMENT CHAIRPERSON')
+        #     }
     elif user.is_authenticated and user.role.role == 'DEPARTMENT CHAIRPERSON':
         if user.program.program == 'BS Information Technology':
 

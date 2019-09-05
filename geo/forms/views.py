@@ -13,7 +13,7 @@ from .models import Files
 from django.forms.models import modelform_factory
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.db.models import Max, Sum, Avg, F
-from forms.models import Forms, SubdivisionDetail, Subdivision, Division
+from forms.models import Forms, SubdivisionDetail, Subdivision, Division, AccreditationType
 from django.db.models.expressions import RawSQL
 from django.db import IntegrityError
 
@@ -23,7 +23,20 @@ from django.core.files.storage import FileSystemStorage
 class FormListView(LoginRequiredMixin, ListView):
     model = Forms
     context_object_name = 'forms'
+    def form_valid(self, form):
 
+        form.instance.id = self.kwargs.get('pk')
+
+        return super(FormListView, self).form_valid(form)
+    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['a'] = self.kwargs.get('pk')
+        context['f'] = Forms.objects.all()
+        context['d'] = Division.objects.all()
+        context['sd'] = Subdivision.objects.all()
+        context['sdd'] = SubdivisionDetail.objects.all()
+        return context
 
 class FormDetailView(LoginRequiredMixin, DetailView):
 

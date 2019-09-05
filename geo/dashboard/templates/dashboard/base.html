@@ -14,7 +14,7 @@
     <link href="{% static 'css/theme.ba/bootstrap.min.css'%}" rel="stylesheet">
     <link href="{% static 'css/theme.ba/animate.css'%}" rel="stylesheet">
     <link href="{% static 'css/theme.ba/style.css'%}" rel="stylesheet">
-    <link href="{% static 'css/acmsa/acmsastyle.css'%}" rel="stylesheet">
+    <!-- <link href="{% static 'css/acmsa/acmsastyle.css'%}" rel="stylesheet"> -->
     <link href="{% static 'font-awesome/css/font-awesome.css'%}" rel="stylesheet">
 
     <link href="{% static 'css/theme.ba/plugins/iCheck/custom.css'%}" rel="stylesheet">
@@ -42,24 +42,24 @@
                             <img alt="image" class="img-circle" src="{{user.profile.image.url}}"/>
                         </div> -->
                     </li>
+                    {% if user.role.role != 'ADMINISTRATOR' %}
                     <li>
                         <a href="{% url 'home' %}"><i class="fa fa-pie-chart"></i> <span class="nav-label">Accreditation tracker</span></a>
                     </li>
-                    {% if user.role.role == 'COLLEGE DEAN' %}
-                    <li>
-                        <a href="{% url 'form-list' %}"> <i class="fa fa-table"></i> <span class="nav-label">Accreditation forms</span></a>
-                    </li>
-                    {% endif %} 
+                    {% endif %}
+                    
                     <li>
                             <a href="{% url 'profile' %}"><i class="fa fa-male"></i> <span class="nav-label">Profile</span></a>
-                    </li>
-                    <li>
-                            <a href="{% url 'calendar' %}"><i class="fa fa-calendar"></i> <span class="nav-label">Calendar</span></a>
+                            
                     </li>
                     {% if user.role.role == 'ADMINISTRATOR' %}
                         <!-- <li><a href="{%url 'user_changelist'%}"> <i class="fa fa-user"></i>Manage User</a></li> -->
                         <li><a href="{%url 'register'%}"> <i class="fa fa-plus"></i>Add User</a></li>
                     {% endif %}
+                    <li>
+                            <a href="{% url 'calendar' %}"><i class="fa fa-calendar"></i> <span class="nav-label">Calendar - Beta</span></a>
+                    </li>
+                    
                     
                     
                 </ul>
@@ -72,14 +72,23 @@
         <nav class="navbar navbar-static-top" role="navigation" style="margin-bottom: 0">
         <div class="navbar-header">
 
-                            <a class="navbar-minimalize minimalize-styl-2 btn btn-primary " href="#"><i class="fa fa-bars"></i> </a>
-
+                           
+                            
+                            
+                                    
+                                            <a class="navbar-minimalize minimalize-styl-2 btn btn-primary " href="#"><i class="fa fa-bars"></i> </a>
+                                    
+                                   
             
         </div>
+        
+        
             <ul class="nav navbar-top-links navbar-right">
+                
                 <li>
                     <span class="m-r-sm text-muted welcome-message">Welcome to TACOS-TIP</span>
                 </li>
+
                 <li class="dropdown">
                    
                     
@@ -99,23 +108,22 @@
                         <i class="fa fa-sign-out"></i> Log out
                     </a>
                 </li>
-                
+                </li>
+                </ul>
 
         </nav>
         </div>
-        <!-- <div class="row wrapper border-bottom white-bg page-heading">
+        
+        {% if title %}
+        <div class="row wrapper border-bottom white-bg page-heading" style="padding-top: 2rem">
                 <div class="col-sm-4">
-                    <h3>Accreditation Tracker</h2>
-                    <ol class="breadcrumb">
-                        <li>
-                            <a href="{% url 'home' %}">Home</a>
-                        </li>
-                        <li class="active">
-                            <strong>Accreditation Tracker</strong>
-                        </li>
-                    </ol>
+                    <h3>{{title}}</h2>
+                    
                 </div>
-         </div>        -->
+         </div>   
+        {% endif %}
+                
+         
         <div class="row  border-bottom white-bg dashboard-header" style="padding-bottom: 4rem">
                 {% if messages %} {% for message in messages %}
                 <div class="alert alert-{{ message.tags }}">

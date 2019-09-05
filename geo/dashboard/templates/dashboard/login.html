@@ -1,4 +1,5 @@
 {% load static %}
+{% load crispy_forms_tags %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -25,8 +26,17 @@
                 <img src="{% static 'img/logologintemp.png' %}" alt="ACMSA LOGO" width="390" class="brand">
                 <form method="POST">
                     {% csrf_token %}
-                    <input type="text" name="username" id="username" placeholder="Enter username" class="form-control">
-                    <input type="password" name="password" id="password" placeholder="Enter password" class="form-control">
+                    {{ form.non_field_errors }}
+                    
+                        {{ form.username.errors }}
+                        <!-- <label for="{{ form.username.id_for_label }}"></label> -->
+                        <input type="text" name="username" id="username" placeholder="Enter username" class="form-control">
+                    
+                    
+                        {{ form.password.errors }}
+                        <!-- <label for="{{ form.password.id_for_label }}"></label> -->
+                        <input type="password" name="password" id="password" placeholder="Enter password" class="form-control">
+                    
                     <button type="submit" class="btn btn-block btn-login">Login</button>
                 </form>
             </div>

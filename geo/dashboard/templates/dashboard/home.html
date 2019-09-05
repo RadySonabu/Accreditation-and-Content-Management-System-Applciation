@@ -39,11 +39,62 @@
 {{ARDY}}
 {% if mem.college.college == 'College of Information Technology Education' %}
 
+  
+  
+   
+  
+    
+  <div class="row  border-bottom white-bg dashboard-header">
+
+    <div class="col-sm-4">
+        
+        <small>Here is the current state of the accreditation for SY 19-20</small>
+        <ul class="list-group clear-list m-t">
+          
+            {% for a in accr_type %}
+                
+                {% for f in f %}
+                
+                  {% if f.year == 2019 and f.id  == 1%}
+                 
+                  <li class="list-group-item fist-item"></li>
+                  <span class="label label-success">{{a.id}}</span> <a href="{% url 'form-list' a.id %}">{{a}}</a>
+                  </li>
+                  
+                  {% endif %}
+                {% endfor %}
+                  
+                {% endfor %} 
+                
+            </ul>
+    </div>
 
 
+        
+    
+    <div class="col-sm-2">
+        </div>
+        
+                <div class="col-sm-4">
+                    <div class="ibox float-e-margins">
+                        
+                            <h1>        </h1>
+                            <h3>{{a}} </h5>
+
+                       
+                        <div class="ibox-content">
+                            <div>
+                                <canvas id="doughnutChart" height="100"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+ </div>          
 
 
-<div class="container ">
+ <!-- end of a in accr_type -->
+
+<!-- <div class="container ">
   <div class="row">
     {% if mem.program.program == 'BS Information Technology' %}
     <div class="col-md-3">
@@ -66,7 +117,7 @@
       </div>
     </div>
   </div>
-</div>
+</div> -->
 
 
 

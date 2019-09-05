@@ -21,7 +21,7 @@ class Forms(models.Model):
     type_of_accreditation = models.ForeignKey(
         AccreditationType, on_delete=models.CASCADE)
 
-    year = models.CharField(max_length=4)
+    year = models.IntegerField()
     college = models.ForeignKey(
         College, on_delete=models.CASCADE, blank=True, null=True)
 
