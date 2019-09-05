@@ -32,7 +32,9 @@ def home(request):
 
             context = {
                 'members': MyUser.objects.filter(program__program='BS Information Technology'),
-                'form': Forms.objects.all()
+                'accr_type': AccreditationType.objects.all(),
+                'title': 'Home',
+                'f': Forms.objects.all(),
             }
     else:
         return render(request, 'dashboard/home.html')
