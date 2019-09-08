@@ -4,14 +4,27 @@ from multiselectfield import MultiSelectField
 from members.models import MyUser
 from django.db.models import Sum
 from choices.models import Role, College, Program
+from PIL import Image
 
 
 class AccreditationType(models.Model):
 
     type_of_accreditations = models.CharField(max_length=150)
+    image = models.ImageField(
+        upload_to='accreditation_image', blank=True, null=True)
 
     def __str__(self):
         return self.type_of_accreditations
+
+    def save(self, *args, **kwargs):
+        super().save()
+
+        img = Image.open(self.image.path)
+
+        if img.height > 200 or img.width > 200:
+            output_size = (200, 200)
+            img.thumbnail(output_size)
+            img.save(self.image.path)
 
 
 class Forms(models.Model):

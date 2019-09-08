@@ -58,8 +58,10 @@
                   {% if f.year == 2019 and f.id  == 1%}
                  
                   <li class="list-group-item fist-item"></li>
-                  <span class="label label-success">{{a.id}}</span> <a href="{% url 'form-list' a.id %}">{{a}}</a>
+                  <span class="label label-success">{{a.id}}</span> <a href="{% url 'form-list' a.id %}">
+                    <img class="avatar" src="/media/{{a.image}}" alt="..." style="width: 30%"></a>
                   </li>
+                  
                   
                   {% endif %}
                 {% endfor %}
@@ -72,7 +74,7 @@
 
         
     
-    <div class="col-sm-2">
+    <!-- <div class="col-sm-2">
         </div>
         
                 
@@ -92,7 +94,7 @@
                     </div>
                 </div>
                 {% endfor %}
-                  
+                   -->
  </div>          
 
 
@@ -158,7 +160,7 @@
 <div class="row container">
 
     <div class="col-sm-4">
-        
+       qwe
         
         <ul class="list-group clear-list m-t">
           
@@ -171,6 +173,7 @@
                   <li class="list-group-item fist-item"></li>
                   <span class="label label-success">{{a.id}}</span> <a href="{% url 'form-list' a.id %}">{{a}}</a>
                   </li>
+                  
                   
                   {% endif %}
                 {% endfor %}

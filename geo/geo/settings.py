@@ -131,7 +131,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 
 STATIC_URL = '/static/'
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+# STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
@@ -153,4 +153,4 @@ MEDIA_URL = '/media/'
 AUTH_USER_MODEL = 'members.MyUser'
 LOGIN_REDIRECT_URL = 'home'
 
-THUMBNAIL_PRESERVE_FORMAT = True
+# THUMBNAIL_PRESERVE_FORMAT = True

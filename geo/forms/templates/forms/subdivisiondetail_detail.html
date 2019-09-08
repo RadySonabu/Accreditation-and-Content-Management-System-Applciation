@@ -44,7 +44,7 @@
                     
                             {% if d.title.id == object.subdivision.division.title.id %}
                             <tr>
-                                <td style="word-wrap: break-word;min-width: 400px;max-width: 400px;"><strong>{{d.criteria}}</strong> 
+                                <td style="word-wrap: break-word;min-width: 350px;max-width: 350px;"><strong>{{d.criteria}}</strong> 
                                   {% if user == f.created_by  %}
                                   <a href="{% url 'subdivision-create' d.id%}">Add Minor Criteria</a>
                                   {% endif %}   
@@ -70,7 +70,7 @@
                             {% for s in sd %}
                             {% if s.division.id == d.id %}
                             <tr >
-                                <td style="word-wrap: break-word;min-width: 400px;max-width: 400px;""> &nbsp;&nbsp;&nbsp; {{s.criteria}}
+                                <td style="word-wrap: break-word;min-width: 350px;max-width: 350px;""> &nbsp;&nbsp;&nbsp; {{s.criteria}}
                                   {% if user == f.created_by %}
                                   <a href="{% url 'subdivisiondetail-create' s.id %}">Add Subcriteria</a>
                                   {% endif %}  
@@ -97,13 +97,13 @@
                               {% for x in sdd %}                     
                               {% if x.subdivision.id == s.id and s.division.id == d.id %}
                               <tr >
-                                  <td style="word-wrap: break-word;min-width: 400px;max-width: 400px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {{x.criteria}}    
+                                  <td style="word-wrap: break-word;min-width: 350px;max-width: 350px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {{x.criteria}}    
                                   </td>
                                   <td class="form-group col-md-1 mb-0 "> {{x.points}}    
                                     </td>
                                     <td class="form-group col-md-1 mb-0"> {{x.subpoints}}    
                                       </td>
-                                      <td style="word-wrap: break-word;min-width: 400px;max-width: 400px;"> {{x.remarks}}    
+                                      <td style="word-wrap: break-word;min-width: 350px;max-width: 350px;"> {{x.remarks}}    
                                         </td>
                                         <td class=""> {{x.subtotal}}    
                                           </td>

@@ -7,7 +7,7 @@ from django.http import HttpResponse
 
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from django.urls import reverse, reverse_lazy
-from .forms import SubdivisionForm, SubdivisionDetailForm, FormForm, FileForm
+from .forms import SubdivisionForm, SubdivisionDetailForm, FormForm, FileForm, DivisionForm
 from .models import Files
 
 from django.forms.models import modelform_factory
@@ -139,7 +139,7 @@ class DivisionDetailView(LoginRequiredMixin, DetailView):
 
 class DivisionCreateView(LoginRequiredMixin, CreateView):
     model = Division
-    fields = ('criteria',)
+    form_class = DivisionForm
 
     def form_valid(self, form):
 
@@ -159,7 +159,7 @@ class DivisionCreateView(LoginRequiredMixin, CreateView):
 
 class DivisionUpdateView(LoginRequiredMixin, UpdateView):
     model = Division
-    fields = ['criteria', ]
+    form_class = DivisionForm
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)

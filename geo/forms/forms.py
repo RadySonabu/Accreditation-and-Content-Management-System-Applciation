@@ -17,7 +17,7 @@ class SubdivisionForm(forms.ModelForm):
         fields = ('criteria', 'points')
         labels = {"points": "Weight", 'subtotal': 'Total'}
         widgets = {
-            'criteria': forms.TextInput(attrs={}),
+            'criteria':  forms.Textarea(attrs={}),
             'points': forms.NumberInput(attrs={'style': 'width:6ch'}),
         }
 
@@ -32,10 +32,10 @@ class SubdivisionDetailForm(forms.ModelForm):
 
         labels = {"subpoints": "Breakdown", 'subtotal': 'Subpoints'}
         widgets = {
-            'criteria': forms.TextInput(attrs={}),
+            'criteria':  forms.Textarea(attrs={}),
 
             'subpoints': forms.NumberInput(attrs={'style': 'width:6ch'}),
-            'remarks': forms.TextInput(attrs={}),
+            'remarks':  forms.Textarea(attrs={}),
             'subtotal': forms.NumberInput(attrs={'style': 'width:6ch'}),
 
         }
@@ -45,3 +45,17 @@ class FileForm(forms.ModelForm):
     class Meta:
         model = Files
         fields = ('title', 'author', 'pdf')
+
+
+class DivisionForm(forms.ModelForm):
+
+    class Meta:
+        model = Division
+        fields = ('criteria',)
+
+        widgets = {
+            'criteria': forms.Textarea(attrs={'class': 'special', 'maxlength': '99', }),
+
+
+
+        }
