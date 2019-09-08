@@ -54,9 +54,9 @@
                             </td>
                             <td class="form-group col-md-2 pt-3 "><strong></strong>
                             </td>
-                            <td class="form-group col-md-1 pt-3 "><strong></strong>
+                            <td class="form-group col-md-1 pt-3 "><strong>{{d.total}}</strong>
                             </td>
-                            <td class="form-group col-md-1 pt-3 "><a href="{% url 'division-update' d.id%}"><i class="btn btn-secondary fa fa-edit"></i></a>
+                            <td class="form-group col-md-1 pt-3 "><a href="{% url 'division-update' d.id%}" ><i class="btn btn-secondary fa fa-edit"></i></a>
                             </td>
                         </tr>
                       
@@ -96,7 +96,7 @@
                               </td>
                               <td class="form-group col-md-2 pt-3 "><strong></strong>
                               </td>
-                              <td class="form-group col-md-1 pt-3 "><strong></strong>
+                              <td class="form-group col-md-1 pt-3 "><strong>{{s.total}}</strong>
                               </td>
                               <td class="form-group col-md-1 pt-3 "><a href="{% url 'subdivision-update' s.id%}"><i class="btn btn-secondary fa fa-edit"></i></a>
                               </td>
@@ -192,6 +192,10 @@
 </div>
 </div>
 
-
+<script type="text/javascript">
+	$(document).ready(function(){
+		$("#myModal").modal('show');
+	});
+</script>
   
 {% endblock%}

@@ -18,7 +18,7 @@ class SubdivisionForm(forms.ModelForm):
         labels = {"points": "Weight", 'subtotal': 'Total'}
         widgets = {
             'criteria':  forms.Textarea(attrs={}),
-            'points': forms.NumberInput(attrs={'style': 'width:6ch'}),
+            'points': forms.NumberInput(attrs={'style': 'width:50pt'}),
         }
 
 
@@ -34,9 +34,9 @@ class SubdivisionDetailForm(forms.ModelForm):
         widgets = {
             'criteria':  forms.Textarea(attrs={}),
 
-            'subpoints': forms.NumberInput(attrs={'style': 'width:6ch'}),
+            'subpoints': forms.NumberInput(attrs={'style': 'width:50pt'}),
             'remarks':  forms.Textarea(attrs={}),
-            'subtotal': forms.NumberInput(attrs={'style': 'width:6ch'}),
+            'subtotal': forms.NumberInput(attrs={'style': 'width:50pt'}),
 
         }
 
