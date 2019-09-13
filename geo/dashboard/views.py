@@ -45,3 +45,19 @@ def home(request):
 @login_required
 def calendar(request):
     return render(request, 'dashboard/calendar.html', {'title': 'Calendar'})
+
+
+@login_required
+def chairperson_forms(request, pk):
+    user = request.user
+    if user.program.program == 'BS Information Technology':
+        context = {
+            'members': MyUser.objects.filter(program__program='BS Information Technology'),
+            'accr_type': AccreditationType.objects.all(),
+            'title': 'Home',
+            'f': Forms.objects.all(),
+            'pk': pk
+        }
+    else:
+        return render(request, 'dashboard/home.html')
+    return render(request, 'forms/chairperson_forms.html', context)

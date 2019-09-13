@@ -6,6 +6,8 @@ urlpatterns = [
 
     path('home/', views.home, name='home'),
     path('calendar/', views.calendar, name='calendar'),
+    path('chairperson-forms/<int:pk>/',
+         views.chairperson_forms, name='chairperson-forms'),
     path('', auth_views.LoginView.as_view(
-        template_name='dashboard/login.html'), name='login'),
+        template_name='dashboard/login.html', redirect_authenticated_user=True), name='login'),
 ]

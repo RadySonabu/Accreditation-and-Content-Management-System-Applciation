@@ -36,6 +36,7 @@ class FormListView(LoginRequiredMixin, ListView):
         context['d'] = Division.objects.all()
         context['sd'] = Subdivision.objects.all()
         context['sdd'] = SubdivisionDetail.objects.all()
+        
         return context
 
 class FormDetailView(LoginRequiredMixin, DetailView):

@@ -4,211 +4,234 @@
 <div style="margin-bottom: 4rem"></div>
 {% for mem in members %}
 
-{% if user.role.role == 'VPAA' %}
+        {% if user.role.role == 'VPAA' %}
 
-<div class="row">
-  {% if mem.college.college == 'CITE' %}
-  <div class="col-md-auto">
-    <div class="card">
-      <div class="card-body">
-        <h5 class="card-title">College of Info. Technology Education</h5>
-        <img class="mx-auto d-block " style="height: 200px; width: 200px; padding: 2%; justify-content: center"
-          src="https://cdn1.iconfinder.com/data/icons/charts-2/304/Untitled-41-512.png">
-      </div>
-    </div>
-  </div>
-  {% elif mem.college.college == 'CEA' %}
-  <div class="col-md-auto">
-    <div class="card">
-      <div class="card-body" style="justify-content: center">
-        <h5 class="card-title">College of Engineering and Architecture</h5>
-        <img class="mx-auto d-block " style="height: 200px; width: 200px; padding: 2%; justify-content: center"
-          src="https://cdn1.iconfinder.com/data/icons/charts-2/304/Untitled-35-512.png">
-      </div>
-    </div>
-  </div>
-</div>
-
-
-
-{% endif %}
-
-
-
-{% elif user.role.role == 'COLLEGE DEAN' %}
-
-{% if mem.college.college == 'College of Information Technology Education' %}
-
-  
-  
-   
-  
-    
-  <div class="row container">
-
-    <div class="col-sm-4">
-        
-        
-        <ul class="list-group clear-list m-t">
-          
-            {% for a in accr_type %}
-                
-                {% for f in f %}
-                
-                  {% if f.year == 2019 and f.id  == 1%}
-                 
-                  <li class="list-group-item fist-item"></li>
-                  <span class="label label-success">{{a.id}}</span> <a href="{% url 'form-list' a.id %}">
-                    <img class="avatar" src="/media/{{a.image}}" alt="..." style="width: 30%"></a>
-                  </li>
-                  
-                  
-                  {% endif %}
-                {% endfor %}
-                  
-                {% endfor %} 
-                
-            </ul>
-    </div>
-
-
-        
-    
-    <!-- <div class="col-sm-2">
+        <div class="row">
+          {% if mem.college.college == 'College of Information Technology Education' %}
+          <div class="col-md-auto">
+            <div class="card">
+              <div class="card-body">
+                <h5 class="card-title">College of Info. Technology Education</h5>
+                <img class="mx-auto d-block " style="height: 200px; width: 200px; padding: 2%; justify-content: center"
+                  src="https://cdn1.iconfinder.com/data/icons/charts-2/304/Untitled-41-512.png">
+              </div>
+            </div>
+          </div>
+          {% elif mem.college.college == 'College of Engineering and Architecture' %}
+          <div class="col-md-auto">
+            <div class="card">
+              <div class="card-body" style="justify-content: center">
+                <h5 class="card-title">College of Engineering and Architecture</h5>
+                <img class="mx-auto d-block " style="height: 200px; width: 200px; padding: 2%; justify-content: center"
+                  src="https://cdn1.iconfinder.com/data/icons/charts-2/304/Untitled-35-512.png">
+              </div>
+            </div>
+          </div>
         </div>
-        
-                
-                {% for f in f %}
-                
-                <div class="col-sm-4">
-                    <div class="ibox float-e-margins">
-                        
-                            
 
-                       
-                        <div class="ibox-content">
-                            <div>
-                                <canvas id="doughnutChart" height="200"></canvas>
+
+
+        {% endif %}
+
+
+
+        {% elif user.role.role == 'COLLEGE DEAN' %}
+
+        {% if mem.college.college == 'College of Information Technology Education' %}
+
+          
+          
+          
+          
+            
+          <div class="row container">
+
+            <div class="col-md-9">
+                
+                
+                
+                  
+                    
+                      <div class="ibox">
+                        
+                            {% for a in accr_type %}
+                        
+                            {% for f in f %}
+                            
+                              {% if f.year == 2019 and f.id  == 1%}
+                            
+                              
+                                <div class="col-md-4 border" style="justify-content: center">
+                                    <a href="{% url 'form-list' a.id %}">
+                                    <div class="ibox-title text-center"  style="justify-content: center"><strong><h3>{{a.id}} {{a.type_of_accreditations}}</h3></strong></div>
+                                    <!-- <div class="ibox-content"> -->
+                                        <div class="ibox-content text-center">
+                                      
+                                        <img class="avatar" src="/media/{{a.image}}" alt="..." style="width: 50%">
+                                    </a>
+                                  </div>
+                                  
+                              
+                          </div>
+                              
+                              
+                              
+                              {% endif %}
+                            {% endfor %}
+                              
+                            {% endfor %} 
+                        </div>
+                        
+                    
+                    
+                      
+                        </div>
+            </div>
+
+
+                
+            
+            <!-- <div class="col-sm-2">
+                </div>
+                
+                        
+                        {% for f in f %}
+                        
+                        <div class="col-sm-4">
+                            <div class="ibox float-e-margins">
+                                
+                                    
+
+                              
+                                <div class="ibox-content">
+                                    <div>
+                                        <canvas id="doughnutChart" height="200"></canvas>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                    </div>
+                        {% endfor %}
+                          -->
+        </div>          
+
+
+        <!-- end of a in accr_type -->
+
+        <!-- <div class="container ">
+          <div class="row">
+            {% if mem.program.program == 'BS Information Technology' %}
+            <div class="col-md-3">
+              <div class="card ">
+                <div class="card-body ">
+                  <h5 class="card-title">Department of Info.Technology</h5>
+                  <img class="mx-auto d-block " style="height: 200px; width: 200px; padding: 2%; justify-content: center"
+                    src="https://cdn1.iconfinder.com/data/icons/charts-2/304/Untitled-41-512.png">
                 </div>
-                {% endfor %}
-                   -->
- </div>          
+              </div>
+            </div>
+            {% elif mem.program.program == 'BS Computer Science' %}
+            <div class="col-md-3">
+              <div class="card">
+                <div class="card-body" style="justify-content: center">
+                  <h5 class="card-title">Department of Computer Science</h5>
+                  <img class="mx-auto d-block " style="height: 200px; width: 200px; padding: 2%; justify-content: center"
+                    src="https://cdn1.iconfinder.com/data/icons/charts-2/304/Untitled-42-512.png">
+                </div>
+              </div>
+            </div>
+          </div>
+        </div> -->
 
 
- <!-- end of a in accr_type -->
 
-<!-- <div class="container ">
-  <div class="row">
-    {% if mem.program.program == 'BS Information Technology' %}
-    <div class="col-md-3">
-      <div class="card ">
-        <div class="card-body ">
-          <h5 class="card-title">Department of Info.Technology</h5>
-          <img class="mx-auto d-block " style="height: 200px; width: 200px; padding: 2%; justify-content: center"
-            src="https://cdn1.iconfinder.com/data/icons/charts-2/304/Untitled-41-512.png">
+
+
+        {% endif %}
+
+
+
+        {% endif %}
+
+
+        {% elif user.role.role == 'DEPARTMENT CHAIRPERSON' %}
+        {% if mem.program.program == 'BS Information Technology' %}
+
+
+
+
+        <!-- {% for f in form %}
+
+        {% if f.created_for.program == mem.program.program %}
+        <div class="col-md-3">
+          <div class="card">
+            <div class="card-body" style="justify-content: center">
+              <h5 class="card-title"><a href="{% url 'form-detail' pk=f.id%}">Department of Info.Technology</a></h5>
+              <a href="{% url 'form-detail' a%}"><img class="mx-auto d-block " style="height: 200px; width: 200px; padding: 2%; justify-content: center"
+                src="https://cdn1.iconfinder.com/data/icons/charts-2/304/Untitled-41-512.png"></a>
+            </div>
+          </div>
         </div>
-      </div>
-    </div>
-    {% elif mem.program.program == 'BS Computer Science' %}
-    <div class="col-md-3">
-      <div class="card">
-        <div class="card-body" style="justify-content: center">
-          <h5 class="card-title">Department of Computer Science</h5>
-          <img class="mx-auto d-block " style="height: 200px; width: 200px; padding: 2%; justify-content: center"
-            src="https://cdn1.iconfinder.com/data/icons/charts-2/304/Untitled-42-512.png">
-        </div>
-      </div>
-    </div>
-  </div>
-</div> -->
+        {% endif %}
 
 
+        {% endfor %} -->
+
+        <div class="row container">
+
+            <div class="row container">
+
+                <div class="col-md-9">
+                    
+                    
+                    
+                      
+                        
+                          <div class="ibox">
+                            
+                                {% for a in accr_type %}
+                            
+                                {% for f in f %}
+                                
+                                  {% if f.year == 2019 and f.id  == 1%}
+                                
+                                  
+                                    <div class="col-md-4 border" style="justify-content: center">
+                                        <a href="{% url 'chairperson-forms' a.id %}">
+                                        <div class="ibox-title text-center"  style="justify-content: center"><strong><h3>{{a.id}} {{a.type_of_accreditations}}</h3></strong></div>
+                                        <!-- <div class="ibox-content"> -->
+                                            <div class="ibox-content text-center">
+                                          
+                                            <img class="avatar" src="/media/{{a.image}}" alt="..." style="width: 50%">
+                                        </a>
+                                      </div>
+                                      
+                                  
+                              </div>
+                                  
+                                  
+                                  
+                                  {% endif %}
+                                {% endfor %}
+                                  
+                                {% endfor %} 
+                            </div>
+                            
+                        
+                        
+                          
+                            </div>
+                </div>
 
 
-
-{% endif %}
-
-
-
-{% endif %}
-{% elif user.role.role == 'DEPARTMENT CHAIRPERSON' %}
-{% if mem.program.program == 'BS Information Technology' %}
-
-
-
-
-<!-- {% for f in form %}
-
-{% if f.created_for.program == mem.program.program %}
-<div class="col-md-3">
-  <div class="card">
-    <div class="card-body" style="justify-content: center">
-      <h5 class="card-title"><a href="{% url 'form-detail' pk=f.id%}">Department of Info.Technology</a></h5>
-      <a href="{% url 'form-detail' a%}"><img class="mx-auto d-block " style="height: 200px; width: 200px; padding: 2%; justify-content: center"
-        src="https://cdn1.iconfinder.com/data/icons/charts-2/304/Untitled-41-512.png"></a>
-    </div>
-  </div>
-</div>
-{% endif %}
-
-
-{% endfor %} -->
-
-<div class="row container">
-
-    <div class="col-sm-4">
-       qwe
-        
-        <ul class="list-group clear-list m-t">
-          
-            {% for a in accr_type %}
                 
-                {% for f in f %}
-                
-                  {% if f.year == 2019 and f.id  == 1%}
-                 
-                  <li class="list-group-item fist-item"></li>
-                  <span class="label label-success">{{a.id}}</span> <a href="{% url 'form-list' a.id %}">{{a}}</a>
-                  </li>
-                  
-                  
-                  {% endif %}
-                {% endfor %}
-                  
-                {% endfor %} 
-                
-            </ul>
-    </div>
+            
+           
+                          
+        </div>       
 
 
-        
-    
-    <div class="col-sm-2">
-        </div>
-        
-                
-                {% for f in f %}
-                {% if f.created_for.program == mem.program.program %}
-                <div class="col-md-3">
-                    <div class="card">
-                      <div class="card-body" style="justify-content: center">
-                        <h5 class="card-title"><a href="{% url 'form-detail' f.id %}">Department of Info.Technology</a></h5>
-                        <a href="{% url 'form-detail' f.id %}"><img class="mx-auto d-block " style="height: 200px; width: 200px; padding: 2%; justify-content: center"
-                          src="https://cdn1.iconfinder.com/data/icons/charts-2/304/Untitled-41-512.png"></a>
-                      </div>
-                    </div>
-                  </div>
-                {% endif %}
-                {% endfor %}
-                  
- </div>       
-
-
-{% endif %}
-{% endif %}
+        {% endif %}
+        {% endif %}
 {% endfor %}
 
 

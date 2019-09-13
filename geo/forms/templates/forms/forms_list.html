@@ -9,9 +9,9 @@
 
   {% if user.role.role == 'COLLEGE DEAN'  and form.created_by == user.instance %}
 
-        <form method="POST">
+        <!-- <form method="POST"> -->
         {% csrf_token %}
-        <fieldset class="">
+        <!-- <fieldset class=""> -->
             <legend class="border-bottom mb-4">List of Forms <a href="{% url 'form-create' a %}"><i class="fa fa-plus"></i></a></legend>
             <div class="row">
                
@@ -32,21 +32,32 @@
                               {% if f.year == 2019 and f.type_of_accreditation.id == a  %}
                                 
                               
+                              
+                                
+                              
+                                
                               <div class="col-lg-3 p-2">
-                                              <div class="ibox">
-                                                <div class="ibox-content" style="justify-content: center">
-                                                  <h6 class="card-title">{{ f.type_of_accreditation}}</h6>
+                                              <div class="ibox float-e-margins">
+                                                <div class="ibox-content text-center" style="justify-content: center">
+                                                    <a href="{% url 'form-detail' f.id %}">
+                                                  <h4 class="card-title">{{ f.type_of_accreditation}}</h6>
                                                   <h7 class="card-title">{{ f.created_for}}</h7>
-                                                  <h5 class="card-title">{{ f.year}}</h5>
-                                                  <a href="{% url 'form-detail' f.id %}"><img class="mx-auto d-block " data-toggle="modal" 
-                                                    data-target="#exampleModalLong"  style="height: 200px; width: 200px; padding: 2%; justify-content: center" 
-                                                    src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAOEAAADhCAMAAAAJbSJIAAAAYFBMVEX///+Aw4B5wHl+wn71+vWNyY12v3aFxYXO5s77/fu127W83rzS6dKVzZXs9ux4wHjh8OGt162z2rOl06Xx+PG53LlxvXHn8+ei0qKJx4mq1qqcz5zZ7NnE4sSPyY+az5rQcl2JAAAF10lEQVR4nO3dfX+aMBAHcEgUWtuCOjvrbOf7f5cDebqQSyD4wB2731+ba63fz1GOnJhFkUQikUgkEolEIpFIJBKJRCKRSCQSiURyt7zolFsugcJcc8tHoFDFzCJCEdKPCP9joUqIJ79RqD6jV9KJjvmNwrew73t+skSEeERIJyJ0RYR0IkJXREgnInRFhHQiQldESCd3Fq7mzDOEh99qvuSvzxDWzzZHtH6KMHe/AhGKUIQivNe5dMZ3QNVThOl6vpyeIaQYEboiQjoRoSsipBMRuiJCOhGhKyKkExG6IkI6EaErC5jqH6YIOU31s3w/Rchnqp8p7SdynyZmWsdxvlmu8AqM48RD5C0sDtHqQU8VWQtboK+KnIUAWBBdpxvGU30D6K4i36l+D+gksr1qs4AF8RP7Pq5CBOioIlNh3QfrU1P7R6xp8BRmhiru/oJUkaUQHqLFL99B+4gMhZeVCSxO/f0HYBgK17HlOdgPteEnhGeWVnPAHqzCUBhjFjeRs9CQOImMhb2j0UXkK7ROmg4iW6HaWV+BNw22wlht7S/BqshXqHObeEhtIh/hd3/uoH9bxNUJXK9+VY+xER7t5ZJVxRW4tFG/6ge5TPW3CbIe1IlBXMEVRwPkMtXfggrqbhsIo4poBblM9Y8JXA++dK8OVBECuwoymSZuc3MZjxFdQBZCCKzGopBYHahOIAehAayX8JBYNg0D+Mf4dvpCeJLpBttmFd0VZCCEbULBJQMg6tRZQfpTfWMuqmGrBERPBclP9TNzCyQN37N/QVqaDSR+1QYXC9Xx6CciQNpCe3TvJ2JA0sJ+BRGicUa0TjLV19AVGu9NOIg/4PdUYRWkLISHqPpQKBFOgtUX/jxkhb2JxCZBiHD25AKSFWb9qdI+t4hw8uQEUhVm9ttJmz4xG1NBqkKjgs37ZT3iuAoSFSIVLAOJ8fe4CtIUohUsA4kjK0hSiM51q2ywNY+jDzahJ3QcolUQor+CBIVWmzBjEQcqSE/orWCZfe8NmoEKkhMOVLDMBi4ZBytITThYwaicbAcBZ5nq43fmRZ42AV8ZPtkOFT50qp+4DpdRFUwDgXNM9V2/EA+p4CzTRIfQ0+g7YHAFCQmDD9HBNkFMOKJN+Eb39IWjKugd/BIXPq6Cs0z1bWE2cJvvLcA5pvqnnz4wsE0EASlctYVWELkbypf5haEV1Ouw559dGNro2X0OOLTRsxOGtgl2wtBGz044oYK8hKFtgp0wtE2wE4ZWUHMTBq/oz5qXcFSjh9eiuwOv/w0peD34h9neJsHrwR2z3VtCL9WuyyVOwikVZCUc1SbSPpDWDjx+YOiKvl7wUtpX37GFTv1Cp1WQ1L76ro0tqmcObRPtyILQft4+YWgfTLqZDA+hUUHHZiQGEEzVWAhvqCAPYTamgileQRbCqW3iMcKbpvr4FjqT28RjhDdN9fEtdE43VZDBVduqa7FTKshA+NbeBjOpggyEpxBggrz5Ql14bA7S8DZRh7pwV79+NeJ3EKsgfWHdC3WK/7O1ordDXPjeXEIo9PUNnGSuIS48twKM6G8TdWgLQTOM1cX61xEVpC6EH0+yiKMqSF0Irtgs4kggbeGxt1SBxLFA2sK9+VlXSBwNpC20PynZEMcDSQu7nWV0jxgAJC38ahh/z93hWvbFcW2iDmHha8NSPxH4LKi6GDfE+jdWj7oZ7lSh/vX+qLTnmWQVQaIG+13E6++hp2l66lRhrO91K76V9g34c/kDP+zPZ1dFHEzzNFOFj0/+Xv7Ao0M4OnSFWhdni7fTzXcfExaef9YJtr9x6POQFRof+7zlaegK7xQRWsLkYV0CnuLt11l2p2kdKlC43W8emc8U9ankNP3n9m/1nzcrpDmoPP08zv3C7pY3a2WYLIlXxPzdK6q3WRSv3EwO8JJ4abyom+Vrnccbe8vYBeR6FVPw9H6RvOssv6zeUnlFLipRu+Xyyjs6Fs0r4r9HUSKRSCQSiUQikUjY5B8pda1HlKR2sgAAAABJRU5ErkJggg==">
+                                                  
+                                                  
+                                                  
+                                                      <img class="avatar" src="/media/{{f.type_of_accreditation.image}}" alt="..." style="width: 50%">
+                                                      <h2 class="card-title">{{ f.year}}</h2>
+                                                      <div class="progress progress-mini">
+                                                          <div style="width: {{f.percent}}%;" class="progress-bar"></div>
+
+                                                      </div>
+                                                      <div>{{f.percent}}%</div>
                                                   </a> </div>
                                               </div>
                                             </div>
                               
                               
-                                
+                                            
                               
                                       
                               {% endif %} 
@@ -62,9 +73,9 @@
                     
             </div>
 </div>
-</fieldset>
+<!-- </fieldset> -->
 
-</form>
+<!-- </form> -->
 
 
   {%else%}

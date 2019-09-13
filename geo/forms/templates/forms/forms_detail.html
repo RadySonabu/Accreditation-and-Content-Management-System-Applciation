@@ -28,13 +28,15 @@
                     </div>
                     <div class="form-group col-md-3 mb-0 b"><h5>{{f.percent}}%</h5>
                     </div>
-                  </div>
+            </div>
                   <table class="table table-sm table-responsive table-striped table-bordered w-auto" ">
                       <thead class="text-center">
                           <tr>
                               <th class=" col-md-4 pt-3">Criteria{% if f.created_by == user %}
                                   <a href="{% url 'division-create' object.id%}"><i class="fa fa-plus"></i></a>
+                                  
                                   {% endif %}</th>
+                                  
                               <th class=" col-md-1 pt-3">Weight</th>
                               <th class=" col-md-1 pt-3">Breakdown</th>
                               <th class=" col-md-2 pt-3">Remarks</th>
@@ -76,7 +78,8 @@
                           <tr >
                               <td style="word-wrap: break-word;min-width: 350px;max-width: 350px;"">&nbsp;&nbsp;&nbsp;{{s.criteria}}
                                 {% if user == f.created_by %}
-                                <a href="{% url 'subdivisiondetail-create' s.id %}">Add Subcriteria</a>
+                                <a href="{% url 'subdivisiondetail-create' s.id %}"></a>Add Subcriteria</a>
+                                <a href="{% url 'subdivisiondetail-create' s.id %}"><i class="fa fa-upload"></i></a>
                                 {% endif %}  
                               </td>
                               <td class="form-group col-md-1 mb-0">{{s.points}}    
@@ -160,7 +163,7 @@
                           
                   
                   
-                  </fieldset>
+                 
                 
                 
             </fieldset>
@@ -170,6 +173,7 @@
     </div>
     </div>
     </div>
+
 
 
   
