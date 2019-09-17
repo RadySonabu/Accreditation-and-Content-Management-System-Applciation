@@ -91,3 +91,7 @@ def form_year(request):
 
     }
     return render(request, 'forms/load_forms.html', context)
+
+
+def lockscreen(request):
+    return render(request, 'dashboard/lockscreen.html')

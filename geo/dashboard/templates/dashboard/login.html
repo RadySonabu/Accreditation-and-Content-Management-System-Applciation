@@ -1,46 +1,56 @@
-{% load static %}
-{% load crispy_forms_tags %}
-<!DOCTYPE html>
-<html lang="en">
+{% load static %}<!DOCTYPE html>
+{% load crispy_forms_tags%}
+<html>
+
 <head>
-    <meta charset="UTF-8">
+
+    <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>TACOS-TIP | Login</title>
 
-    <link href="{% static 'css/theme.ba/bootstrap.min.css' %} " rel="stylesheet">
-    <link href="{% static 'font-awesome/css/font-awesome.css ' %}" rel="stylesheet">
+    <title>TACOS | Login</title>
 
-    <link href="{% static 'css/theme.ba/animate.css ' %}" rel="stylesheet">
-    <link href="{% static 'css/theme.ba/style.css' %}" rel="stylesheet">
-    <link href="{% static 'css/acmsa/acmsastyle.css' %}" rel="stylesheet">
+    <link href="{% static 'css/bootstrap.min.css'%}" rel="stylesheet">
+    <link href="{% static 'font-awesome/css/font-awesome.css'%}" rel="stylesheet">
+
+    <link href="{% static 'css/animate.css'%}" rel="stylesheet">
+    <link href="{% static 'css/style.css'%}" rel="stylesheet">
 
 </head>
-<body class="container login-container">
-    <section class="row login">
-        <div class="col-sm-6 image-form-container">
-            <div id="overlay"></div>
-        </div>
-        <div class="col-sm-6 col-xs-12 form-container">
-            <div class="login-card">
-                <img src="{% static 'img/logologintemp.png' %}" alt="ACMSA LOGO" width="390" class="brand">
-                <form method="POST">
-                    {% csrf_token %}
-                    {{ form.non_field_errors }}
-                    
-                        {{ form.username.errors }}
-                        <!-- <label for="{{ form.username.id_for_label }}"></label> -->
-                        <input type="text" name="username" id="username" placeholder="Enter username" class="form-control">
-                    
-                    
-                        {{ form.password.errors }}
-                        <!-- <label for="{{ form.password.id_for_label }}"></label> -->
-                        <input type="password" name="password" id="password" placeholder="Enter password" class="form-control">
-                    
-                    <button type="submit" class="btn btn-block btn-login">Login</button>
-                </form>
+
+<body class="gray-bg p-4">
+
+    <div class="middle-box text-center loginscreen animated fadeInDown">
+        <div class="payment-card" style="box-shadow: 0px 3px 5px -1px rgba(0, 0, 0, 0.2),
+        0px 5px 8px 0px rgba(0, 0, 0, 0.14),
+        0px 1px 14px 0px rgba(0, 0, 0, 0.12);">
+            <div>
+
+                    <img src="{% static 'img/logomalaki.png' %}" alt="ACMSA LOGO" width="50%" class="brand">
+
             </div>
-        </div> 
-    </section>
+            <h3>Welcome to TACOS</h3>
+            
+            
+            <form class="m-t" role="form" method="POST">
+                {% csrf_token %}
+                <div class="form-group">
+                   {{form|crispy}}
+                </div>
+                
+                <button type="submit" class="btn btn-primary block full-width m-b">Login</button>
+
+                <a href="{% url 'password_reset'%}"><small>Forgot password?</small></a>
+                
+                
+            </form>
+           
+        </div>
+    </div>
+
+    <!-- Mainly scripts -->
+    <script src="{% static 'js/jquery-2.1.1.js'%}"></script>
+    <script src="{% static 'js/bootstrap.min.js'%}"></script>
+
 </body>
+
 </html>

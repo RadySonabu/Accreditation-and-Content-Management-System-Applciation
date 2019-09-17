@@ -1,6 +1,4 @@
-
-
-{% extends "dashboard/base.html" %} 
+{% extends "dashboard/base.html" %}
 
 {% block content %}
 {% load crispy_forms_tags %}
@@ -15,72 +13,85 @@
   
 </form>
 
-  {% if user.role.role == 'COLLEGE DEAN'  and form.created_by == user.instance %}
+{% if user.role.role == 'COLLEGE DEAN'  and form.created_by == user.instance %}
 
-        <!-- <form method="POST"> -->
-        {% csrf_token %}
-        <!-- <fieldset class=""> -->
-            <legend class="border-bottom mb-4">List of Forms <a href="{% url 'form-create' a %}"><i class="fa fa-plus"></i></a></legend>
-            <div class="row" id="forms_dean" >
-               
-            
-                       
-                    <!-- 
+<!-- <form method="POST"> -->
+{% csrf_token %}
+<!-- <fieldset class=""> -->
+<legend class="border-bottom mb-4" style="color: 2px solid black">List of Forms <a href="{% url 'form-create' a %}"><i
+      class="fa fa-plus"></i></a>
+</legend>
+<div class="row col-md-12">
+
+
+
+  <!-- 
                         
                         {% if form.created_by == user  %}
                         <h2><a class="article-title" href="{% url 'form-detail' form.id %}">{{ form.title}}</a></h2>
                         {% endif %} -->
-                        
-                        {% for f in f %}
-                        
-                            {% if f.created_by == user  %}
-                            
-                            
-                            
-                              {% if f.year == year and f.type_of_accreditation.id == a  %}
-                                
-                              
-                              
-                                
-                              
-                                
-                              <div class="col-lg-3 p-2">
-                                              <div class="ibox float-e-margins">
-                                                <div class="ibox-content text-center" style="justify-content: center">
-                                                    <a href="{% url 'form-detail' f.id %}">
-                                                  <h4 class="card-title">{{ f.type_of_accreditation}}</h6>
-                                                  <h7 class="card-title">{{ f.created_for}}</h7>
-                                                  
-                                                  
-                                                  
-                                                      <img class="avatar" src="/media/{{f.type_of_accreditation.image}}" alt="..." style="width: 50%">
-                                                      <h2 class="card-title">{{ f.year}}</h2>
-                                                      <div class="progress progress-mini">
-                                                          <div style="width: {{f.percent}}%;" class="progress-bar"></div>
 
-                                                      </div>
-                                                      <div>{{f.percent}}%</div>
-                                                  </a> </div>
-                                              </div>
-                                            </div>
-                              
-                              
-                                            
-                              
-                                      
-                              {% endif %} 
-                              <!-- end of year and type of -->
-                
-        
-                          {% endif %}
-                          <!-- end of f.created -->
-                    {% endfor %}
-                    <!-- end of for f in f -->
-                              
-            
-                    
+  {% for f in f %}
+
+  {% if f.created_by == user  %}
+
+
+
+  {% if f.year == 2019 and f.type_of_accreditation.id == a  %}
+
+
+
+
+  <a href="{% url 'form-detail' f.id %}" class="block full-width m-b bounce">
+
+  <div class="col-md-3 p-2 bounce">
+    <div class="payment-card" style="box-shadow: 0px 3px 5px -1px rgba(0, 0, 0, 0.2),
+    0px 5px 8px 0px rgba(0, 0, 0, 0.14),
+    0px 1px 14px 0px rgba(0, 0, 0, 0.12); background: rgba(85, 85, 85, 0.12)">
+      <div class=" text-center" style="justify-content: center">
+       
+          <h4 class="card-title">{{ f.type_of_accreditation}}</h6>
+            <h7 class="card-title">{{ f.created_for}}</h7>
+
+
+
+            <img class="avatar" src="/media/{{f.type_of_accreditation.image}}" alt="..." style="width: 50%">
+            <h2 class="card-title">{{ f.year}}</h2>
+            <div class="progress progress-mini">
+
+              {% if f.percent >= 80 %}
+              <div style=" width: {{f.percent}}%; background-color: blue;" class="progress-bar">qwe</div>
+              {% elif f.percent >= 60%}
+              <div style=" width: {{f.percent}}%; background-color: green;" class="progress-bar"></div>
+              {% elif f.percent >= 50%}
+              <div style=" width: {{f.percent}}%; background-color: orange;" class="progress-bar"></div>
+              {% elif f.percent < 50%}
+              <div style=" width: {{f.percent}}%; background-color: red;" class="progress-bar"></div>
+              {% endif %}
+
             </div>
+            <div><h3>{{f.percent}}%</h3></div>
+        </a>
+      </div>
+    </div>
+  </div>
 
+
+
+
+
+  {% endif %}
+  <!-- end of year and type of -->
+
+
+  {% endif %}
+  <!-- end of f.created -->
+  {% endfor %}
+  <!-- end of for f in f -->
+
+
+
+</div>
 <!-- </fieldset> -->
 
 <!-- </form> -->

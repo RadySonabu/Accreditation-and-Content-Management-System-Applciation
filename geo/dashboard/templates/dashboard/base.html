@@ -38,7 +38,7 @@
     <link href="{% static 'css/plugins/toastr/toastr.min.css'%}" rel="stylesheet">
     <link href="{% static 'js/plugins/gritter/jquery.gritter.css'%}" rel="stylesheet">
 
-    <link rel="shortcut icon" href="{% static 'img/logomalaki.png' %}"/>
+    <link rel="shortcut icon" href="{% static 'img/logomalaki.png' %}" />
 </head>
 
 <body>
@@ -46,15 +46,20 @@
         <nav class="navbar-default navbar-static-side " role="navigation">
             <div class="sidebar-collapse ">
                 <ul class="nav metismenu  " id="side-menu">
-                    <li class="nav-header default-skin ">
+                    <li class="nav-header default-skin " style="box-shadow: 0px 3px 5px -1px rgba(0, 0, 0, 0.2),
+                    0px 5px 8px 0px rgba(0, 0, 0, 0.14),
+                    0px 1px 14px 0px rgba(0, 0, 0, 0.12); background: rgba(255, 255, 255, 0.12)">
                         <div class="dropdown profile-element img-fluid"> <span>
-                                <img alt="image" class="img-circle" src="{{user.profile.image.url}}" style="width: 50%" />
-                                 </span>
+                                <img alt="image" class="img-circle" src="{{user.profile.image.url}}"
+                                    style="width: 50%" />
+                            </span>
                             <a data-toggle="dropdown" class="dropdown-toggle" href="#">
-                            <span class="clear"> <span class="block m-t-xs"> <strong class="font-bold">{{user.first_name}} {{user.middle_initial}}. {{user.last_name}}</strong>
-                             </span> <span class=" text-xs block">{{user.role.role}}</span> </span> </a>
-                            
-                        </div>   
+                                <span class="clear"> <span class="block m-t-xs"> <strong
+                                            class="font-bold">{{user.first_name}} {{user.middle_initial}}.
+                                            {{user.last_name}}</strong>
+                                    </span> <span class=" text-xs block">{{user.role.role}}</span> </span> </a>
+
+                        </div>
 
                         <!-- <div class="logo-content">
                             <img alt="image" class="img-circle" src="{{user.profile.image.url}}"/>
@@ -62,59 +67,68 @@
                     </li>
                     {% if user.role.role != 'ADMINISTRATOR' %}
                     <li>
-                        <a href="{% url 'home' %}"><i class="fa fa-pie-chart"></i> <span class="nav-label">Accreditation tracker</span></a>
+                        <a href="{% url 'home' %}"><i class="fa fa-pie-chart"></i> <span class="nav-label">Accreditation
+                                tracker</span></a>
                     </li>
                     {% endif %}
-                    
+
                     <li>
-                            <a href="{% url 'profile' %}"><i class="fa fa-male"></i> <span class="nav-label">Profile</span></a>
-                            
+                        <a href="{% url 'profile' %}"><i class="fa fa-male"></i> <span
+                                class="nav-label">Profile</span></a>
+
                     </li>
                     {% if user.role.role == 'ADMINISTRATOR' %}
-                        <!-- <li><a href="{%url 'user_changelist'%}"> <i class="fa fa-user"></i>Manage User</a></li> -->
-                        <li><a href="{%url 'register'%}"> <i class="fa fa-plus"></i><span class="nav-label">Add User</span></a></li>
+                    <!-- <li><a href="{%url 'user_changelist'%}"> <i class="fa fa-user"></i>Manage User</a></li> -->
+                    <li><a href="{%url 'register'%}"> <i class="fa fa-plus"></i><span class="nav-label">Add
+                                User</span></a></li>
+                    <li><a href="{%url 'user_changelist'%}"> <i class="fa fa-users"></i><span class="nav-label">Manage
+                                User</span></a></li>
                     {% endif %}
                     <li>
-                            <a href="{% url 'calendar' %}"><i class="fa fa-calendar"></i> <span class="nav-label">Calendar - Beta</span></a>
+                        <a href="{% url 'calendar' %}"><i class="fa fa-calendar"></i> <span class="nav-label">Calendar -
+                                Beta</span></a>
                     </li>
-                    
-                    
-                    
+
+
+
                 </ul>
 
             </div>
         </nav>
 
         <div id="page-wrapper" class="gray-bg dashbard-1">
-        <div class="row border-bottom">
-        <nav class="navbar navbar-static-top" role="navigation" style="margin-bottom: 0">
-        <div class="navbar-header ">
+            <div class="row border-bottom">
+                <nav class="navbar navbar-static-top" role="navigation" style="margin-bottom: 0">
+                    <div class="navbar-header ">
 
-                           
-                            
-                            
-                                    
-                                            <a class="navbar-minimalize minimalize-styl-2 btn btn-primary " href="#"><i class="fa fa-bars"></i> </a>
-                                    
-                                   
-            
-        </div>
-        
-        
-            <ul class="nav navbar-top-links navbar-right">
-                
-                <!-- <li>
+
+
+
+
+                        <a class="navbar-minimalize minimalize-styl-2 btn btn-primary " href="#"><i
+                                class="fa fa-bars"></i> </a>
+
+
+
+                    </div>
+
+
+                    <ul class="nav navbar-top-links navbar-right">
+
+                        <!-- <li>
                     <span class="m-r-sm text-muted welcome-message">Welcome to TACOS-TIP</span>
                 </li> -->
 
-                <li class="dropdown">
-                   
-                    
+                        <li class="dropdown">
+
+
                         <li class="divider"></li>
-                        
+
                         <li class="divider"></li>
-                        
-                        <li class="divider"></li>
+
+                        <li class="divider"><a href="{% url 'lockscreen'%}" style="color: white">
+                                <i class="fa fa-lock" style="color: white"></i> 
+                            </a></li>
                       
                 
                        
@@ -123,18 +137,21 @@
                             {% now "M d, Y "%}
                         </li>
 
-                <li>
-                    <a href="{% url 'logout'%}">
-                        <i class="fa fa-sign-out"></i> Log out
-                    </a>
-                </li>
-                </li>
-                </ul>
 
-        </nav>
-        </div>
-        
-        <!-- {% if title %}
+                        
+
+                        <li>
+                            <a href="{% url 'logout'%}" style="color: white">
+                                <i class="fa fa-sign-out" style="color: white"></i> Log out
+                            </a>
+                        </li>
+                        </li>
+                    </ul>
+
+                </nav>
+            </div>
+
+            <!-- {% if title %}
         <div class="row wrapper white-bg page-heading" style="padding-top: 2rem">
                 <div class="col-sm-4">
                     <h3>{{title}}</h2>
@@ -142,15 +159,17 @@
                 </div>
          </div>   
         {% endif %} -->
-                
-         
-        <div class="row   white-bg dashboard-header" >
+
+
+            <div class="row   gray-bg dashboard-header">
                 {% if messages %} {% for message in messages %}
-                <div class="alert alert-{{ message.tags }}">
-                  {{ message }}
+                <div class="alert alert-{{ message.tags }}" style="box-shadow: 0px 3px 5px -1px rgba(0, 0, 0, 0),
+                0px 5px 8px 0px rgba(0, 0, 0, 0.14),
+                0px 1px 14px 0px rgba(0, 0, 0, 0.12); background: rgba(0, 0, 0, 0)">
+                    {{ message }}
                 </div>
                 {% endfor %} {% endif %}{% block content%}{% endblock%}
-            <!-- <div class="col-sm-4">
+                <!-- <div class="col-sm-4">
                 <h2>Welcome {{user.first_name}} {{user.middle_initial}}. {{user.last_name}}</h2>
                 <small>Here is the current state of the accreditation for SY 19-20</small><ul class="list-group clear-list m-t">
                         <li class="list-group-item fist-item"></li>
@@ -189,24 +208,28 @@
                                 </div>
                             </div>
                         </div> -->
-         </div>          
-        
 
-        
 
-        <div class="footer">
+            </div>
+
+
+
+
+            <div class="footer">
                 <div class="pull-right">
                     Made by <strong> TEAM JFTW </strong>for the <strong>Institute. </strong>
                 </div>
                 <div>
-                    <strong>Established</strong> 2019 
+                    <strong>Established</strong> 2019
                 </div>
             </div>
         </div>
-        </div>
-        
 
-               
+
+    </div>
+
+
+
     <!-- Mainly scripts -->
     <script src="{% static 'js/jquery-2.1.1.js'%}"></script>
     <script src="{% static 'js/bootstrap.min.js'%}"></script>
@@ -219,8 +242,8 @@
 
     <!-- ChartJS-->
     <script src="{% static 'js/plugins/chartJs/Chart.min.js' %}"></script>
-     
-  
+
+
     <!-- Flot -->
     <script src="{% static 'js/plugins/flot/jquery.flot.js' %}"></script>
     <script src="{% static 'js/plugins/flot/jquery.flot.tooltip.min.js' %}"></script>
@@ -254,22 +277,21 @@
     <!-- Toastr -->
     <script src="{% static 'js/plugins/toastr/toastr.min.js' %}"></script>
     <script>
-        $(document).ready(function() {
-            setTimeout(function() {
+        $(document).ready(function () {
+            setTimeout(function () {
                 toastr.options = {
                     closeButton: true,
                     progressBar: true,
                     showMethod: 'slideDown',
                     timeOut: 4000
                 };
-                
+
 
             }, 1300);
 
 
-            
-            var doughnutData = [
-                {
+
+            var doughnutData = [{
                     value: 300,
                     color: "#a3e1d4",
                     highlight: "#1ab394",
@@ -303,12 +325,12 @@
             var ctx = document.getElementById("doughnutChart").getContext("2d");
             var DoughnutChart = new Chart(ctx).Doughnut(doughnutData, doughnutOptions);
 
-           
+
         });
     </script>
 
 
-    
+
 </body>
+
 </html>
-    
