@@ -2,6 +2,7 @@
 {% load crispy_forms_tags %}
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -16,6 +17,7 @@
     <link href="{% static 'css/acmsa/acmsastyle.css' %}" rel="stylesheet">
 
 </head>
+
 <body class="container login-container">
     <section class="row login">
         <div class="col-sm-6 image-form-container">
@@ -27,20 +29,25 @@
                 <form method="POST">
                     {% csrf_token %}
                     {{ form.non_field_errors }}
-                    
-                        {{ form.username.errors }}
-                        <!-- <label for="{{ form.username.id_for_label }}"></label> -->
-                        <input type="text" name="username" id="username" placeholder="Enter username" class="form-control">
-                    
-                    
-                        {{ form.password.errors }}
-                        <!-- <label for="{{ form.password.id_for_label }}"></label> -->
-                        <input type="password" name="password" id="password" placeholder="Enter password" class="form-control">
-                    
+
+                    {{ form.username.errors }}
+                    <!-- <label for="{{ form.username.id_for_label }}"></label> -->
+                    <input type="text" name="username" id="username" placeholder="Enter username" class="form-control">
+
+
+                    {{ form.password.errors }}
+                    <!-- <label for="{{ form.password.id_for_label }}"></label> -->
+                    <input type="password" name="password" id="password" placeholder="Enter password"
+                        class="form-control">
+
                     <button type="submit" class="btn btn-block btn-login">Login</button>
                 </form>
+                <small class="text-muted ml-2">
+                    <a href="{% url 'password_reset' %}">Forgot Password?</a>
+                </small>
             </div>
-        </div> 
+        </div>
     </section>
 </body>
+
 </html>

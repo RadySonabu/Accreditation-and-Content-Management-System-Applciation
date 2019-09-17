@@ -4,94 +4,100 @@
 <div style="margin-bottom: 4rem"></div>
 {% for mem in members %}
 
-        {% if user.role.role == 'VPAA' %}
+{% if user.role.role == 'VPAA' %}
 
-        <div class="row">
-          {% if mem.college.college == 'College of Information Technology Education' %}
-          <div class="col-md-auto">
-            <div class="card">
-              <div class="card-body">
-                <h5 class="card-title">College of Info. Technology Education</h5>
-                <img class="mx-auto d-block " style="height: 200px; width: 200px; padding: 2%; justify-content: center"
-                  src="https://cdn1.iconfinder.com/data/icons/charts-2/304/Untitled-41-512.png">
-              </div>
-            </div>
-          </div>
-          {% elif mem.college.college == 'College of Engineering and Architecture' %}
-          <div class="col-md-auto">
-            <div class="card">
-              <div class="card-body" style="justify-content: center">
-                <h5 class="card-title">College of Engineering and Architecture</h5>
-                <img class="mx-auto d-block " style="height: 200px; width: 200px; padding: 2%; justify-content: center"
-                  src="https://cdn1.iconfinder.com/data/icons/charts-2/304/Untitled-35-512.png">
-              </div>
-            </div>
-          </div>
-        </div>
-
-
-
-        {% endif %}
+<div class="row">
+  {% if mem.college.college == 'College of Information Technology Education' %}
+  <div class="col-md-auto">
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title">College of Info. Technology Education</h5>
+        <img class="mx-auto d-block " style="height: 200px; width: 200px; padding: 2%; justify-content: center"
+          src="https://cdn1.iconfinder.com/data/icons/charts-2/304/Untitled-41-512.png">
+      </div>
+    </div>
+  </div>
+  {% elif mem.college.college == 'College of Engineering and Architecture' %}
+  <div class="col-md-auto">
+    <div class="card">
+      <div class="card-body" style="justify-content: center">
+        <h5 class="card-title">College of Engineering and Architecture</h5>
+        <img class="mx-auto d-block " style="height: 200px; width: 200px; padding: 2%; justify-content: center"
+          src="https://cdn1.iconfinder.com/data/icons/charts-2/304/Untitled-35-512.png">
+      </div>
+    </div>
+  </div>
+</div>
 
 
 
-        {% elif user.role.role == 'COLLEGE DEAN' %}
-
-        {% if mem.college.college == 'College of Information Technology Education' %}
-
-          
-          
-          
-          
-            
-          <div class="row container">
-
-            <div class="col-md-9">
-                
-                
-                
-                  
-                    
-                      <div class="ibox">
-                        
-                            {% for a in accr_type %}
-                        
-                            {% for f in f %}
-                            
-                              {% if f.year == 2019 and f.id  == 1%}
-                            
-                              
-                                <div class="col-md-4 border" style="justify-content: center">
-                                    <a href="{% url 'form-list' a.id %}">
-                                    <div class="ibox-title text-center"  style="justify-content: center"><strong><h3>{{a.id}} {{a.type_of_accreditations}}</h3></strong></div>
-                                    <!-- <div class="ibox-content"> -->
-                                        <div class="ibox-content text-center">
-                                      
-                                        <img class="avatar" src="/media/{{a.image}}" alt="..." style="width: 50%">
-                                    </a>
-                                  </div>
-                                  
-                              
-                          </div>
-                              
-                              
-                              
-                              {% endif %}
-                            {% endfor %}
-                              
-                            {% endfor %} 
-                        </div>
-                        
-                    
-                    
-                      
-                        </div>
-            </div>
+{% endif %}
 
 
-                
-            
-            <!-- <div class="col-sm-2">
+
+{% elif user.role.role == 'COLLEGE DEAN' %}
+
+{% if mem.college.college == 'College of Information Technology Education' %}
+
+
+
+
+
+
+<div class="row ">
+
+  <div class="col-md-12">
+
+
+
+
+
+    <div>
+
+
+      {% for a in accr_type %}
+
+      {% for f in f %}
+
+      {% if f.year == 2019 and f.id  == 1%}
+
+      <a href="{% url 'form-list' a.id %}">
+        <div class="col-md-3 stretched-link">
+
+          <div class="payment-card text-center" style="justify-content: center; box-shadow: 0px 3px 5px -1px rgba(0, 0, 0, 0.2),
+            0px 5px 8px 0px rgba(0, 0, 0, 0.14),
+            0px 1px 14px 0px rgba(0, 0, 0, 0.12); background: rgba(85, 85, 85, 0.12)">
+            <strong>
+              <h3>{{a.id}} {{a.type_of_accreditations}}</h3>
+            </strong>
+            <!-- <div class="ibox-content"> -->
+
+
+            <img class="avatar" src="/media/{{a.image}}" alt="..." style="width: 50%">
+      </a>
+    </div>
+
+
+  </div>
+
+
+
+  {% endif %}
+  {% endfor %}
+
+  {% endfor %}
+</div>
+
+
+
+
+</div>
+</div>
+
+
+
+
+<!-- <div class="col-sm-2">
                 </div>
                 
                         
@@ -112,12 +118,12 @@
                         </div>
                         {% endfor %}
                           -->
-        </div>          
+</div>
 
 
-        <!-- end of a in accr_type -->
+<!-- end of a in accr_type -->
 
-        <!-- <div class="container ">
+<!-- <div class="container ">
           <div class="row">
             {% if mem.program.program == 'BS Information Technology' %}
             <div class="col-md-3">
@@ -146,20 +152,20 @@
 
 
 
-        {% endif %}
+{% endif %}
 
 
 
-        {% endif %}
+{% endif %}
 
 
-        {% elif user.role.role == 'DEPARTMENT CHAIRPERSON' %}
-        {% if mem.program.program == 'BS Information Technology' %}
+{% elif user.role.role == 'DEPARTMENT CHAIRPERSON' %}
+{% if mem.program.program == 'BS Information Technology' %}
 
 
 
 
-        <!-- {% for f in form %}
+<!-- {% for f in form %}
 
         {% if f.created_for.program == mem.program.program %}
         <div class="col-md-3">
@@ -176,62 +182,64 @@
 
         {% endfor %} -->
 
-        <div class="row container">
+<div class="row container">
 
-            <div class="row container">
+  <div class="row container">
 
-                <div class="col-md-9">
-                    
-                    
-                    
-                      
-                        
-                          <div class="ibox">
-                            
-                                {% for a in accr_type %}
-                            
-                                {% for f in f %}
-                                
-                                  {% if f.year == 2019 and f.id  == 1%}
-                                
-                                  
-                                    <div class="col-md-4 border" style="justify-content: center">
-                                        <a href="{% url 'chairperson-forms' a.id %}">
-                                        <div class="ibox-title text-center"  style="justify-content: center"><strong><h3>{{a.id}} {{a.type_of_accreditations}}</h3></strong></div>
-                                        <!-- <div class="ibox-content"> -->
-                                            <div class="ibox-content text-center">
-                                          
-                                            <img class="avatar" src="/media/{{a.image}}" alt="..." style="width: 50%">
-                                        </a>
-                                      </div>
-                                      
-                                  
-                              </div>
-                                  
-                                  
-                                  
-                                  {% endif %}
-                                {% endfor %}
-                                  
-                                {% endfor %} 
-                            </div>
-                            
-                        
-                        
-                          
-                            </div>
-                </div>
+    <div class="col-md-9">
 
 
-                
-            
-           
-                          
-        </div>       
 
 
-        {% endif %}
-        {% endif %}
+
+      <div class="ibox">
+
+        {% for a in accr_type %}
+
+        {% for f in f %}
+
+        {% if f.year == 2019 and f.id  == 1%}
+
+
+        <div class="col-md-4 border" style="justify-content: center">
+          <a href="{% url 'chairperson-forms' a.id %}">
+            <div class="ibox-title text-center" style="justify-content: center"><strong>
+                <h3>{{a.id}} {{a.type_of_accreditations}}</h3>
+              </strong></div>
+            <!-- <div class="ibox-content"> -->
+            <div class="ibox-content text-center">
+
+              <img class="avatar" src="/media/{{a.image}}" alt="..." style="width: 50%">
+          </a>
+        </div>
+
+
+      </div>
+
+
+
+      {% endif %}
+      {% endfor %}
+
+      {% endfor %}
+    </div>
+
+
+
+
+  </div>
+</div>
+
+
+
+
+
+
+</div>
+
+
+{% endif %}
+{% endif %}
 {% endfor %}
 
 

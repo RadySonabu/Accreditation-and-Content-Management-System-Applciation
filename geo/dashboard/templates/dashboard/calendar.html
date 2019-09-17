@@ -31,13 +31,16 @@
                 <ul class="nav metismenu" id="side-menu">
                     <li class="nav-header yellow-skin">
                         <div class="dropdown profile-element img-fluid"> <span>
-                                <img alt="image" class="img-circle" src="{{user.profile.image.url}}" style="width: 50%" />
-                                 </span>
+                                <img alt="image" class="img-circle" src="{{user.profile.image.url}}"
+                                    style="width: 50%" />
+                            </span>
                             <a data-toggle="dropdown" class="dropdown-toggle" href="#">
-                            <span class="clear"> <span class="block m-t-xs"> <strong class="font-bold">{{user.first_name}} {{user.middle_initial}}. {{user.last_name}}</strong>
-                             </span> <span class=" text-xs block">{{user.role.role}}</span> </span> </a>
-                            
-                        </div>   
+                                <span class="clear"> <span class="block m-t-xs"> <strong
+                                            class="font-bold">{{user.first_name}} {{user.middle_initial}}.
+                                            {{user.last_name}}</strong>
+                                    </span> <span class=" text-xs block">{{user.role.role}}</span> </span> </a>
+
+                        </div>
 
                         <!-- <div class="logo-content">
                             <img alt="image" class="img-circle" src="{{user.profile.image.url}}"/>
@@ -45,77 +48,81 @@
                     </li>
                     {% if user.role.role != 'ADMINISTRATOR' %}
                     <li>
-                        <a href="{% url 'home' %}"><i class="fa fa-pie-chart"></i> <span class="nav-label">Accreditation tracker</span></a>
+                        <a href="{% url 'home' %}"><i class="fa fa-pie-chart"></i> <span class="nav-label">Accreditation
+                                tracker</span></a>
                     </li>
                     {% endif %}
-                    
+
                     <li>
-                            <a href="{% url 'profile' %}"><i class="fa fa-male"></i> <span class="nav-label">Profile</span></a>
-                            
+                        <a href="{% url 'profile' %}"><i class="fa fa-male"></i> <span
+                                class="nav-label">Profile</span></a>
+
                     </li>
                     {% if user.role.role == 'ADMINISTRATOR' %}
-                        <!-- <li><a href="{%url 'user_changelist'%}"> <i class="fa fa-user"></i>Manage User</a></li> -->
-                        <li><a href="{%url 'register'%}"> <i class="fa fa-plus"></i>Add User</a></li>
+                    <!-- <li><a href="{%url 'user_changelist'%}"> <i class="fa fa-user"></i>Manage User</a></li> -->
+                    <li><a href="{%url 'register'%}"> <i class="fa fa-plus"></i>Add User</a></li>
                     {% endif %}
                     <li>
-                            <a href="{% url 'calendar' %}"><i class="fa fa-calendar"></i> <span class="nav-label">Calendar - Beta</span></a>
+                        <a href="{% url 'calendar' %}"><i class="fa fa-calendar"></i> <span class="nav-label">Calendar -
+                                Beta</span></a>
                     </li>
-                    
-                    
-                    
+
+
+
                 </ul>
 
             </div>
         </nav>
 
         <div id="page-wrapper" class="gray-bg dashbard-1">
-        <div class="row border-bottom">
-        <nav class="navbar navbar-static-top" role="navigation" style="margin-bottom: 0">
-        <div class="navbar-header">
+            <div class="row border-bottom">
+                <nav class="navbar navbar-static-top" role="navigation" style="margin-bottom: 0">
+                    <div class="navbar-header">
 
-                           
-                            
-                            
-                                    
-                                            <a class="navbar-minimalize minimalize-styl-2 btn btn-primary " href="#"><i class="fa fa-bars"></i> </a>
-                                    
-                                   
-            
-        </div>
-        
-        
-            <ul class="nav navbar-top-links navbar-right">
-                
-                <li>
-                    <span class="m-r-sm text-muted welcome-message">Welcome to TACOS-TIP</span>
-                </li>
 
-                <li class="dropdown">
-                   
-                    
+
+
+
+                        <a class="navbar-minimalize minimalize-styl-2 btn btn-primary " href="#"><i
+                                class="fa fa-bars"></i> </a>
+
+
+
+                    </div>
+
+
+                    <ul class="nav navbar-top-links navbar-right">
+
+                        <li>
+                            <span class="m-r-sm text-muted welcome-message">Welcome to TACOS-TIP</span>
+                        </li>
+
+                        <li class="dropdown">
+
+
                         <li class="divider"></li>
-                        
+
                         <li class="divider"></li>
-                        
+
                         <li class="divider"></li>
-                      
-                
-                       
-                        
 
 
-                <li>
-                    <a href="{% url 'logout'%}">
-                        <i class="fa fa-sign-out"></i> Log out
-                    </a>
-                </li>
-                </li>
-                </ul>
 
-        </nav>
-        </div>
-        
-        <!-- {% if title %}
+
+
+
+                        <li>
+                            <a href="{% url 'logout'%}">
+                                <i class="fa fa-sign-out"></i> Log out
+                            </a>
+                        </li>
+                        </li>
+                    </ul>
+
+                </nav>
+            </div>
+
+            <!-- {% if title %}
         <div class="row wrapper white-bg page-heading" style="padding-top: 2rem">
                 <div class="col-sm-4">
                     <h3>{{title}}</h2>
@@ -123,15 +130,15 @@
                 </div>
          </div>   
         {% endif %} -->
-                
-         
-        <div class="row   white-bg dashboard-header" >
+
+
+            <div class="row   white-bg dashboard-header">
                 {% if messages %} {% for message in messages %}
                 <div class="alert alert-{{ message.tags }}">
-                  {{ message }}
+                    {{ message }}
                 </div>
                 {% endfor %} {% endif %}{% block content%}{% endblock%}
-            <!-- <div class="col-sm-4">
+                <!-- <div class="col-sm-4">
                 <h2>Welcome {{user.first_name}} {{user.middle_initial}}. {{user.last_name}}</h2>
                 <small>Here is the current state of the accreditation for SY 19-20</small><ul class="list-group clear-list m-t">
                         <li class="list-group-item fist-item"></li>
@@ -170,214 +177,216 @@
                                 </div>
                             </div>
                         </div> -->
-         </div>          
-        
+            </div>
 
-        
-<div class="wrapper wrapper-content">
-    <div class="row animated fadeInDown">
-        <div class="col-lg-3">
-            <div class="ibox float-e-margins">
-                <div class="ibox-title">
-                    <h5>Draggable Events</h5>
-                    <div class="ibox-tools">
-                        <a class="collapse-link">
-                            <i class="fa fa-chevron-up"></i>
-                        </a>
-                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                            <i class="fa fa-wrench"></i>
-                        </a>
-                        <ul class="dropdown-menu dropdown-user">
-                            <li><a href="#">Config option 1</a>
-                            </li>
-                            <li><a href="#">Config option 2</a>
-                            </li>
-                        </ul>
-                        <a class="close-link">
-                            <i class="fa fa-times"></i>
-                        </a>
+
+
+            <div class="wrapper wrapper-content">
+                <div class="row animated fadeInDown">
+                    <div class="col-lg-3">
+                        <div class="ibox float-e-margins">
+                            <div class="">
+                                <h5>Draggable Events</h5>
+                                <div class="ibox-tools">
+                                    <a class="collapse-link">
+                                        <i class="fa fa-chevron-up"></i>
+                                    </a>
+                                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                                        <i class="fa fa-wrench"></i>
+                                    </a>
+                                    <ul class="dropdown-menu dropdown-user">
+                                        <li><a href="#">Config option 1</a>
+                                        </li>
+                                        <li><a href="#">Config option 2</a>
+                                        </li>
+                                    </ul>
+                                    <a class="close-link">
+                                        <i class="fa fa-times"></i>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="payment-card" style="box-shadow: 0px 3px 5px -1px rgba(0, 0, 0, 0.2),
+                0px 5px 8px 0px rgba(0, 0, 0, 0.14),
+                0px 1px 14px 0px rgba(0, 0, 0, 0.12); background: rgba(85, 85, 85, 0.12)">
+                                <div id='external-events'>
+                                    <p>Drag a event and drop into callendar.</p>
+                                    <div class='external-event navy-bg'>Go to shop and buy some products.</div>
+                                    <div class='external-event navy-bg'>Check the new CI from Corporation.</div>
+                                    <div class='external-event navy-bg'>Send documents to John.</div>
+                                    <div class='external-event navy-bg'>Phone to Sandra.</div>
+                                    <div class='external-event navy-bg'>Chat with Michael.</div>
+                                    <p class="m-t">
+                                        <input type='checkbox' id='drop-remove' class="i-checks" checked /> <label
+                                            for='drop-remove'>remove after drop</label>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+
                     </div>
-                </div>
-                <div class="ibox-content">
-                    <div id='external-events'>
-                        <p>Drag a event and drop into callendar.</p>
-                        <div class='external-event navy-bg'>Go to shop and buy some products.</div>
-                        <div class='external-event navy-bg'>Check the new CI from Corporation.</div>
-                        <div class='external-event navy-bg'>Send documents to John.</div>
-                        <div class='external-event navy-bg'>Phone to Sandra.</div>
-                        <div class='external-event navy-bg'>Chat with Michael.</div>
-                        <p class="m-t">
-                            <input type='checkbox' id='drop-remove' class="i-checks" checked /> <label for='drop-remove'>remove after drop</label>
-                        </p>
+                    <div class="col-lg-9">
+                        <div class="ibox-content" style="box-shadow: 0px 3px 5px -1px rgba(0, 0, 0, 0.2),
+                        0px 5px 8px 0px rgba(0, 0, 0, 0.14),
+                        0px 1px 14px 0px rgba(0, 0, 0, 0.12); background: rgba(85, 85, 85, 0.12)">
+                            <div class="ibox-title">
+                                <h5>Striped Table </h5>
+                                <div class="ibox-tools">
+                                    <a class="collapse-link">
+                                        <i class="fa fa-chevron-up"></i>
+                                    </a>
+                                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                                        <i class="fa fa-wrench"></i>
+                                    </a>
+                                    <ul class="dropdown-menu dropdown-user">
+                                        <li><a href="#">Config option 1</a>
+                                        </li>
+                                        <li><a href="#">Config option 2</a>
+                                        </li>
+                                    </ul>
+                                    <a class="close-link">
+                                        <i class="fa fa-times"></i>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="ibox-content">
+                                <div id="calendar"></div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
-           
-        </div>
-        <div class="col-lg-9">
-            <div class="ibox float-e-margins">
-                <div class="ibox-title">
-                    <h5>Striped Table </h5>
-                    <div class="ibox-tools">
-                        <a class="collapse-link">
-                            <i class="fa fa-chevron-up"></i>
-                        </a>
-                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                            <i class="fa fa-wrench"></i>
-                        </a>
-                        <ul class="dropdown-menu dropdown-user">
-                            <li><a href="#">Config option 1</a>
-                            </li>
-                            <li><a href="#">Config option 2</a>
-                            </li>
-                        </ul>
-                        <a class="close-link">
-                            <i class="fa fa-times"></i>
-                        </a>
-                    </div>
-                </div>
-                <div class="ibox-content">
-                    <div id="calendar"></div>
+            <div class="footer">
+
+                <div>
+                    <strong>Copyright</strong> TACOS-TIP
                 </div>
             </div>
+
         </div>
     </div>
-</div>
-<div class="footer">
-    
-    <div>
-        <strong>Copyright</strong> TACOS-TIP
-    </div>
-</div>
 
-</div>
-</div>
+    <!-- Mainly scripts -->
+    <script src="{% static 'js/plugins/fullcalendar/moment.min.js'%}"></script>
+    <script src="{% static 'js/jquery-2.1.1.js'%}"></script>
+    <script src="{% static 'js/bootstrap.min.js'%}"></script>
+    <script src="{% static 'js/plugins/metisMenu/jquery.metisMenu.js'%}"></script>
+    <script src="{% static 'js/plugins/slimscroll/jquery.slimscroll.min.js'%}"></script>
 
-<!-- Mainly scripts -->
-<script src="{% static 'js/plugins/fullcalendar/moment.min.js'%}"></script>
-<script src="{% static 'js/jquery-2.1.1.js'%}"></script>
-<script src="{% static 'js/bootstrap.min.js'%}"></script>
-<script src="{% static 'js/plugins/metisMenu/jquery.metisMenu.js'%}"></script>
-<script src="{% static 'js/plugins/slimscroll/jquery.slimscroll.min.js'%}"></script>
+    <!-- Custom and plugin javascript -->
+    <script src="{% static 'js/inspinia.js'%}"></script>
+    <script src="{% static 'js/plugins/pace/pace.min.js'%}"></script>
 
-<!-- Custom and plugin javascript -->
-<script src="{% static 'js/inspinia.js'%}"></script>
-<script src="{% static 'js/plugins/pace/pace.min.js'%}"></script>
+    <!-- jQuery UI custom -->
+    <script src="{% static 'js/jquery-ui.custom.min.js'%}"></script>
 
-<!-- jQuery UI custom -->
-<script src="{% static 'js/jquery-ui.custom.min.js'%}"></script>
+    <!-- iCheck -->
+    <script src="{% static 'js/plugins/iCheck/icheck.min.js'%}"></script>
 
-<!-- iCheck -->
-<script src="{% static 'js/plugins/iCheck/icheck.min.js'%}"></script>
+    <!-- Full Calendar -->
+    <script src="{% static 'js/plugins/fullcalendar/fullcalendar.min.js'%}"></script>
 
-<!-- Full Calendar -->
-<script src="{% static 'js/plugins/fullcalendar/fullcalendar.min.js'%}"></script>
-
-<script>
-
-    $(document).ready(function() {
+    <script>
+        $(document).ready(function () {
 
             $('.i-checks').iCheck({
                 checkboxClass: 'icheckbox_square-green',
                 radioClass: 'iradio_square-green'
             });
 
-        /* initialize the external events
-         -----------------------------------------------------------------*/
+            /* initialize the external events
+             -----------------------------------------------------------------*/
 
 
-        $('#external-events div.external-event').each(function() {
+            $('#external-events div.external-event').each(function () {
 
-            // store data so the calendar knows to render an event upon drop
-            $(this).data('event', {
-                title: $.trim($(this).text()), // use the element's text as the event title
-                stick: true // maintain when user navigates (see docs on the renderEvent method)
+                // store data so the calendar knows to render an event upon drop
+                $(this).data('event', {
+                    title: $.trim($(this).text()), // use the element's text as the event title
+                    stick: true // maintain when user navigates (see docs on the renderEvent method)
+                });
+
+                // make the event draggable using jQuery UI
+                $(this).draggable({
+                    zIndex: 1111999,
+                    revert: true, // will cause the event to go back to its
+                    revertDuration: 0 //  original position after the drag
+                });
+
             });
 
-            // make the event draggable using jQuery UI
-            $(this).draggable({
-                zIndex: 1111999,
-                revert: true,      // will cause the event to go back to its
-                revertDuration: 0  //  original position after the drag
+
+            /* initialize the calendar
+             -----------------------------------------------------------------*/
+            var date = new Date();
+            var d = date.getDate();
+            var m = date.getMonth();
+            var y = date.getFullYear();
+
+            $('#calendar').fullCalendar({
+                header: {
+                    left: 'prev,next today',
+                    center: 'title',
+                    right: 'month,agendaWeek,agendaDay'
+                },
+                editable: true,
+                droppable: true, // this allows things to be dropped onto the calendar
+                drop: function () {
+                    // is the "remove after drop" checkbox checked?
+                    if ($('#drop-remove').is(':checked')) {
+                        // if so, remove the element from the "Draggable Events" list
+                        $(this).remove();
+                    }
+                },
+                events: [{
+                        title: 'All Day Event',
+                        start: new Date(y, m, 1)
+                    },
+                    {
+                        title: 'Long Event',
+                        start: new Date(y, m, d - 5),
+                        end: new Date(y, m, d - 2)
+                    },
+                    {
+                        id: 999,
+                        title: 'Repeating Event',
+                        start: new Date(y, m, d - 3, 16, 0),
+                        allDay: false
+                    },
+                    {
+                        id: 999,
+                        title: 'Repeating Event',
+                        start: new Date(y, m, d + 4, 16, 0),
+                        allDay: false
+                    },
+                    {
+                        title: 'Meeting',
+                        start: new Date(y, m, d, 10, 30),
+                        allDay: false
+                    },
+                    {
+                        title: 'Lunch',
+                        start: new Date(y, m, d, 12, 0),
+                        end: new Date(y, m, d, 14, 0),
+                        allDay: false
+                    },
+                    {
+                        title: 'Birthday Party',
+                        start: new Date(y, m, d + 1, 19, 0),
+                        end: new Date(y, m, d + 1, 22, 30),
+                        allDay: false
+                    },
+                    {
+                        title: 'Click for Google',
+                        start: new Date(y, m, 28),
+                        end: new Date(y, m, 29),
+                        url: 'http://google.com/'
+                    }
+                ]
             });
 
+
         });
-
-
-        /* initialize the calendar
-         -----------------------------------------------------------------*/
-        var date = new Date();
-        var d = date.getDate();
-        var m = date.getMonth();
-        var y = date.getFullYear();
-
-        $('#calendar').fullCalendar({
-            header: {
-                left: 'prev,next today',
-                center: 'title',
-                right: 'month,agendaWeek,agendaDay'
-            },
-            editable: true,
-            droppable: true, // this allows things to be dropped onto the calendar
-            drop: function() {
-                // is the "remove after drop" checkbox checked?
-                if ($('#drop-remove').is(':checked')) {
-                    // if so, remove the element from the "Draggable Events" list
-                    $(this).remove();
-                }
-            },
-            events: [
-                {
-                    title: 'All Day Event',
-                    start: new Date(y, m, 1)
-                },
-                {
-                    title: 'Long Event',
-                    start: new Date(y, m, d-5),
-                    end: new Date(y, m, d-2)
-                },
-                {
-                    id: 999,
-                    title: 'Repeating Event',
-                    start: new Date(y, m, d-3, 16, 0),
-                    allDay: false
-                },
-                {
-                    id: 999,
-                    title: 'Repeating Event',
-                    start: new Date(y, m, d+4, 16, 0),
-                    allDay: false
-                },
-                {
-                    title: 'Meeting',
-                    start: new Date(y, m, d, 10, 30),
-                    allDay: false
-                },
-                {
-                    title: 'Lunch',
-                    start: new Date(y, m, d, 12, 0),
-                    end: new Date(y, m, d, 14, 0),
-                    allDay: false
-                },
-                {
-                    title: 'Birthday Party',
-                    start: new Date(y, m, d+1, 19, 0),
-                    end: new Date(y, m, d+1, 22, 30),
-                    allDay: false
-                },
-                {
-                    title: 'Click for Google',
-                    start: new Date(y, m, 28),
-                    end: new Date(y, m, 29),
-                    url: 'http://google.com/'
-                }
-            ]
-        });
-
-
-    });
-
-</script>
+    </script>
 </body>
 
 </html>
