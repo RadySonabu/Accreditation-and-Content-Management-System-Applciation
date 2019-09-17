@@ -3,6 +3,7 @@ from django.contrib.auth.decorators import login_required
 
 from members.models import MyUser
 from forms.models import Forms, AccreditationType
+from .forms import LockscreenForm
 
 
 @login_required
@@ -19,6 +20,8 @@ def home(request):
         year_str = str(year_js)
         year = int(year_str)
         print(type(year))
+        
+
         if year == 2019:
             context = {
                 'members': MyUser.objects.filter(program__program='BS Information Technology'),
@@ -26,7 +29,8 @@ def home(request):
                 'title': 'Home',
                 'f': Forms.objects.all(),
                 'user': user,
-                'year': year
+                'year': year,
+                
 
             }
             return render(request, 'dashboard/home.html', context)
@@ -94,4 +98,11 @@ def form_year(request):
 
 
 def lockscreen(request):
+    # form = LockscreenForm
+    # password1 = self.cleaned_data.get("password1")
+    # password2 = self.cleaned_data.get("password2")
+    # if password1 and password2 and password1 != password2:
+    #     raise forms.ValidationError("Passwords don't match")
+    # if form.is_valid():
+    #     return render(request, 'dashboard/home.html')
     return render(request, 'dashboard/lockscreen.html')

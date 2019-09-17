@@ -1,7 +1,19 @@
 from django import forms
+from members.models import MyUser
 
 
-class FilterForm(forms.Form):
+# class FilterForm(forms.Form):
 
-    selectedplant = forms.ModelChoiceField(
-        queryset=Forms.objects.all(), required=True)
+#     selectedplant = forms.ModelChoiceField(
+#         queryset=Forms.objects.all(), required=True)
+
+
+class LockscreenForm(forms.Form):
+
+    class Meta:
+        password1 = forms.CharField(
+            label='Password', widget=forms.PasswordInput)
+        model = MyUser
+        fields = (
+            'email', 'password', 'password1'
+        )

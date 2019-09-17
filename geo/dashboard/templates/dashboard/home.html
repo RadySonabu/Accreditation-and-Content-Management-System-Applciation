@@ -1,6 +1,8 @@
 {% extends "dashboard/base.html" %}
 {% block content %}
 
+
+
 <!-- <form method="POST" load-url="{% url 'load-forms'%}" novalidate>
   <label>Select Year:</label>
   <select class="country">
@@ -72,11 +74,11 @@
       {% if f.year == 2019 and f.id  == 1%}
 
       <a href="{% url 'form-list' a.id %}">
-        <div class="col-md-3 stretched-link">
+        <div class="col-md-3 stretched-link ">
 
           <div class="payment-card text-center" style="justify-content: center; box-shadow: 0px 3px 5px -1px rgba(0, 0, 0, 0.2),
             0px 5px 8px 0px rgba(0, 0, 0, 0.14),
-            0px 1px 14px 0px rgba(0, 0, 0, 0.12); background: rgba(85, 85, 85, 0.12)">
+            0px 1px 14px 0px rgba(0, 0, 0, 0.12); background: rgba(85, 85, 85, 0.12); border-top: 2px solid rgb(15, 15, 15)">
             <strong>
               <h3>{{a.id}} {{a.type_of_accreditations}}</h3>
             </strong>
