@@ -3696,7 +3696,7 @@ a.forum-item-title:hover {
   background: rgba(0, 0, 0, 0.75);
   padding: 20px;
   margin-bottom: 25px;
-  border: 10px solid #000;
+  border-top: 2px solid #000;
 }
 
 .payment-icon-big {
@@ -4606,7 +4606,7 @@ table.table-mail tr td {
 
 /* BACKGROUNDS */
 .gray-bg {
-  background-color: #f3f3f4;
+  background-color: #c7c7c8f5;
 }
 
 .white-bg {

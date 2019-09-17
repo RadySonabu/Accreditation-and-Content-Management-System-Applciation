@@ -2,55 +2,17 @@
 
 {% load crispy_forms_tags %}
 {% block content %}
-<form id="ardy" class="dropdown">
-    <select  id="lr_action">
-        <option value="CENTER">{% now "Y" %}</option>
-        <option value="LEFT">Left</option>
-        <option value="RIGHT">Right</option>
-    </select>
-  </form>
 
-<<<<<<< HEAD
-<div class="container justify-content-center  " >
-    <div class="col-md-10 ">
-      <div class="content-section" >
-        <form method="POST" id="personForm" data-college-url="{% url 'ajax_load_college' %}" data-program-url="{% url 'ajax_load_program' %}" novalidate>
-          {% csrf_token %}
-          <fieldset class="form-group">
-            
-            <legend class="border-bottom mb-4">Add User</legend>
-            <div class="form-row">
-                <div class="form-group col-md-5 mb-0">
-                  {{ form.first_name | as_crispy_field }}
-                </div>
-                <div class="form-group col-md-3 mb-0">
-                  {{ form.middle_initial | as_crispy_field }}
-                </div>
-                <div class="form-group col-md-4 mb-0">
-                  {{ form.last_name | as_crispy_field }}
-                </div>
-              </div>
-            
-            <div class="form-row">
-                <div class="form-group col-md-4 mb-0">
-                    {{ form.role | as_crispy_field }}
-                  </div>
-              <div class="form-group col-md-4 mb-0">
-                {{ form.college | as_crispy_field }}
-              </div>
-              <div class="form-group col-md-4 mb-0">
-                {{ form.program | as_crispy_field }}
-              </div>
-=======
-<div class="container justify-content-center  " style="box-shadow: 0px 3px 5px -1px rgba(0, 0, 0, 0.2),
+
+<div class="container justify-content-center col-md-10  " style="box-shadow: 0px 3px 5px -1px rgba(0, 0, 0, 0.2),
 0px 5px 8px 0px rgba(0, 0, 0, 0.14),
-0px 1px 14px 0px rgba(0, 0, 0, 0.12); background: rgba(85, 85, 85, 0.12); padding-top: 2rem">
+0px 1px 14px 0px rgba(0, 0, 0, 0.12); background: rgba(133, 133, 133, 0.12); padding: 2rem; border-top: 2px solid black">
   <div class="col-md-12 ">
     <div class="content-section">
       <form method="POST" id="personForm" data-college-url="{% url 'ajax_load_college' %}"
         data-program-url="{% url 'ajax_load_program' %}" novalidate>
         {% csrf_token %}
-        <fieldset class="form-group">
+        <fieldset class="form-group has-error help-block">
           <legend class="border-bottom mb-4">Add User</legend>
           <div class="form-row">
             <div class="form-group col-md-5 mb-0">
@@ -91,7 +53,6 @@
           <div class="form-row">
             <div class="form-group col-md-6 mb-0">
               {{ form.password1 | as_crispy_field }}
->>>>>>> 2281beda0abeba760adbcecb5caf9546c71f9f87
             </div>
             <div class="form-group col-md-6 mb-0">
               {{ form.password2 | as_crispy_field }}
@@ -110,54 +71,6 @@
 
     </div>
   </div>
-<<<<<<< HEAD
-  
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-  
-        <script>
-          $("#id_role").change(function (e) {
-            
-            var url = $("#personForm").attr("data-college-url");  // get the url of the `load_cities` view
-            var roleId = $(this).val();  // get the selected country ID from the HTML input
-            console.log(roleId + 1)
-            $.ajax({                       // initialize an AJAX request
-              url: url,                    // set the url of the request (= localhost:8000/hr/ajax/load-cities/)
-              data: {
-                'role': roleId       // add the country id to the GET parameters
-              },
-              success: function (data) {   // `data` is the return of the `load_cities` view function
-                $("#id_college").html(data);  // replace the contents of the city input with the data that came from the server
-              }
-            });
-      
-          });
-          $("#id_college").change(function (e) {
-            var url = $("#personForm").attr("data-program-url");  // get the url of the `load_cities` view
-            var collegeId = $(this).val();  // get the selected country ID from the HTML input
-      
-            $.ajax({                       // initialize an AJAX request
-              url: url,                    // set the url of the request (= localhost:8000/hr/ajax/load-cities/)
-              data: {
-                'college': collegeId       // add the country id to the GET parameters
-              },
-              success: function (data) {   // `data` is the return of the `load_cities` view function
-                $("#id_program").html(data);  // replace the contents of the city input with the data that came from the server
-              }
-            });
-      
-          });
-        </script>
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-=======
 </div>
 </body>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
@@ -206,5 +119,4 @@
 
 
 
->>>>>>> 2281beda0abeba760adbcecb5caf9546c71f9f87
 {% endblock%}

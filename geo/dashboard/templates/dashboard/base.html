@@ -10,7 +10,7 @@
 
     <title>TACOS-TIP | Accreditation Tracker
     </title>
-
+    
     <link href="{% static 'css/theme.ba/bootstrap.min.css'%}" rel="stylesheet">
     <link href="{% static 'css/theme.ba/animate.css'%}" rel="stylesheet">
     <link href="{% static 'css/theme.ba/style.css'%}" rel="stylesheet">
@@ -96,7 +96,7 @@
             </div>
         </nav>
 
-        <div id="page-wrapper" class="gray-bg skin-1">
+        <div id="page-wrapper" class="gray-bg skin-2">
             <div class="row border-bottom">
                 <nav class="navbar navbar-static-top" role="navigation" style="margin-bottom: 0">
                     <div class="navbar-header ">
@@ -127,13 +127,13 @@
                         <li class="divider"></li>
 
                         <li class="divider"><a href="{% url 'lockscreen'%}" style="color: white">
-                                <i class="fa fa-lock" style="color: black"></i> 
+                                <i class="fa fa-lock" style="color: white"></i> 
                             </a></li>
                       
                 
                        
                         
-                        <li style="color: black">
+                        <li style="color: white">
                             {% now "M d, Y "%}
                         </li>
 
@@ -141,8 +141,8 @@
                         
 
                         <li>
-                            <a href="{% url 'logout'%}" style="color: black">
-                                <i class="fa fa-sign-out" style="color: black"></i> Log out
+                            <a href="{% url 'logout'%}" style="color: white">
+                                <i class="fa fa-sign-out" style="color: white"></i> Log out
                             </a>
                         </li>
                         </li>
@@ -161,7 +161,7 @@
         {% endif %} -->
 
 
-            <div class="row   gray-bg dashboard-header">
+            <div class="row   gray-bg dashboard-header " >
                 {% if messages %} {% for message in messages %}
                 <div class="alert alert-{{ message.tags }}" style="box-shadow: 0px 3px 5px -1px rgba(0, 0, 0, 0),
                 0px 5px 8px 0px rgba(0, 0, 0, 0.14),

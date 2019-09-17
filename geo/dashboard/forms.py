@@ -15,5 +15,5 @@ class LockscreenForm(forms.Form):
             label='Password', widget=forms.PasswordInput)
         model = MyUser
         fields = (
-            'email', 'password', 'password1'
+            'email', 'password', 'password1 '
         )

@@ -388,7 +388,7 @@ def upload(request):
 
 def file_list(request):
     files = Files.objects.all()
-    return render(request, 'forms/file_list.html', {
+    return render(request, 'forms/files_list.html', {
         'files': files
     })
 

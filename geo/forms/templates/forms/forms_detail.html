@@ -79,7 +79,7 @@
                               <td style="word-wrap: break-word;min-width: 350px;max-width: 350px;"">&nbsp;&nbsp;&nbsp;{{s.criteria}}
                                 {% if user == f.created_by %}
                                 <a href="{% url 'subdivisiondetail-create' s.id %}"></a>Add Subcriteria</a>
-                                <a href="{% url 'subdivisiondetail-create' s.id %}"><i class="fa fa-upload"></i></a>
+                                <a href="{% url 'upload_file' %}"><i class="fa fa-upload"></i></a>
                                 {% endif %}  
                               </td>
                               <td class="form-group col-md-1 mb-0">{{s.points}}    
