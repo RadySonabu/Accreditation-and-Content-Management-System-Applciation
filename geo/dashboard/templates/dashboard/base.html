@@ -46,7 +46,7 @@
         <nav class="navbar-default navbar-static-side " role="navigation">
             <div class="sidebar-collapse ">
                 <ul class="nav metismenu  " id="side-menu">
-                    <li class="nav-header yellow-skin ">
+                    <li class="nav-header default-skin ">
                         <div class="dropdown profile-element img-fluid"> <span>
                                 <img alt="image" class="img-circle" src="{{user.profile.image.url}}" style="width: 50%" />
                                  </span>
@@ -119,7 +119,9 @@
                 
                        
                         
-
+                        <li style="color: aliceblue">
+                            {% now "M d, Y "%}
+                        </li>
 
                 <li>
                     <a href="{% url 'logout'%}">

@@ -105,7 +105,6 @@ class ProfileUpdateForm(forms.ModelForm):
         fields = ['image']
         labels = {
             'image':  '', }
-        
 
 
 class UserAdmin(BaseUserAdmin):
@@ -145,7 +144,6 @@ class UserAdmin(BaseUserAdmin):
 @admin.register(MyUser)
 class ViewAdmin(ImportExportModelAdmin):
     pass
-
 
     # ... and, since we're not using Django's built-in permissions,
     # unregister the Group model from admin.

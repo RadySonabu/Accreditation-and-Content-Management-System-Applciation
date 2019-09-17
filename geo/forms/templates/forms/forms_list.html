@@ -5,7 +5,15 @@
 {% block content %}
 {% load crispy_forms_tags %}
 
-
+<form method="POST" load-url="{% url 'load-forms'%}" novalidate>
+  <label>Select Year:</label>
+  <select class="country">
+      <option value="2019">2019</option>
+      <option value="2020">2020</option>
+      <option value="2021">2021</option>
+  </select>
+  
+</form>
 
   {% if user.role.role == 'COLLEGE DEAN'  and form.created_by == user.instance %}
 
@@ -13,7 +21,7 @@
         {% csrf_token %}
         <!-- <fieldset class=""> -->
             <legend class="border-bottom mb-4">List of Forms <a href="{% url 'form-create' a %}"><i class="fa fa-plus"></i></a></legend>
-            <div class="row">
+            <div class="row" id="forms_dean" >
                
             
                        
@@ -29,7 +37,7 @@
                             
                             
                             
-                              {% if f.year == 2019 and f.type_of_accreditation.id == a  %}
+                              {% if f.year == year and f.type_of_accreditation.id == a  %}
                                 
                               
                               
@@ -72,7 +80,7 @@
             
                     
             </div>
-</div>
+
 <!-- </fieldset> -->
 
 <!-- </form> -->
@@ -81,4 +89,28 @@
   {%else%}
   Oops page not found!
   {% endif %}
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script>
+    $(document).ready(function(){
+    $("select.country").change(function(){
+        var selectedCountry = $(this).children("option:selected").val();
+        var url = $("#forms_dean").attr("load-url");
+        console.log(selectedCountry);
+
+        $.ajax({                       // initialize an AJAX request
+        url: url,              // set the url of the request (= localhost:8000/hr/ajax/load-cities/)
+        data: {
+          'year': selectedCountry       // add the country id to the GET parameters
+        },
+        success: function (data) {   // `data` is the return of the `load_cities` view function
+          // location.html(data)
+          $("#forms_dean").html(data)
+          console.log("Bobo"); // replace the contents of the city input with the data that came from the server
+        }
+      });
+
+    });
+});
+ </script>
 {% endblock %}

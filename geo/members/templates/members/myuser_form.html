@@ -2,13 +2,21 @@
   
 {% load crispy_forms_tags %}
 {% block content %}
+<form id="ardy" class="dropdown">
+    <select  id="lr_action">
+        <option value="CENTER">{% now "Y" %}</option>
+        <option value="LEFT">Left</option>
+        <option value="RIGHT">Right</option>
+    </select>
+  </form>
 
-<div class="container justify-content-center  ">
+<div class="container justify-content-center  " >
     <div class="col-md-10 ">
       <div class="content-section" >
         <form method="POST" id="personForm" data-college-url="{% url 'ajax_load_college' %}" data-program-url="{% url 'ajax_load_program' %}" novalidate>
           {% csrf_token %}
           <fieldset class="form-group">
+            
             <legend class="border-bottom mb-4">Add User</legend>
             <div class="form-row">
                 <div class="form-group col-md-5 mb-0">
@@ -68,14 +76,15 @@
       </div>
     </div>
   </div>
-  </body>
+  
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  
         <script>
           $("#id_role").change(function (e) {
             
             var url = $("#personForm").attr("data-college-url");  // get the url of the `load_cities` view
             var roleId = $(this).val();  // get the selected country ID from the HTML input
-            console.log(roleId)
+            console.log(roleId + 1)
             $.ajax({                       // initialize an AJAX request
               url: url,                    // set the url of the request (= localhost:8000/hr/ajax/load-cities/)
               data: {
