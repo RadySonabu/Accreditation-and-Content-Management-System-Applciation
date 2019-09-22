@@ -25,8 +25,13 @@ class UserCreationForm(forms.ModelForm):
             'first_name', 'middle_initial',
             'last_name', 'contact', 'email', 'role',  'college', 'program', 'password1', 'password2')
         labels = {
-            'role': 'Designation'
+            'role': 'Designation',
+            # 'first_name':  "", 'middle_initial': ""
         }
+        # widgets = {
+        #     'first_name': forms.TextInput(attrs={'placeholder': 'First name', 'required': True}),
+        #     'middle_initial': forms.TextInput(attrs={'placeholder': 'Middle name', })
+        # }
 
     def clean_password2(self):
         # Check that the two password entries match
@@ -101,6 +106,7 @@ class UserChangeForm(forms.ModelForm):
 
 class ProfileUpdateForm(forms.ModelForm):
     class Meta:
+
         model = Profile
         fields = ['image']
         labels = {
@@ -144,6 +150,7 @@ class UserAdmin(BaseUserAdmin):
 @admin.register(MyUser)
 class ViewAdmin(ImportExportModelAdmin):
     pass
+
 
     # ... and, since we're not using Django's built-in permissions,
     # unregister the Group model from admin.

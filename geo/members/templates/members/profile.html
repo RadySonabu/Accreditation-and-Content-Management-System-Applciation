@@ -128,7 +128,7 @@
                                 <form method="POST" enctype="multipart/form-data">
                                     <fieldset class="form-group ">
                                         {% csrf_token %}
-                                        {{p_form|crispy}}
+                                        <div>{{p_form|crispy}}</div>
                                         <div class="form-group">
                                             <button class="btn btn-fill btn-primary dim" type="submit">Update</button>
                                         </div>

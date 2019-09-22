@@ -1,4 +1,5 @@
-{% load static %}<!DOCTYPE html>
+{% load static %}
+<!DOCTYPE html>
 {% load crispy_forms_tags%}
 <html>
 
@@ -20,30 +21,30 @@
 <body class="gray-bg p-4">
 
     <div class="middle-box text-center loginscreen animated fadeInDown">
-        <div class="payment-card" style="box-shadow: 0px 3px 5px -1px rgba(0, 0, 0, 0.2),
+        <div class="" style="box-shadow: 0px 3px 5px -1px rgba(0, 0, 0, 0.2),
         0px 5px 8px 0px rgba(0, 0, 0, 0.14),
-        0px 1px 14px 0px rgba(0, 0, 0, 0.12);">
+        0px 1px 14px 0px rgba(0, 0, 0, 0.12); padding: 20px">
             <div>
 
-                    <img src="{% static 'img/logomalaki.png' %}" alt="ACMSA LOGO" width="50%" class="brand">
+                <img src="{% static 'img/logomalaki.png' %}" alt="ACMSA LOGO" width="50%" class="brand">
 
             </div>
             <h3>Welcome to TACOS</h3>
-            
-            
+
+
             <form class="m-t" role="form" method="POST">
                 {% csrf_token %}
                 <div class="form-group">
-                   {{form|crispy}}
+                    {{form|crispy}}
                 </div>
-                
+
                 <button type="submit" class="btn btn-primary block full-width m-b">Login</button>
 
                 <a href="{% url 'password_reset'%}"><small>Forgot password?</small></a>
-                
-                
+
+
             </form>
-           
+
         </div>
     </div>
 
