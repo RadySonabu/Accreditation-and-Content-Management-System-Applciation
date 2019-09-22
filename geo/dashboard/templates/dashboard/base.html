@@ -41,7 +41,11 @@
     <link rel="shortcut icon" href="{% static 'img/logomalaki.png' %}" />
 </head>
 
-<body>
+<body class=" pace-done" data-gr-c-s-loaded="true">
+        <div class="pace  pace-inactive"><div class="pace-progress" data-progress-text="100%" data-progress="99" style="transform: translate3d(100%, 0px, 0px);">
+                <div class="pace-progress-inner"></div>
+              </div>
+              <div class="pace-activity"></div></div>
     <div id="wrapper">
         <nav class="navbar-default navbar-static-side " role="navigation">
             <div class="sidebar-collapse ">
@@ -96,7 +100,7 @@
             </div>
         </nav>
 
-        <div id="page-wrapper" class="gray-bg skin-2">
+        <div id="page-wrapper" class="white-bg skin-2">
             <div class="row border-bottom">
                 <nav class="navbar navbar-static-top" role="navigation" style="margin-bottom: 0">
                     <div class="navbar-header ">
@@ -161,11 +165,11 @@
         {% endif %} -->
 
 
-            <div class="row   gray-bg dashboard-header " >
+            <div class="row    dashboard-header " style="padding-bottom: 4rem">
                 {% if messages %} {% for message in messages %}
                 <div class="alert alert-{{ message.tags }}" style="box-shadow: 0px 3px 5px -1px rgba(0, 0, 0, 0),
                 0px 5px 8px 0px rgba(0, 0, 0, 0.14),
-                0px 1px 14px 0px rgba(0, 0, 0, 0.12); background: rgba(0, 0, 0, 0)">
+                0px 1px 14px 0px rgba(0, 0, 0, 0.12); ">
                     {{ message }}
                 </div>
                 {% endfor %} {% endif %}{% block content%}{% endblock%}
@@ -215,7 +219,7 @@
 
 
 
-            <div class="footer">
+            <div class="footer" >
                 <div class="pull-right">
                     Made by <strong> TEAM JFTW </strong>for the <strong>Institute. </strong>
                 </div>
@@ -233,6 +237,7 @@
     <!-- Mainly scripts -->
     <script src="{% static 'js/jquery-2.1.1.js'%}"></script>
     <script src="{% static 'js/bootstrap.min.js'%}"></script>
+    <script src="{% static 'js/popper.min.js'%}"></script>
     <script src="{% static 'js/plugins/metisMenu/jquery.metisMenu.js'%}"></script>
     <script src="{% static 'js/plugins/slimscroll/jquery.slimscroll.min.js'%}"></script>
 
@@ -255,9 +260,7 @@
     <script src="{% static 'js/plugins/peity/jquery.peity.min.js' %}"></script>
     <script src="{% static 'js/demo/peity-demo.js' %}"></script>
 
-    <!-- Custom and plugin javascript -->
-    <script src="{% static 'js/inspinia.js' %}"></script>
-    <script src="{% static 'js/plugins/pace/pace.min.js' %}"></script>
+    
 
     <!-- jQuery UI -->
     <script src="{% static 'js/plugins/jquery-ui/jquery-ui.min.js' %}"></script>
@@ -271,8 +274,7 @@
     <!-- Sparkline demo data  -->
     <script src="{% static 'js/demo/sparkline-demo.js' %}"></script>
 
-    <!-- ChartJS-->
-    <script src="{% static 'js/plugins/chartJs/Chart.min.js' %}"></script>
+    
 
     <!-- Toastr -->
     <script src="{% static 'js/plugins/toastr/toastr.min.js' %}"></script>

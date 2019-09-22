@@ -3,6 +3,7 @@
 {% load crispy_forms_tags %}
 
 {% block content %}
+{{instance}}
 <h2>Upload File</h2>
 <form method="post" enctype="multipart/form-data">
     {% csrf_token %}

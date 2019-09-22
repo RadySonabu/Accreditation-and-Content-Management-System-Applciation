@@ -3,23 +3,25 @@
 {% block content %}
 {% load crispy_forms_tags %}
 
-<form method="POST" load-url="{% url 'load-forms'%}" novalidate>
-  <label>Select Year:</label>
-  <select class="country">
-      <option value="2019">2019</option>
-      <option value="2020">2020</option>
-      <option value="2021">2021</option>
-  </select>
-  
-</form>
+<h3><strong>
+    <form method="POST" load-url="{% url 'load-forms'%}" novalidate>
+        <label>Select Year:</label>
+        <select class="country">
+            <option value="2019">2019</option>
+            <option value="2020">2020</option>
+            <option value="2021">2021</option>
+        </select>
+        
+      </form>
+</strong></h3>
 
 {% if user.role.role == 'COLLEGE DEAN'  and form.created_by == user.instance %}
 
 <!-- <form method="POST"> -->
 {% csrf_token %}
 <!-- <fieldset class=""> -->
-<legend class="border-bottom mb-4" style="color: 2px solid black">List of Forms <a href="{% url 'form-create' a %}"><i
-      class="fa fa-plus"></i></a>
+<legend class="border-bottom mb-4" style="color: 2px solid black"><h2><strong>List of Forms <a href="{% url 'form-create' a %}"><i
+      class="fa fa-plus"></i></a></strong></h2>
 </legend>
 <div class="row col-md-12">
 
@@ -50,8 +52,8 @@
     0px 1px 14px 0px rgba(0, 0, 0, 0.12); background: rgba(85, 85, 85, 0.12);border-top: 2px solid rgb(15, 15, 15)">
       <div class=" text-center" style="justify-content: center">
        
-          <h4 class="card-title">{{ f.type_of_accreditation}}</h6>
-            <h7 class="card-title">{{ f.created_for}}</h7>
+          <h4 class="card-title">{{ f.type_of_accreditation}}</h4>
+            <h5 class="card-title">{{ f.created_for}}</h5>
 
 
 

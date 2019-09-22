@@ -3,7 +3,7 @@
 {% block content %}
 
 {% block content_header %}
-<h2>Books</h2>
+<h2>Files</h2>
 <p>
     <a href="{% url 'upload_file' %}" class="btn btn-primary">Upload file</a>
 </p>
@@ -13,20 +13,21 @@
     <thead>
         <tr>
 
-            <th>Title</th>
-            <th>Author</th>
+            <th>For</th>
+            <th>File name</th>
             <th>Download</th>
             <th>Delete</th>
         </tr>
     </thead>
     <tbody>
+        
         {% for file in files %}
         <tr>
-            <td>{{ file.title }}</td>
-            <td>{{ file.author }}</td>
+            <td>{{ file.subdivisiondetail }}</td>
+            <td>{{ file.name }}</td>
             <td>
                 <a href="{{ file.pdf.url }}" class="btn btn-primary btn-sm" target="_blank">
-                    Download PDF
+                    Download File
                 </a>
             </td>
             <td>
