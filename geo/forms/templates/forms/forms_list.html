@@ -7,6 +7,7 @@
     <form method="POST" load-url="{% url 'load-forms'%}" novalidate>
         <label>Select Year:</label>
         <select class="country">
+            <!-- <option value="">-------------</option> -->
             <option value="2019">2019</option>
             <option value="2020">2020</option>
             <option value="2021">2021</option>
@@ -15,12 +16,14 @@
       </form>
 </strong></h3>
 
+
+
 {% if user.role.role == 'COLLEGE DEAN'  and form.created_by == user.instance %}
 
 <!-- <form method="POST"> -->
 {% csrf_token %}
 <!-- <fieldset class=""> -->
-<legend class="border-bottom mb-4" style="color: 2px solid black"><h2><strong>List of Forms <a href="{% url 'form-create' a %}"><i
+<legend  class="border-bottom mb-4" style="color: 2px solid black"><h2><strong>List of Forms <a href="{% url 'form-create' a %}"><i
       class="fa fa-plus"></i></a></strong></h2>
 </legend>
 <div class="row col-md-12">
@@ -39,44 +42,46 @@
 
 
 
-  {% if f.year == 2019 and f.type_of_accreditation.id == a  %}
+  {% if f.year == 2019 and  f.type_of_accreditation.id == a  %}
 
 
 
+    
+    <a href="{% url 'detail-form' f.id %}" class="block full-width m-b bounce">
 
-  <a href="{% url 'detail-form' f.id %}" class="block full-width m-b bounce">
-
-  <div class="col-md-3 p-2 bounce">
-    <div class="payment-card" style="box-shadow: 0px 3px 5px -1px rgba(0, 0, 0, 0.2),
-    0px 5px 8px 0px rgba(0, 0, 0, 0.14),
-    0px 1px 14px 0px rgba(0, 0, 0, 0.12); background: rgba(85, 85, 85, 0.12);border-top: 2px solid rgb(15, 15, 15)">
-      <div class=" text-center" style="justify-content: center">
-       
-          <h4 class="card-title">{{ f.type_of_accreditation}}</h4>
-            <h5 class="card-title">{{ f.created_for}}</h5>
-
-
-
-            <img class="avatar" src="/media/{{f.type_of_accreditation.image}}" alt="..." style="width: 50%">
-            <h2 class="card-title">{{ f.year}}</h2>
-            <div class="progress progress-mini">
-
-              {% if f.percent >= 80 %}
-              <div style=" width: {{f.percent}}%; background-color: blue;" class="progress-bar">qwe</div>
-              {% elif f.percent >= 60%}
-              <div style=" width: {{f.percent}}%; background-color: green;" class="progress-bar"></div>
-              {% elif f.percent >= 50%}
-              <div style=" width: {{f.percent}}%; background-color: orange;" class="progress-bar"></div>
-              {% elif f.percent < 50%}
-              <div style=" width: {{f.percent}}%; background-color: red;" class="progress-bar"></div>
-              {% endif %}
-
+        <div class="col-md-3 p-2 bounce">
+          <div class="payment-card" style="box-shadow: 0px 3px 5px -1px rgba(0, 0, 0, 0.2),
+          0px 5px 8px 0px rgba(0, 0, 0, 0.14),
+          0px 1px 14px 0px rgba(0, 0, 0, 0.12); background: rgba(85, 85, 85, 0.12);border-top: 2px solid rgb(15, 15, 15)">
+            <div class=" text-center" style="justify-content: center">
+             
+                <h4 class="card-title">{{ f.type_of_accreditation}}</h4>
+                  <h5 class="card-title">{{ f.created_for}}</h5>
+      
+      
+      
+                  <img class="avatar" src="/media/{{f.type_of_accreditation.image}}" alt="..." style="width: 50%">
+                  <h2 class="card-title">{{ f.year}}</h2>
+                  <div class="progress progress-mini">
+      
+                    {% if f.percent >= 80 %}
+                    <div style=" width: {{f.percent}}%; background-color: blue;" class="progress-bar"></div>
+                    {% elif f.percent >= 60%}
+                    <div style=" width: {{f.percent}}%; background-color: green;" class="progress-bar"></div>
+                    {% elif f.percent >= 50%}
+                    <div style=" width: {{f.percent}}%; background-color: orange;" class="progress-bar"></div>
+                    {% elif f.percent < 50%}
+                    <div style=" width: {{f.percent}}%; background-color: red;" class="progress-bar"></div>
+                    {% endif %}
+      
+                  </div>
+                  <div><h3>{{f.percent}}%</h3></div>
+              </a>
             </div>
-            <div><h3>{{f.percent}}%</h3></div>
-        </a>
-      </div>
-    </div>
-  </div>
+          </div>
+        </div>
+    
+  
 
 
 
@@ -97,7 +102,7 @@
 <!-- </fieldset> -->
 
 <!-- </form> -->
-
+<div id="forms_dean" ></div>
 
   {%else%}
   Oops page not found!
@@ -118,7 +123,7 @@
         },
         success: function (data) {   // `data` is the return of the `load_cities` view function
           // location.html(data)
-          $("#forms_dean").html(data)
+          // $("#forms_dean").html(data)
           console.log("Bobo"); // replace the contents of the city input with the data that came from the server
         }
       });
