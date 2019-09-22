@@ -3,7 +3,7 @@
 {% block content %}
 
 {% block content_header %}
-<h2>Books</h2>
+<h2>Accreditation Files</h2>
 <p>
     <a href="{% url 'upload_file' %}" class="btn btn-primary">Upload file</a>
 </p>
@@ -13,8 +13,8 @@
     <thead>
         <tr>
 
-            <th>Title</th>
-            <th>Author</th>
+            <th>Year</th>
+            <th>College</th>
             <th>Download</th>
             <th>Delete</th>
         </tr>
@@ -26,7 +26,7 @@
             <td>{{ file.author }}</td>
             <td>
                 <a href="{{ file.pdf.url }}" class="btn btn-primary btn-sm" target="_blank">
-                    Download PDF
+                    Download FILE
                 </a>
             </td>
             <td>

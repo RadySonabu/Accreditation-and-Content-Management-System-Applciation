@@ -1,190 +1,195 @@
-{% extends "dashboard/base.html" %} 
+{% extends "dashboard/base.html" %}
 {% load crispy_forms_tags %}
 {% block content %}
 
 {% if user.role.role == 'DEPARTMENT CHAIRPERSON'  or  user.created_by == user.instance %}
-  {% for f in f %}
-  
-  {% if object.id == f.id %}
-  {% if f.created_for.program == user.program.program or  f.created_by == user %}
-  <div class="row justify-content-center" >
-      <div class="col-md-12 ">
-        <div class="content-section" style="margin-bottom: 4rem">
-          <form method="POST">
-                {% csrf_token %}
-                
-            <fieldset class="form-group">
-              <legend class="border-bottom mb-4">{{ object.title }} 
-                  {% if f.created_by == user %}
-                <a href="{% url 'form-update' object.id%}"><i class="fa fa-edit"></i></a>
-                <a href="{% url 'form-delete' object.id %}"><i class="fa fa-trash"></i></a>
-                {% endif %}
-              </legend>
-              
-            <div class="row">
-                    <div class=" col-md-6 mb-0">Accreditation Type: {{ object.type_of_accreditation }}    
-                    </div>
-                    <div class="form-group col-md-3 mb-0">Total: {{f.total}} 
-                    </div>
-                    <div class="form-group col-md-3 mb-0 b"><h5>{{f.percent}}%</h5>
-                    </div>
+{% for f in f %}
+
+{% if object.id == f.id %}
+{% if f.created_for.program == user.program.program or  f.created_by == user %}
+<div class="row justify-content-center">
+  <div class="col-md-12 ">
+    <div class="content-section" style="margin-bottom: 4rem">
+      <form method="POST">
+        {% csrf_token %}
+
+        <fieldset class="form-group">
+          <legend class="border-bottom mb-4">{{ object.title }}
+            {% if f.created_by == user %}
+            <a href="{% url 'form-update' object.id%}"><i class="fa fa-edit"></i></a>
+            <a href="{% url 'form-delete' object.id %}"><i class="fa fa-trash"></i></a>
+            {% endif %}
+          </legend>
+
+          <div class="row">
+            <div class=" col-md-6 mb-0">Accreditation Type: {{ object.type_of_accreditation }}
             </div>
-                  <table class="table table-sm table-responsive table-striped table-bordered w-auto" ">
-                      <thead class="text-center">
-                          <tr>
-                              <th class=" col-md-4 pt-3">Criteria{% if f.created_by == user %}
-                                  <a href="{% url 'division-create' object.id%}"><i class="fa fa-plus"></i></a>
-                                  
-                                  {% endif %}</th>
-                                  
-                              <th class=" col-md-1 pt-3">Weight</th>
-                              <th class=" col-md-1 pt-3">Breakdown</th>
-                              <th class=" col-md-2 pt-3">Remarks</th>
-                              <th class=" col-md-2 pt-3">Subpoints</th>
-                              <th class=" col-md-1 pt-3">Points</th>
-                              <th class=" col-md-1 pt-3">Action</th>
-                          </tr>
-                      </thead>
-                      <tbody>
-                          {% for d in d%}
-                  
-                          {% if d.title.id == object.id %}
-                          <tr>
-                              <td style="word-wrap: break-word;min-width: 350px;max-width: 350px;"><strong>{{d.criteria}}</strong> 
-                                {% if user == f.created_by  %}
-                                <a href="{% url 'subdivision-create' d.id%}">Add Minor Criteria</a>
-                                {% endif %}   
-                              </td>
-                              <td class="form-group col-md-1 pt-3 "><strong></strong>
-                              </td>
-                              <td class="form-group col-md-1 pt-3 "><strong></strong>
-                              </td>
-        
-                              <td class="form-group col-md-2 pt-3 "><strong></strong>
-                              </td>
-                              <td class="form-group col-md-1 pt-3 "><strong></strong>
-                              </td>
-                              <td class="form-group col-md-2 pt-3 "><strong>{{d.total}}</strong>
-                              </td>
-                              <td class="form-group col-md-1 pt-3 "><a href="{% url 'division-update' d.id%}"><i class="fa fa-edit"></i></a>
+            <div class="form-group col-md-3 mb-0">Total: {{f.total}}
+            </div>
+            <div class="form-group col-md-3 mb-0 b">
+              <h5>{{f.percent}}%</h5>
+            </div>
+          </div>
+          <table class="table table-sm table-responsive table-striped table-bordered w-auto" ">
+                      <thead class=" text-center">
+            <tr>
+              <th class=" col-md-4 pt-3">Criteria{% if f.created_by == user %}
+                <a href="{% url 'division-create' object.id%}"><i class="fa fa-plus"></i></a>
+
+                {% endif %}</th>
+
+              <th class=" col-md-1 pt-3">Weight</th>
+              <th class=" col-md-1 pt-3">Breakdown</th>
+              <th class=" col-md-2 pt-3">Remarks</th>
+              <th class=" col-md-2 pt-3">Subpoints</th>
+              <th class=" col-md-1 pt-3">Points</th>
+              <th class=" col-md-1 pt-3">Action</th>
+            </tr>
+            </thead>
+            <tbody>
+              {% for d in d%}
+
+              {% if d.title.id == object.id %}
+              <tr>
+                <td style="word-wrap: break-word;min-width: 350px;max-width: 350px;"><strong>{{d.criteria}}</strong>
+                  {% if user == f.created_by  %}
+                  <a href="{% url 'subdivision-create' d.id%}">Add Minor Criteria</a>
+                  {% endif %}
+                </td>
+                <td class="form-group col-md-1 pt-3 "><strong></strong>
+                </td>
+                <td class="form-group col-md-1 pt-3 "><strong></strong>
+                </td>
+
+                <td class="form-group col-md-2 pt-3 "><strong></strong>
+                </td>
+                <td class="form-group col-md-1 pt-3 "><strong></strong>
+                </td>
+                <td class="form-group col-md-2 pt-3 "><strong>{{d.total}}</strong>
+                </td>
+                <td class="form-group col-md-1 pt-3 "><a href="{% url 'division-update' d.id%}"><i
+                      class="fa fa-edit"></i></a>
+                  {% if user == f.created_by %}
+                  <a href="{% url 'division-delete' d.id%}"><i class="fa fa-trash"></i></a>
+                  {% endif %}
+                </td>
+              </tr>
+
+              {% for s in sd %}
+              {% if s.division.id == d.id %}
+              <tr>
+                <td style="word-wrap: break-word;min-width: 350px;max-width: 350px;"">&nbsp;&nbsp;&nbsp;{{s.criteria}}
                                 {% if user == f.created_by %}
-                                <a href="{% url 'division-delete' d.id%}"><i class="fa fa-trash"></i></a>
-                                {% endif %}
-                              </td>
-                          </tr>
-                          
-                          {% for s in sd %}
-                          {% if s.division.id == d.id %}
-                          <tr >
-                              <td style="word-wrap: break-word;min-width: 350px;max-width: 350px;"">&nbsp;&nbsp;&nbsp;{{s.criteria}}
-                                {% if user == f.created_by %}
-                                <a href="{% url 'subdivisiondetail-create' s.id %}"></a>Add Subcriteria</a>
-                                <a href="{% url 'subdivisiondetail-create' s.id %}"><i class="fa fa-upload"></i></a>
-                                {% endif %}  
-                              </td>
-                              <td class="form-group col-md-1 mb-0">{{s.points}}    
-                              </td>
-                              <td class="form-group col-md-1 pt-3 "><strong></strong>
-                              </td>
-          
-                              <td class="form-group col-md-2 pt-3 "><strong></strong>
-                              </td>
-                              <td class="form-group col-md-2 pt-3 "><strong></strong>
-                              </td>
-                              <td class="form-group col-md-1 pt-3 "><strong>{{s.total}}</strong>
-                              </td>
-                              <td class="form-group col-md-1 pt-3 "><a href="{% url 'subdivision-update' s.id%}"><i class="fa fa-edit"></i></a>
-                                {% if user == f.created_by %}
-                                <a href="{% url 'subdivision-delete' s.id%}"><i class="fa fa-trash"></i></a>
-                                {% endif %}
-                              </td>
-                            </tr>
-                            {% endif %}
+                                <a href=" {% url 'subdivisiondetail-create' s.id %}"></a>Add Subcriteria</a>
+                  <a href="{% url 'upload_file'  %}"><i class="fa fa-upload"></i></a>
+                  {% endif %}
+                </td>
+                <td class="form-group col-md-1 mb-0">{{s.points}}
+                </td>
+                <td class="form-group col-md-1 pt-3 "><strong></strong>
+                </td>
 
-                            {% for x in sdd %}                     
-                            {% if x.subdivision.id == s.id and s.division.id == d.id %}
-                            <tr >
-                                <td style="word-wrap: break-word;min-width: 350px;max-width: 350px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {{x.criteria}}    
-                                </td>
-                                <td class="form-group col-md-1 mb-0 "> {{x.points}}    
-                                  </td>
-                                  <td class="form-group col-md-1 mb-0"> {{x.subpoints}}    
-                                    </td>
-                                    <td style="word-wrap: break-word;min-width: 350px;max-width: 350px;"> {{x.remarks}}    
-                                      </td>
-                                      <td class=""> {{x.subtotal}}    
-                                        </td>
-                                <td class="form-group col-md-1 mb-0"> {{x.total}}    
-                                  </td>
-                                  <td class="form-group col-md-1 mb-0"> <a href="{% url 'subdivisiondetail-update' x.id%}"><i class="fa fa-edit"></i></a>
-                                    {% if user == f.created_by %}
-                                    <a href="{% url 'subdivisiondetail-delete' x.id%}"><i class="fa fa-trash"></i></a>
-                                    {% endif %}    
-                                </td>
-                                          
-                              </tr>
-                            <!-- </fieldset> -->
-                            {% endif %}
-                            {% endfor %}
-                            {% endfor %}
-                          
-                            {% endif %}
-                        {% endfor %}
-                      </tbody>
-                      
-                  </table>
-                
-                
-                
-                
-                    
-                  
-                      
-                      
-                      
-                      
-                      
-                    
-                    
-                    
-                  
-                    
-                        
-                        
-                        
-                        
-                      
-                        
-                      
-                      
-                          
-                        
-                         
-                          
-                  
-                  
-                 
-                
-                
-            </fieldset>
-        
-       
-        </form>
+                <td class="form-group col-md-2 pt-3 "><strong></strong>
+                </td>
+                <td class="form-group col-md-2 pt-3 "><strong></strong>
+                </td>
+                <td class="form-group col-md-1 pt-3 "><strong>{{s.total}}</strong>
+                </td>
+                <td class="form-group col-md-1 pt-3 "><a href="{% url 'subdivision-update' s.id%}"><i
+                      class="fa fa-edit"></i></a>
+                  {% if user == f.created_by %}
+                  <a href="{% url 'subdivision-delete' s.id%}"><i class="fa fa-trash"></i></a>
+                  {% endif %}
+                </td>
+              </tr>
+              {% endif %}
+
+              {% for x in sdd %}
+              {% if x.subdivision.id == s.id and s.division.id == d.id %}
+              <tr>
+                <td style="word-wrap: break-word;min-width: 350px;max-width: 350px;">
+                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {{x.criteria}}
+                </td>
+                <td class="form-group col-md-1 mb-0 "> {{x.points}}
+                </td>
+                <td class="form-group col-md-1 mb-0"> {{x.subpoints}}
+                </td>
+                <td style="word-wrap: break-word;min-width: 350px;max-width: 350px;"> {{x.remarks}}
+                </td>
+                <td class=""> {{x.subtotal}}
+                </td>
+                <td class="form-group col-md-1 mb-0"> {{x.total}}
+                </td>
+                <td class="form-group col-md-1 mb-0"> <a href="{% url 'subdivisiondetail-update' x.id%}"><i
+                      class="fa fa-edit"></i></a>
+                  {% if user == f.created_by %}
+                  <a href="{% url 'subdivisiondetail-delete' x.id%}"><i class="fa fa-trash"></i></a>
+                  {% endif %}
+                </td>
+
+              </tr>
+              <!-- </fieldset> -->
+              {% endif %}
+              {% endfor %}
+              {% endfor %}
+
+              {% endif %}
+              {% endfor %}
+            </tbody>
+
+          </table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        </fieldset>
+
+
+      </form>
     </div>
-    </div>
-    </div>
+  </div>
+</div>
 
 
 
 
-  
-      
- 
+
+
+
 
 
 {% endif %}
-  {% endif %}
-  {% endfor %}
+{% endif %}
+{% endfor %}
 {% else %}
 Oops.. Page not found!
 {% endif %}

@@ -19,20 +19,22 @@
 
 <body class="gray-bg">
 
-<div class="lock-word animated fadeInDown">
-    <span class="first-word">SCREEN</span><span style="padding: 20px">SAVER</span>
-</div>
-    <div class="middle-box text-center lockscreen animated fadeInDown">
+    <div class="lock-word animated fadeInDown">
+        <span class="first-word" style="color: black;padding-right: 30px;">SCREEN</span><span
+            style="padding: 20px; color: black">SAVER</span>
+    </div>
+    <div class=" middle-box text-center lockscreen animated fadeInDown">
         <div>
             <div class="m-b-md">
-            <img alt="image" class="img-circle circle-border" src="{{user.profile.image.url}}" style="width: 75%; ">
+                <img alt="image" class="img-circle circle-border" src="{{user.profile.image.url}}" style="width: 75%; ">
             </div>
             <h3>{{user.first_name}} {{user.last_name}}</h3>
-            <p>Your are in lock screen. Main app was shut down and you need to enter your passwor to go back to app.</p>
+            <p>Your are in lock screen. Main app was shut down and you need to enter your passwor to go back to app.
+            </p>
             <form class="m-t" role="form" method="POST">
                 {% csrf_token %}
                 <div class="form-group">
-                    
+
                 </div>
                 <!-- <button type="submit" class="btn btn-primary block full-width">Unlock</button> -->
                 <a href="{% url 'home' %}" class="btn btn-primary block full-width">OPEN</a>

@@ -27,10 +27,8 @@ class FormListView(LoginRequiredMixin, ListView):
 
         form.instance.id = self.kwargs.get('pk')
 
-        
-
         return super(FormListView, self).form_valid(form)
-    
+
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['year'] = 2019
@@ -39,8 +37,9 @@ class FormListView(LoginRequiredMixin, ListView):
         context['d'] = Division.objects.all()
         context['sd'] = Subdivision.objects.all()
         context['sdd'] = SubdivisionDetail.objects.all()
-        
+
         return context
+
 
 class FormDetailView(LoginRequiredMixin, DetailView):
 
@@ -58,8 +57,6 @@ class FormDetailView(LoginRequiredMixin, DetailView):
 class FormCreateView(LoginRequiredMixin, CreateView):
     model = Forms
     form_class = FormForm
-
-    
 
     error_message = "%(account)s is already created!"
 
@@ -86,7 +83,7 @@ class FormCreateView(LoginRequiredMixin, CreateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['a']= self.kwargs.get('pk')
+        context['a'] = self.kwargs.get('pk')
         context['d'] = Division.objects.all()
         context['sd'] = Subdivision.objects.all()
         context['sdd'] = SubdivisionDetail.objects.all()
@@ -388,7 +385,7 @@ def upload(request):
 
 def file_list(request):
     files = Files.objects.all()
-    return render(request, 'forms/file_list.html', {
+    return render(request, 'forms/files_list.html', {
         'files': files
     })
 
