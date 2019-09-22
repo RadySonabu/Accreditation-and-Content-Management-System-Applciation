@@ -21,23 +21,33 @@
     </thead>
     <tbody>
         
+        
+        
+            
+        
+            
+            
         {% for file in files %}
-        <tr>
-            <td>{{ file.subdivisiondetail }}</td>
-            <td>{{ file.name }}</td>
-            <td>
-                <a href="{{ file.file.url }}" class="btn btn-primary btn-sm" target="_blank">
-                    Download File
-                </a>
-            </td>
-            <td>
-                <form method="post" action="{% url 'delete_file' file.pk %}">
-                    {% csrf_token %}
-                    <button type="submit" class="btn btn-danger btn-sm">Delete</button>
-                </form>
-            </td>
-        </tr>
+        
+            {% if pk == file.subdivisiondetail.id  %}
+            <tr>
+                    <td>{{ file.subdivisiondetail }}</td>
+                    <td>{{ file.name }}</td>
+                    <td>
+                        <a href="{{ file.file.url }}" class="btn btn-primary btn-sm" target="_blank">
+                            Download File
+                        </a>
+                    </td>
+                    <td>
+                        <form method="post" action="{% url 'delete_file' file.pk %}">
+                            {% csrf_token %}
+                            <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                        </form>
+                    </td>
+                </tr>
+            {% endif %}
         {% endfor %}
+        
     </tbody>
 </table>
 {% endblock %}

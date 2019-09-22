@@ -383,11 +383,18 @@ def upload(request):
     return render(request, 'forms/upload.html', context)
 
 
-def file_list(request):
+def file_list(request, *args, **kwargs):
     files = Files.objects.all()
-    return render(request, 'forms/files_list.html', {
-        'files': files
-    })
+    forms = Forms.objects.all()
+    subdivisiondetail = SubdivisionDetail.objects.all()
+    
+    context = {
+        'files': files,
+        'forms':forms,
+        'subdivisiondetail':subdivisiondetail,
+        'pk': kwargs.get('pk')
+    }
+    return render(request, 'forms/files_list.html', context)
 
 
 def upload_file(request):
