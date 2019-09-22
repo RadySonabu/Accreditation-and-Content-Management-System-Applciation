@@ -194,28 +194,29 @@
 
         {% endfor %} -->
 
-<div class="row container">
+<div class="row ">
 
-  <div class="row container">
+  
 
-    <div class="col-md-9">
-
-
+    <div class="col-md-12">
 
 
 
-      <div class="ibox">
+
+
+      <div>
 
         {% for a in accr_type %}
 
         {% for f in f %}
 
         {% if f.year == 2019 and f.id  == 1%}
-
-
-        <div class="col-md-4 border" style="justify-content: center">
-          <a href="{% url 'chairperson-forms' a.id %}">
-            <div class="ibox-title text-center" style="justify-content: center"><strong>
+        <a href="{% url 'chairperson-forms' a.id %}">
+        
+        <div class="col-md-4 border" style="justify-content: center;">
+        <div class="payment-card">
+          
+            <div class=" text-center" style="justify-content: center"><strong>
                 <h3>{{a.id}}. {{a.type_of_accreditations}}</h3>
               </strong></div>
             <!-- <div class="ibox-content"> -->
@@ -227,7 +228,16 @@
 
 
       </div>
+    </div>
 
+
+
+
+
+
+ 
+ 
+  
 
 
       {% endif %}
@@ -239,20 +249,13 @@
 
 
 
-  </div>
-</div>
 
-
-
-
-
-
-</div>
 
 
 {% endif %}
 {% endif %}
 {% endfor %}
-
+</div>
+</div>
 
 {% endblock content %}
