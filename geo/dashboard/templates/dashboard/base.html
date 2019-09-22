@@ -42,21 +42,24 @@
 </head>
 
 <body class=" pace-done" data-gr-c-s-loaded="true">
-        <div class="pace  pace-inactive"><div class="pace-progress" data-progress-text="100%" data-progress="99" style="transform: translate3d(100%, 0px, 0px);">
+        <div class="pace  pace-inactive">
+            <div class="pace-progress" data-progress-text="100%" data-progress="99" style="transform: translate3d(100%, 0px, 0px);">
                 <div class="pace-progress-inner"></div>
               </div>
-              <div class="pace-activity"></div></div>
+              <div class="pace-activity"></div>
+            </div>
     <div id="wrapper">
         <nav class="navbar-default navbar-static-side " role="navigation">
             <div class="sidebar-collapse ">
                 <ul class="nav metismenu  " id="side-menu">
-                    <li class="nav-header default-skin " style="box-shadow: 0px 3px 5px -1px rgba(0, 0, 0, 0.2),
+                    <li class="nav-header yellow-skin " style="box-shadow: 0px 3px 5px -1px rgba(0, 0, 0, 0.2),
                     0px 5px 8px 0px rgba(0, 0, 0, 0.14),
                     0px 1px 14px 0px rgba(0, 0, 0, 0.12); background: rgba(255, 255, 255, 0.12)">
-                        <div class="dropdown profile-element img-fluid"> <span>
+                        <div class="dropdown profile-element "> <span>
                                 <img alt="image" class="img-circle" src="{{user.profile.image.url}}"
                                     style="width: 50%" />
                             </span>
+
                             <a data-toggle="dropdown" class="dropdown-toggle" href="#">
                                 <span class="clear"> <span class="block m-t-xs"> <strong
                                             class="font-bold">{{user.first_name}} {{user.middle_initial}}.
@@ -65,8 +68,8 @@
 
                         </div>
 
-                        <!-- <div class="logo-content">
-                            <img alt="image" class="img-circle" src="{{user.profile.image.url}}"/>
+                        <!-- <div class="logo-content ">
+                            <img alt="image" class="img-circle" src="{{user.profile.image.url}}" style="width: 50%"/>
                         </div> -->
                     </li>
                     {% if user.role.role != 'ADMINISTRATOR' %}
@@ -131,15 +134,6 @@
                         <li class="divider"></li>
 
                         <li class="divider"><a href="{% url 'lockscreen'%}" style="color: white">
-<<<<<<< HEAD
-                                <i class="fa fa-lock" style="color: black"></i>
-                            </a></li>
-
-
-
-
-                        <li style="color: black">
-=======
                                 <i class="fa fa-lock" style="color: white"></i> 
                             </a></li>
                       
@@ -147,7 +141,6 @@
                        
                         
                         <li style="color: white">
->>>>>>> 5b67d75df00309068daf96ec3d5df5b1757ebec1
                             {% now "M d, Y "%}
                         </li>
 

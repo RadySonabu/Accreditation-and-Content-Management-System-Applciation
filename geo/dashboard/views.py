@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 
 from members.models import MyUser
-from forms.models import Forms, AccreditationType
+from forms.models import Forms, AccreditationType, Division, Subdivision, SubdivisionDetail
 from .forms import LockscreenForm
 
 
@@ -20,7 +20,6 @@ def home(request):
         year_str = str(year_js)
         year = int(year_str)
         print(type(year))
-        
 
         if year == 2019:
             context = {
@@ -30,7 +29,7 @@ def home(request):
                 'f': Forms.objects.all(),
                 'user': user,
                 'year': year,
-                
+
 
             }
             return render(request, 'dashboard/home.html', context)
@@ -79,6 +78,7 @@ def chairperson_forms(request, pk):
     return render(request, 'forms/chairperson_forms.html', context)
 
 
+@login_required
 def form_year(request):
     year_js = request.GET.get('year') or 2019
     print(year_js)
@@ -97,6 +97,7 @@ def form_year(request):
     return render(request, 'forms/load_forms.html', context)
 
 
+@login_required
 def lockscreen(request):
     # form = LockscreenForm
     # password1 = self.cleaned_data.get("password1")
@@ -106,3 +107,14 @@ def lockscreen(request):
     # if form.is_valid():
     #     return render(request, 'dashboard/home.html')
     return render(request, 'dashboard/lockscreen.html')
+
+
+def detail_form(request, *args, **kwargs):
+    context = {
+        'f': Forms.objects.all(),
+        'd': Division.objects.all(),
+        'sd': Subdivision.objects.all(),
+        'sdd': SubdivisionDetail.objects.all(),
+        'pk': kwargs.get('pk')
+    }
+    return render(request, 'dashboard/detailed_form.html', context)

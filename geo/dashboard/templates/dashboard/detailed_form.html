@@ -1,0 +1,94 @@
+{% extends "dashboard/base.html" %}
+{% block content %}
+    
+    {% for f in f %}
+        
+        {% if f.id == pk %}
+        <div class="row">
+                <div class="col-lg-12">
+                    <div class="wrapper wrapper-content animated fadeInUp">
+                        <div class="ibox">
+                            <div class="ibox-content">
+                                <div class="row">
+                                    <div class="col-lg-12">
+                                        <div class="m-b-md">
+                                                <h2><strong><b>Accreditation detail </b></strong></h2> 
+                                        </div>
+                                        <dl class="dl-horizontal">
+                                            <dt>Status:</dt> <dd><span class="label label-primary">Active</span></dd>
+                                        </dl>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-lg-5">
+                                        <dl class="dl-horizontal">
+        
+                                            <dt>Created by:</dt> <dd>{{f.created_by.first_name}} {{f.created_by.middle_initial}}. {{f.created_by.last_name}}</dd>
+                                            <dt>Client:</dt> <dd><a href="#" class="text-navy">{{f.type_of_accreditation}}</a> </dd>
+                                            
+                                        </dl>
+                                    </div>
+                                    <div class="col-lg-5" id="cluster_info">
+                                        <dl class="dl-horizontal" >
+        
+                                            <dt>Last Updated:</dt> <dd>16.08.2019 12:15:57</dd>
+                                            <dt>Created:</dt> <dd> 	10.07.2018 23:36:57 </dd>
+                                            
+                                        </dl>
+                                    </div>
+        
+                                    <div class="col-lg-12">
+                                            <dl class="dl-horizontal">
+                                                <dt>Completed:</dt>
+                                                <dd>
+                                                    <div class="progress progress-striped active m-b-sm">
+                                                        <div style="width: {{f.percent}}%;" class="progress-bar"></div>
+                                                    </div>
+                                                    <small>Accreditation completed in <strong>{{f.percent}}%</strong>.</small>
+                                                </dd>
+                                            </dl>
+                                        </div>
+                                    
+                               
+                                    
+        
+                                    <div class="row">
+                                    <div class="ibox float-e-margins">
+                                    <div class="col-lg-6">
+                                            <div class="text-center">
+                                                    <a data-toggle="modal" class="btn btn-primary" href="{% url 'form-detail' pk%}">Edit accreditation form</a>
+                                                    </div>
+                                                    <div id="modal-form" class="modal fade" aria-hidden="true">
+                                                        <div class="modal-dialog">
+                                                            <div class="modal-content">
+                                                                <div class="modal-body">
+                                                                    <div class="row">
+                                                                        <div class="col-lg-12"><h3 class="m-t-none m-b">Edit Accreditation form</h3>
+                                                                </div>
+                                                            </div>
+                                                            </div>
+                                                        </div>
+                                                </div>
+                                            </div>
+                                        </div>
+        
+                                      
+        
+                                    
+                                    
+                                    </div>          
+                                </div>
+                            </div>    
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endif %}
+            
+    {% endfor %}
+        
+{% endblock%}
+
+
+
