@@ -397,24 +397,27 @@ def file_list(request, *args, **kwargs):
     return render(request, 'forms/files_list.html', context)
 
 
-def upload_file(request):
+def upload_file(request, *args, **kwargs):
+    pk= kwargs.get('pk')
     if request.method == 'POST':
         form = FileForm(request.POST, request.FILES)
+        
         if form.is_valid():
             form.save()
-            return redirect('file_list')
+            return redirect('file_list', pk)
     else:
         form = FileForm()
-    return render(request, 'forms/upload_file.html', {
-        'form': form
-    })
+    context = {
+        'form': form, 
+    }
+    return render(request, 'forms/upload_file.html', context)
 
 
 def delete_file(request, pk):
     if request.method == 'POST':
         files = Files.objects.get(pk=pk)
         files.delete()
-    return redirect('file_list')
+    return redirect('home')
 
 
 class FileListView(ListView):

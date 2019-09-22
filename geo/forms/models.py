@@ -190,3 +190,6 @@ class Files(models.Model):
 
     def name(self):
         return self.filename
+
+    def get_absolute_url(self):
+        return reverse("file_list", kwargs={"pk": self.pk})
