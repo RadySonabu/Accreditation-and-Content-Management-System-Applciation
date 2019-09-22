@@ -4,15 +4,19 @@
 {% block content %}
 
 
+<<<<<<< HEAD
 <div class="container justify-content-center  " style="box-shadow: 0px 3px 5px -1px rgba(0, 0, 0, 0.2),
+=======
+<div class="container justify-content-center col-md-10  " style="box-shadow: 0px 3px 5px -1px rgba(0, 0, 0, 0.2),
+>>>>>>> 5b67d75df00309068daf96ec3d5df5b1757ebec1
 0px 5px 8px 0px rgba(0, 0, 0, 0.14),
-0px 1px 14px 0px rgba(0, 0, 0, 0.12); background: rgba(85, 85, 85, 0.12); padding-top: 2rem">
+0px 1px 14px 0px rgba(0, 0, 0, 0.12); background: rgba(133, 133, 133, 0.12); padding: 2rem; border-top: 2px solid black">
   <div class="col-md-12 ">
     <div class="content-section">
       <form method="POST" id="personForm" data-college-url="{% url 'ajax_load_college' %} "
         data-program-url="{% url 'ajax_load_program' %}" class="wizard-big" novalidate>
         {% csrf_token %}
-        <fieldset class="form-group">
+        <fieldset class="form-group has-error help-block">
           <legend class="border-bottom mb-4">Add User</legend>
           <div class="form-row">
             <div class="form-group required col-md-5 mb-0">
@@ -121,6 +125,7 @@
 
 
 
+<<<<<<< HEAD
 
 
 
@@ -130,4 +135,6 @@
 
 
 
+=======
+>>>>>>> 5b67d75df00309068daf96ec3d5df5b1757ebec1
 {% endblock%}
