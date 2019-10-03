@@ -47,9 +47,10 @@ class Forms(models.Model):
         default=0, db_column='total', max_digits=7, decimal_places=2)
     _percent = models.DecimalField(
         default=0, db_column='percent',  max_digits=7, decimal_places=2)
+    is_active = models.BooleanField(default=False)
 
     def __str__(self):
-        return f'{self.title}'
+        return f'{self.title} {self.is_active}'
 
     def get_absolute_url(self):
         return reverse("form-detail", kwargs={"pk": self.pk})
@@ -157,9 +158,11 @@ class SubdivisionDetail(models.Model):
     remarks = models.CharField(max_length=150)
     subtotal = models.DecimalField(default=0, validators=[
         MinValueValidator(0.0)],  max_digits=7, decimal_places=2)
+    can_upload = models.ForeignKey(
+        Program, on_delete=models.CASCADE, null=True, )
 
     def __str__(self):
-        return self.criteria
+        return f'{self.criteria} {self.can_upload}'
 
     def get_absolute_url(self):
         return reverse("subdivisiondetail-detail", kwargs={"pk": self.pk})
@@ -183,8 +186,12 @@ class Files(models.Model):
     subdivisiondetail = models.ForeignKey(
         'SubdivisionDetail', on_delete=models.CASCADE)
     file = models.FileField(upload_to=uploads, null=True,
-                            blank=True, max_length=500)
-    filename  = models.CharField( max_length=100)
+                            blank=True, max_length=10000)
+    filename = models.CharField(max_length=1500)
+
+    note_from_auditor = models.TextField(null=True, blank=True)
+    note_from_audited = models.TextField(null=True, blank=True)
+
     def __str__(self):
         return self.filename
 

@@ -31,25 +31,28 @@
                        {% for f in f %}
                        
                        {% if f.created_for.program == mem.program.program  and f.type_of_accreditation.id == pk and a.id == 1%}
+                       {% if f.is_active == True %}
                        <div class="col-lg-3 p-2">
-                            <div class="ibox float-e-margins">
-                              <div class="ibox-content text-center" style="justify-content: center">
-                                  <a href="{% url 'form-detail' f.id %}">
-                                <h4 class="card-title">{{ f.type_of_accreditation}}</h6>
-                                <h7 class="card-title">{{ f.created_for}}</h7>
-                                
-                                
-                                
-                                    <img class="avatar" src="/media/{{f.type_of_accreditation.image}}" alt="..." style="width: 50%">
-                                    <h2 class="card-title">{{ f.year}}</h2>
-                                    <div class="progress progress-mini">
-                                        <div style="width: {{f.percent}}%;" class="progress-bar"></div>
+                        <div class="ibox float-e-margins">
+                          <div class="ibox-content text-center" style="justify-content: center">
+                              <a href="{% url 'form-detail' f.id %}">
+                            <h4 class="card-title">{{ f.type_of_accreditation}}</h6>
+                            <h7 class="card-title">{{ f.created_for}}</h7>
+                            
+                            
+                            
+                                <img class="avatar" src="/media/{{f.type_of_accreditation.image}}" alt="..." style="width: 50%">
+                                <h2 class="card-title">{{ f.year}}</h2>
+                                <div class="progress progress-mini">
+                                    <div style="width: {{f.percent}}%;" class="progress-bar"></div>
 
-                                    </div>
-                                    <div>{{f.percent}}%</div>
-                                </a> </div>
-                            </div>
-                          </div>
+                                </div>
+                                <div>{{f.percent}}%</div>
+                            </a> </div>
+                        </div>
+                      </div>
+                       {% endif %}
+                       <!-- is active -->
                        {% endif %}
                        {% endfor %}
                        {% endfor %}
@@ -60,7 +63,7 @@
                               
             
                     
-            </div>
+           
 </div>
 <!-- </fieldset> -->
 

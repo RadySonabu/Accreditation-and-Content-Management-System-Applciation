@@ -392,7 +392,9 @@ def file_list(request, *args, **kwargs):
         'files': files,
         'forms':forms,
         'subdivisiondetail':subdivisiondetail,
-        'pk': kwargs.get('pk')
+        'pk': kwargs.get('pk'),
+        
+        'object': kwargs.get('pk')
     }
     return render(request, 'forms/files_list.html', context)
 

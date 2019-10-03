@@ -4,12 +4,12 @@
 {% block content %}
 
 
-<div class="container justify-content-center  " style="box-shadow: 0px 3px 5px -1px rgba(0, 0, 0, 0.2),
+<div class="container justify-content-center col-md-12 " style="box-shadow: 0px 3px 5px -1px rgba(0, 0, 0, 0.2),
 0px 5px 8px 0px rgba(0, 0, 0, 0.14),
 0px 1px 14px 0px rgba(0, 0, 0, 0.12); background: rgba(133, 133, 133, 0.12); padding: 2rem; border-top: 2px solid black">
   <div class="col-md-12 ">
     <div class="content-section">
-      <form method="POST" id="personForm" data-college-url="{% url 'ajax_load_college' %} "
+      <form method="POST" id="personForm" data-college-url="{% url 'ajax_load_college' %}"
         data-program-url="{% url 'ajax_load_program' %}" class="wizard-big" novalidate>
         {% csrf_token %}
         <fieldset class="form-group has-error help-block">
@@ -81,7 +81,7 @@
 
     var url = $("#personForm").attr("data-college-url"); // get the url of the `load_cities` view
     var roleId = $(this).val(); // get the selected country ID from the HTML input
-    console.log(roleId + 1)
+    console.log(roleId + url)
     $.ajax({ // initialize an AJAX request
       url: url, // set the url of the request (= localhost:8000/hr/ajax/load-cities/)
       data: {
@@ -97,7 +97,7 @@
   $("#id_college").change(function (e) {
     var url = $("#personForm").attr("data-program-url"); // get the url of the `load_cities` view
     var collegeId = $(this).val(); // get the selected country ID from the HTML input
-
+    console.log(collegeId + "qwe")
     $.ajax({ // initialize an AJAX request
       url: url, // set the url of the request (= localhost:8000/hr/ajax/load-cities/)
       data: {

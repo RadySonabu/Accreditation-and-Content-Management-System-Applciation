@@ -1,7 +1,9 @@
 {% extends "dashboard/base.html" %}
 {% block content %}
 
+{% if user.role.role != 'ADMINISTRATOR' %}
 <div><h1><strong>List of Accreditations</strong></h1></div>
+{% endif %}
 
 
 <!-- <form method="POST" load-url="{% url 'load-forms'%}" novalidate>
@@ -210,7 +212,7 @@
 
         {% for f in f %}
 
-        {% if f.year == 2019 and f.id  == 1%}
+        {% if f.year == 2019 and f.id  == 1 %}
         <a href="{% url 'chairperson-forms' a.id %}">
         
         <div class="col-md-4 border" style="justify-content: center;">

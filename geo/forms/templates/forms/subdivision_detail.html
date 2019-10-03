@@ -103,7 +103,9 @@
                         {% if x.subdivision.id == s.id and s.division.id == d.id %}
                         <tr >
                             <td style="word-wrap: break-word;min-width: 350px;max-width: 350px;"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{x.criteria}}  
-                                <a href="{% url 'file_list' %}"><i class="fa fa-upload"></i></a>    
+                              {% if user.program.program == x.can_upload.program or user.role == f.created_by.role %}
+                              <a href="{% url 'file_list' x.id%}"><i class="fa fa-upload"></i></a>  
+                              {% endif %}  
                             </td>
                             <td class="form-group col-md-1 mb-0 "> {{x.points}}    
                               </td>

@@ -61,8 +61,7 @@ def profile(request):
 
 def load_college(request):
     role_id = request.GET.get('role')
-    # print(role_id)
-    # print(request.POST)
+
     college = College.objects.filter(role_id=role_id)
 
     return render(request, 'members/college_dropdown_option.html', {'college': college, })

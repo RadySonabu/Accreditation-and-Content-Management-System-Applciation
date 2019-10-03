@@ -4,7 +4,7 @@ from django.contrib.auth.decorators import login_required
 from members.models import MyUser
 from forms.models import Forms, AccreditationType, Division, Subdivision, SubdivisionDetail
 from .forms import LockscreenForm
-
+from forms.forms import FormForm
 
 @login_required
 def home(request):
@@ -111,6 +111,7 @@ def lockscreen(request):
 
 def detail_form(request, *args, **kwargs):
     context = {
+        'form': FormForm,
         'f': Forms.objects.all(),
         'd': Division.objects.all(),
         'sd': Subdivision.objects.all(),

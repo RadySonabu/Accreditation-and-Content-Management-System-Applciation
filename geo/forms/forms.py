@@ -7,7 +7,7 @@ class FormForm(forms.ModelForm):
     class Meta:
         model = Forms
         fields = ('type_of_accreditation',  'year',
-                  'created_for')
+                  'created_for', 'is_active')
 
 
 class SubdivisionForm(forms.ModelForm):
@@ -28,7 +28,7 @@ class SubdivisionDetailForm(forms.ModelForm):
         model = SubdivisionDetail
 
         fields = ('criteria',  'subpoints',
-                  'remarks', 'subtotal')
+                  'remarks', 'subtotal', 'can_upload')
 
         labels = {"subpoints": "Breakdown", 'subtotal': 'Subpoints'}
         widgets = {
@@ -44,8 +44,10 @@ class SubdivisionDetailForm(forms.ModelForm):
 class FileForm(forms.ModelForm):
     class Meta:
         model = Files
-        fields = ('subdivisiondetail', 'filename', 'file')
-        labels = {'subdivisiondetail': 'For Subcriteria'}
+        fields = ('subdivisiondetail', 'filename', 'file',
+                  'note_from_auditor', 'note_from_audited')
+        labels = {'subdivisiondetail': 'For Subcriteria',
+                  'note_from_audited': 'My note', 'note_from_auditor': 'Note'}
 
 
 class DivisionForm(forms.ModelForm):
