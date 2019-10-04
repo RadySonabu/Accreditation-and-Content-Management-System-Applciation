@@ -12,7 +12,7 @@
       <form method="POST" id="personForm" data-college-url="{% url 'ajax_load_college' %}"
         data-program-url="{% url 'ajax_load_program' %}" class="wizard-big" novalidate>
         {% csrf_token %}
-        <fieldset class="form-group has-error help-block">
+        <fieldset class="form-group help-block" >
           <legend class="border-bottom mb-4">Add User</legend>
           <div class="form-row">
             <div class="form-group required col-md-5 mb-0">

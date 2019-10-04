@@ -6,13 +6,26 @@ from forms.models import Forms, AccreditationType, Division, Subdivision, Subdiv
 from .forms import LockscreenForm
 from forms.forms import FormForm
 
+
 @login_required
 def home(request):
     user = request.user
     if user.is_authenticated and user.role.role == 'VPAA':
-        context = {
-            'members': MyUser.objects.filter(role__role='COLLEGE DEAN')
-        }
+        year_js = request.GET.get('year') or 2019
+        print(year_js)
+        year_str = str(year_js)
+        year = int(year_str)
+        print(type(year))
+        if year == 2019:
+            context = {
+                'members': MyUser.objects.filter(role__role='COLLEGE DEAN'),
+                'accr_type': AccreditationType.objects.all(),
+                'title': 'Home',
+                'f': Forms.objects.all(),
+                'user': user,
+                'year': year,
+            }
+            return render(request, 'dashboard/home.html', context)
     elif user.is_authenticated and user.role.role == 'COLLEGE DEAN':
         # if user.college.college == 'College of Information Technology Education':
         year_js = request.GET.get('year') or 2019

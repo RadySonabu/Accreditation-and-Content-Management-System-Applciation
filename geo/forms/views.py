@@ -393,7 +393,7 @@ def file_list(request, *args, **kwargs):
         'forms':forms,
         'subdivisiondetail':subdivisiondetail,
         'pk': kwargs.get('pk'),
-        
+        'note': FileForm,
         'object': kwargs.get('pk')
     }
     return render(request, 'forms/files_list.html', context)
@@ -433,3 +433,12 @@ class UploadFileView(CreateView):
     form_class = FileForm
     success_url = reverse_lazy('class_file_list')
     template_name = 'forms/upload.html'
+
+
+class NoteUpdateView(UpdateView):
+    model = Files 
+    fields = 'note_from_auditor'
+    context_object_name = 'n'
+    
+
+

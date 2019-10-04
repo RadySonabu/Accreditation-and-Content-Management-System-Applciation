@@ -33,7 +33,7 @@
                        {% if f.created_for.program == mem.program.program  and f.type_of_accreditation.id == pk and a.id == 1%}
                        {% if f.is_active == True %}
                        <div class="col-lg-3 p-2">
-                        <div class="ibox float-e-margins">
+                        <div class="payment-card">
                           <div class="ibox-content text-center" style="justify-content: center">
                               <a href="{% url 'form-detail' f.id %}">
                             <h4 class="card-title">{{ f.type_of_accreditation}}</h6>

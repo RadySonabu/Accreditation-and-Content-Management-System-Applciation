@@ -20,23 +20,22 @@
 
   
 
-{% if user.role.role == 'COLLEGE DEAN'  and form.created_by == user.instance %}
+{% if user.role.role == 'COLLEGE DEAN'  and form.created_by == user.instance or user.role.role == 'VPAA' %}
 
 <!-- <form method="POST"> -->
 {% csrf_token %}
 <!-- <fieldset class=""> -->
-<legend  class="border-bottom mb-4" style="color: 2px solid black"><h2><strong>List of Forms <a href="{% url 'form-create' a %}"><i
-      class="fa fa-plus"></i></a></strong></h2>
+<legend  class="border-bottom mb-4 p-2" style="color: 2px solid black; margin: 10px"><h2><strong>List of Forms 
+  {% if user.role.role == "COLLEGE DEAN" %}
+  <a href="{% url 'form-create' a %}"><i
+    class="fa fa-plus"></i></a></strong></h2>
+  {% endif %}
 </legend>
 <div class="row col-md-12">
 
 
 
-  <!-- 
-                        
-                        {% if form.created_by == user  %}
-                        <h2><a class="article-title" href="{% url 'form-detail' form.id %}">{{ form.title}}</a></h2>
-                        {% endif %} -->
+  
 
   {% for f in f %}
 
@@ -49,36 +48,66 @@
 
 
     
+    {% if user.role.role == 'VPAA' %}
+    <div class="col-md-3 p-2 bounce">
+      <div class="payment-card" style="box-shadow: 0px 3px 5px -1px rgba(0, 0, 0, 0.2),
+      0px 5px 8px 0px rgba(0, 0, 0, 0.14),
+      0px 1px 14px 0px rgba(0, 0, 0, 0.12); background: rgba(85, 85, 85, 0.12);border-top: 2px solid rgb(15, 15, 15)">
+        <div class=" text-center" style="justify-content: center">
+         
+            <h4 class="card-title">{{ f.type_of_accreditation}}</h4>
+              <h5 class="card-title">{{ f.created_for}}</h5>
+  
+  
+  
+              <img class="avatar" src="/media/{{f.type_of_accreditation.image}}" alt="..." style="width: 50%">
+              <h2 class="card-title">{{ f.year}}</h2>
+              <div class="progress progress-mini">
+  
+                {% if f.percent >= 80 %}
+                <div style=" width: {{f.percent}}%; background-color: blue;" class="progress-bar"></div>
+                {% elif f.percent >= 60%}
+                <div style=" width: {{f.percent}}%; background-color: green;" class="progress-bar"></div>
+                {% elif f.percent >= 50%}
+                <div style=" width: {{f.percent}}%; background-color: orange;" class="progress-bar"></div>
+                {% elif f.percent < 50%}
+                <div style=" width: {{f.percent}}%; background-color: red;" class="progress-bar"></div>
+                {% endif %}
+  
+              </div>
+              <div><h3>{{f.percent}}%</h3></div>
+    {% else %}
     <a href="{% url 'detail-form' f.id %}" class="block full-width m-b bounce">
 
-        <div class="col-md-3 p-2 bounce">
-          <div class="payment-card" style="box-shadow: 0px 3px 5px -1px rgba(0, 0, 0, 0.2),
-          0px 5px 8px 0px rgba(0, 0, 0, 0.14),
-          0px 1px 14px 0px rgba(0, 0, 0, 0.12); background: rgba(85, 85, 85, 0.12);border-top: 2px solid rgb(15, 15, 15)">
-            <div class=" text-center" style="justify-content: center">
-             
-                <h4 class="card-title">{{ f.type_of_accreditation}}</h4>
-                  <h5 class="card-title">{{ f.created_for}}</h5>
-      
-      
-      
-                  <img class="avatar" src="/media/{{f.type_of_accreditation.image}}" alt="..." style="width: 50%">
-                  <h2 class="card-title">{{ f.year}}</h2>
-                  <div class="progress progress-mini">
-      
-                    {% if f.percent >= 80 %}
-                    <div style=" width: {{f.percent}}%; background-color: blue;" class="progress-bar"></div>
-                    {% elif f.percent >= 60%}
-                    <div style=" width: {{f.percent}}%; background-color: green;" class="progress-bar"></div>
-                    {% elif f.percent >= 50%}
-                    <div style=" width: {{f.percent}}%; background-color: orange;" class="progress-bar"></div>
-                    {% elif f.percent < 50%}
-                    <div style=" width: {{f.percent}}%; background-color: red;" class="progress-bar"></div>
-                    {% endif %}
-      
-                  </div>
-                  <div><h3>{{f.percent}}%</h3></div>
-              </a>
+      <div class="col-md-3 p-2 bounce">
+        <div class="payment-card" style="box-shadow: 0px 3px 5px -1px rgba(0, 0, 0, 0.2),
+        0px 5px 8px 0px rgba(0, 0, 0, 0.14),
+        0px 1px 14px 0px rgba(0, 0, 0, 0.12); background: rgba(85, 85, 85, 0.12);border-top: 2px solid rgb(15, 15, 15)">
+          <div class=" text-center" style="justify-content: center">
+           
+              <h4 class="card-title">{{ f.type_of_accreditation}}</h4>
+                <h5 class="card-title">{{ f.created_for}}</h5>
+    
+    
+    
+                <img class="avatar" src="/media/{{f.type_of_accreditation.image}}" alt="..." style="width: 50%">
+                <h2 class="card-title">{{ f.year}}</h2>
+                <div class="progress progress-mini">
+    
+                  {% if f.percent >= 80 %}
+                  <div style=" width: {{f.percent}}%; background-color: blue;" class="progress-bar"></div>
+                  {% elif f.percent >= 60%}
+                  <div style=" width: {{f.percent}}%; background-color: green;" class="progress-bar"></div>
+                  {% elif f.percent >= 50%}
+                  <div style=" width: {{f.percent}}%; background-color: orange;" class="progress-bar"></div>
+                  {% elif f.percent < 50%}
+                  <div style=" width: {{f.percent}}%; background-color: red;" class="progress-bar"></div>
+                  {% endif %}
+    
+                </div>
+                <div><h3>{{f.percent}}%</h3></div>
+            </a>  
+    {% endif %}
             </div>
           </div>
         </div>

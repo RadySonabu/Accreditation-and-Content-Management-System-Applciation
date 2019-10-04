@@ -99,10 +99,10 @@
                               </td>
                               <td class="form-group col-md-1 pt-3 "><strong>{{s.total}}</strong>
                               </td>
-                              <td class="form-group col-md-1 pt-3 "><a href="{% url 'subdivision-update' s.id%}"><i class="fa fa-edit"></i></a>
+                              <td class="form-group col-md-1 pt-3 ">
 
                                 {% if user == f.created_by %}
-
+                                <a href="{% url 'subdivision-update' s.id%}"><i class="fa fa-edit"></i></a>
                                 <a href="{% url 'subdivision-delete' s.id%}"><i class="fa fa-trash"></i></a>
                                 {% endif %}
                               </td>

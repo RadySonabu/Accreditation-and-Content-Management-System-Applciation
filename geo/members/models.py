@@ -78,9 +78,12 @@ class MyUserManager(BaseUserManager):
 class MyUser(AbstractBaseUser):
 
     email = models.EmailField(primary_key=True,  max_length=254)
-    first_name = models.CharField(max_length=50)
-    middle_initial = models.CharField(max_length=1)
-    last_name = models.CharField(max_length=50)
+    first_name = models.CharField(max_length=50,validators=[
+        RegexValidator(r'^[a-zA-Z\s]+$')],)
+    middle_initial = models.CharField(max_length=2,validators=[
+        RegexValidator(r'^[a-zA-Z\s]+$')],)
+    last_name = models.CharField(max_length=50,validators=[
+        RegexValidator(r'^[a-zA-Z\s]+$')],)
 
     contact = models.CharField(validators=[
         RegexValidator(r'^(09|\+639)\d{9}$')], blank=True, max_length=13)

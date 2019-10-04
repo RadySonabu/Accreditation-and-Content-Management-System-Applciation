@@ -131,21 +131,12 @@ class Subdivision(models.Model):
 
     @property
     def total(self):
-        return self.subdivisiondetail_set.aggregate(total=Sum("subtotal")).get('total') or 0
+        total = self.subdivisiondetail_set.aggregate(total=Sum("subtotal")).get('total') or 0
+        # if total > self.points:
+        #     return self.points
+        return total
 
-    # @property
-    # def total(self):
-    #     subdivision_detail = self.subdivisiondetail_set.only(
-    #         'subtotal')
-    #     total = 0
-    #     for subdivision_detail in subdivision_detail:
-    #         total += subdivision_detail.subtotal
-    #         self._total = total
-    #     return self._total
-
-    # @total.setter
-    # def total(self, value):
-    #     self._total = value
+    
 
 
 class SubdivisionDetail(models.Model):
@@ -162,10 +153,12 @@ class SubdivisionDetail(models.Model):
         Program, on_delete=models.CASCADE, null=True, )
 
     def __str__(self):
-        return f'{self.criteria} {self.can_upload}'
+        return f'{self.criteria}'
 
     def get_absolute_url(self):
         return reverse("subdivisiondetail-detail", kwargs={"pk": self.pk})
+    
+    
 
 
 class Files(models.Model):
