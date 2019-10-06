@@ -48,7 +48,7 @@ class FormDetailView(LoginRequiredMixin, DetailView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['files'] = Files.objects.all()
+        context['files'] = Files.objects.all().distinct()
         context['f'] = Forms.objects.all()
         context['d'] = Division.objects.all()
         context['sd'] = Subdivision.objects.all()
@@ -432,9 +432,25 @@ class FileDeleteView(DeleteView):
 class FileUpdateView(UpdateView):
     model = Files
     form_class = FileForm
-    success_url = reverse_lazy('home')
+    
     template_name = 'forms/upload_file.html'
+    def get_success_url( self, **kwargs):
+        self.object = self.get_object()
+        id1 = self.kwargs['pk']
+        id2 = self.kwargs.get('pk')
+        print(id1)
+        print(id2 + 1)
+        return reverse_lazy('file_list', kwargs={'pk':self.object.subdivisiondetail.id})
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['files'] = Files.objects.all()
+        context['forms'] = Forms.objects.all()
+        context['subdivisiondetail'] =  SubdivisionDetail.objects.all()
+        context['pk'] =  self.kwargs.get('pk')
+        context['note'] = FileForm
+        context['object'] =  self.kwargs.get('pk')
 
+        return context
 
 class UploadFileView(CreateView):
     model = Files

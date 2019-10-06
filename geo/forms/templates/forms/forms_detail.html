@@ -119,10 +119,12 @@
 
                                   {% endif %}
                                   
-                                  {% for file in files %} {{x.id}} - {{file.subdivisiondetail.id}} 
-                                    {% if x.id == x.id  %}
-                                    {% if file.note_from_audited != "" or user.role.role == 'COLLEGE DEAN' %}
-                                    <a  href="{% url 'update-note' file.id%}" class=" glyphicon glyphicon-comment  " >
+                                  {% for file in files %} 
+                                  
+                                    {% if x.id == file.subdivisiondetail.id  %}
+                                    
+                                    {% if file.note_from_audited != " "  %}
+                                    <a  href="{% url 'update-note' file.id%}" class=" glyphicon glyphicon-comment  " style="color: orange">
                                       
                                     </a>
                                     {% endif %}

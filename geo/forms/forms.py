@@ -47,7 +47,7 @@ class FileForm(forms.ModelForm):
         fields = ('subdivisiondetail', 'filename', 'file',
                   'note_from_auditor', 'note_from_audited')
         labels = {'subdivisiondetail': 'For Subcriteria',
-                  'note_from_audited': 'My note', 'note_from_auditor': 'Note'}
+                  'note_from_auditor': 'Note'}
 
 
 class DivisionForm(forms.ModelForm):

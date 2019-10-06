@@ -12,26 +12,48 @@
         <div class="col-md-auto">
                 <div class="m-5">
                        {% if object %}
-                       <h2><strong>Update FILE</strong></h2>
-                       {% else %}
-                       <h2><strong>Upload File</strong></h2>
-                       {% endif %}
+                       <h2><strong> Auditor's Note</strong></h2>
                        
-                        <form method="post" enctype="multipart/form-data">
-                            {% csrf_token %}
-                            
-                            {% for sd in sd %}
-                            <div class="col-md-12" style="padding: 2%">For: <strong>{{sd}}</strong></div> 
-                            {% endfor %}
-                                    
-                            <div class="col-md-6">{{form.file|as_crispy_field}}</div>
-                            <div class="col-md-6">{{form.filename|as_crispy_field}}</div>
-                            
-                            <div class="col-md-6">{{form.note_from_audited|as_crispy_field}}</div>
-                            <div class="col-md-6">{{form.note_from_auditor|as_crispy_field}}</div>
-                            <div class="invisible">{{form.subdivisiondetail|as_crispy_field}}</div>
-                            <button type="submit" class="btn btn-primary " style="margin-bottom: 2rem">Upload File</button>
-                        </form>
+                       
+                       <form method="post" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        
+                        {% for sd in sd %}
+                        <div class="col-md-12" style="padding: 2%">For: <strong>{{sd}}</strong></div> 
+                        {% endfor %}
+                        <div class="col-md-6 disabled"  >{{form.note_from_auditor|as_crispy_field}}</div>      
+                        <div class="col-md-6 invisible">{{form.file|as_crispy_field}}</div>
+                        <div class="col-md-6 invisible">{{form.filename|as_crispy_field}}</div>
+                        
+                        
+                        
+                        <div class="invisible">{{form.subdivisiondetail|as_crispy_field}}</div>
+                        {% if user.role.role != 'COLLEGE DEAN' %}
+                        <button type="submit" class="btn btn-danger " style="margin-bottom: 2rem">Close</button>
+                        {% else %}
+                        <button type="submit" class="btn btn-primary " style="margin-bottom: 2rem">Submit</button>
+                        {% endif %}
+                        
+                    </form>
+                        {% else %}
+                       <h2><strong>Upload File</strong></h2>
+                       <form method="post" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        
+                        {% for sd in sd %}
+                        <div class="col-md-12" style="padding: 2%">For: <strong>{{sd}}</strong></div> 
+                        {% endfor %}
+                          
+                        <div class="col-md-6 ">{{form.file|as_crispy_field}}</div>
+                        <div class="col-md-6 ">{{form.filename|as_crispy_field}}</div>
+                        
+                        <div class="col-md-6">{{form.note_from_auditor|as_crispy_field}}</div>    
+                        
+                        <div class="invisible">{{form.subdivisiondetail|as_crispy_field}}</div>
+                        <button type="submit" class="btn btn-primary " style="margin-bottom: 2rem">Submit</button>
+                        
+                    </form>
+                       {% endif %}
                 </div>
         </div>
 
