@@ -1,27 +1,39 @@
 
-
+{% extends 'dashboard/base.html'%}
 {% load crispy_forms_tags %}
 
 {% block content %}
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-<div class="container card p-2 " style="margin-top: 2rem;box-shadow: 0px 3px 5px -1px rgba(0, 0, 0, 0.2),
+
+<div class="container card p-2 col-md-12" style="margin-top: 2rem;box-shadow: 0px 3px 5px -1px rgba(0, 0, 0, 0.2),
 0px 5px 8px 0px rgba(0, 0, 0, 0.14),
 0px 1px 14px 0px rgba(0, 0, 0, 0.12); background: rgba(85, 85, 85, 0.12);border-top: 2px solid rgb(15, 15, 15)">
+
+
         <div class="col-md-auto">
                 <div class="m-5">
-                        <h2>Upload File</h2>
+                       {% if object %}
+                       <h2><strong>Update FILE</strong></h2>
+                       {% else %}
+                       <h2><strong>Upload File</strong></h2>
+                       {% endif %}
+                       
                         <form method="post" enctype="multipart/form-data">
                             {% csrf_token %}
-                            <div class="hidden">{{form.subdivisiondetail|as_crispy_field}}</div>
-                            {{form.file|as_crispy_field}}
-                            {{form.filename|as_crispy_field}}
-                            {{form.note_from_audited|as_crispy_field}}
-                            <button type="submit" class="btn btn-primary">Upload File</button>
+                            
+                            {% for sd in sd %}
+                            <div class="col-md-12" style="padding: 2%">For: <strong>{{sd}}</strong></div> 
+                            {% endfor %}
+                                    
+                            <div class="col-md-6">{{form.file|as_crispy_field}}</div>
+                            <div class="col-md-6">{{form.filename|as_crispy_field}}</div>
+                            
+                            <div class="col-md-6">{{form.note_from_audited|as_crispy_field}}</div>
+                            <div class="col-md-6">{{form.note_from_auditor|as_crispy_field}}</div>
+                            <div class="invisible">{{form.subdivisiondetail|as_crispy_field}}</div>
+                            <button type="submit" class="btn btn-primary " style="margin-bottom: 2rem">Upload File</button>
                         </form>
                 </div>
         </div>
-</div>
+
+        
 {% endblock %}

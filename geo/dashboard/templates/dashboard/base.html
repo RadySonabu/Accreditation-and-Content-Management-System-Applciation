@@ -159,63 +159,26 @@
                 </nav>
             </div>
 
-            <!-- {% if title %}
-        <div class="row wrapper white-bg page-heading" style="padding-top: 2rem">
-                <div class="col-sm-4">
-                    <h3>{{title}}</h2>
-                    
-                </div>
-         </div>   
-        {% endif %} -->
+           
 
 
-            <div class="row    dashboard-header " style="padding-bottom: 4rem">
+            <div class="row    dashboard-header " style="padding-bottom: 4rem; justify-items: center">
                 {% if messages %} {% for message in messages %}
                 <div class="alert alert-{{ message.tags }}" style="box-shadow: 0px 3px 5px -1px rgba(0, 0, 0, 0),
                 0px 5px 8px 0px rgba(0, 0, 0, 0.14),
                 0px 1px 14px 0px rgba(0, 0, 0, 0.12); ">
                     {{ message }}
                 </div>
-                {% endfor %} {% endif %}{% block content%}{% endblock%}
-                <!-- <div class="col-sm-4">
-                <h2>Welcome {{user.first_name}} {{user.middle_initial}}. {{user.last_name}}</h2>
-                <small>Here is the current state of the accreditation for SY 19-20</small><ul class="list-group clear-list m-t">
-                        <li class="list-group-item fist-item"></li>
-                            <span class="label label-success">1</span> <a href="#">PACUCOA</a>
-                        </li>
-                        <li class="list-group-item">
-                            <span class="label label-info">2</span> <a href="#">ABET</a>
-                        </li>
-                        <li class="list-group-item">
-                            <span class="label label-primary">3</span> <a href="#">CENTER OF EXCELLENCE</a>
-                        </li>
-                        <li class="list-group-item">
-                            <span class="label label-default">4</span> <a href="#">ISO</a>
-                        </li>
-                        
-                    </ul>
-            </div>
+                {% endfor %} {% endif %}
+                <div class="" style="justify: center">{% block content%}{% endblock%}
+                </div>
 
 
                 
             
-            <div class="col-sm-2">
-                </div>
+            
                 
-                        <div class="col-sm-3">
-                            <div class="ibox float-e-margins">
-                                
-                                    <h1>        </h1>
-                                    <h3>PACUCOA </h5>
-        
-                               
-                                <div class="ibox-content">
-                                    <div>
-                                        <canvas id="doughnutChart" height="300"></canvas>
-                                    </div>
-                                </div>
-                            </div>
-                        </div> -->
+                        
 
 
             </div>

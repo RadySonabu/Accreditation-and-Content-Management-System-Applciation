@@ -72,8 +72,9 @@
                               </td>
                               <td class="form-group col-md-2 pt-3 "><strong>{{d.total}}</strong>
                               </td>
-                              <td class="form-group col-md-1 pt-3 "><a href="{% url 'division-update' d.id%}"><i class="fa fa-edit"></i></a>
+                              <td class="form-group col-md-1 pt-3 ">
                                 {% if user == f.created_by %}
+                                <a href="{% url 'division-update' d.id%}"><i class="fa fa-edit"></i></a>
                                 <a href="{% url 'division-delete' d.id%}"><i class="fa fa-trash"></i></a>
                                 {% endif %}
                               </td>
@@ -115,7 +116,20 @@
                                 <td style="word-wrap: break-word;min-width: 350px;max-width: 350px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {{x.criteria}}   
                                   {% if user.program.program == x.can_upload.program or user.role == f.created_by.role %}
                                   <a href="{% url 'file_list' x.id%}"><i class="fa fa-upload"></i></a>  
+
                                   {% endif %}
+                                  
+                                  {% for file in files %} {{x.id}} - {{file.subdivisiondetail.id}} 
+                                    {% if x.id == x.id  %}
+                                    {% if file.note_from_audited != "" or user.role.role == 'COLLEGE DEAN' %}
+                                    <a  href="{% url 'update-note' file.id%}" class=" glyphicon glyphicon-comment  " >
+                                      
+                                    </a>
+                                    {% endif %}
+                                    {% endif %}
+                                  
+                                  {% endfor %}
+                                    
                                 </td>
                                 <td class="form-group col-md-1 mb-0 "> {{x.points}}  
                                   </td>

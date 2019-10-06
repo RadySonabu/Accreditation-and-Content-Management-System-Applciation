@@ -53,34 +53,21 @@
                             </td>
                             <td class="form-group col-md-1 pt-3 "><strong>{{d.total}}</strong>
                             </td>
-                            <td class="form-group col-md-1 pt-3 "><a href="{% url 'division-update' d.id%}" ><i class="btn btn-secondary fa fa-edit"></i></a>
+                            <td class="form-group col-md-1 pt-3 ">
+                              {% if user.role.role == 'COLLEGE DEAN' %}
+                              <a href="{% url 'division-update' d.id%}" ><i class="btn btn-secondary fa fa-edit"></i></a>
+                            
+                              {% endif %}
                             </td>
                         </tr>
                       
                         
                       
                     {% for s in sd %}
+                    
                     {% if s.division.id == d.id %}
                         
-                        <!-- {% if object.id == s.id %}
-                        <tr>
-                            <td class="form-group col-md-4 mb-0">{{form.criteria}}    
-                              </td>
-                              <td class="form-group col-md-1 mb-0">{{form.points}}    
-                              </td>
-                              <td class="form-group col-md-1 pt-3 "><strong></strong>
-                              </td>
-  
-                              <td class="form-group col-md-2 pt-3 "><strong></strong>
-                              </td>
-                              <td class="form-group col-md-2 pt-3 "><strong></strong>
-                              </td>
-                              <td class="form-group col-md-1 pt-3 "><strong></strong>
-                              </td>
-                              <td class="form-group col-md-1 pt-3 "><button class="btn btn-primary fa fa-check dim" type="submit"></button>
-                              </td>
-                        </tr>
-                        {% else %} -->
+                        
                         <tr>
                             <td class="form-group col-md-4 mb-0">{{s.criteria}}    
                               </td>
@@ -95,10 +82,13 @@
                               </td>
                               <td class="form-group col-md-1 pt-3 "><strong>{{s.total}}</strong>
                               </td>
-                              <td class="form-group col-md-1 pt-3 "><a href="{% url 'subdivision-update' s.id%}"><i class="btn btn-secondary fa fa-edit"></i></a>
+                              <td class="form-group col-md-1 pt-3 ">
+                                {% if user.role.role == 'COLLEGE DEAN' %}
+                                <a href="{% url 'subdivision-update' s.id%}"><i class="btn btn-secondary fa fa-edit"></i></a>
+                              
+                                {% endif %}
                               </td>
                         </tr>
-                        <!-- {% endif %} -->
                             
                         
                         {%endif%}
@@ -108,11 +98,12 @@
                         
                       
                       {% for x in sdd %}
-                      
+                     
                         {% if x.subdivision.id == s.id and s.division.id == d.id %}
                           
                         {% if object.id == x.id %}
                         <tr>
+                            {% if user.role.role == 'COLLEGE DEAN' %}
                             <td class="form-group col-md-4 mb-0"> {{form.criteria}} 
                               <div class="hidden">{{form.can_upload}}</div>   
                               </td>
@@ -124,9 +115,23 @@
                                     </td>
                                     <td class="form-group col-md-2 mb-0"> {{form.subtotal}}    
                                       </td>
-                                      <td class="form-group col-md-1 mb-0"> {{form.total}}    
+                            {% else %}
+                            <td class="form-group col-md-4 mb-0"> {{x.criteria}} <div class="hidden">{{form.criteria}}</div>   
+                              <div class="hidden">{{form.can_upload}}</div>   
+                              </td>
+                              <td class="form-group col-md-1 mb-0 "> 
+                                </td>
+                                <td class="form-group col-md-1 mb-0"> {{x.subpoints}}    <div class="hidden">{{form.subpoints}}</div>   
+                                  </td>
+                                  <td class="form-group col-md-2 mb-0"> {{x.remarks}}    <div class="hidden">{{form.remarks}}</div>   
+                                    </td>
+                                    <td class="form-group col-md-2 mb-0"> {{form.subtotal}}    
+                                      </td>
+                            {% endif %}
+                            
+                                      <td class="form-group col-md-1 mb-0">  {{form.total}} 
                                         </td>
-                                        <td class="form-group col-md-1 pt-3 "><button class="btn btn-primary fa fa-check dim" type="submit"></button>
+                                        <td class="form-group col-md-1 pt-3 "><button class="btn btn-primary fa fa-check " type="submit"></button>
                                         </td>
                         </tr>
                         {%else%}

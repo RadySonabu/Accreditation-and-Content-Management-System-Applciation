@@ -72,14 +72,6 @@ class Forms(models.Model):
             percentage = (points/over)*100
 
         return round(percentage)
-    # @property
-    # def total(self):
-    #     division = self.subdivision_set.only(
-    #         'total')
-    #     total=0
-    #     for division in division:
-    #         total += division.total
-    #     return total
 
 
 class Division(models.Model):
@@ -97,21 +89,6 @@ class Division(models.Model):
     @property
     def total(self):
         return SubdivisionDetail.objects.filter(subdivision__division=self).aggregate(total=Sum("subtotal")).get('total') or 0
-    # @property
-    # def total(self):
-    #     subdivision_detail = self.subdivision_set.only(
-    #         '_total')
-    #     total = 0
-    #     for subdivision_detail in subdivision_detail:
-    #         total += subdivision_detail._total
-    #         self._total = total
-
-    #     return self._total
-
-    # @total.setter
-    # def total(self, value):
-    #     print(value + ' ardy')
-    #     self._total = value
 
 
 class Subdivision(models.Model):
@@ -131,15 +108,15 @@ class Subdivision(models.Model):
 
     @property
     def total(self):
-        total = self.subdivisiondetail_set.aggregate(total=Sum("subtotal")).get('total') or 0
-        # if total > self.points:
-        #     return self.points
+        total = self.subdivisiondetail_set.aggregate(
+            total=Sum("subtotal")).get('total') or 0
+        if total > self.points:
+            return self.points
         return total
-
-    
 
 
 class SubdivisionDetail(models.Model):
+
     subdivision = models.ForeignKey(
         Subdivision, default=1, on_delete=models.CASCADE)
     criteria = models.CharField(max_length=150)
@@ -157,27 +134,16 @@ class SubdivisionDetail(models.Model):
 
     def get_absolute_url(self):
         return reverse("subdivisiondetail-detail", kwargs={"pk": self.pk})
-    
-    
 
 
 class Files(models.Model):
-    # title = models.CharField(max_length=100)
-    # author = models.CharField(max_length=100)
-    # pdf = models.FileField(upload_to='uploads', null=True, blank=True)
 
-    # def __str__(self):
-    #     return self.title
-
-    # def delete(self, *args, **kwargs):
-    #     self.pdf.delete()
-    #     super().delete(*args, **kwargs)
     def uploads(self, filename):
         uploads = f'''uploads/{self.subdivisiondetail.subdivision.division.title.year}/{self.subdivisiondetail.subdivision.division.title.type_of_accreditation}/{self.subdivisiondetail.subdivision.division.title.college.college}/{self.subdivisiondetail.subdivision.division.title.created_for}/{self.subdivisiondetail.subdivision.division}/{self.subdivisiondetail.subdivision}/{self.subdivisiondetail}/{self.file}'''
         return uploads
 
     subdivisiondetail = models.ForeignKey(
-        'SubdivisionDetail', on_delete=models.CASCADE)
+        'SubdivisionDetail', on_delete=models.CASCADE, default=1)
     file = models.FileField(upload_to=uploads, null=True,
                             blank=True, max_length=10000)
     filename = models.CharField(max_length=1500)
@@ -193,3 +159,13 @@ class Files(models.Model):
 
     def get_absolute_url(self):
         return reverse("file_list", kwargs={"pk": self.pk})
+
+
+class Note(models.Model):
+
+    files = models.ForeignKey('Files', on_delete=models.CASCADE)
+    audit_note = models.TextField()
+    own_note = models.TextField()
+
+    def __str__(self):
+        return self.file.filename

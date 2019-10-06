@@ -13,7 +13,7 @@ from .models import Files
 from django.forms.models import modelform_factory
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.db.models import Max, Sum, Avg, F
-from forms.models import Forms, SubdivisionDetail, Subdivision, Division, AccreditationType
+from forms.models import Forms, SubdivisionDetail, Subdivision, Division, AccreditationType, Files
 from django.db.models.expressions import RawSQL
 from django.db import IntegrityError
 
@@ -31,6 +31,7 @@ class FormListView(LoginRequiredMixin, ListView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
+        context['files'] = Files.objects.all()
         context['year'] = 2019
         context['a'] = self.kwargs.get('pk')
         context['f'] = Forms.objects.all()
@@ -47,6 +48,7 @@ class FormDetailView(LoginRequiredMixin, DetailView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
+        context['files'] = Files.objects.all()
         context['f'] = Forms.objects.all()
         context['d'] = Division.objects.all()
         context['sd'] = Subdivision.objects.all()
@@ -289,9 +291,13 @@ class SubdivisionDetailCreateView(LoginRequiredMixin, CreateView):
     form_class = SubdivisionDetailForm
 
     def form_valid(self, form):
+       
+        
+
+
 
         form.instance.subdivision_id = self.kwargs.get('pk')
-
+        
         return super(SubdivisionDetailCreateView, self).form_valid(form)
 
     def get_context_data(self, **kwargs):
@@ -308,42 +314,17 @@ class SubdivisionDetailUpdateView(LoginRequiredMixin, UpdateView):
     model = SubdivisionDetail
     form_class = SubdivisionDetailForm
 
-    # def form_valid( self, form ):
-    #     #get the pk of the foreign key
+    def form_valid( self, form ):
+        subpoints=form.cleaned_data['subpoints']
+        subtotal=form.cleaned_data['subtotal']
 
-    #     sd = SubdivisionDetail.objects.all()
-    #     sd_filter = sd.filter(subdivision_id=self.object.subdivision.id)
-    #     sum = sd_filter.aggregate(Sum('subtotal'))['subtotal__sum']
-    #     # sum = Subdivision.objects.annotate(Sum('subdivisiondetail__subtotal'))
+        if subtotal > subpoints:
+            form.instance.subtotal = subpoints
+        #     return self.subpoints
+        
+        return super(SubdivisionDetailUpdateView, self).form_valid(form)
 
-    #     s = Subdivision.objects.get(id=self.object.subdivision.id)
-    #     s.total = sum
-
-    #     s.save()
-    #     # Subdivision.objects.filter(id = self.object.subdivision.id).update(total=sum)
-    #     # form.instance.remarks =sum
-    #     # form.save()
-    #     return super(SubdivisionDetailUpdateView, self).form_valid(form)
-
-    # def profile(request, self):
-    #     if request.method == 'POST':
-    #         form = SubdivisionForm(request.POST)
-
-    #         if form.is_valid():
-
-    #             sd = SubdivisionDetail.objects.all()
-    #             sd_filter = sd.filter(subdivision_id=7)
-    #             sum = sd_filter.aggregate(Sum('subtotal'))['subtotal__sum']
-    #             # sum = Subdivision.objects.annotate(Sum('subdivisiondetail__subtotal'))
-
-    #             form.instance.remarks =sum
-    #             form.save()
-    #             return redirect('form-list')
-
-    # else:
-    #   form = SubdivisionForm(request.POST, )
-
-    # return render(request, 'members/register.html')
+   
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -383,49 +364,76 @@ def upload(request):
     return render(request, 'forms/upload.html', context)
 
 
-def file_list(request, *args, **kwargs):
-    files = Files.objects.all()
-    forms = Forms.objects.all()
-    subdivisiondetail = SubdivisionDetail.objects.all()
+class FileListView(ListView):
+    model = Files
     
-    context = {
-        'files': files,
-        'forms':forms,
-        'subdivisiondetail':subdivisiondetail,
-        'pk': kwargs.get('pk'),
-        'note': FileForm,
-        'object': kwargs.get('pk')
-    }
-    return render(request, 'forms/files_list.html', context)
+    template_name = 'forms/files_list.html'
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['files'] = Files.objects.all()
+        context['forms'] = Forms.objects.all()
+        context['subdivisiondetail'] =  SubdivisionDetail.objects.all()
+        context['pk'] =  self.kwargs.get('pk')
+        context['note'] = FileForm(),
+        context['object'] =  self.kwargs.get('pk')
+        
+        return context
 
 
+    
 def upload_file(request, *args, **kwargs):
     pk= kwargs.get('pk')
+    sd = SubdivisionDetail.objects.filter(pk=pk)
     if request.method == 'POST':
         form = FileForm(request.POST, request.FILES)
         
         if form.is_valid():
+            form.instance.subdivisiondetail_id = pk
+
             form.save()
+            
             return redirect('file_list', pk)
     else:
         form = FileForm()
+        
     context = {
         'form': form, 
+        'sd':sd
     }
     return render(request, 'forms/upload_file.html', context)
 
-
-def delete_file(request, pk):
-    if request.method == 'POST':
-        files = Files.objects.get(pk=pk)
-        files.delete()
-    return redirect('home')
-
-
-class FileListView(ListView):
+class FileDeleteView(DeleteView):
     model = Files
-    template_name = 'forms/class_file_list.html'
-    context_object_name = 'files'
+    fields = "__all__"
+    template_name = 'forms/upload_file.html'
+    def get_success_url( self, **kwargs):
+        self.object = self.get_object()
+        id1 = self.kwargs['pk']
+        id2 = self.kwargs.get('pk')
+        print(id1)
+        print(id2 + 1)
+        return reverse_lazy('file_list', kwargs={'pk':self.object.subdivisiondetail.id})
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['files'] = Files.objects.all()
+        context['forms'] = Forms.objects.all()
+        context['subdivisiondetail'] =  SubdivisionDetail.objects.all()
+        context['pk'] =  self.kwargs.get('pk')
+        context['note'] = FileForm,
+        context['object'] =  self.kwargs.get('pk')
+
+        return context
+
+
+
+
+
+class FileUpdateView(UpdateView):
+    model = Files
+    form_class = FileForm
+    success_url = reverse_lazy('home')
+    template_name = 'forms/upload_file.html'
 
 
 class UploadFileView(CreateView):

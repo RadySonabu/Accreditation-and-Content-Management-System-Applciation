@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Division, Subdivision, SubdivisionDetail, AccreditationType, Forms, Files
+from .models import Division, Subdivision, SubdivisionDetail, AccreditationType, Forms, Files, Note
 
 from django.contrib.admin import AdminSite
 from django.utils.translation import ugettext_lazy
@@ -16,6 +16,7 @@ admin.site.register(SubdivisionDetail)
 admin.site.register(AccreditationType)
 admin.site.register(Forms, FormsAdmin)
 admin.site.register(Files)
+admin.site.register(Note)
 
 
 # default: "Django Administration"
