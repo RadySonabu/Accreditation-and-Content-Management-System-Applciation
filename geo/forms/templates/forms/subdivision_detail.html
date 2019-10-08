@@ -23,6 +23,8 @@
                  </div>
                  <div class="form-group col-md-3 mb-0">Total: {{f.total}}  
                 </div>
+                <div class="form-group col-md-3 mb-0 b"><h5>{{f.percent}}%</h5>
+                </div>
                 
                </div>
         
@@ -105,7 +107,11 @@
                         <tr >
                             <td style="word-wrap: break-word;min-width: 350px;max-width: 350px;"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{x.criteria}}  
                               {% if user.program.program == x.can_upload.program or user.role == f.created_by.role %}
-                              <a href="{% url 'file_list' x.id%}"><i class="fa fa-upload"></i></a>  
+                              <a href="{% url 'file_list' x.id%}"><i class="fa fa-upload"></i>
+                                {% if x.get_note > 0 %}
+                                <i class="fa fa-envelope" style="color: orange"></i>
+                              {% endif %}
+                              </a>  
                               {% endif %}  
                             </td>
                             <td class="form-group col-md-1 mb-0 "> {{x.points}}    

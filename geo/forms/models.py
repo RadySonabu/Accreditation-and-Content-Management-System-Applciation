@@ -95,8 +95,8 @@ class Subdivision(models.Model):
     division = models.ForeignKey(
         Division, default=1, on_delete=models.CASCADE)
     criteria = models.CharField(max_length=150,)
-    points = models.DecimalField(default=0, validators=[
-        MinValueValidator(0.0)],  max_digits=7, decimal_places=2)
+    _points = models.DecimalField(default=0, validators=[
+        MinValueValidator(0.0)],  max_digits=7, decimal_places=2, db_column='points')
     _total = models.DecimalField(
         default=0, db_column='total',  max_digits=7, decimal_places=2)
 
@@ -105,6 +105,13 @@ class Subdivision(models.Model):
 
     def get_absolute_url(self):
         return reverse("subdivision-detail", kwargs={"pk": self.pk})
+
+    @property
+    def points(self):
+        points = SubdivisionDetail.objects.filter(
+            subdivision=self).aggregate(total=Sum("subpoints")).get('total') or 0
+
+        return points
 
     @property
     def total(self):
@@ -116,13 +123,17 @@ class Subdivision(models.Model):
 
 
 class SubdivisionDetail(models.Model):
+    def max_subpoints(self):
+        over = SubdivisionDetail.objects.filter(subdivision=self).aggregate(
+            total=Sum("subpoints")).get('total') or 0
 
+        return 100
     subdivision = models.ForeignKey(
         Subdivision, default=1, on_delete=models.CASCADE)
     criteria = models.CharField(max_length=150)
 
-    subpoints = models.DecimalField(default=0, validators=[
-        MinValueValidator(0.0)],  max_digits=7, decimal_places=2)
+    subpoints = models.DecimalField(default=0,  validators=[
+        MinValueValidator(0.0)],   max_digits=7, decimal_places=2, )
     remarks = models.CharField(max_length=150)
     subtotal = models.DecimalField(default=0, validators=[
         MinValueValidator(0.0)],  max_digits=7, decimal_places=2)

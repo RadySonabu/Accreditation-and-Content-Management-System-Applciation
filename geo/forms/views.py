@@ -67,10 +67,10 @@ class FormDetailView(LoginRequiredMixin, DetailView):
         context['d'] = Division.objects.all()
         context['sd'] = Subdivision.objects.all()
         context['sdd'] = SubdivisionDetail.objects.all()
-        files = Files.objects.exclude(note_from_auditor='')
-        count = files.count()
+        # files = Files.objects.exclude(note_from_auditor='')
+        # count = files.count()
         
-        messages.add_message(self.request, messages.INFO, f'You have {count} notes left')
+        # messages.add_message(self.request, messages.INFO, f'You have {count} note/s left')
         return context
 
 
@@ -155,10 +155,10 @@ class DivisionDetailView(LoginRequiredMixin, DetailView):
         context['sd'] = Subdivision.objects.all()
         context['sdd'] = SubdivisionDetail.objects.all()
 
-        files = Files.objects.exclude(note_from_auditor='')
-        count = files.count()
+        # files = Files.objects.exclude(note_from_auditor='')
+        # count = files.count()
         
-        messages.add_message(self.request, messages.INFO, f'You have {count} notes left')
+        # messages.add_message(self.request, messages.INFO, f'You have {count} note/s left')
 
         return context
 
@@ -233,10 +233,10 @@ class SubdivisionDetailView(LoginRequiredMixin, DetailView):
         context['sd'] = Subdivision.objects.all()
         context['sdd'] = SubdivisionDetail.objects.all()
 
-        files = Files.objects.exclude(note_from_auditor='')
-        count = files.count()
+        # files = Files.objects.exclude(note_from_auditor='')
+        # count = files.count()
         
-        messages.add_message(self.request, messages.INFO, f'You have {count} notes left')
+        # messages.add_message(self.request, messages.INFO, f'You have {count} note/s left')
 
         return context
 
@@ -311,10 +311,10 @@ class SubdivisionDetailDetailView(LoginRequiredMixin, DetailView):
         context['sd'] = Subdivision.objects.all()
         context['sdd'] = SubdivisionDetail.objects.all()
 
-        files = Files.objects.exclude(note_from_auditor='')
-        count = files.count()
+        # files = Files.objects.exclude(note_from_auditor='')
+        # count = files.count()
         
-        messages.add_message(self.request, messages.INFO, f'You have {count} notes left')
+        # messages.add_message(self.request, messages.INFO, f'You have {count} note/s left')
 
         return context
 

@@ -109,11 +109,11 @@
                               </td>
                               <td class="form-group col-md-1 mb-0 "> 
                                 </td>
-                                <td class="form-group col-md-1 mb-0"> {{form.subpoints}}    
+                                <td class="form-group col-md-1 mb-0"> {{form.subpoints|as_crispy_field}}    
                                   </td>
                                   <td class="form-group col-md-2 mb-0"> {{form.remarks}}    
                                     </td>
-                                    <td class="form-group col-md-2 mb-0"> {{form.subtotal}}    
+                                    <td class="form-group col-md-2 mb-0"> {{form.subtotal|as_crispy_field}}    
                                       </td>
                             {% else %}
                             <td class="form-group col-md-4 mb-0"> {{x.criteria}} <div class="hidden">{{form.criteria}}</div>   

@@ -1,6 +1,8 @@
 from django import forms
 from .models import Forms,  Division, Subdivision, SubdivisionDetail, Files
 
+from django.db.models import Sum
+
 
 class FormForm(forms.ModelForm):
 
@@ -14,11 +16,11 @@ class SubdivisionForm(forms.ModelForm):
 
     class Meta:
         model = Subdivision
-        fields = ('criteria', 'points')
-        labels = {"points": "Weight", 'subtotal': 'Total'}
+        fields = ('criteria', )
+        labels = {"Points": "Weight", 'subtotal': 'Total'}
         widgets = {
             'criteria':  forms.Textarea(attrs={}),
-            'points': forms.NumberInput(attrs={'style': 'width:100pt'}),
+            'Points': forms.NumberInput(attrs={'style': 'width:100pt'}),
         }
 
 

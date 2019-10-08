@@ -36,7 +36,7 @@ def home(request):
         print(type(year))
         files = Files.objects.exclude(note_from_auditor='')
         count = files.count()
-        messages.info(request, f'You have {count} notes left')
+        messages.info(request, f'You have {count} note/s left')
         if year == 2019:
             context = {
                 'members': MyUser.objects.filter(program__program='BS Information Technology'),
@@ -52,7 +52,9 @@ def home(request):
 
     elif user.is_authenticated and user.role.role == 'DEPARTMENT CHAIRPERSON':
         if user.program.program == 'BS Information Technology':
-
+            files = Files.objects.exclude(note_from_auditor='')
+            count = files.count()
+            messages.info(request, f'You have {count} note/s left')
             context = {
                 'members': MyUser.objects.filter(program__program='BS Information Technology'),
                 'accr_type': AccreditationType.objects.all(),

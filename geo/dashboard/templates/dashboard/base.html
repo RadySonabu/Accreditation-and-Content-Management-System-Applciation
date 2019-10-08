@@ -92,10 +92,10 @@
                     <!-- <li><a href="{%url 'user_changelist'%}"> <i class="fa fa-users"></i><span class="nav-label">Manage
                                 User</span></a></li> -->
                     {% endif %}
-                    <li>
+                    <!-- <li>
                         <a href="{% url 'calendar' %}"><i class="fa fa-calendar"></i> <span class="nav-label">Calendar -
                                 Beta</span></a>
-                    </li>
+                    </li> -->
 
 
 
@@ -104,9 +104,9 @@
             </div>
         </nav>
 
-        <div id="page-wrapper" class="white-bg skin-2">
+        <div id="page-wrapper" class="white-bg "  >
             <div class="row border-bottom">
-                <nav class="navbar navbar-static-top" role="navigation" style="margin-bottom: 0">
+                <nav class="navbar navbar-static-top" role="navigation" style="margin-bottom: 0" style="border: 1px solid black">
                     <div class="navbar-header ">
 
 
@@ -123,9 +123,7 @@
 
                     <ul class="nav navbar-top-links navbar-right">
 
-                        <!-- <li>
-                    <span class="m-r-sm text-muted welcome-message">Welcome to TACOS-TIP</span>
-                </li> -->
+                       
 
                         <li class="dropdown">
 
@@ -134,14 +132,14 @@
 
                         <li class="divider"></li>
 
-                        <li class="divider"><a href="{% url 'lockscreen'%}" style="color: white">
-                                <i class="fa fa-lock" style="color: white"></i> 
+                        <li class="divider"><a href="{% url 'lockscreen'%}" style="color: rgb(2, 2, 2)">
+                                <i class="fa fa-lock" style="color: rgb(3, 3, 3)"></i> 
                             </a></li>
                       
                 
                        
                         
-                        <li style="color: white">
+                        <li style="color: rgb(0, 0, 0)">
                             {% now "M d, Y "%}
                         </li>
 
@@ -149,8 +147,8 @@
 
 
                         <li>
-                            <a href="{% url 'logout'%}" style="color: white">
-                                <i class="fa fa-sign-out" style="color: white"></i> Log out
+                            <a href="{% url 'logout'%}" style="color: rgb(5, 5, 5)">
+                                <i class="fa fa-sign-out" style="color: rgb(0, 0, 0)"></i> Log out
                             </a>
                         </li>
                         </li>
