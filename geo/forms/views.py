@@ -47,12 +47,30 @@ class FormDetailView(LoginRequiredMixin, DetailView):
     model = Forms
 
     def get_context_data(self, **kwargs):
+        files = Files.objects.exclude(note_from_auditor = '')
+        subdivisiondetails = SubdivisionDetail.objects.all()
+        for x in subdivisiondetails:
+            
+            for file in files:
+                if x.id == file.subdivisiondetail.id:
+                    count = 1
+                    
+            
+            
+        
+        
+
         context = super().get_context_data(**kwargs)
-        context['files'] = Files.objects.all().distinct()
+        context['files'] = files
+        context['count'] = 1
         context['f'] = Forms.objects.all()
         context['d'] = Division.objects.all()
         context['sd'] = Subdivision.objects.all()
         context['sdd'] = SubdivisionDetail.objects.all()
+        files = Files.objects.exclude(note_from_auditor='')
+        count = files.count()
+        
+        messages.add_message(self.request, messages.INFO, f'You have {count} notes left')
         return context
 
 
@@ -129,13 +147,18 @@ class DivisionDetailView(LoginRequiredMixin, DetailView):
     model = Division
     fields = "__all__"
     context_object_name = 'forms'
-
+    
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['f'] = Forms.objects.all()
         context['d'] = Division.objects.all()
         context['sd'] = Subdivision.objects.all()
         context['sdd'] = SubdivisionDetail.objects.all()
+
+        files = Files.objects.exclude(note_from_auditor='')
+        count = files.count()
+        
+        messages.add_message(self.request, messages.INFO, f'You have {count} notes left')
 
         return context
 
@@ -210,6 +233,11 @@ class SubdivisionDetailView(LoginRequiredMixin, DetailView):
         context['sd'] = Subdivision.objects.all()
         context['sdd'] = SubdivisionDetail.objects.all()
 
+        files = Files.objects.exclude(note_from_auditor='')
+        count = files.count()
+        
+        messages.add_message(self.request, messages.INFO, f'You have {count} notes left')
+
         return context
 
 
@@ -282,6 +310,11 @@ class SubdivisionDetailDetailView(LoginRequiredMixin, DetailView):
         context['d'] = Division.objects.all()
         context['sd'] = Subdivision.objects.all()
         context['sdd'] = SubdivisionDetail.objects.all()
+
+        files = Files.objects.exclude(note_from_auditor='')
+        count = files.count()
+        
+        messages.add_message(self.request, messages.INFO, f'You have {count} notes left')
 
         return context
 

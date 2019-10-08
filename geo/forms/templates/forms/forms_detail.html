@@ -58,7 +58,7 @@
                           <tr>
                               <td style="word-wrap: break-word;max-width: 350px;"><strong>{{d.criteria}}</strong> 
                                 {% if user == f.created_by  %}
-                                <a href="{% url 'subdivision-create' d.id%}"><i class="fa fa-plus"></i> Minor Criteria</a>
+                                <a href="{% url 'subdivision-create' d.id%}"><i class="fa fa-plus"></i> <small>Minor Criteria</small></a>
                                 {% endif %}   
                               </td>
                               <td class="form-group col-md-1 pt-3 "><strong></strong>
@@ -85,7 +85,7 @@
                           <tr >
                               <td style="word-wrap: break-word;min-width: 350px;max-width: 350px;"">&nbsp;&nbsp;&nbsp;{{s.criteria}}
                                 {% if user == f.created_by %}
-                                <a href="{% url 'subdivisiondetail-create' s.id %}"><i class="fa fa-plus"></i> Subcriteria</a>
+                                <a href="{% url 'subdivisiondetail-create' s.id %}"><i class="fa fa-plus"></i> <small>Subcriteria</small></a>
                                 
                                 {% endif %}  
                               </td>
@@ -115,22 +115,33 @@
                             <tr >
                                 <td style="word-wrap: break-word;min-width: 350px;max-width: 350px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {{x.criteria}}   
                                   {% if user.program.program == x.can_upload.program or user.role == f.created_by.role %}
-                                  <a href="{% url 'file_list' x.id%}"><i class="fa fa-upload"></i></a>  
+                                  <a href="{% url 'file_list' x.id%}"><i class="fa fa-upload"></i>
+                                  
+                                    {% if x.get_note > 0 %}
+                                    <i class="fa fa-envelope" style="color: orange"></i>
+                                  {% endif %}
+                                  
+                                  </a>  
 
                                   {% endif %}
                                   
-                                  {% for file in files %} 
                                   
-                                    {% if x.id == file.subdivisiondetail.id  %}
+                                  
+                                  
                                     
-                                    {% if file.note_from_audited != " "  %}
-                                    <a  href="{% url 'update-note' file.id%}" class=" glyphicon glyphicon-comment  " style="color: orange">
+                                    
                                       
-                                    </a>
-                                    {% endif %}
-                                    {% endif %}
+                                   
+                                   
+                                     
+                                    
+                                    
                                   
-                                  {% endfor %}
+                                    
+                                  
+                                    
+                                    
+                                    
                                     
                                 </td>
                                 <td class="form-group col-md-1 mb-0 "> {{x.points}}  

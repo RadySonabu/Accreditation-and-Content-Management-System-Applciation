@@ -1,8 +1,9 @@
 from django.shortcuts import render, redirect
+from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 
 from members.models import MyUser
-from forms.models import Forms, AccreditationType, Division, Subdivision, SubdivisionDetail
+from forms.models import Forms, AccreditationType, Division, Subdivision, SubdivisionDetail, Files
 from .forms import LockscreenForm
 from forms.forms import FormForm
 
@@ -33,7 +34,9 @@ def home(request):
         year_str = str(year_js)
         year = int(year_str)
         print(type(year))
-
+        files = Files.objects.exclude(note_from_auditor='')
+        count = files.count()
+        messages.info(request, f'You have {count} notes left')
         if year == 2019:
             context = {
                 'members': MyUser.objects.filter(program__program='BS Information Technology'),
@@ -46,11 +49,7 @@ def home(request):
 
             }
             return render(request, 'dashboard/home.html', context)
-        # else:
 
-        #     context = {
-        #         'members': MyUser.objects.filter(role__role='DEPARTMENT CHAIRPERSON')
-        #     }
     elif user.is_authenticated and user.role.role == 'DEPARTMENT CHAIRPERSON':
         if user.program.program == 'BS Information Technology':
 

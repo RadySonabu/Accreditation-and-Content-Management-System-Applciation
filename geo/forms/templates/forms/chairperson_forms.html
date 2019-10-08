@@ -44,7 +44,15 @@
                                 <img class="avatar" src="/media/{{f.type_of_accreditation.image}}" alt="..." style="width: 50%">
                                 <h2 class="card-title">{{ f.year}}</h2>
                                 <div class="progress progress-mini">
-                                    <div style="width: {{f.percent}}%;" class="progress-bar"></div>
+                                    {% if f.percent >= 80 %}
+                <div style=" width: {{f.percent}}%; background-color: blue;" class="progress-bar"></div>
+                {% elif f.percent >= 60%}
+                <div style=" width: {{f.percent}}%; background-color: green;" class="progress-bar"></div>
+                {% elif f.percent >= 50%}
+                <div style=" width: {{f.percent}}%; background-color: orange;" class="progress-bar"></div>
+                {% elif f.percent < 50%}
+                <div style=" width: {{f.percent}}%; background-color: red;" class="progress-bar"></div>
+                {% endif %}
 
                                 </div>
                                 <div>{{f.percent}}%</div>

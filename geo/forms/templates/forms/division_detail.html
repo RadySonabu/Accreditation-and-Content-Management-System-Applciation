@@ -55,7 +55,7 @@
                       <tr>
                           <td style="word-wrap: break-word;min-width: 350px;max-width: 350px;"><strong>{{d.criteria}}</strong> 
                             {% if user == f.created_by  %}
-                            <a href="{% url 'subdivision-create' d.id%}">Add Minor Criteria</a>
+                            <a href="{% url 'subdivision-create' d.id%}"><i class="fa fa-plus"></i> <small>Minor Criteria</small></a>
                             {% endif %}   
                           </td>
                           <td class="form-group col-md-1 pt-3 "><strong></strong>
@@ -82,7 +82,7 @@
                       <tr >
                           <td style="word-wrap: break-word;min-width: 350px;max-width: 350px;"">&nbsp;&nbsp;&nbsp;{{s.criteria}}
                             {% if user == f.created_by %}
-                            <a href="{% url 'subdivisiondetail-create' s.id %}">Add Subcriteria</a>
+                            <a href="{% url 'subdivisiondetail-create' s.id %}"><i class="fa fa-plus"></i> <small>Subcriteria</small></a>
                             {% endif %}  
                           </td>
                           <td class="form-group col-md-1 mb-0">{{s.points}}    

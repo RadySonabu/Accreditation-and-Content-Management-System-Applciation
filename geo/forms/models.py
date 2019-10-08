@@ -135,6 +135,12 @@ class SubdivisionDetail(models.Model):
     def get_absolute_url(self):
         return reverse("subdivisiondetail-detail", kwargs={"pk": self.pk})
 
+    def get_note(self):
+
+        total = self.files_set.exclude(note_from_auditor='')
+        count = total.count()
+        return count
+
 
 class Files(models.Model):
 

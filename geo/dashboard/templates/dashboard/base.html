@@ -163,14 +163,14 @@
 
 
             <div class="row    dashboard-header " style="padding-bottom: 4rem; justify-items: center">
-                {% if messages %} {% for message in messages %}
+                <div id="message_container"> {% if messages %} {% for message in messages %}
                 <div class="alert alert-{{ message.tags }}" style="box-shadow: 0px 3px 5px -1px rgba(0, 0, 0, 0),
                 0px 5px 8px 0px rgba(0, 0, 0, 0.14),
                 0px 1px 14px 0px rgba(0, 0, 0, 0.12); ">
                     {{ message }}
                 </div>
-                {% endfor %} {% endif %}
-                <div class="" style="justify: center">{% block content%}{% endblock%}
+                {% endfor %} {% endif %}</div>
+                <div class="">{% block content%}{% endblock%}
                 </div>
 
 
@@ -297,7 +297,14 @@
 
         });
     </script>
+    <script>
+    var message_ele = document.getElementById("message_container");
 
+    setTimeout(function(){ 
+    message_ele.style.display = "none"; 
+    }, 3000);
+    // Timeout is 3 sec, you can change it
+    </script>
 
 
 </body>

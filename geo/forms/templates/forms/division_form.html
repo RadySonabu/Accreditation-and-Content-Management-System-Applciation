@@ -51,8 +51,13 @@
                     {% if object.id == d.id %}
                     
                       <tr>
+                          {% if user.role.role == 'COLLEGE DEAN' %}
+                          <td class="form-group col-md-4 mb-0" ><strong>{{form.criteria}} </strong>   
+                          </td>
+                          {%else%}
                           <td class="form-group col-md-4 mb-0" ><strong>{{d.criteria}} </strong>   
                           </td>
+                          {%endif%}
                           <td class="form-group col-md-1 pt-3 "><strong></strong>
                           </td>
                           <td class="form-group col-md-1 pt-3 "><strong></strong>
@@ -64,8 +69,8 @@
                           </td>
                           <td class="form-group col-md-1 pt-3 "><strong>{{d.total}}</strong>
                           </td>
-                          {% if user.role == 'COLLEGE DEAN' %}
-                          <td class="form-group col-md-1 pt-3 "><button class="btn btn-primary fa fa-check dim" type="submit"></button>
+                          {% if user.role.role == 'COLLEGE DEAN' %}
+                          <td class="form-group col-md-1 pt-3 "><button class="btn btn-primary fa fa-check" type="submit"></button>
                             
                           </td>
                           {% endif %}

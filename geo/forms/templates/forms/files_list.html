@@ -48,7 +48,7 @@
                     <td>{{ file.name }}</td>
                     <td>
                      
-                      {% if file.note_from_audited != "" or user.role.role == 'COLLEGE DEAN' %}
+                      {% if file.note_from_auditor != "" or user.role.role == 'COLLEGE DEAN' %}
                       <a  href="{% url 'update-note' file.id%}" class="btn btn-primary btn-sm glyphicon glyphicon-comment  " >
                         
                       </a>
