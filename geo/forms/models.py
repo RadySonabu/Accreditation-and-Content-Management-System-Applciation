@@ -50,7 +50,7 @@ class Forms(models.Model):
     is_active = models.BooleanField(default=False)
 
     def __str__(self):
-        return f'{self.title} {self.is_active}'
+        return f'{self.title}'
 
     def get_absolute_url(self):
         return reverse("form-detail", kwargs={"pk": self.pk})
