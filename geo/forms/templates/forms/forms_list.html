@@ -3,24 +3,13 @@
 {% block content %}
 {% load crispy_forms_tags %}
 
-<h3><strong>
-    <form method="POST" load-url="{% url 'load-forms'%}" novalidate>
-        <label>Select Year:</label>
-        <select class="country">
-            <!-- <option value="">-------------</option> -->
-            <option value="2019">2019</option>
-            <option value="2020">2020</option>
-            <option value="2021">2021</option>
-        </select>
-        
-      </form>
-</strong></h3>
+
 
 
 
   
 
-{% if user.role.role == 'COLLEGE DEAN'  and form.created_by == user.instance or user.role.role == 'VPAA' %}
+{% if user.role.role == 'COLLEGE DEAN'  and form.created_by == user.instance or user.role.role == 'VPAA'  or user.role.role == 'AUDITOR'%}
 
 <!-- <form method="POST"> -->
 {% csrf_token %}

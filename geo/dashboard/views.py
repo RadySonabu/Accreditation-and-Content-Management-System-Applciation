@@ -27,7 +27,7 @@ def home(request, *args, **kwargs):
                 'year': year,
             }
             return render(request, 'dashboard/home.html', context)
-    elif user.is_authenticated and user.role.role == 'COLLEGE DEAN':
+    elif (user.is_authenticated and user.role.role == 'COLLEGE DEAN') or (user.is_authenticated and user.role.role == 'AUDITOR'):
         # if user.college.college == 'College of Information Technology Education':
         year_js = request.GET.get('year') or 2019
         print(year_js)
@@ -94,7 +94,7 @@ def chairperson_forms(request, pk):
 
 
 @login_required
-def form_year(request):
+def form_year(request, *args, **kwargs):
     year_js = request.GET.get('year') or 2019
     print(year_js)
     year_str = str(year_js)
@@ -105,7 +105,7 @@ def form_year(request):
         'accr_type': AccreditationType.objects.all(),
         'title': 'Home',
         'f': Forms.objects.all(),
-        'user': user,
+
         'year': year
 
     }
@@ -124,6 +124,7 @@ def lockscreen(request):
     return render(request, 'dashboard/lockscreen.html')
 
 
+@login_required
 def detail_form(request, *args, **kwargs):
     context = {
         'form': FormForm,

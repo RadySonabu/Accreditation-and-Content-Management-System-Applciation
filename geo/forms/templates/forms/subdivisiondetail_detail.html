@@ -3,7 +3,7 @@
 {% block content %}
 {% for f in f %}
   {% if object.subdivision.division.title.id == f.id %}
-      {% if user == f.created_by or user.program.program == f.created_for.program %}
+      {% if user == f.created_by or user.program.program == f.created_for.program or user.role.role == 'AUDITOR' %}
       <div class = "row   " style="border: 0.1px solid black;box-shadow: 0px 3px 5px -1px rgba(0, 0, 0, 0.2),
       0px 5px 8px 0px rgba(0, 0, 0, 0.14),
       0px 1px 14px 0px rgba(0, 0, 0, 0.12); ">
@@ -108,7 +108,7 @@
                                             {% if x.subdivision.id == s.id and s.division.id == d.id %}
                                             <tr >
                                                 <td style="word-wrap: break-word;min-width: 350px;max-width: 350px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {{x.criteria}}    
-                                                  {% if user.program.program == x.can_upload.program or user.role == f.created_by.role %}
+                                                  {% if user.program.program == x.can_upload.program or user.role == f.created_by.role or user.role.role == 'AUDITOR' %}
                                                   <a href="{% url 'file_list' x.id%}"><i class="fa fa-upload"></i>
                                                     {% if x.get_note > 0 %}
                                                     <i class="fa fa-envelope" style="color: orange"></i>
@@ -126,7 +126,10 @@
                                                         </td>
                                                 <td class="form-group col-md-1 mb-0">   
                                                   </td>
-                                                  <td class="form-group col-md-1 mb-0"> <a href="{% url 'subdivisiondetail-update' x.id%}"><i class="fa fa-edit"></i></a>
+                                                  <td class="form-group col-md-1 mb-0"> 
+                                                    {% if user.role.role ==  'AUDITOR'  and user == f.created_by%}
+                                                    <a href="{% url 'subdivisiondetail-update' x.id%}"><i class="fa fa-edit"></i></a>
+                                                    {% endif %}
                                                     {% if user == f.created_by %}
                                                     <a href="{% url 'subdivisiondetail-delete' x.id%}"><i class="fa fa-trash"></i></a>
                                                     {% endif %}    

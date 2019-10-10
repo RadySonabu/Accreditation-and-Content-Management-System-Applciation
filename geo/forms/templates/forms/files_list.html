@@ -16,7 +16,9 @@
     </div>
 <h2>Files</h2>
 <p>
+    {% if user.role.role != 'AUDITOR' %}
     <a href="{% url 'upload_file' pk %}" class="btn btn-primary btn-sm" >Upload file</a>
+    {% endif %}
     
 </p>
 
@@ -29,8 +31,10 @@
             <th>File name</th>
             <th>Note</th>
             <th>Download</th>
+            {% if user.role.role != 'AUDITOR' %}
             <th>Update</th>
             <th>Delete</th>
+            {% endif %}
         </tr>
     </thead>
     <tbody>
@@ -72,19 +76,23 @@
                       
                       
                        
-                        <a  href="{% url 'update-note' file.id%}" class="btn btn-primary btn-sm " >
-                          Update
-                        </a>
+                        {% if user.role.role != 'AUDITOR' %}
+                        <a  href="{% url 'update-note' file.id%}" class="btn btn-primary btn-sm  " >
+                                Update
+                              </a>
+                        {% endif %}
                         
                       
                           
                           
                     </td>
                     <td>
+                        {% if user.role.role != 'AUDITOR' %}
                         <form method="post" action="{% url 'delete_file' file.pk %}">
-                            {% csrf_token %}
-                            <button type="submit" class="btn btn-danger btn-sm">Delete</button>
-                        </form>
+                                {% csrf_token %}
+                                <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                            </form>
+                        {% endif %}
                     </td>
                 </tr>
             {% endif %}
