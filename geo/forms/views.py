@@ -3,6 +3,7 @@ from django import forms
 from django.shortcuts import render, redirect, get_object_or_404
 
 from django.contrib import messages
+from django.core.paginator import Paginator
 from django.http import HttpResponse
 
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
@@ -511,24 +512,21 @@ class NoteUpdateView(UpdateView):
 class CommentCreateView(CreateView):
     model= Comment
     form_class = CommentForm
+    paginate_by = 5
 
     def form_valid( self, form, *args, **kwargs ):
         form.instance.files_id = self.kwargs.get('pk')
         form.instance.user = self.request.user
         return super(CommentCreateView, self).form_valid(form)
         
-    # def get_success_url( self, **kwargs):
-    #     self.object = self.get_object()
-    #     id1 = self.kwargs['pk']
-    #     id2 = self.kwargs.get('pk')
-        
-    #     return reverse_lazy('comment_list', kwargs={'pk':id1})
+    
     
     def get_context_data(self, **kwargs):
         pk = self.kwargs.get('pk')
         files = Files.objects.filter(pk=pk)
         
-        comments = Comment.objects.filter(files=47).order_by('-pk')
+        comments = Comment.objects.filter(files=pk).order_by('-pk')
+        paginated_comments = Paginator(comments, 3)
         context = super().get_context_data(**kwargs)
         context['files'] = Files.objects.all()
         context['forms'] = Forms.objects.all()
@@ -539,3 +537,31 @@ class CommentCreateView(CreateView):
         context['comments'] = comments
         
         return context
+
+class CommentDeleteView(DeleteView):
+    model = Comment
+
+    def get_context_data(self, **kwargs):
+        pk = self.kwargs.get('pk')
+        files = Files.objects.filter(pk=pk)
+        
+        comments = Comment.objects.filter(files=pk).order_by('-pk')
+        paginated_comments = Paginator(comments, 3)
+        context = super().get_context_data(**kwargs)
+        context['files'] = Files.objects.all()
+        context['forms'] = Forms.objects.all()
+        context['subdivisiondetail'] =  SubdivisionDetail.objects.all()
+        context['pk'] =  self.kwargs.get('pk')
+        context['note'] = FileForm
+        context['object'] =  self.kwargs.get('pk')
+        context['comments'] = comments
+        context['f'] = Forms.objects.all()
+        context['d'] = Division.objects.all()
+        context['sd'] = Subdivision.objects.all()
+        context['sdd'] = SubdivisionDetail.objects.all()
+        return context
+    
+    def get_success_url(self, **kwargs):
+        self.object = self.get_object()
+        id1 = self.kwargs['pk']
+        return reverse("comment-list", kwargs={"pk": self.object.files.pk})

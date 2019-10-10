@@ -186,10 +186,10 @@ class Comment(models.Model):
     files = models.ForeignKey(Files, on_delete=models.CASCADE)
     user = models.ForeignKey(MyUser, on_delete=models.CASCADE)
     comment = models.TextField()
-    timestamp = models.TimeField(auto_now_add=True, null=True)
+    timestamp = models.DateTimeField(auto_now_add=True, null=True)
 
     def __str__(self):
         return self.files.filename
 
     def get_absolute_url(self):
-        return reverse("comment-list", kwargs={"pk": self.pk})
+        return reverse("comment-list", kwargs={"pk": self.files.pk})

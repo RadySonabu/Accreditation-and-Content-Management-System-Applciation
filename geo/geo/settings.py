@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     'crispy_forms',
     'phonenumber_field',
     'request',
+    # 'bootstrap_pagination',
 
 
 
@@ -73,6 +74,7 @@ TEMPLATES = [
             'context_processors': [
                 'django.template.context_processors.debug',
                 'django.template.context_processors.request',
+
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
             ],
