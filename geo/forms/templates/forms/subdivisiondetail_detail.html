@@ -4,10 +4,10 @@
 {% for f in f %}
   {% if object.subdivision.division.title.id == f.id %}
       {% if user == f.created_by or user.program.program == f.created_for.program %}
-      <div class = "row justify-content-center" style="border: 0.1px solid black;box-shadow: 0px 3px 5px -1px rgba(0, 0, 0, 0.2),
+      <div class = "row   " style="border: 0.1px solid black;box-shadow: 0px 3px 5px -1px rgba(0, 0, 0, 0.2),
       0px 5px 8px 0px rgba(0, 0, 0, 0.14),
       0px 1px 14px 0px rgba(0, 0, 0, 0.12); ">
-        <div class = "col-lg-12 " >
+        <div class = "col-md-12 " >
             <form method = "POST" >
                 {% csrf_token %}
 
@@ -131,7 +131,7 @@
                                                     <a href="{% url 'subdivisiondetail-delete' x.id%}"><i class="fa fa-trash"></i></a>
                                                     {% endif %}    
                                                 </td>
-                                                          
+                                                         
                                               </tr>
                                             <!-- </fieldset> -->
                                             {% endif %}

@@ -69,4 +69,9 @@ urlpatterns = [
     #     path('class/files/', views.FileListView.as_view(), name='class_file_list'),
     path('class/files//upload/', views.UploadFileView.as_view(),
          name='class_upload_file'),
+
+
+
+    # -------------------------------------------------------------------------------------
+    path('comment/<int:pk>', views.CommentCreateView.as_view(), name='comment-list'),
 ]

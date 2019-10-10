@@ -12,24 +12,31 @@
         <div class="col-md-auto">
                 <div class="m-5">
                        {% if object %}
-                       <h2><strong> Auditor's Note</strong></h2>
+                       <h2><strong> Update File</strong></h2>
                        
                        
                        <form method="post" enctype="multipart/form-data">
                         {% csrf_token %}
+                        {%block content_comment%}{%endblock content_comment%}
                         
+                        
+                        <!-- {% for comment in comments %}
+                           <div> {{comment.comment}} - {{comment.timestamp}}</div>
+                           <div>-   {{comment.user.first_name}} {{comment.user.last_name}}</div>
+                        {% endfor %} -->
+                            
                         {% for sd in sd %}
-                        <div class="col-md-12" style="padding: 2%">For: <strong>{{sd}}</strong></div> 
+                        <div class="col-md-6" style="padding: 2%">For: <strong>{{sd}}</strong></div> 
                         {% endfor %}
-                        <div class="col-md-6 disabled"  >{{form.note_from_auditor|as_crispy_field}}</div>      
-                        <div class="col-md-6 invisible">{{form.file|as_crispy_field}}</div>
-                        <div class="col-md-6 invisible">{{form.filename|as_crispy_field}}</div>
+                           
+                        <div class="col-md-6 ">{{form.file|as_crispy_field}}</div>
+                        <div class="col-md-6 ">{{form.filename|as_crispy_field}}</div>
                         
                         
                         
                         <div class="invisible">{{form.subdivisiondetail|as_crispy_field}}</div>
                         {% if user.role.role != 'COLLEGE DEAN' %}
-                        <button type="submit" class="btn btn-danger " style="margin-bottom: 2rem">Close</button>
+                        <button type="submit" class="btn btn-primary " style="margin-bottom: 2rem">Submit</button>
                         {% else %}
                         <button type="submit" class="btn btn-primary " style="margin-bottom: 2rem">Submit</button>
                         {% endif %}
@@ -47,7 +54,7 @@
                         <div class="col-md-6 ">{{form.file|as_crispy_field}}</div>
                         <div class="col-md-6 ">{{form.filename|as_crispy_field}}</div>
                         
-                        <div class="col-md-6">{{form.note_from_auditor|as_crispy_field}}</div>    
+                        <div class="col-md-6"></div>    
                         
                         <div class="invisible">{{form.subdivisiondetail|as_crispy_field}}</div>
                         <button type="submit" class="btn btn-primary " style="margin-bottom: 2rem">Submit</button>

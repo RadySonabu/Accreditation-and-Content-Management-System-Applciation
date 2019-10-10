@@ -29,6 +29,7 @@
             <th>File name</th>
             <th>Note</th>
             <th>Download</th>
+            <th>Update</th>
             <th>Delete</th>
         </tr>
     </thead>
@@ -36,29 +37,48 @@
         
         
         
-            
+          
+          
+              
        
             
             
         {% for file in files %}
-       
+        
             {% if pk == file.subdivisiondetail.id  %}
             <tr>
                     <td>{{ file.subdivisiondetail.criteria   }}</td>
                     <td>{{ file.name }}</td>
                     <td>
                      
-                      {% if file.note_from_auditor != "" or user.role.role == 'COLLEGE DEAN' %}
-                      <a  href="{% url 'update-note' file.id%}" class="btn btn-primary btn-sm glyphicon glyphicon-comment  " >
-                        
-                      </a>
-                      {% endif %}
+                      
+                      
+                        {% if  file.get_note > 0 or user.role.role == 'COLLEGE DEAN' %}
+                        <a  href="{% url 'comment-list' file.id%}" class="btn btn-primary btn-sm glyphicon glyphicon-comment  " >
+                          
+                        </a>
+                        {% endif %}
+                      
+                          
                           
                     </td>
                     <td>
                         <a href="{{ file.file.url }}" class="btn btn-primary btn-sm" target="_blank">
                             Download File
                         </a>
+                    </td>
+                    <td>
+                     
+                      
+                      
+                       
+                        <a  href="{% url 'update-note' file.id%}" class="btn btn-primary btn-sm " >
+                          Update
+                        </a>
+                        
+                      
+                          
+                          
                     </td>
                     <td>
                         <form method="post" action="{% url 'delete_file' file.pk %}">
@@ -74,5 +94,8 @@
 </table>
 
 </div>
+
+
+    
 
 {% endblock %}

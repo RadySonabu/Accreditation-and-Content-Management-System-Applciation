@@ -148,7 +148,7 @@ class SubdivisionDetail(models.Model):
 
     def get_note(self):
 
-        total = self.files_set.exclude(note_from_auditor='')
+        total = Comment.objects.filter(files__subdivisiondetail_id=self.id)
         count = total.count()
         return count
 
@@ -165,9 +165,6 @@ class Files(models.Model):
                             blank=True, max_length=10000)
     filename = models.CharField(max_length=1500)
 
-    note_from_auditor = models.TextField(null=True, blank=True)
-    note_from_audited = models.TextField(null=True, blank=True)
-
     def __str__(self):
         return self.filename
 
@@ -177,12 +174,22 @@ class Files(models.Model):
     def get_absolute_url(self):
         return reverse("file_list", kwargs={"pk": self.pk})
 
+    def get_note(self, **kwargs):
 
-class Note(models.Model):
+        total = self.comment_set.exclude(comment='')
+        count = total.count()
+        return count
 
-    files = models.ForeignKey('Files', on_delete=models.CASCADE)
-    audit_note = models.TextField()
-    own_note = models.TextField()
+
+class Comment(models.Model):
+
+    files = models.ForeignKey(Files, on_delete=models.CASCADE)
+    user = models.ForeignKey(MyUser, on_delete=models.CASCADE)
+    comment = models.TextField()
+    timestamp = models.TimeField(auto_now_add=True, null=True)
 
     def __str__(self):
-        return self.file.filename
+        return self.files.filename
+
+    def get_absolute_url(self):
+        return reverse("comment-list", kwargs={"pk": self.pk})

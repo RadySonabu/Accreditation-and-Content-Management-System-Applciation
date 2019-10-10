@@ -7,13 +7,13 @@ from django.http import HttpResponse
 
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from django.urls import reverse, reverse_lazy
-from .forms import SubdivisionForm, SubdivisionDetailForm, FormForm, FileForm, DivisionForm
+from .forms import SubdivisionForm, SubdivisionDetailForm, FormForm, FileForm, DivisionForm, CommentForm
 from .models import Files
 
 from django.forms.models import modelform_factory
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.db.models import Max, Sum, Avg, F
-from forms.models import Forms, SubdivisionDetail, Subdivision, Division, AccreditationType, Files
+from forms.models import Forms, SubdivisionDetail, Subdivision, Division, AccreditationType, Files, Comment
 from django.db.models.expressions import RawSQL
 from django.db import IntegrityError
 
@@ -47,13 +47,7 @@ class FormDetailView(LoginRequiredMixin, DetailView):
     model = Forms
 
     def get_context_data(self, **kwargs):
-        files = Files.objects.exclude(note_from_auditor = '')
-        subdivisiondetails = SubdivisionDetail.objects.all()
-        for x in subdivisiondetails:
-            
-            for file in files:
-                if x.id == file.subdivisiondetail.id:
-                    count = 1
+        
                     
             
             
@@ -61,12 +55,13 @@ class FormDetailView(LoginRequiredMixin, DetailView):
         
 
         context = super().get_context_data(**kwargs)
-        context['files'] = files
-        context['count'] = 1
+        
+        
         context['f'] = Forms.objects.all()
         context['d'] = Division.objects.all()
         context['sd'] = Subdivision.objects.all()
         context['sdd'] = SubdivisionDetail.objects.all()
+        context['files'] = Files.objects.all()
         # files = Files.objects.exclude(note_from_auditor='')
         # count = files.count()
         
@@ -401,15 +396,24 @@ class FileListView(ListView):
     model = Files
     
     template_name = 'forms/files_list.html'
+
+    
+
     def get_context_data(self, **kwargs):
+        pk = self.kwargs.get('pk')
+        files = Files.objects.filter(pk=pk)
+        
+        comments = Comment.objects.filter(files=pk)
+        comment2 = Comment.objects.all()
         context = super().get_context_data(**kwargs)
         context['files'] = Files.objects.all()
-        context['forms'] = Forms.objects.all()
+        context['forms'] = Forms.objects.all()  
         context['subdivisiondetail'] =  SubdivisionDetail.objects.all()
         context['pk'] =  self.kwargs.get('pk')
         context['note'] = FileForm(),
-        context['object'] =  self.kwargs.get('pk')
-        
+        context['object'] =  self.kwargs.get('pk'),
+        context['comments'] = comments
+        context['comment_form'] = CommentForm()
         return context
 
 
@@ -443,8 +447,7 @@ class FileDeleteView(DeleteView):
         self.object = self.get_object()
         id1 = self.kwargs['pk']
         id2 = self.kwargs.get('pk')
-        print(id1)
-        print(id2 + 1)
+        
         return reverse_lazy('file_list', kwargs={'pk':self.object.subdivisiondetail.id})
 
     def get_context_data(self, **kwargs):
@@ -467,14 +470,19 @@ class FileUpdateView(UpdateView):
     form_class = FileForm
     
     template_name = 'forms/upload_file.html'
+
     def get_success_url( self, **kwargs):
         self.object = self.get_object()
         id1 = self.kwargs['pk']
         id2 = self.kwargs.get('pk')
-        print(id1)
-        print(id2 + 1)
+        
         return reverse_lazy('file_list', kwargs={'pk':self.object.subdivisiondetail.id})
+
     def get_context_data(self, **kwargs):
+        pk = self.kwargs.get('pk')
+        files = Files.objects.filter(pk=pk)
+        
+        comments = Comment.objects.filter(files=pk).order_by('-pk')
         context = super().get_context_data(**kwargs)
         context['files'] = Files.objects.all()
         context['forms'] = Forms.objects.all()
@@ -482,7 +490,8 @@ class FileUpdateView(UpdateView):
         context['pk'] =  self.kwargs.get('pk')
         context['note'] = FileForm
         context['object'] =  self.kwargs.get('pk')
-
+        context['comments'] = comments
+        
         return context
 
 class UploadFileView(CreateView):
@@ -499,3 +508,34 @@ class NoteUpdateView(UpdateView):
     
 
 
+class CommentCreateView(CreateView):
+    model= Comment
+    form_class = CommentForm
+
+    def form_valid( self, form, *args, **kwargs ):
+        form.instance.files_id = self.kwargs.get('pk')
+        form.instance.user = self.request.user
+        return super(CommentCreateView, self).form_valid(form)
+        
+    # def get_success_url( self, **kwargs):
+    #     self.object = self.get_object()
+    #     id1 = self.kwargs['pk']
+    #     id2 = self.kwargs.get('pk')
+        
+    #     return reverse_lazy('comment_list', kwargs={'pk':id1})
+    
+    def get_context_data(self, **kwargs):
+        pk = self.kwargs.get('pk')
+        files = Files.objects.filter(pk=pk)
+        
+        comments = Comment.objects.filter(files=47).order_by('-pk')
+        context = super().get_context_data(**kwargs)
+        context['files'] = Files.objects.all()
+        context['forms'] = Forms.objects.all()
+        context['subdivisiondetail'] =  SubdivisionDetail.objects.all()
+        context['pk'] =  self.kwargs.get('pk')
+        context['note'] = FileForm
+        context['object'] =  self.kwargs.get('pk')
+        context['comments'] = comments
+        
+        return context

@@ -1,0 +1,27 @@
+{% extends 'dashboard/base.html'%}
+{% load crispy_forms_tags%}
+{% block content %}
+  <div class="col-md-6">
+        <div><a href="javascript:history.back()" class="btn btn-primary ">BACK</a></div>
+    <h3>This is the comments:</h3>
+    {% for comments in comments %}
+        <div></div>
+        <blockquote class="blockquote">
+          <p class="mb-0">{{comments.comment}}.</p>
+          <footer class="blockquote-footer">by <cite title="Source Title">{{comments.user.first_name}} {{comments.user.last_name}} {{comments.timestamp}}</cite></footer>
+        </blockquote>
+  
+    {% endfor %}
+    
+  </div>
+  
+{% if user.role.role == 'COLLEGE DEAN' %}
+<form method="POST">
+        {% csrf_token %}
+        <!-- <div>Add comment:</div> -->
+        <div class="col-md-6">{{form|crispy}}
+        <button type="submit" class="btn btn-primary">Submit</button>
+        </div>
+    </form>
+{% endif %}
+{% endblock content %}

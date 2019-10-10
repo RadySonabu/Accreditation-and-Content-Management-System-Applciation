@@ -1,5 +1,5 @@
 from django import forms
-from .models import Forms,  Division, Subdivision, SubdivisionDetail, Files
+from .models import Forms,  Division, Subdivision, SubdivisionDetail, Files, Comment
 
 from django.db.models import Sum
 
@@ -47,9 +47,9 @@ class FileForm(forms.ModelForm):
     class Meta:
         model = Files
         fields = ('subdivisiondetail', 'filename', 'file',
-                  'note_from_auditor', 'note_from_audited')
+                  )
         labels = {'subdivisiondetail': 'For Subcriteria',
-                  'note_from_auditor': 'Note'}
+                  }
 
 
 class DivisionForm(forms.ModelForm):
@@ -64,3 +64,11 @@ class DivisionForm(forms.ModelForm):
 
 
         }
+
+
+class CommentForm(forms.ModelForm):
+    class Meta:
+        model = Comment
+        fields = ('comment',)
+        labels = {'comment': 'Add comment',
+                  }

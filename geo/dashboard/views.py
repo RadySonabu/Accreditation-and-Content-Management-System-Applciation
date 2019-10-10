@@ -3,13 +3,13 @@ from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 
 from members.models import MyUser
-from forms.models import Forms, AccreditationType, Division, Subdivision, SubdivisionDetail, Files
+from forms.models import Forms, AccreditationType, Division, Subdivision, SubdivisionDetail, Files, Comment
 from .forms import LockscreenForm
 from forms.forms import FormForm
 
 
 @login_required
-def home(request):
+def home(request, *args, **kwargs):
     user = request.user
     if user.is_authenticated and user.role.role == 'VPAA':
         year_js = request.GET.get('year') or 2019
@@ -34,9 +34,9 @@ def home(request):
         year_str = str(year_js)
         year = int(year_str)
         print(type(year))
-        files = Files.objects.exclude(note_from_auditor='')
-        count = files.count()
-        messages.info(request, f'You have {count} note/s left')
+        # files = Files.objects.exclude(note_from_auditor='')
+        # count = files.count()
+        # messages.info(request, f'You have {count} note/s left')
         if year == 2019:
             context = {
                 'members': MyUser.objects.filter(program__program='BS Information Technology'),
@@ -52,9 +52,10 @@ def home(request):
 
     elif user.is_authenticated and user.role.role == 'DEPARTMENT CHAIRPERSON':
         if user.program.program == 'BS Information Technology':
-            files = Files.objects.exclude(note_from_auditor='')
+            # acc_type = Comment.objects.filter(files__subdivisiondetail__=)
+            files = Comment.objects.exclude(comment='')
             count = files.count()
-            messages.info(request, f'You have {count} note/s left')
+            messages.info(request, f'You have { count } note/s left')
             context = {
                 'members': MyUser.objects.filter(program__program='BS Information Technology'),
                 'accr_type': AccreditationType.objects.all(),
