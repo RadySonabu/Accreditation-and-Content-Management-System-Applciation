@@ -35,9 +35,9 @@
                 {% csrf_token %}
                 <h2>You have succesfully logged out!</h2>
                 
-                <a href="{% url 'login' %}" class="btn  btn-primary block full-width m-b">Login</a>
+                <a href="{% url 'login' %}" class="btn  y block full-width m-b" style="background: black; color:aliceblue">Login</a>
 
-                <a href="{% url 'password_reset'%}"><small>Forgot password?</small></a>
+                <a href="{% url 'password_reset'%}" style=" color:black"><small>Forgot password?</small></a>
                 
                 
             </form>

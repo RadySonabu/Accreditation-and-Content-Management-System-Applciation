@@ -11,12 +11,12 @@
         {% csrf_token %}
         <!-- <div>Add comment:</div> -->
         <div class="col-md-6">{{form|crispy}}
-        <button type="submit" class="btn btn-primary">Submit</button>
+        <button type="submit" class="btn btn-success btn-outline">Submit</button>
         </div>
     </form>
 {% endif %}
   <div class="col-md-6" s>
-        <div>This is the comments:<a href="javascript:history.back()" class="btn btn-primary btn-xs navbar-right ">BACK</a></div>
+        <div>This is the comments:<a href="javascript:history.back()" class="btn btn-success btn-outline btn-xs navbar-right ">BACK</a></div>
     
     {% for comments in comments %}
     
