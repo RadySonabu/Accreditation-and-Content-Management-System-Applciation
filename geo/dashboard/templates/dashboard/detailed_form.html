@@ -4,19 +4,19 @@
     {% for f in f %}
         
         {% if f.id == pk %}
-        <div class="row">
+        <div class="row" style="color: black;">
                 <div class="col-lg-12">
                     <div class="wrapper wrapper-content animated fadeInUp">
                         <div class="payment-card">
                             <div class="ibox-content">
                                 <div class="row">
-                                    <div class="col-lg-12">
+                                    <div class="col-lg-12" >
                                         <div class="m-b-md">
-                                                <h2><strong><b>Accreditation detail : {{f.title}} </b></strong></h2> 
+                                                <h2 ><strong><b>Accreditation detail : {{f.title}} </b></strong></h2> 
                                         </div>
                                         {% if f.is_active == True %}
                                         <dl class="dl-horizontal">
-                                            <dt>Status:</dt> <dd><span class="label label-primary">Active</span></dd>
+                                            <dt>Status:</dt> <dd><span class="label " style="background: black; color: aliceblue;">Active</span></dd>
                                         </dl>
                                         {%else%}
                                         <dl class="dl-horizontal">
@@ -30,7 +30,7 @@
                                         <dl class="dl-horizontal">
         
                                             <dt>Created by:</dt> <dd>{{f.created_by.first_name}} {{f.created_by.middle_initial}}. {{f.created_by.last_name}}</dd>
-                                            <dt>Client:</dt> <dd><a href="#" class="text-navy">{{f.type_of_accreditation}}</a> </dd>
+                                            <dt>Client:</dt> <dd><a href="#" style="color: black;">{{f.type_of_accreditation}}</a> </dd>
                                             
                                         </dl>
                                     </div>
@@ -70,7 +70,7 @@
                                     <div class="ibox float-e-margins">
                                     <div class="col-lg-6">
                                             <div class="text-center">
-                                                    <a class="btn btn-primary" href="{% url 'form-detail' pk%}">Edit accreditation form</a>
+                                                    <a class="btn " style="background: black; color: aliceblue;" href="{% url 'form-detail' pk%}">Edit accreditation form</a>
                                                     </div>
                                                     <div id="modal-form" class="modal fade" aria-hidden="true">
                                                         <div class="modal-dialog">

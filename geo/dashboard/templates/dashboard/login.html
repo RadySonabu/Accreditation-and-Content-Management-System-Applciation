@@ -20,7 +20,7 @@
 
 <body class="gray-bg p-4">
 
-    <div class="middle-box text-center loginscreen animated fadeInDown">
+    <div class="middle-box text-center loginscreen animated fadeInDown" style="color: black;">
         <div class="" style="box-shadow: 0px 3px 5px -1px rgba(0, 0, 0, 0.2),
         0px 5px 8px 0px rgba(0, 0, 0, 0.14),
         0px 1px 14px 0px rgba(0, 0, 0, 0.12); padding: 20px; background-color: aliceblue">
@@ -38,9 +38,9 @@
                     {{form|crispy}}
                 </div>
 
-                <button type="submit" class="btn btn-primary block full-width m-b">Login</button>
+                <button type="submit" class="btn  block full-width m-b" style="background: black; color: aliceblue;">Login</button>
 
-                <a href="{% url 'password_reset'%}"><small>Forgot password?</small></a>
+                <a href="{% url 'password_reset'%}" style="color: black;"><small>Forgot password?</small></a>
 
 
             </form>
