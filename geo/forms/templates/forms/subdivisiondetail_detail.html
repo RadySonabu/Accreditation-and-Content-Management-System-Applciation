@@ -127,7 +127,7 @@
                                                 <td class="form-group col-md-1 mb-0">   
                                                   </td>
                                                   <td class="form-group col-md-1 mb-0"> 
-                                                    {% if user.role.role ==  'AUDITOR'  and user == f.created_by%}
+                                                    {% if user.role.role ==  f.created_by  or user == f.created_by%}
                                                     <a href="{% url 'subdivisiondetail-update' x.id%}"><i class="fa fa-edit"></i></a>
                                                     {% endif %}
                                                     {% if user == f.created_by %}

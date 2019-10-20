@@ -67,10 +67,25 @@ class Forms(models.Model):
         over = SubdivisionDetail.objects.filter(
             subdivision__division__title=self).aggregate(total=Sum("subpoints")).get('total') or 0
         if over == 0:
-            return 0
+            percentage=0
+            return percentage
         else:
             percentage = (points/over)*100
 
+        return round(percentage)
+
+    @property
+    def total_progress_college(self):
+        points = SubdivisionDetail.objects.filter(
+            subdivision__division__title__college=self.college, subdivision__division__title__year=self.year).aggregate(total=Sum("subtotal")).get('total') or 0
+
+        over = SubdivisionDetail.objects.filter(
+            subdivision__division__title__college=self.college, subdivision__division__title__year=self.year).aggregate(total=Sum("subpoints")).get('total') or 0
+
+        if over == 0:
+            return 0
+        else:
+            percentage = (points/over)*100
         return round(percentage)
 
 
