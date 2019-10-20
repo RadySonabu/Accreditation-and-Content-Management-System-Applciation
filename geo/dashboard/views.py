@@ -80,7 +80,7 @@ def chairperson_forms(request, pk):
     if user.program.program == 'BS Information Technology':
         context = {
             'members': MyUser.objects.filter(program__program='BS Information Technology'),
-            'accr_type': AccreditationType.objects.all(),
+            'accr_type': AccreditationType.objects.values('type_of_accreditations').distinct(),
             'title': 'Home',
             'f': Forms.objects.all().order_by('-year'),
             'pk': pk
