@@ -12,7 +12,8 @@
         <!-- <form method="POST"> -->
         {% csrf_token %}
         <!-- <fieldset class=""> -->
-            <legend class="border-bottom mb-4">List of Forms </legend>
+            <h2><strong><b>List of Forms </b></strong></h2>
+            <div class="border-bottom mb-4"></div>
             <div class="row">
                
                     
@@ -36,7 +37,7 @@
                        <div class="row container">
                           <div class="col-lg-3 p-2">
                               <h2><strong><b>{{f.year}}</b></strong></h2>
-                            <div class="payment-card">
+                            <div class="payment-card ">
                               <div class="ibox-content text-center" style="justify-content: center">
                                   <a href="{% url 'form-detail' f.id %}">
                                 <h4 class="card-title">{{ f.type_of_accreditation}}</h6>
@@ -63,6 +64,7 @@
                             </div>
                           </div>
                        </div>
+                      <div class="border-bottom mb-4" ></div>
                        {% endif %}
                        <!-- is active -->
                        {% endif %}
