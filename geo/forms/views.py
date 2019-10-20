@@ -90,7 +90,7 @@ class FormCreateView(LoginRequiredMixin, CreateView):
             form.instance.college = self.request.user.college
         else:
 
-            return redirect('form-detail')
+            return redirect('form-list', self.kwargs.get('pk'))
         return super(FormCreateView, self).form_valid(form)
 
     def get_error_message(self, cleaned_data):
@@ -123,7 +123,11 @@ class FormUpdateView(LoginRequiredMixin, UpdateView):
 
 class FormDeleteView(LoginRequiredMixin, DeleteView):
     model = Forms
-    success_url = '/form/'
+    
+    def get_success_url(self, **kwargs):
+        self.object = self.get_object()
+        id1 = self.kwargs['pk']
+        return reverse_lazy('form-list', kwargs={'pk': 1})
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
