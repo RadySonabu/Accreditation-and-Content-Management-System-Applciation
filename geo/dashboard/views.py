@@ -34,9 +34,6 @@ def home(request, *args, **kwargs):
         year_str = str(year_js)
         year = int(year_str)
         print(type(year))
-        # files = Files.objects.exclude(note_from_auditor='')
-        # count = files.count()
-        # messages.info(request, f'You have {count} note/s left')
         if year == 2019:
             context = {
                 'members': MyUser.objects.filter(program__program='BS Information Technology'),
@@ -85,7 +82,7 @@ def chairperson_forms(request, pk):
             'members': MyUser.objects.filter(program__program='BS Information Technology'),
             'accr_type': AccreditationType.objects.all(),
             'title': 'Home',
-            'f': Forms.objects.all(),
+            'f': Forms.objects.all().order_by('-year'),
             'pk': pk
         }
     else:
@@ -95,11 +92,7 @@ def chairperson_forms(request, pk):
 
 @login_required
 def form_year(request, *args, **kwargs):
-    year_js = request.GET.get('year') or 2019
-    print(year_js)
-    year_str = str(year_js)
-    year = int(year_str)
-    print(type(year))
+    year = request.POST.get('year')
     context = {
         'members': MyUser.objects.filter(program__program='BS Information Technology'),
         'accr_type': AccreditationType.objects.all(),

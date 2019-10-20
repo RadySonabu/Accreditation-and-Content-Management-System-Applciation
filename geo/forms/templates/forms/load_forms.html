@@ -2,16 +2,10 @@
 
 {%extends 'dashboard/base.html' %}
 {% block content %}
-<h3><strong>
-    <form method="POST"  novalidate>
-        <label>Select Year:</label>
-        <select class="country">
-            <!-- <option value="">-------------</option> -->
-            <option value="2019">2019</option>
-            <option value="2020">2020</option>
-            <option value="2021">2021</option>
-        </select>
-        
-      </form>
-</strong></h3>
+<form " method="POST">
+    {% csrf_token %}
+    Year
+    <input type="text" id="year" placeholder="Select year">
+    <button type="submit">Submit</button>
+</form>
 {% endblock content %}

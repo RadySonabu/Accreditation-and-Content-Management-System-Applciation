@@ -24,6 +24,8 @@ from django.core.files.storage import FileSystemStorage
 class FormListView(LoginRequiredMixin, ListView):
     model = Forms
     context_object_name = 'forms'
+    
+
     def form_valid(self, form):
 
         form.instance.id = self.kwargs.get('pk')
@@ -35,7 +37,7 @@ class FormListView(LoginRequiredMixin, ListView):
         context['files'] = Files.objects.all()
         context['year'] = 2019
         context['a'] = self.kwargs.get('pk')
-        context['f'] = Forms.objects.all()
+        context['f'] = Forms.objects.all().order_by('-year')
         context['d'] = Division.objects.all()
         context['sd'] = Subdivision.objects.all()
         context['sdd'] = SubdivisionDetail.objects.all()
