@@ -30,35 +30,39 @@
                        
                        {% for f in f %}
                        
-                       {% if f.created_for.program == mem.program.program  and f.type_of_accreditation.id == pk and a.id == 1%}
+                       {% if f.created_for.program == mem.program.program  and f.type_of_accreditation.id == pk  and a.id == 1%}
                        {% if f.is_active == True %}
-                       <div class="col-lg-3 p-2">
-                        <div class="payment-card">
-                          <div class="ibox-content text-center" style="justify-content: center">
-                              <a href="{% url 'form-detail' f.id %}">
-                            <h4 class="card-title">{{ f.type_of_accreditation}}</h6>
-                            <h7 class="card-title">{{ f.created_for}}</h7>
-                            
-                            
-                            
-                                <img class="avatar" src="/media/{{f.type_of_accreditation.image}}" alt="..." style="width: 50%">
-                                <h2 class="card-title">{{ f.year}}</h2>
-                                <div class="progress progress-mini">
-                                    {% if f.percent >= 80 %}
-                <div style=" width: {{f.percent}}%; background-color: blue;" class="progress-bar"></div>
-                {% elif f.percent >= 60%}
-                <div style=" width: {{f.percent}}%; background-color: green;" class="progress-bar"></div>
-                {% elif f.percent >= 50%}
-                <div style=" width: {{f.percent}}%; background-color: orange;" class="progress-bar"></div>
-                {% elif f.percent < 50%}
-                <div style=" width: {{f.percent}}%; background-color: red;" class="progress-bar"></div>
-                {% endif %}
-
-                                </div>
-                                <div>{{f.percent}}%</div>
-                            </a> </div>
-                        </div>
-                      </div>
+                      
+                       <div class="row container">
+                          <div class="col-lg-3 p-2">
+                              <h3><strong><b>{{f.year}}</b></strong></h3>
+                            <div class="payment-card">
+                              <div class="ibox-content text-center" style="justify-content: center">
+                                  <a href="{% url 'form-detail' f.id %}">
+                                <h4 class="card-title">{{ f.type_of_accreditation}}</h6>
+                                <h7 class="card-title">{{ f.created_for}}</h7>
+                                
+                                
+                                
+                                    <img class="avatar" src="/media/{{f.type_of_accreditation.image}}" alt="..." style="width: 50%">
+                                    <h2 class="card-title">{{ f.year}}</h2>
+                                    <div class="progress progress-mini">
+                                        {% if f.percent >= 80 %}
+                    <div style=" width: {{f.percent}}%; background-color: blue;" class="progress-bar"></div>
+                    {% elif f.percent >= 60%}
+                    <div style=" width: {{f.percent}}%; background-color: green;" class="progress-bar"></div>
+                    {% elif f.percent >= 50%}
+                    <div style=" width: {{f.percent}}%; background-color: orange;" class="progress-bar"></div>
+                    {% elif f.percent < 50%}
+                    <div style=" width: {{f.percent}}%; background-color: red;" class="progress-bar"></div>
+                    {% endif %}
+    
+                                    </div>
+                                    <div>{{f.percent}}%</div>
+                                </a> </div>
+                            </div>
+                          </div>
+                       </div>
                        {% endif %}
                        <!-- is active -->
                        {% endif %}
