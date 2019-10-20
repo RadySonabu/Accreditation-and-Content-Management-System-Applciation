@@ -19,7 +19,7 @@
             <div class="form-row">
                     <div class="form-group col-md-6 mb-0">Accreditation Type: {{ object.subdivision.division.title.type_of_accreditation }}    
                     </div>
-                    <div class="form-group col-md-3 mb-0">Total: {{f.total}} 
+                    <div class="form-group col-md-3 mb-0">Total: {{f.total|floatformat:2}} 
                     </div>
                     <div class="form-group col-md-3 mb-0 b"><h5>{{f.percent}}%</h5>
                     </div>
@@ -66,7 +66,7 @@
                                               </td>
                                               <td class="form-group col-md-1 pt-3 "><strong></strong>
                                               </td>
-                                              <td class="form-group col-md-2 pt-3 "><strong>{{d.total}}</strong>
+                                              <td class="form-group col-md-2 pt-3 "><strong>{{d.total|floatformat:2}}</strong>
                                               </td>
                                               <td class="form-group col-md-1 pt-3 ">
                                                 {% if user == f.created_by %}
@@ -93,7 +93,7 @@
                                               </td>
                                               <td class="form-group col-md-2 pt-3 "><strong></strong>
                                               </td>
-                                              <td class="form-group col-md-1 pt-3 "><strong>{{s.total}}</strong>
+                                              <td class="form-group col-md-1 pt-3 "><strong>{{s.total|floatformat:2}}</strong>
                                               </td>
                                               <td class="form-group col-md-1 pt-3 ">
                                                 {% if user == f.created_by %}
@@ -122,12 +122,12 @@
                                                     </td>
                                                     <td style="word-wrap: break-word;min-width: 350px;max-width: 350px;"> {{x.remarks}}    
                                                       </td>
-                                                      <td class=""> {{x.subtotal}}    
+                                                      <td class=""> {{x.subtotal|floatformat:2 }}    
                                                         </td>
                                                 <td class="form-group col-md-1 mb-0">   
                                                   </td>
                                                   <td class="form-group col-md-1 mb-0"> 
-                                                    {% if user.role.role ==  f.created_by  or user == f.created_by%}
+                                                    {% if user.program ==  f.created_for  or user == f.created_by%}
                                                     <a href="{% url 'subdivisiondetail-update' x.id%}"><i class="fa fa-edit"></i></a>
                                                     {% endif %}
                                                     {% if user == f.created_by %}
