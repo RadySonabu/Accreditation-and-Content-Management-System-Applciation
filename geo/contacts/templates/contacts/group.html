@@ -1,17 +1,21 @@
 {% extends "dashboard/base.html" %}
 {% load crispy_forms_tags %}
 {% block content %}
+
+{% for group in group %}
+  Group name: "{{group.group_id}}"
+{% endfor %}
 <div class="container">
   <div class="col-md-12" style="padding-right: 4;">
     <div class="col-md-6">
       <div class="payment-card">
-        <h1><b>GROUPS</b>  <a href="{% url 'contact-group-add' %}"><i class="fa fa-plus-square-o pull-right" aria-hidden="true"></i></a></h1>
+        <h1><b>GROUPS</b>  <a href="{% url 'contact-group-add' %}">group<i class="fa fa-plus-square-o pull-right" aria-hidden="true"></i></a></h1>
         
       </div>
     </div>
     <div class="col-md-6">
       <div class="payment-card">
-        <h1><b>ROLE</b>  <a href="{% url 'contact-group-role-add' %}"><i class="fa fa-plus-square-o pull-right" aria-hidden="true"></i></a></h1>
+        <h1><b>ROLE</b>  <a href="{% url 'contact-group-role-add' %}">role <i class="fa fa-plus-square-o pull-right" aria-hidden="true"></i></a></h1>
         
       </div>
     </div>

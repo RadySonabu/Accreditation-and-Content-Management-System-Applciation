@@ -18,17 +18,18 @@ def contact(request):
         sample_work = ContactContactA03.objects.all()
         deduction = ContactContactA04.objects.all()
     else:
-        contact = ContactContactA00.objects.get(contact_a00_rec = request.user.id)
-        skill = ContactContactA01.objects.get(contact_id = request.user.id)
-        endorsement = ContactContactA02.objects.get(contact_id = request.user.id)
-        sample_work = ContactContactA03.objects.get(contact_id = request.user.id)
-        deduction = ContactContactA04.objects.get(contact_id = request.user.id)
+        contact = ContactContactA00.objects.all().filter(created_by_id = request.user.id)
+        skill = ContactContactA01.objects.all().filter(contact_id__created_by_id = request.user.id)
+        endorsement = ContactContactA02.objects.all().filter(contact_id__created_by_id = request.user.id)
+        sample_work = ContactContactA03.objects.all().filter(contact_id__created_by_id = request.user.id)
+        deduction = ContactContactA04.objects.all().filter(contact_id__created_by_id = request.user.id)
     context = {
        "contact": contact,
        "skill": skill,
        "endorsement": endorsement,
        "sample_work": sample_work,
        "deduction": deduction,
+       "user": request.user
 
     }
     return render(request, 'contacts/contact.html', context)
@@ -225,8 +226,8 @@ def group(request):
         group = ContactGroupA00.objects.all()
         group_role = ContactGroupA01.objects.all()
     else:
-        group = ContactGroupA00.objects.all()
-        group_role = ContactGroupA01.objects.all()
+        group =  ContactGroupA01.objects.all().filter(contact_id__created_by_id = request.user.id) # not yet finished
+        group_role = ContactGroupA01.objects.all().filter(contact_id__created_by_id = request.user.id)# not yet finished
     context = {
         "group": group,
         "group_role": group_role
@@ -289,8 +290,8 @@ def add_group_role(request):
             contact = ContactContactA00.objects.get(created_by_id = request.user.id)
             contact_id = contact.contact_a00_rec
             group_data = form.cleaned_data.get('group_id')
-            group = ContactGroupA00.objects.get(group_a00_rec = group.group_a00_rec)
-            group_id = group_id.group_a00_rec
+            group = ContactGroupA00.objects.get(group_a00_rec = group_data.group_a00_rec)
+            group_id = group.group_a00_rec
             
             
             data = {
@@ -305,7 +306,7 @@ def add_group_role(request):
             r = requests.post('https://contact-dot-heroic-climber-277222.df.r.appspot.com/api/group-detail/', json=data, headers=header)
             print(r)
 
-            messages.success(request, f'You have successfully created a group!')
+            messages.success(request, f'You have successfully created a role!')
             return redirect('contact-group') 
     else:
         form = GroupA01Form()
