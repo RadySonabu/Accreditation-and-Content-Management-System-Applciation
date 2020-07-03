@@ -25,23 +25,26 @@ SECRET_KEY = '&-gl6)5cl)hog-nsoi3#-*yeoq&(1ra3xd%ndb+2ye%67eee@*'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
 
 INSTALLED_APPS = [
+    
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
+    'whitenoise.runserver_nostatic',
     'django.contrib.staticfiles',
-    'members.apps.MembersConfig',
-    'dashboard',
-    'forms',
-    'choices',
 
+    
+    'dashboard',
+  
+    'contacts',
+    'jobs',     
 
     'import_export',
     'crispy_forms',
@@ -55,6 +58,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -90,8 +94,15 @@ WSGI_APPLICATION = 'geo.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.db.backends.postgresql',
+        'OPTIONS': {
+            'options': '-c search_path=demo,philone,philtwo,philthree,philfour,philfive'
+        },
+        'NAME': 'postgres',  # os.environ.get('DB_NAME)
+        'USER': 'postgres',  # os.environ.get('DB_USER)
+        'PASSWORD': 'K0llab0rat0r!',  # os.environ.get('DB_PASS)
+        'HOST': '34.92.91.38',
+        'PORT': '5432',
     }
 }
 
@@ -132,7 +143,7 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 
-STATIC_URL = '/static/'
+# STATIC_URL = '/static/'
 # STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
@@ -149,10 +160,10 @@ MAILCHIMP_DATA_CENTER = 'us20'
 MAILCHIMP_EMAIL_LIST_ID = '12d2e1d537'
 
 
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
-MEDIA_URL = '/media/'
-
-AUTH_USER_MODEL = 'members.MyUser'
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+STATIC_URL = '/static/'
+# STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+# AUTH_USER_MODEL = 'contacts.AuthUser'
 LOGIN_REDIRECT_URL = 'home'
 
 # THUMBNAIL_PRESERVE_FORMAT = True
