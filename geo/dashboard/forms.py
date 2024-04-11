@@ -1,5 +1,5 @@
 from django import forms
-from members.models import MyUser
+
 
 
 # class FilterForm(forms.Form):
@@ -13,7 +13,7 @@ class LockscreenForm(forms.Form):
     class Meta:
         password1 = forms.CharField(
             label='Password', widget=forms.PasswordInput)
-        model = MyUser
+        # model = MyUser
         fields = (
             'email', 'password', 'password1 '
         )

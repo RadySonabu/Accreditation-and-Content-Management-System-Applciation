@@ -1,0 +1,50 @@
+{% extends "dashboard/base.html" %}
+{% load crispy_forms_tags %}
+{% block content %}
+
+{% for contact in contact %}
+  {{contact.contact_id}}
+  {{contact.first_name}}
+  {{contact.middle_initial}}
+  {{contact.last_name}}
+{% endfor %}
+{% for skill in skill %}
+  {{skill.skill_id}}
+  {{skill.comments}}
+{% endfor %}
+
+
+
+
+
+  <div class="col-md-12" >
+    
+    <div class="container">
+      <div class="row">
+        <div class="col-md-auto">
+          <div class="col-md-6">
+            <div class="payment-card">
+              <h1>CONTACTS<a href="{% url 'contact-add' %}"> CONTACTS <i class="fa fa-plus-square-o pull-right" aria-hidden="true"></i></h1></a>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="payment-card">
+              <h1>SKILLS<a href="{% url 'contact-skill-add' %}"> SKILLS <i class="fa fa-plus-square-o pull-right" aria-hidden="true"></i></h1></a>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="payment-card">
+            <h1>ENDORSEMENT<a href="{% url 'contact-endorsement-add' %}"> ENDORSEMENT <i class="fa fa-plus-square-o pull-right" aria-hidden="true"></i></h1></a>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="payment-card">
+            <h1>DEDUCTION<a href="{% url 'contact-deduction-add' %}"> DEDUCTION <i class="fa fa-plus-square-o pull-right" aria-hidden="true"></i></h1></a>
+          </div>
+        </div>
+      </div>
+    
+  </div>
+</div>
+{% endblock content %}

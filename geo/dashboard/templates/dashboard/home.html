@@ -1,310 +1,33 @@
 {% extends "dashboard/base.html" %}
 {% block content %}
-
-{% if user.role.role != 'ADMINISTRATOR' %}
-<div style="color: black;"><h1><strong>List of Accreditations</strong></h1></div>
-{% endif %}
-
-
-<div style="margin-bottom: 4rem"></div>
-<!-- {% for mem in members %} -->
-
-{% if user.role.role == 'VPAA' %}
-
-<div class="row ">
-
-  <div class="col-md-12">
-
-
-
-
-
-    <div>
-
-
-      {% for a in accr_type %}
-
-      {% for f in f %}
-
-      {% if f.year == 2020 %}
-
-      <a href="{% url 'form-list' a.id %}">
-        <div class="col-md-3 stretched-link ">
-
-          <div class="payment-card text-center" style="justify-content: center; box-shadow: 0px 3px 5px -1px rgba(0, 0, 0, 0.2),
-            0px 5px 8px 0px rgba(0, 0, 0, 0.14),
-            0px 1px 14px 0px rgba(0, 0, 0, 0.12); background: rgba(255, 255, 255, 0.12);  ">
-            <strong>
-              <h3 style="color: black;"> {{a.type_of_accreditations}}</h3>
-            </strong>
-            <!-- <div class="ibox-content"> -->
-
-
-            <img class="avatar" src="/media/{{a.image}}" alt="..." style="width: 50%">
-      </a>
+<div class=row>
+<a href="#">
+  <div class="col-md-4">
+    <div class="payment-card">
+      Jobs
     </div>
-
-
   </div>
-
-
-
-  {% endif %}
-  {% endfor %}
-
-  {% endfor %}
-</div>
-
-
-
-
-
-
-
-
-{% elif user.role.role == 'COLLEGE DEAN' or user.role.role == 'AUDITOR' %}
-
-{% if mem.college.college == 'College of Information Technology Education' or mem.college.college == 'CITE AUDITOR' %}
-
-
-
-
-
-
-<div class="row ">
-  <div class="col-md-12">
-      <!-- <h3><strong>
-          <form method="POST"  novalidate>
-              <label>Select Year:</label>
-              <select class="country">
-                  <option value="">-------------</option>
-                  <option value="2019">2019</option>
-                  <option value="2020">2020</option>
-                  <option value="2021">2021</option>
-              </select>
-              
-            </form>
-      </strong></h3> -->
-
-
-
-
-    <div>
-
-
-      {% for a in accr_type %}
-
-      {% for f in f %}
-
-      {% if f.year == 2020%}
-
-      <a href="{% url 'form-list' a.id %}">
-        <div class="col-md-3 stretched-link ">
-
-          <div class="payment-card text-center" style="justify-content: center; box-shadow: 0px 3px 5px -1px rgba(0, 0, 0, 0.2),
-            0px 5px 8px 0px rgba(0, 0, 0, 0.14),
-            0px 1px 14px 0px rgba(0, 0, 0, 0.12); background: rgba(250, 250, 250, 0.12);  ">
-            <strong>
-              <h3 style="color: black;">  {{a.type_of_accreditations}}</h3>
-            </strong>
-            <!-- <div class="ibox-content"> -->
-
-
-            <img class="avatar" src="/media/{{a.image}}" alt="..." style="width: 50%">
-      </a>
+</a>
+<a href="#">
+  <div class="col-md-4">
+    <div class="payment-card">
+      Invites
     </div>
-
-
   </div>
-
-
-
-  {% endif %}
-  {% endfor %}
-
-  {% endfor %}
-</div>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-<script>
-  $(document).ready(function(){
-  $("select.country").change(function(){
-      var selectedCountry = $(this).children("option:selected").val();
-      var url = $("#forms_dean").attr("load-url");
-      console.log(selectedCountry);
-
-      $.ajax({                       // initialize an AJAX request
-      url: url,              // set the url of the request (= localhost:8000/hr/ajax/load-cities/)
-      data: {
-        'year': selectedCountry       // add the country id to the GET parameters
-      },
-      success: function (data) {   // `data` is the return of the `load_cities` view function
-        // location.html(data)
-        // $("#forms_dean").html(data)
-        console.log("Bobo"); // replace the contents of the city input with the data that came from the server
-      }
-    });
-
-  });
-});
-</script>
-
-
-
-
-
-
-
-
-
-<!-- <div class="col-sm-2">
-                </div>
-                
-                        
-                        {% for f in f %}
-                        
-                        <div class="col-sm-4">
-                            <div class="ibox float-e-margins">
-                                
-                                    
-
-                              
-                                <div class="ibox-content">
-                                    <div>
-                                        <canvas id="doughnutChart" height="200"></canvas>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        {% endfor %}
-                          -->
-<!-- </div> -->
-
-
-<!-- end of a in accr_type -->
-
-<!-- <div class="container ">
-          <div class="row">
-            {% if mem.program.program == 'BS Information Technology' %}
-            <div class="col-md-3">
-              <div class="card ">
-                <div class="card-body ">
-                  <h5 class="card-title">Department of Info.Technology</h5>
-                  <img class="mx-auto d-block " style="height: 200px; width: 200px; padding: 2%; justify-content: center"
-                    src="https://cdn1.iconfinder.com/data/icons/charts-2/304/Untitled-41-512.png">
-                </div>
-              </div>
-            </div>
-            {% elif mem.program.program == 'BS Computer Science' %}
-            <div class="col-md-3">
-              <div class="card">
-                <div class="card-body" style="justify-content: center">
-                  <h5 class="card-title">Department of Computer Science</h5>
-                  <img class="mx-auto d-block " style="height: 200px; width: 200px; padding: 2%; justify-content: center"
-                    src="https://cdn1.iconfinder.com/data/icons/charts-2/304/Untitled-42-512.png">
-                </div>
-              </div>
-            </div>
-          </div>
-        </div> -->
-
-
-
-
-
-{% endif %}
-
-
-
-{% endif %}
-
-
-{% elif user.role.role == 'DEPARTMENT CHAIRPERSON' %}
-{% if mem.program.program == 'BS Information Technology' %}
-
-
-
-
-<!-- {% for f in form %}
-
-        {% if f.created_for.program == mem.program.program %}
-        <div class="col-md-3">
-          <div class="card">
-            <div class="card-body" style="justify-content: center">
-              <h5 class="card-title"><a href="{% url 'form-detail' pk=f.id%}">Department of Info.Technology</a></h5>
-              <a href="{% url 'form-detail' a%}"><img class="mx-auto d-block " style="height: 200px; width: 200px; padding: 2%; justify-content: center"
-                src="https://cdn1.iconfinder.com/data/icons/charts-2/304/Untitled-41-512.png"></a>
-            </div>
-          </div>
-        </div>
-        {% endif %}
-
-
-        {% endfor %} -->
-
-<div class="row ">
-
-  
-
-    <div class="col-md-12">
-
-
-
-
-
-      <div>
-
-        {% for a in accr_type %}
-
-        {% for f in f %}
-
-        {% if f.year == 2020  %}
-        <a href="{% url 'chairperson-forms' a.id %}">
-        
-        <div class="col-md-3 " style="justify-content: center;">
-        <div class="payment-card">
-          
-            <div class=" text-center" style="justify-content: center"><strong>
-                <h3 style="color: black;">  {{a.type_of_accreditations}}</h3>
-              </strong></div>
-            <!-- <div class="ibox-content"> -->
-            <div class="ibox-content text-center">
-
-              <img class="avatar" src="/media/{{a.image}}" alt="..." style="width: 50%">
-          </a>
-        </div>
-
-
-      </div>
+</a>
+<a href="#">
+  <div class="col-md-4">
+    <div class="payment-card">
+      Useful Informations here 3
     </div>
-
-
-
-
-
-
- 
- 
-  
-
-
-      {% endif %}
-      {% endfor %}
-
-      {% endfor %}
+  </div>
+</a>
+<a href="#">
+  <div class="col-md-4">
+    <div class="payment-card">
+      Useful Informations here 4
     </div>
-
-
-
-
-
-
-
-{% endif %}
-{% endif %}
-{% endfor %}
+  </div>
+</a>
 </div>
-
-
-
-
 {% endblock content %}

@@ -9,41 +9,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
-    <title>TACOS-TIP | Accreditation Tracker
+    <title>Loudbox Studios
     </title>
     
-    <link href="{% static 'css/theme.ba/bootstrap.min.css'%}" rel="stylesheet">
-    <link href="{% static 'css/theme.ba/animate.css'%}" rel="stylesheet">
-    <link href="{% static 'css/theme.ba/style.css'%}" rel="stylesheet">
-
-    <link href="{% static 'font-awesome/css/font-awesome.css'%}" rel="stylesheet">
-
-    <link href="{% static 'css/theme.ba/plugins/iCheck/custom.css'%}" rel="stylesheet">
-
-    <link href="{% static 'css/theme.ba/plugins/fullcalendar/fullcalendar.css'%}" rel="stylesheet">
-    <link href="{% static 'css/theme.ba/plugins/fullcalendar/fullcalendar.print.css'%}" rel='stylesheet' media='print'>
-
-    <link href="{% static 'css/plugins/iCheck/custom.css'%" rel="stylesheet">
-
-    <link href="{% static 'css/bootstrap.min.css'%}" rel="stylesheet">
-    <link href="{% static 'font-awesome/css/font-awesome.css'%}" rel="stylesheet">
-
-    <link href="{% static 'css/plugins/iCheck/custom.css'%}" rel="stylesheet">
-
-    <link href="{% static 'css/plugins/fullcalendar/fullcalendar.css'%}" rel="stylesheet">
-    <link href="{% static 'css/plugins/fullcalendar/fullcalendar.print.css'%}" rel='stylesheet' media='print'>
-
-    <link href="{% static 'css/animate.css'%}" rel="stylesheet">
-    <link href="{% static 'css/style.css'%}" rel="stylesheet">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-    
-
-    <link rel="shortcut icon" href="{% static 'img/logomalaki.png' %}" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+	  <!--For input Number-->
+	 
 </head>
 
-<body class=" pace-done" data-gr-c-s-loaded="true">
+<body >
         
         <div class="pace  pace-inactive">
             <div class="pace-progress" data-progress-text="100%" data-progress="99" style="transform: translate3d(100%, 0px, 0px);">
@@ -52,53 +26,56 @@
               <div class="pace-activity"></div>
               
             </div>
-    <div id="wrapper" style="background: black;">
+    <div class="wrapper" >
         <nav class="navbar-default navbar-static-side " role="navigation">
             <div class="sidebar-collapse ">
                 
-                <ul class="nav metismenu  " id="side-menu">
-                    <li class="nav-header yellow-skin " style="box-shadow: 0px 3px 5px -1px rgba(0, 0, 0, 0.2),
+                <ul class="nav  " id="side-menu">
+                    <li class="nav-header" style="box-shadow: 0px 3px 5px -1px rgba(0, 0, 0, 0.2),
                     0px 5px 8px 0px rgba(0, 0, 0, 0.14),
-                    0px 1px 14px 0px rgba(0, 0, 0, 0.12); background: rgba(0, 0, 0, 0.993)">
+                    0px 1px 14px 0px rgba(0, 0, 0, 0.12); background: orangered;">
                         <div class="dropdown profile-element "> <span>
-                                <img alt="image" class="img-circle" src="{{user.profile.image.url}}"
-                                    style="width: 50%" />
+                                <img alt="image" class="img-circle" src="https://images.unsplash.com/photo-1531427186611-ecfd6d936c79?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=634&q=80"
+                                    style="width: 70%" />
                             </span>
 
                             <a data-toggle="dropdown" class="dropdown-toggle" href="#">
                                 <span class="clear"> <span class="block m-t-xs"> <strong
                                             class="font-bold">{{user.first_name}} {{user.middle_initial}}.
                                             {{user.last_name}}</strong>
-                                    </span> <span class=" text-xs block">{{user.role.role}}</span> </span> </a>
+                                    </span> 
+                                    <!-- <span class=" text-xs block">{{user.role.role}}</span>  -->
+                                </span> </a>
 
                         </div>
 
                         
                     </li>
-                    {% if user.role.role != 'ADMINISTRATOR' %}
+                  
                     <li>
-                        <a href="{% url 'home' %}"><i class="fa fa-pie-chart"></i> <span class="nav-label">Accreditation
-                                tracker</span></a>
+                        <a href="{% url 'home' %}"><i class="fa fa-home"></i> <span class="nav-label">Home
+                                </span></a>
+                    </li>
+                    {% if user.is_superuser %}
+                    <li>
+                        <a href="{% url 'contact-contact' %}"><i class="fa fa-user"></i> <span class="nav-label">Contact
+                                </span></a>
+                    </li>
+                    {% else %}
+                    <li>
+                        <a href="{% url 'contact-contact' %}"><i class="fa fa-user"></i> <span class="nav-label">Profile
+                                </span></a>
                     </li>
                     {% endif %}
-
                     <li>
-                        <a href="{% url 'profile' %}"><i class="fa fa-male"></i> <span
-                                class="nav-label">Profile</span></a>
-
+                        <a href="{% url 'contact-group' %}"><i class="fa fa-group"></i> <span class="nav-label">Groups
+                                </span></a>
                     </li>
-                    {% if user.role.role == 'ADMINISTRATOR' %}
-                    <!-- <li><a href="{%url 'user_changelist'%}"> <i class="fa fa-user"></i>Manage User</a></li> -->
-                    <li><a href="{%url 'register'%}"> <i class="fa fa-plus"></i><span class="nav-label">Add
-                                User</span></a></li>
-                    <!-- <li><a href="{%url 'user_changelist'%}"> <i class="fa fa-users"></i><span class="nav-label">Manage
-                                User</span></a></li> -->
-                    {% endif %}
-                    <!-- <li>
-                        <a href="{% url 'calendar' %}"><i class="fa fa-calendar"></i> <span class="nav-label">Calendar -
-                                Beta</span></a>
-                    </li> -->
-
+                    <li>
+                        <a href="{% url 'job-job' %}"><i class="fa fa-soundcloud"></i> <span class="nav-label">Job
+                                </span></a>
+                    </li>
+                    
 
 
                 </ul>
@@ -114,17 +91,17 @@
 
 
 
-
+                       
                         <a class="navbar-minimalize minimalize-styl-2 btn  " href="#" style="background: black;color: aliceblue;"><i
-                                class="fa fa-bars" "></i> </a>
+                                class="fa fa-bars" ></i> </a>
 
 
 
                     </div>
-
-
+                    
                     <ul class="nav navbar-top-links navbar-right">
 
+                    
                        
 
                         <li class="dropdown">
@@ -132,17 +109,13 @@
 
                         <li class="divider"></li>
 
-                        <li class="divider"></li>
-
-                        <li class="divider"><a href="{% url 'lockscreen'%}" style="color: rgb(2, 2, 2)">
-                                <i class="fa fa-lock" style="color: rgb(3, 3, 3)"></i> 
-                            </a></li>
+                        <li class="divider"><a href="#"><i class="fa fa-bell" style="color: rgb(3, 3, 3)"></i></a></li>
                       
                 
                        
                         
                         <li style="color: rgb(0, 0, 0)">
-                            {% now "M d, Y "%}
+                            {% now " M d, Y "%}
                         </li>
 
 
@@ -163,6 +136,9 @@
 
 
             <div class="row    dashboard-header " style="padding-bottom: 4rem; justify-items: center">
+                <div class="container col-md-auto col-md-offset-1">
+                    <h1>{{header}}</h1>
+                </div>
                 <div id="message_container" class="animated fadeInUp"> {% if messages %} {% for message in messages %}
                 <div class="alert alert-{{ message.tags }}" style="box-shadow: 0px 3px 5px -1px rgba(0, 0, 0, 0),
                 0px 5px 8px 0px rgba(0, 0, 0, 0.14),
@@ -170,7 +146,7 @@
                     {{ message }}
                 </div>
                 {% endfor %} {% endif %}</div>
-                <div class="animated fadeInUp">{% block content%}{% endblock%}
+                <div class="animated fadeInUp">{% block content%} <div class="container"></div> {% endblock%}
                 </div>
 
 
@@ -185,127 +161,28 @@
 
 
 
-
+            <!--Footer-->
             <div class="footer" >
                 <div class="pull-right">
-                    Made by <strong> TEAM JFTW </strong>for the <strong>Institute. </strong>
+                    
+                    <strong>Established</strong> 2020
                 </div>
                 <div>
-                    <strong>Established</strong> 2019
+                    ©️ QuadraLogix
                 </div>
             </div>
+             <!--End of the Footer/-->
         </div>
 
+            
+               
 
     </div>
 
-
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
     
-    <!-- Mainly scripts -->
-    
-    <script src="{% static 'js/bootstrap.min.js'%}"></script>
-    <script src="{% static 'js/popper.min.js'%}"></script>
-    <script src="{% static 'js/plugins/metisMenu/jquery.metisMenu.js'%}"></script>
-    <script src="{% static 'js/plugins/slimscroll/jquery.slimscroll.min.js'%}"></script>
-
-    <!-- Custom and plugin javascript -->
-    <script src="{% static 'js/inspinia.js'%}"></script>
-    <script src="{% static 'js/plugins/pace/pace.min.js'%}"></script>
-
-    <!-- ChartJS-->
-    <script src="{% static 'js/plugins/chartJs/Chart.min.js' %}"></script>
-
-
-    <!-- Flot -->
-    <script src="{% static 'js/plugins/flot/jquery.flot.js' %}"></script>
-    <script src="{% static 'js/plugins/flot/jquery.flot.tooltip.min.js' %}"></script>
-    <script src="{% static 'js/plugins/flot/jquery.flot.spline.js' %}"></script>
-    <script src="{% static 'js/plugins/flot/jquery.flot.resize.js' %}"></script>
-    <script src="{% static 'js/plugins/flot/jquery.flot.pie.js' %}"></script>
-
-    <!-- Peity -->
-    <script src="{% static 'js/plugins/peity/jquery.peity.min.js' %}"></script>
-    <script src="{% static 'js/demo/peity-demo.js' %}"></script>
-    
-    
-
-    <!-- jQuery UI -->
-    <script src="{% static 'js/plugins/jquery-ui/jquery-ui.min.js' %}"></script>
-
-    <!-- GITTER -->
-    <script src="{% static 'js/plugins/gritter/jquery.gritter.min.js' %}"></script>
-
-    <!-- Sparkline -->
-    <script src="{% static 'js/plugins/sparkline/jquery.sparkline.min.js' %}"></script>
-
-    <!-- Sparkline demo data  -->
-    <script src="{% static 'js/demo/sparkline-demo.js' %}"></script>
-
-    
-
-    <!-- Toastr -->
-    <script src="{% static 'js/plugins/toastr/toastr.min.js' %}"></script>
-    <script>
-        $(document).ready(function () {
-            setTimeout(function () {
-                toastr.options = {
-                    closeButton: true,
-                    progressBar: true,
-                    showMethod: 'slideDown',
-                    timeOut: 4000
-                };
-
-
-            }, 1300);
-
-
-
-            var doughnutData = [{
-                    value: 300,
-                    color: "#a3e1d4",
-                    highlight: "#1ab394",
-                    label: "Student"
-                },
-                {
-                    value: 50,
-                    color: "#dedede",
-                    highlight: "#1ab394",
-                    label: "Faculty"
-                },
-                {
-                    value: 1000,
-                    color: "#A4CEE8",
-                    highlight: "#1ab394",
-                    label: "Seminars and Teachings"
-                }
-            ];
-
-            var doughnutOptions = {
-                segmentShowStroke: true,
-                segmentStrokeColor: "#fff",
-                segmentStrokeWidth: 2,
-                percentageInnerCutout: 45, // This is 0 for Pie charts
-                animationSteps: 100,
-                animationEasing: "easeOutBounce",
-                animateRotate: true,
-                animateScale: false
-            };
-
-            var ctx = document.getElementById("doughnutChart").getContext("2d");
-            var DoughnutChart = new Chart(ctx).Doughnut(doughnutData, doughnutOptions);
-
-
-        });
-    </script>
-    <script>
-    var message_ele = document.getElementById("message_container");
-
-    setTimeout(function(){ 
-    message_ele.style.display = "none"; 
-    }, 3000);
-    // Timeout is 3 sec, you can change it
-    </script>
-
 
 </body>
 
